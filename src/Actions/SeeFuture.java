@@ -1,8 +1,0 @@
-package Actions;
-
-public class SeeFuture {
-
-    //Privately view the top 3 cards from the Draw Pile
-    //and put them back in the same order. Don’t show
-    //the cards to the other players
-}
