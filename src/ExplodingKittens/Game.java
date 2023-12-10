@@ -7,7 +7,7 @@ public class Game {
     public ArrayList<Player> players;
     public Player Player;
     //deck:Arraylist<Deck>
-    public ArrayList<Deck> deck;
+    public Deck deck;
     //startGame() starts the game and does all the things to be able to start (shuffle() etc.)
     public void startGame(){
         //do all the things needed to start the game
