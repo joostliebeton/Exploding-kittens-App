@@ -5,15 +5,6 @@ public class Card {
     enum Cards{
       EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK
         //if its correct this is how it is correct
-//       ExplodingKitten,
-//        Defuse,
-//        Nope,
-//        Shuffle,
-//        Skip,
-//        SeeTheFuture,
-//        CatCard,
-//        Favor,
-//        Attack
     }
     // id; int
     public int id;
@@ -40,8 +31,7 @@ public class Card {
     public void  Skip(){
 
         }
-    public void  SeeTheFuture(){
-
+    public void  SeeTheFuture(){ 
         }
     public void  CatCard(){
 
