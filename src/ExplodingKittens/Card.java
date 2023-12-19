@@ -2,18 +2,29 @@ package ExplodingKittens;
 
 import java.util.ArrayList;
 
-import static ExplodingKittens.Card.Cards.DEFUSE;
-import static ExplodingKittens.Card.Cards.EXPLODINGKITTEN;
+import java.util.HashMap;
+
+import static ExplodingKittens.Card.Cards.*;
 
 public class Card {
     public Card Card;
-    enum Cards{
+    public enum Cards{
       EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK
         //if its correct this is how it is correct
     }
+    int amount;
+    public HashMap<Cards, Integer> amountsCardstype = new HashMap<>();
     // id; int
     public int id;
     // methode is playable()
+    public Cards cardType;
+    public Card(int id, Cards cardType){
+        this.id = id;
+        this.cardType = cardType;
+    }
+    public Cards getCardType(){
+        return cardType;
+    }
     public boolean playable(){
         return true;
     }
@@ -72,6 +83,26 @@ public class Card {
 
         }
     public void  Attack () {
+    }
+    public HashMap<Cards, Integer> cardlibrary(){
+        amountsCardstype.put(SHUFFLE,4);
+        amountsCardstype.put(SKIP,4);
+        amountsCardstype.put(SEETHEFUTURE, 5);
+        amountsCardstype.put(FAVOR, 4);
+        amountsCardstype.put(CATCARD, 20);
+        amountsCardstype.put(DEFUSE, 6);
+        amountsCardstype.put(EXPLODINGKITTEN, 4);
+        amountsCardstype.put(NOPE, 5);
+        return amountsCardstype;
+    }
+    public void makeCards(){
+        cardlibrary();
+        for(Cards card: amountsCardstype.keySet()){
+            int amount = amountsCardstype.get(card);
+            for(int i=0; i<amount;i++){
+                Card Card = new Card(1, card);
+            }
+        }
     }
     
 }
