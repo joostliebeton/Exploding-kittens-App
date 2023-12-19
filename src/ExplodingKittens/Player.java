@@ -15,6 +15,40 @@ public class Player {
         return Card;
     }
     // playCard()
+
+    public void playCard(Card.Cards cardPlayed) {
+//this is the code for the cards; when played, a function will compile the code of that card.
+        switch (cardPlayed) {
+            case EXPLODINGKITTEN:
+                Card.ExplodingKitten();
+                break;
+            case DEFUSE:
+                Card.Defuse();
+                break;
+            case NOPE:
+                Card.Nope();
+                break;
+            case SHUFFLE:
+                Card.Shuffle();
+                break;
+            case SKIP:
+                Card.Skip();
+                break;
+            case SEETHEFUTURE:
+                Card.SeeTheFuture();
+                break;
+            case CATCARD:
+                Card.CatCard();
+                break;
+            case FAVOR:
+                Card.Favor();
+                break;
+            case ATTACK:
+                Card.Attack();
+                break;
+        }
+    }
+
     public Card playcard(Card playedCard){
         return Card;
     }
