@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/check' into check" />
+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +28,11 @@
     <option name="NEW_BASE" value="origin/main" />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Liebeton, J.C. (Joost, Student B-BIT) &lt;j.c.liebeton@student.utwente.nl&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -49,7 +60,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;check&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Check&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -102,6 +114,13 @@
       <workItem from="1701958153036" duration="254000" />
       <workItem from="1701958517553" duration="9157000" />
       <workItem from="1702029072014" duration="6034000" />
+      <workItem from="1702227314083" duration="717000" />
+      <workItem from="1702288044838" duration="58000" />
+      <workItem from="1702456875415" duration="610000" />
+      <workItem from="1702725191333" duration="595000" />
+      <workItem from="1702891630013" duration="48000" />
+      <workItem from="1702984776524" duration="469000" />
+      <workItem from="1702990475812" duration="2975000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -263,7 +282,31 @@
       <option name="project" value="LOCAL" />
       <updated>1702154486560</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1702227389630</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1702227389630</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1702990961908</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702990961908</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1702990996466</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1702990996466</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +323,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/check" />
+                        <option value="Check" />
                       </list>
                     </value>
                   </entry>
@@ -298,7 +341,8 @@
     <MESSAGE value="Merge remote-tracking banch 'origin/master'" />
     <MESSAGE value="test" />
     <MESSAGE value="Merge remote-tracking branch 'origin/check' into check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/check' into check" />
+    <MESSAGE value="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
