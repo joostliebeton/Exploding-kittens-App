@@ -10,6 +10,7 @@ import static ExplodingKittens.Card.Cards.EXPLODINGKITTEN;
 
 
 public class Card {
+    private Deck deck;
     public Card Card;
     enum Cards{
           EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD1,CATCARD2,CATCARD3, CATCARD4, CATCARD5, FAVOR, ATTACK
@@ -21,12 +22,16 @@ public class Card {
     public int id;
     // methode is playable()
     public Cards cardType;
-    public Card(int id, Cards cardType){
+    public Card(int id, Cards cardType, Deck deck){
         this.id = id;
         this.cardType = cardType;
+        this.deck = deck;
     }
     public Cards getCardType(){
         return cardType;
+    }
+    public void addDiscardPile(Card card){
+        deck.discardPile.add(card);
     }
     public boolean playable(){
         return true;
@@ -40,7 +45,15 @@ public class Card {
             if(Player.hasCard(DEFUSE)){
                 Scanner intExplodingKitten = new Scanner(System.in);
                 play(DEFUSE);
-                Hand.hand.remove(DEFUSE);
+                boolean defuseRemoved = false;
+
+                // Remove only the first occurrence of DEFUSE from the hand
+                for (Card card : Hand.hand) {
+                    if (card.getCardType() == Cards.DEFUSE && !defuseRemoved) {
+                        Hand.hand.remove(card);
+                        defuseRemoved = true;
+                    }
+                }
                 addDiscardPile(DEFUSE);
                 int pileSize = pileSize();
                 System.out.println("The size of the pile is: " + pileSize());

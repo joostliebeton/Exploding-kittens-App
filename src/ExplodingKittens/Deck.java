@@ -18,7 +18,7 @@ public class Deck {
         for (Card.Cards card : amountsCardstype.keySet()) {
             int amount = amountsCardstype.get(card);
             for (int i = 1; i <= amount; i++) {
-                Card Card1 = new Card(i, card);
+                Card Card1 = new Card(i, card, this);
                 cards.add(Card1);
             }
         }
@@ -26,9 +26,6 @@ public class Deck {
 
     public ArrayList<Card> playingDeck;
     public ArrayList<Card> beginDeck;
-    public void addDiscardPile(Card card){
-        discardPile.add(card);
-    }
 
     public ArrayList<Card> discardPile;
     public void setBeginDeck() {
