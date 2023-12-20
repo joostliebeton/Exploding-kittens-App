@@ -1,10 +1,13 @@
 package ExplodingKittens;
 
+import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
-import static ExplodingKittens.Card.Cards.*;
-import static ExplodingKittens.Deck.pileSize;
+import static ExplodingKittens.Card.Cards.DEFUSE;
+import static ExplodingKittens.Card.Cards.EXPLODINGKITTEN;
+
 
 public class Card {
     public Card Card;
@@ -29,8 +32,7 @@ public class Card {
         return true;
     }
     // methode play()
-    public Card play(Cards card){
-                return Card;
+    public void play(){
     }
     // the functionality of the cards
     public void ExplodingKitten(){
@@ -39,7 +41,7 @@ public class Card {
                 Scanner intExplodingKitten = new Scanner(System.in);
                 play(DEFUSE);
                 Hand.hand.remove(DEFUSE);
-                Deck.discardPile.add(DEFUSE);
+                addDiscardPile(DEFUSE);
                 int pileSize = pileSize();
                 System.out.println("The size of the pile is: " + pileSize());
                                                                                                             // if player has defuse; give input for index newly placed exploding kitten
@@ -88,26 +90,8 @@ public class Card {
         }
     public void  Attack () {
     }
-    public HashMap<Cards, Integer> cardlibrary(){
-        amountsCardstype.put(SHUFFLE,4);
-        amountsCardstype.put(SKIP,4);
-        amountsCardstype.put(SEETHEFUTURE, 5);
-        amountsCardstype.put(FAVOR, 4);
-        amountsCardstype.put(CATCARD, 20);
-        amountsCardstype.put(DEFUSE, 6);
-        amountsCardstype.put(EXPLODINGKITTEN, 4);
-        amountsCardstype.put(NOPE, 5);
-        return amountsCardstype;
-    }
-    public void makeCards(){
-        cardlibrary();
-        for(Cards card: amountsCardstype.keySet()){
-            int amount = amountsCardstype.get(card);
-            for(int i=0; i<amount;i++){
-                Card Card = new Card(1, card);
-            }
-        }
-    }
-    
+
+
+
 }
 
