@@ -1,10 +1,10 @@
 package ExplodingKittens;
 
+import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.Scanner;
 
 import static ExplodingKittens.Card.Cards.*;
-import static ExplodingKittens.Deck.pileSize;
 
 public class Card {
     public Card Card;
@@ -29,42 +29,37 @@ public class Card {
         return true;
     }
     // methode play()
-    public Card play(Cards card){
-                return Card;
+    public void play(){
     }
     // the functionality of the cards
     public void ExplodingKitten(){
-        if(Deck.drawCard().equals(EXPLODINGKITTEN)){
-            if(Player.hasCard(DEFUSE)){
-                Scanner intExplodingKitten = new Scanner(System.in);
+        if(Deck.drawCard.equals(EXPLODINGKITTEN)){
+            if(player.hasCard(DEFUSE)){
                 play(DEFUSE);
-                Hand.hand.remove(DEFUSE);
-                Deck.discardPile.add(DEFUSE);
-                int pileSize = pileSize();
-                System.out.println("The size of the pile is: " + pileSize());
-                                                                                                            // if player has defuse; give input for index newly placed exploding kitten
-                try{
-                    System.out.println("Enter a integer number between 1 and " + pileSize +" for the index of the ExplodingKitten to be put back in the deck.");
-                    if(intExplodingKitten.hasNextInt() && intExplodingKitten.nextInt() > 0 && intExplodingKitten.nextInt() < pileSize){
-                        intExplodingKitten.nextInt();
-                    }
-                }
-                catch(Exception e){
-                    System.out.println("You have to enter a valid integer number.");
-                }
-                finally {
-                    intExplodingKitten.close();
-                }
-                int userInput = intExplodingKitten.nextInt();
-                                                                                                             // could also implement that it is optional to defuse or not. that is what said in the rules.
-                Deck.playingDeck.add(userInput, EXPLODINGKITTEN);
-                //Game.nextPlayer();  (make sure that after a player drawn a card (in this case the explodingKitten), the turn goes to the next player // maybe there is an exception for attackcard (you need to draw 2x)
+                hand.remove(DEFUSE); // removes the defuse card from the hand
+                discardpile.add(DEFUSE);
+                // player can secretly put the exploding kitten back in the deck
+                Normalpile.add(EXPLODINGKITTEN);
+                // after
+            // is this the right way to do it?
+                // player can defuse the exploding kitten
+
             }
-            else{
-                Game.EleminatePlayer();
-                //Game.nextPlayer();  (make sure that after a player is eliminated, the turn goes to the next player)
+            else{Game.eliminatedPlayers.add(currentPlayer); // currentplayer
+                // player is out of the game
             }
+            // player is out of the game
         }
+        else{
+            // player is still in the game
+        }
+        // we are making the game "exploding kittens", so we need to make the cards and implement methods regarding the cards
+        // if the exploding kitten is drawn, the player is out of the game
+        // if the player has a defuse card, he can defuse the exploding kitten and put it back in the deck
+        // if the player has no defuse card, he is out of the game
+        // if the player has a nope card, he can NOT nope the exploding kitten
+
+
     }
     public void  Defuse(){
         //card.remove
@@ -88,26 +83,8 @@ public class Card {
         }
     public void  Attack () {
     }
-    public HashMap<Cards, Integer> cardlibrary(){
-        amountsCardstype.put(SHUFFLE,4);
-        amountsCardstype.put(SKIP,4);
-        amountsCardstype.put(SEETHEFUTURE, 5);
-        amountsCardstype.put(FAVOR, 4);
-        amountsCardstype.put(CATCARD, 20);
-        amountsCardstype.put(DEFUSE, 6);
-        amountsCardstype.put(EXPLODINGKITTEN, 4);
-        amountsCardstype.put(NOPE, 5);
-        return amountsCardstype;
-    }
-    public void makeCards(){
-        cardlibrary();
-        for(Cards card: amountsCardstype.keySet()){
-            int amount = amountsCardstype.get(card);
-            for(int i=0; i<amount;i++){
-                Card Card = new Card(1, card);
-            }
-        }
-    }
-    
+
+
+
 }
 
