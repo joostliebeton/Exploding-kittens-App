@@ -1,29 +1,59 @@
 package ExplodingKittens;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static ExplodingKittens.Card.Cards.*;
+import static ExplodingKittens.Card.Cards.NOPE;
 
 public class Deck {
-    public Card Card;
     // cards: Arraylist<card>
-    public ArrayList<Card> deck;
-    public ArrayList<Card> begindeck;
-    public void setBegindeck() {
-        begindeck.add(ExplodingKittens.Card.Cards.)
-
-        this.begindeck = begindeck;
+    public Deck(){
+        this.cards=new ArrayList<>();
+        initializeDeck();
     }
-
+    private void initializeDeck(){
+        cardlibrary();
+        for(Card.Cards card: amountsCardstype.keySet()){
+            int amount = amountsCardstype.get(card);
+            for(int i=1; i<=amount;i++){
+                Card Card1 = new Card(i, card);
+                cards.add(Card1);
+                }
+            }
+    }
+    public ArrayList<Card> cards;
+    public ArrayList<Card> discardPile;
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
     // shuffle() shuffles the cards
     public void shuffle(){
         //randomizes the cards order
     }
     //drawCard() takes a card from the top of the deck and removes from the deck
-    public static Card drawCard(){
-        return Card;
+//    public Card drawCard(){
+//        return Card;
 
-    }
+//    }
     public void removeCard(){
 
+    }
+    public HashMap<Card.Cards, Integer> amountsCardstype = new HashMap<>();
+    public void cardlibrary(){
+        amountsCardstype.put(SHUFFLE,4);
+        amountsCardstype.put(SKIP,4);
+        amountsCardstype.put(SEETHEFUTURE, 5);
+        amountsCardstype.put(FAVOR, 4);
+        amountsCardstype.put(CATCARD1, 4);
+        amountsCardstype.put(CATCARD2, 4);
+        amountsCardstype.put(CATCARD3, 4);
+        amountsCardstype.put(CATCARD4, 4);
+        amountsCardstype.put(CATCARD5, 4);
+        amountsCardstype.put(DEFUSE, 6);
+        amountsCardstype.put(EXPLODINGKITTEN, 4);
+        amountsCardstype.put(NOPE, 5);
+        amountsCardstype.put(ATTACK, 4);
     }
 
 }

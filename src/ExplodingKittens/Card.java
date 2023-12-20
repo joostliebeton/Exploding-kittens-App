@@ -29,8 +29,7 @@ public class Card {
         return true;
     }
     // methode play()
-    public Card play(){
-                return Card;
+    public void play(){
     }
     // the functionality of the cards
     public void ExplodingKitten(){
@@ -84,26 +83,8 @@ public class Card {
         }
     public void  Attack () {
     }
-    public HashMap<Cards, Integer> cardlibrary(){
-        amountsCardstype.put(SHUFFLE,4);
-        amountsCardstype.put(SKIP,4);
-        amountsCardstype.put(SEETHEFUTURE, 5);
-        amountsCardstype.put(FAVOR, 4);
-        amountsCardstype.put(CATCARD, 20);
-        amountsCardstype.put(DEFUSE, 6);
-        amountsCardstype.put(EXPLODINGKITTEN, 4);
-        amountsCardstype.put(NOPE, 5);
-        return amountsCardstype;
-    }
-    public void makeCards(){
-        cardlibrary();
-        for(Cards card: amountsCardstype.keySet()){
-            int amount = amountsCardstype.get(card);
-            for(int i=0; i<amount;i++){
-                Card Card = new Card(1, card);
-            }
-        }
-    }
+
+
 
 }
 
