@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Deck {
     public Card Card;
     // cards: Arraylist<card>
-    public ArrayList<Card> deck;
-    public ArrayList<Card> begindeck;
-    public void setBegindeck() {
-        begindeck.add(ExplodingKittens.Card.Cards.)
+    public static ArrayList<Card> playingDeck;
+    public ArrayList<Card> beginDeck;
 
-        this.begindeck = begindeck;
+    public static ArrayList<Card> discardPile;
+    public void setBeginDeck() {
+        beginDeck.add(ExplodingKittens.Card.Cards.);
+
+        this.beginDeck = beginDeck;
     }
 
     // shuffle() shuffles the cards
@@ -19,11 +21,14 @@ public class Deck {
     }
     //drawCard() takes a card from the top of the deck and removes from the deck
     public static Card drawCard(){
+        // remove one card from playingDeck list.
         return Card;
 
     }
     public void removeCard(){
 
     }
-
+    public static int pileSize(){
+        return playingDeck.size();
+    }
 }

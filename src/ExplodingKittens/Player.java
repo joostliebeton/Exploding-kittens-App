@@ -14,8 +14,6 @@ public class Player {
 
         return Card;
     }
-    // playCard()
-
     public void playCard(Card.Cards cardPlayed) {
 //this is the code for the cards; when played, a function will compile the code of that card.
         switch (cardPlayed) {
@@ -35,7 +33,7 @@ public class Player {
             case SEETHEFUTURE:
                 Card.SeeTheFuture();
                 break;
-            case CATCARD:
+            case CATCARD1, CATCARD2, CATCARD3, CATCARD4, CATCARD5:
                 Card.CatCard();
                 break;
             case FAVOR:
@@ -47,11 +45,7 @@ public class Player {
         }
     }
 
-//    public Card playCard(Card playedCard){
-//        return Card;
-//    }
-    // hasCard()
-    public boolean hasCard(){
+    public static boolean hasCard(Card.Cards card){
         return true;
     }
 }
