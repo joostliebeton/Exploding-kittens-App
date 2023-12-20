@@ -4,16 +4,23 @@ import java.util.ArrayList;
 
 public class Player {
     // name String
+    Deck deck = new Deck();
     public String name;
     // hand: Arraylist<Card>
-    public static ArrayList<Card> hand;
-    public Card Card;
+    public ArrayList<Card> hand;
+    public Player(String name){
+        this.name=name;
+        this.hand = new ArrayList<>();
+    }
 
     // drawCard()
     public Card drawcard(){
-
-        return Card;
+        ArrayList<Card> cards = deck.getCards();
+        Card drawncard = cards.get(cards.size() - 1);
+        return drawncard;
     }
+    // playCard()
+
     public void playCard(Card.Cards cardPlayed) {
 //this is the code for the cards; when played, a function will compile the code of that card.
         switch (cardPlayed) {

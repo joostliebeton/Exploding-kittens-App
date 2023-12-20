@@ -7,15 +7,25 @@ public class Game {
 
     public static ArrayList<Player> players;
     public static ArrayList<Player> eliminatedPlayers;
+    public ArrayList<Player> players;
+    private Player currentPlayer;
+    private boolean GameOVer;
+    public ArrayList<Player> eliminatedPlayers;
     public String[] playernames;
     public void setPlayernames(String[] playernames) {
         this.playernames = playernames;
     }
+    public Game(ArrayList<Player> players){
+        this.players = players;
+        this.currentPlayer=null;
+        this.deck = new Deck();
+    }
+    public Player Player;
     static Player currentPlayer;
     public static void EleminatePlayer(){
         players.remove(currentPlayer);
         eliminatedPlayers.add(currentPlayer);
-        
+
     }
     public static Player Player;
     //deck:Arraylist<Deck>
@@ -23,19 +33,13 @@ public class Game {
     //startGame() starts the game and does all the things to be able to start (shuffle() etc.)
     public ArrayList<Player> makeplayerlist(String[] names){
         for(String name: names){
-            Player player = new Player();
-            player.name = name;
+            Player player = new Player(name);
             players.add(player);
         }
         return players;
     }
     public void startGame(){
-        Game game = new Game();
-        setPlayernames(new String[]{"Joost", "Joris"});
-        makeplayerlist(playernames);
-        game.players=players;
-        makeCards();
-
+        Game game = new Game(players);
     //do all the things needed to start the game
     }
     //nextPlayer() moves to the next player
