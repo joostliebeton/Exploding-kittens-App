@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_19_12_2023_15_03__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_19_12_2023_15_03__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +35,7 @@
       <map>
         <entry key="$PROJECT_DIR$" value="check" />
         <entry key="$PROJECT_DIR$" value="master" />
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Check" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -62,7 +60,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Check&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -70,7 +68,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/joris/IdeaProjects/Project/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;shared-indexes&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
@@ -140,7 +138,9 @@
       <workItem from="1702725191333" duration="595000" />
       <workItem from="1702891630013" duration="48000" />
       <workItem from="1702984776524" duration="469000" />
-      <workItem from="1702990475812" duration="2975000" />
+      <workItem from="1702990475812" duration="6154000" />
+      <workItem from="1703069716669" duration="861000" />
+      <workItem from="1703070598911" duration="343000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -344,7 +344,39 @@
       <updated>1703069855682</updated>
     </task>
     <option name="localTasksCounter" value="26" />
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1702993620339</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1702993620339</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1702996469411</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1702996469411</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1703069094171</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1703069094171</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+      <option name="closed" value="true" />
+      <created>1703070521630</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1703070521630</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

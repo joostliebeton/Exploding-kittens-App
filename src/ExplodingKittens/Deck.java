@@ -12,15 +12,26 @@ public class Deck {
         this.cards=new ArrayList<>();
         initializeDeck();
     }
-    private void initializeDeck(){
+    public HashMap<Card.Cards, Integer> amountsCardstype = new HashMap<>();
+    private void initializeDeck() {
         cardlibrary();
-        for(Card.Cards card: amountsCardstype.keySet()){
+        for (Card.Cards card : amountsCardstype.keySet()) {
             int amount = amountsCardstype.get(card);
-            for(int i=1; i<=amount;i++){
-                Card Card1 = new Card(i, card);
+            for (int i = 1; i <= amount; i++) {
+                Card Card1 = new Card(i, card, this);
                 cards.add(Card1);
-                }
             }
+        }
+    }
+
+    public ArrayList<Card> playingDeck;
+    public ArrayList<Card> beginDeck;
+
+    public ArrayList<Card> discardPile;
+    public void setBeginDeck() {
+        beginDeck.add(ExplodingKittens.Card.Cards.);
+
+        this.beginDeck = beginDeck;
     }
     public ArrayList<Card> cards;
     public ArrayList<Card> discardPile;
@@ -32,14 +43,15 @@ public class Deck {
         //randomizes the cards order
     }
     //drawCard() takes a card from the top of the deck and removes from the deck
-//    public Card drawCard(){
-//        return Card;
+    public Card drawCard(){
+        // remove one card from playingDeck list.
+        return Card card;
 
-//    }
+    }
     public void removeCard(){
 
     }
-    public HashMap<Card.Cards, Integer> amountsCardstype = new HashMap<>();
+
     public void cardlibrary(){
         amountsCardstype.put(SHUFFLE,4);
         amountsCardstype.put(SKIP,4);
@@ -56,4 +68,7 @@ public class Deck {
         amountsCardstype.put(ATTACK, 4);
     }
 
+    public int pileSize(){
+        return playingDeck.size();
+    }
 }
