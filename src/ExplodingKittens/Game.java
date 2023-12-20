@@ -30,7 +30,7 @@ public class Game {
         return players;
     }
     public void startGame(){
-        Game game = new Game();
+        Game game = new Game(players);
     //do all the things needed to start the game
     }
     //nextPlayer() moves to the next player
