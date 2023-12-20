@@ -6,7 +6,7 @@ public class Player {
     // name String
     public String name;
     // hand: Arraylist<Card>
-    public ArrayList<Card> hand;
+    public static ArrayList<Card> hand;
     public Card Card;
 
     // drawCard()
@@ -19,9 +19,7 @@ public class Player {
     public void playCard(Card.Cards cardPlayed) {
 //this is the code for the cards; when played, a function will compile the code of that card.
         switch (cardPlayed) {
-            case EXPLODINGKITTEN:
-                Card.ExplodingKitten();
-                break;
+
             case DEFUSE:
                 Card.Defuse();
                 break;
@@ -49,9 +47,9 @@ public class Player {
         }
     }
 
-    public Card playcard(Card playedCard){
-        return Card;
-    }
+//    public Card playCard(Card playedCard){
+//        return Card;
+//    }
     // hasCard()
     public boolean hasCard(){
         return true;

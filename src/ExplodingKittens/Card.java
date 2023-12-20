@@ -8,8 +8,8 @@ import static ExplodingKittens.Card.Cards.EXPLODINGKITTEN;
 public class Card {
     public Card Card;
     enum Cards{
-      EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK
-        //if its correct this is how it is correct
+          EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD1,CATCARD2,CATCARD3, CATCARD4, CATCARD5, FAVOR, ATTACK
+
     }
     // id; int
     public int id;
@@ -23,8 +23,8 @@ public class Card {
     }
     // the functionality of the cards
     public void ExplodingKitten(){
-        if(Deck.drawCard.equals(EXPLODINGKITTEN)){
-            if(player.hasCard(DEFUSE)){
+        if(Deck.drawCard.equals(EXPLODINGKITTEN)){ // or is this if statement not needed? "you just call the methode ExplodingKitten() and it explodes or gives option"
+            if(Player.hand.contains(DEFUSE)){
                 play(DEFUSE);
                 hand.remove(DEFUSE); // removes the defuse card from the hand
                 discardpile.add(DEFUSE);
@@ -35,7 +35,7 @@ public class Card {
                 // player can defuse the exploding kitten
 
             }
-            else{
+            else{Game.eliminatedPlayers.add(currentPlayer); // currentplayer
                 // player is out of the game
             }
             // player is out of the game

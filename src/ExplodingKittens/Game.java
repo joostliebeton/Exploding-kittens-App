@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Game {
     //players: Arraylist<player>
+
     public ArrayList<Player> players;
     public String[] playernames;
     public void setPlayernames(String[] playernames) {
