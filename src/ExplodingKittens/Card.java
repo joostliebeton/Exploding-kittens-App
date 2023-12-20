@@ -2,8 +2,9 @@ package ExplodingKittens;
 
 import java.util.ArrayList;
 
-import static ExplodingKittens.Card.Cards.DEFUSE;
-import static ExplodingKittens.Card.Cards.EXPLODINGKITTEN;
+import java.util.HashMap;
+
+import static ExplodingKittens.Card.Cards.*;
 
 public class Card {
     public Card Card;
@@ -11,9 +12,19 @@ public class Card {
           EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD1,CATCARD2,CATCARD3, CATCARD4, CATCARD5, FAVOR, ATTACK
 
     }
+    int amount;
+    public HashMap<Cards, Integer> amountsCardstype = new HashMap<>();
     // id; int
     public int id;
     // methode is playable()
+    public Cards cardType;
+    public Card(int id, Cards cardType){
+        this.id = id;
+        this.cardType = cardType;
+    }
+    public Cards getCardType(){
+        return cardType;
+    }
     public boolean playable(){
         return true;
     }
@@ -23,8 +34,8 @@ public class Card {
     }
     // the functionality of the cards
     public void ExplodingKitten(){
-        if(Deck.drawCard.equals(EXPLODINGKITTEN)){ // or is this if statement not needed? "you just call the methode ExplodingKitten() and it explodes or gives option"
-            if(Player.hand.contains(DEFUSE)){
+        if(Deck.drawCard.equals(EXPLODINGKITTEN)){
+            if(player.hasCard(DEFUSE)){
                 play(DEFUSE);
                 hand.remove(DEFUSE); // removes the defuse card from the hand
                 discardpile.add(DEFUSE);
@@ -73,6 +84,26 @@ public class Card {
         }
     public void  Attack () {
     }
-    
+    public HashMap<Cards, Integer> cardlibrary(){
+        amountsCardstype.put(SHUFFLE,4);
+        amountsCardstype.put(SKIP,4);
+        amountsCardstype.put(SEETHEFUTURE, 5);
+        amountsCardstype.put(FAVOR, 4);
+        amountsCardstype.put(CATCARD, 20);
+        amountsCardstype.put(DEFUSE, 6);
+        amountsCardstype.put(EXPLODINGKITTEN, 4);
+        amountsCardstype.put(NOPE, 5);
+        return amountsCardstype;
+    }
+    public void makeCards(){
+        cardlibrary();
+        for(Cards card: amountsCardstype.keySet()){
+            int amount = amountsCardstype.get(card);
+            for(int i=0; i<amount;i++){
+                Card Card = new Card(1, card);
+            }
+        }
+    }
+
 }
 

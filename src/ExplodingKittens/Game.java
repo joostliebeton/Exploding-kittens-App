@@ -6,6 +6,7 @@ public class Game {
     //players: Arraylist<player>
 
     public ArrayList<Player> players;
+    public ArrayList<Player> eliminatedPlayers;
     public String[] playernames;
     public void setPlayernames(String[] playernames) {
         this.playernames = playernames;
@@ -27,7 +28,7 @@ public class Game {
         setPlayernames(new String[]{"Joost", "Joris"});
         makeplayerlist(playernames);
         game.players=players;
-        game.deck= deck.shuffle();
+        makeCards();
 
     //do all the things needed to start the game
     }

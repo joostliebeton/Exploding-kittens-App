@@ -1,102 +1,64 @@
-Index: src/ExplodingKittens/Player.java
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+>package ExplodingKittens;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Player {\r\n    // name String\r\n    public String name;\r\n    // hand: Arraylist<Card>\r\n    public ArrayList<Card> hand;\r\n    public Card Card;\r\n\r\n    // drawCard()\r\n    public Card drawcard(){\r\n\r\n        return Card;\r\n    }\r\n    // playCard()\r\n\r\n    public void playCard(Card.Cards cardPlayed) {\r\n//this is the code for the cards; when played, a function will compile the code of that card.\r\n        switch (cardPlayed) {\r\n            case EXPLODINGKITTEN:\r\n                Card.ExplodingKitten();\r\n                break;\r\n            case DEFUSE:\r\n                Card.Defuse();\r\n                break;\r\n            case NOPE:\r\n                Card.Nope();\r\n                break;\r\n            case SHUFFLE:\r\n                Card.Shuffle();\r\n                break;\r\n            case SKIP:\r\n                Card.Skip();\r\n                break;\r\n            case SEETHEFUTURE:\r\n                Card.SeeTheFuture();\r\n                break;\r\n            case CATCARD:\r\n                Card.CatCard();\r\n                break;\r\n            case FAVOR:\r\n                Card.Favor();\r\n                break;\r\n            case ATTACK:\r\n                Card.Attack();\r\n                break;\r\n        }\r\n    }\r\n\r\n    public Card playcard(Card playedCard){\r\n        return Card;\r\n    }\r\n    // hasCard()\r\n    public boolean hasCard(){\r\n        return true;\r\n    }\r\n}\r\n
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
-diff --git a/src/ExplodingKittens/Player.java b/src/ExplodingKittens/Player.java
---- a/src/ExplodingKittens/Player.java	(revision f0fa6178b69bf34c98567169e286533d6e610aa1)
-+++ b/src/ExplodingKittens/Player.java	(date 1702996499443)
-@@ -6,7 +6,7 @@
-     // name String
-     public String name;
-     // hand: Arraylist<Card>
--    public ArrayList<Card> hand;
-+    public static ArrayList<Card> hand;
-     public Card Card;
-
-     // drawCard()
-@@ -19,9 +19,7 @@
-     public void playCard(Card.Cards cardPlayed) {
- //this is the code for the cards; when played, a function will compile the code of that card.
-         switch (cardPlayed) {
--            case EXPLODINGKITTEN:
--                Card.ExplodingKitten();
--                break;
-+
-             case DEFUSE:
-                 Card.Defuse();
-                 break;
-@@ -49,9 +47,9 @@
-         }
-     }
-
--    public Card playcard(Card playedCard){
--        return Card;
--    }
-+//    public Card playCard(Card playedCard){
-+//        return Card;
-+//    }
-     // hasCard()
-     public boolean hasCard(){
-         return true;
-Index: .idea/vcs.xml
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
-diff --git a/.idea/vcs.xml b/.idea/vcs.xml
-new file mode 100644
---- /dev/null	(date 1702996499439)
-+++ b/.idea/vcs.xml	(date 1702996499439)
-@@ -0,0 +1,6 @@
-+<?xml version="1.0" encoding="UTF-8"?>
-+<project version="4">
-+  <component name="VcsDirectoryMappings">
-+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
-+  </component>
-+</project>
-\ No newline at end of file
 Index: src/ExplodingKittens/Card.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+>package ExplodingKittens;\r\n\r\nimport java.util.ArrayList;\r\n\r\nimport static ExplodingKittens.Card.Cards.DEFUSE;\r\nimport static ExplodingKittens.Card.Cards.EXPLODINGKITTEN;\r\n\r\npublic class Card {\r\n    public Card Card;\r\n    enum Cards{\r\n      EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK\r\n        //if its correct this is how it is correct\r\n    }\r\n    // id; int\r\n    public int id;\r\n    // methode is playable()\r\n    public boolean playable(){\r\n        return true;\r\n    }\r\n    // methode play()\r\n    public Card play(){\r\n                return Card;\r\n    }\r\n    // the functionality of the cards\r\n    public void ExplodingKitten(){\r\n        if(Deck.drawCard.equals(EXPLODINGKITTEN)){\r\n            if(player.hasCard(DEFUSE)){\r\n                play(DEFUSE);\r\n                hand.remove(DEFUSE); // removes the defuse card from the hand\r\n                discardpile.add(DEFUSE);\r\n                // player can secretly put the exploding kitten back in the deck\r\n                Normalpile.add(EXPLODINGKITTEN);\r\n                // after\r\n            // is this the right way to do it?\r\n                // player can defuse the exploding kitten\r\n\r\n            }\r\n            else{\r\n                // player is out of the game\r\n            }\r\n            // player is out of the game\r\n        }\r\n        else{\r\n            // player is still in the game\r\n        }\r\n        // we are making the game \"exploding kittens\", so we need to make the cards and implement methods regarding the cards\r\n        // if the exploding kitten is drawn, the player is out of the game\r\n        // if the player has a defuse card, he can defuse the exploding kitten and put it back in the deck\r\n        // if the player has no defuse card, he is out of the game\r\n        // if the player has a nope card, he can NOT nope the exploding kitten\r\n\r\n\r\n    }\r\n    public void  Defuse(){\r\n        //card.remove\r\n    }\r\n    public void  Nope  (){\r\n\r\n        }\r\n    public void  Shuffle(){\r\n\r\n        }\r\n    public void  Skip(){\r\n\r\n        }\r\n    public void  SeeTheFuture(){ \r\n        }\r\n    public void  CatCard(){\r\n\r\n        }\r\n    public void Favor (){\r\n\r\n        }\r\n    public void  Attack () {\r\n    }\r\n    \r\n}\r\n\r\n
+<+>package ExplodingKittens;\r\n\r\npublic class Card {\r\n    public Card Card;\r\n    enum Cards{\r\n      EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK\r\n        //if its correct this is how it is correct\r\n    }\r\n    // id; int\r\n    public int id;\r\n    // methode is playable()\r\n    public boolean playable(){\r\n        return true;\r\n    }\r\n    // methode play()\r\n    public Card play(){\r\n                return Card;\r\n    }\r\n    // the functionallity of the cards\r\n    public void ExplodingKitten(){\r\n\r\n    }\r\n    public void  Defuse(){\r\n        //card.remove\r\n    }\r\n    public void  Nope  (){\r\n\r\n        }\r\n    public void  Shuffle(){\r\n\r\n        }\r\n    public void  Skip(){\r\n\r\n        }\r\n    public void  SeeTheFuture(){ \r\n        }\r\n    public void  CatCard(){\r\n\r\n        }\r\n    public void Favor (){\r\n\r\n        }\r\n    public void  Attack () {\r\n    }\r\n    \r\n}\r\n\r\n
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
 diff --git a/src/ExplodingKittens/Card.java b/src/ExplodingKittens/Card.java
---- a/src/ExplodingKittens/Card.java	(revision f0fa6178b69bf34c98567169e286533d6e610aa1)
-+++ b/src/ExplodingKittens/Card.java	(date 1702996499447)
-@@ -9,7 +9,7 @@
-     public Card Card;
-     enum Cards{
-       EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK
--        //if its correct this is how it is correct
+--- a/src/ExplodingKittens/Card.java	(revision 7de0d2222ca27ccea0ae41ff6157747a95ca842c)
++++ b/src/ExplodingKittens/Card.java	(date 1702994551145)
+@@ -1,14 +1,26 @@
+ package ExplodingKittens;
+ 
++import java.util.HashMap;
 +
+ public class Card {
+     public Card Card;
+-    enum Cards{
++    public enum Cards{
+       EXPLODINGKITTEN, DEFUSE, NOPE, SHUFFLE, SKIP, SEETHEFUTURE, CATCARD, FAVOR, ATTACK
+         //if its correct this is how it is correct
      }
++    int amount;
++    public HashMap<Cards, Double>;
      // id; int
      public int id;
-@@ -23,8 +23,8 @@
+     // methode is playable()
++    public Cards cardType;
++    public Card(int id, Cards cardType){
++        this.id = id;
++        this.cardType = cardType;
++    }
++    public Cards getCardType(){
++        return cardType;
++    }
+     public boolean playable(){
+         return true;
      }
-     // the functionality of the cards
-     public void ExplodingKitten(){
--        if(Deck.drawCard.equals(EXPLODINGKITTEN)){
--            if(player.hasCard(DEFUSE)){
-+        if(Deck.drawCard.equals(EXPLODINGKITTEN)){ // or is this if statement not needed? "you just call the methode ExplodingKitten() and it explodes or gives option"
-+            if(Player.hand.contains(DEFUSE)){
-                 play(DEFUSE);
-                 hand.remove(DEFUSE); // removes the defuse card from the hand
-                 discardpile.add(DEFUSE);
-@@ -35,7 +35,7 @@
-                 // player can defuse the exploding kitten
-
-             }
--            else{
-+            else{Game.eliminatedPlayers.add(currentPlayer); // currentplayer
-                 // player is out of the game
-             }
-             // player is out of the game
+@@ -42,6 +54,22 @@
+         }
+     public void  Attack () {
+     }
++    public static void MakeCards(){
++
++        int shuffle_card_amount = 4;
++        int skip_card_amount =4;
++        int future_card_amount= 5;
++        int favor_card_amount = 4;
++        int cat_card_amount = 20;
++        int defusion_Card_amount = 6;
++        int exploding_kitten_card_amount = 4;
++        int nope_card_amount = 5;
++        for ()
++        Card explodingKittenCard1 = new Card(1, Cards.EXPLODINGKITTEN);
++        Card explodingKittenCard2 = new Card(2, Cards.EXPLODINGKITTEN);
++        Card explodingKittenCard3= new Card(3, Cards.EXPLODINGKITTEN);
++        Card explodingKittenCard4 = new Card(4, Cards.EXPLODINGKITTEN);
++    }
+     
+ }
+ 
 Index: .idea/workspace.xml
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
@@ -105,164 +67,94 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
 diff --git a/.idea/workspace.xml b/.idea/workspace.xml
---- a/.idea/workspace.xml	(revision f0fa6178b69bf34c98567169e286533d6e610aa1)
-+++ b/.idea/workspace.xml	(date 1702996499450)
-@@ -4,12 +4,12 @@
-     <option name="autoReloadType" value="SELECTIVE" />
+--- a/.idea/workspace.xml	(revision 7de0d2222ca27ccea0ae41ff6157747a95ca842c)
++++ b/.idea/workspace.xml	(date 1702994551705)
+@@ -5,11 +5,8 @@
    </component>
    <component name="ChangeListManager">
--    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
+     <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
 -      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into check">
-+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
        <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
        <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
 -      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
-       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
-+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
      </list>
      <option name="SHOW_DIALOG" value="false" />
      <option name="HIGHLIGHT_CONFLICTS" value="true" />
-@@ -28,11 +28,19 @@
-     <option name="NEW_BASE" value="origin/main" />
-   </component>
-   <component name="Git.Settings">
--    <option name="PREVIOUS_COMMIT_AUTHORS">
--      <list>
--        <option value="Liebeton, J.C. (Joost, Student B-BIT) &lt;j.c.liebeton@student.utwente.nl&gt;" />
--      </list>
--    </option>
-+    <favorite-branches>
-+      <branch-storage>
-+        <map>
-+          <entry type="REMOTE">
-+            <value>
-+              <list>
-+                <branch-info repo="$PROJECT_DIR$" source="origin/check" />
-+              </list>
-+            </value>
-+          </entry>
-+        </map>
-+      </branch-storage>
-+    </favorite-branches>
+@@ -35,7 +32,7 @@
+     </option>
      <option name="RECENT_BRANCH_BY_REPOSITORY">
        <map>
-         <entry key="$PROJECT_DIR$" value="master" />
-@@ -60,8 +68,7 @@
-     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-        <entry key="$PROJECT_DIR$" value="master" />
++        <entry key="$PROJECT_DIR$" value="Check" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -54,24 +51,24 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
 -    &quot;git-widget-placeholder&quot;: &quot;Check&quot;,
 -    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-+    &quot;git-widget-placeholder&quot;: &quot;check&quot;,
-     &quot;last_opened_file_path&quot;: &quot;C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src&quot;,
-     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-@@ -114,13 +121,8 @@
-       <workItem from="1701958153036" duration="254000" />
-       <workItem from="1701958517553" duration="9157000" />
-       <workItem from="1702029072014" duration="6034000" />
--      <workItem from="1702227314083" duration="717000" />
--      <workItem from="1702288044838" duration="58000" />
--      <workItem from="1702456875415" duration="610000" />
--      <workItem from="1702725191333" duration="595000" />
--      <workItem from="1702891630013" duration="48000" />
--      <workItem from="1702984776524" duration="469000" />
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/joris/IdeaProjects/Project/src/Main.java&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;shared-indexes&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "git-widget-placeholder": "test",
++    "ignore.virus.scanning.warn.message": "true",
++    "last_opened_file_path": "C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "onboarding.tips.debug.path": "C:/Users/joris/IdeaProjects/Project/src/Main.java",
++    "settings.editor.selected.configurable": "shared-indexes",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\joris\IdeaProjects\Project\src\Cards" />
+@@ -120,7 +117,7 @@
+       <workItem from="1702725191333" duration="595000" />
+       <workItem from="1702891630013" duration="48000" />
+       <workItem from="1702984776524" duration="469000" />
 -      <workItem from="1702990475812" duration="2975000" />
-+      <workItem from="1702155984212" duration="2750000" />
-+      <workItem from="1702991059140" duration="5188000" />
++      <workItem from="1702990475812" duration="4049000" />
      </task>
      <task id="LOCAL-00001" summary="commit test">
        <option name="closed" value="true" />
-@@ -282,31 +284,23 @@
+@@ -306,7 +303,15 @@
        <option name="project" value="LOCAL" />
-       <updated>1702154486560</updated>
-     </task>
--    <task id="LOCAL-00021" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
-+    <task id="LOCAL-00021" summary="Merge remote-tracking branch 'origin/check' into check">
-       <option name="closed" value="true" />
--      <created>1702227389630</created>
-+      <created>1702210267900</created>
-       <option name="number" value="00021" />
-       <option name="presentableId" value="LOCAL-00021" />
-       <option name="project" value="LOCAL" />
--      <updated>1702227389630</updated>
-+      <updated>1702210267900</updated>
-     </task>
--    <task id="LOCAL-00022" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
-+    <task id="LOCAL-00022" summary="Merge remote-tracking branch 'origin/test' into check">
-       <option name="closed" value="true" />
--      <created>1702990961908</created>
-+      <created>1702994651648</created>
-       <option name="number" value="00022" />
-       <option name="presentableId" value="LOCAL-00022" />
-       <option name="project" value="LOCAL" />
--      <updated>1702990961908</updated>
--    </task>
--    <task id="LOCAL-00023" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
--      <option name="closed" value="true" />
--      <created>1702990996466</created>
--      <option name="number" value="00023" />
--      <option name="presentableId" value="LOCAL-00023" />
--      <option name="project" value="LOCAL" />
--      <updated>1702990996466</updated>
-+      <updated>1702994651648</updated>
+       <updated>1702990996466</updated>
      </task>
 -    <option name="localTasksCounter" value="24" />
-+    <option name="localTasksCounter" value="23" />
++    <task id="LOCAL-00024" summary="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4">
++      <option name="closed" value="true" />
++      <created>1702993620339</created>
++      <option name="number" value="00024" />
++      <option name="presentableId" value="LOCAL-00024" />
++      <option name="project" value="LOCAL" />
++      <updated>1702993620339</updated>
++    </task>
++    <option name="localTasksCounter" value="25" />
      <servers />
    </component>
    <component name="TypeScriptGeneratedFilesManager">
-@@ -323,7 +317,7 @@
-                   <entry key="branch">
-                     <value>
-                       <list>
--                        <option value="Check" />
-+                        <option value="origin/check" />
-                       </list>
-                     </value>
-                   </entry>
-@@ -341,8 +335,8 @@
-     <MESSAGE value="Merge remote-tracking banch 'origin/master'" />
-     <MESSAGE value="test" />
-     <MESSAGE value="Merge remote-tracking branch 'origin/check' into check" />
--    <MESSAGE value="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4" />
--    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'check' into 'main'&#10;&#10;Check&#10;&#10;See merge request s3259633/exploding-kittens-project!4" />
-+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
-+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into check" />
-   </component>
-   <component name="XSLT-Support.FileAssociations.UIState">
-     <expand />
-Index: src/ExplodingKittens/Game.java
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+>package ExplodingKittens;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class Game {\r\n    //players: Arraylist<player>\r\n    public ArrayList<Player> players;\r\n    public String[] playernames;\r\n    public void setPlayernames(String[] playernames) {\r\n        this.playernames = playernames;\r\n    }\r\n    public Player Player;\r\n    //deck:Arraylist<Deck>\r\n    public Deck deck;\r\n    //startGame() starts the game and does all the things to be able to start (shuffle() etc.)\r\n    public ArrayList<Player> makeplayerlist(String[] names){\r\n        for(String name: names){\r\n            Player player = new Player();\r\n            player.name = name;\r\n            players.add(player);\r\n        }\r\n        return players;\r\n    }\r\n    public void startGame(){\r\n        Game game = new Game();\r\n        setPlayernames(new String[]{\"Joost\", \"Joris\"});\r\n        makeplayerlist(playernames);\r\n        game.players=players;\r\n        game.deck= deck.shuffle();\r\n\r\n    //do all the things needed to start the game\r\n    }\r\n    //nextPlayer() moves to the next player\r\n    public Player nextPlayer(){\r\n        return Player;\r\n    }\r\n    private void play(){\r\n\r\n    }\r\n    //endGame() ends the game when last kitten exploded\r\n    public void endGame(){\r\n        //end the game\r\n    }\r\n}\r\n
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
-diff --git a/src/ExplodingKittens/Game.java b/src/ExplodingKittens/Game.java
---- a/src/ExplodingKittens/Game.java	(revision f0fa6178b69bf34c98567169e286533d6e610aa1)
-+++ b/src/ExplodingKittens/Game.java	(date 1702996499454)
-@@ -4,6 +4,7 @@
-
- public class Game {
-     //players: Arraylist<player>
-+
-     public ArrayList<Player> players;
-     public String[] playernames;
-     public void setPlayernames(String[] playernames) {
-Index: .idea/misc.xml
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_20\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
-diff --git a/.idea/misc.xml b/.idea/misc.xml
---- a/.idea/misc.xml	(revision 25df5a630f86d06c9984dd4bbdeae78b2b2a873a)
-+++ b/.idea/misc.xml	(date 1702210640068)
-@@ -1,4 +1,3 @@
--<?xml version="1.0" encoding="UTF-8"?>
- <project version="4">
-   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
-     <output url="file://$PROJECT_DIR$/out" />
