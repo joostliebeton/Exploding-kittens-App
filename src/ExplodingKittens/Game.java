@@ -11,15 +11,28 @@ public class Game {
         public List<Player> getPlayers() {
             return players;
         }
+        private int currentPlayerIndex;
 
         public Game(int numPlayers) {
-            initializeDeck();
-            initializeDiscardPile();
             initializePlayers(numPlayers);
+            initializeDeckandhands();
+            initializeDiscardPile();
+
+            currentPlayerIndex = 0;
         }
 
-        private void initializeDeck() {
+        private void initializeDeckandhands() {
             deck = new Deck();
+            for (int i = 0; i < 5; i++) {
+                for (Player player : players) {
+                    player.drawCard(deck);
+                }
+            }
+            // Add Exploding Kittens to the deck after initial cards have been dealt
+            for (int i = 0; i < 4; i++) {
+                deck.addExplodingKitten();
+            }
+            deck.shuffle();
         }
         private void initializeDiscardPile() {
             discardPile = new DiscardPile();
@@ -34,11 +47,6 @@ public class Game {
 
         public void startGame() {
             // Deal initial cards to players
-            for (Player player : players) {
-                for (int i = 0; i < 5; i++) { // Assuming each player starts with 5 cards
-                    player.drawCard(deck);
-                }
-            }
 
             // Play a round (for demonstration purposes)
             for (Player player : players) {
@@ -47,6 +55,12 @@ public class Game {
             // Implement the game loop and overall game logic here
             // For example, dealing initial cards to players, handling turns, etc.
         }
+        public Player getCurrentPlayer() {
+            return players.get(currentPlayerIndex);
+        }
+    public void endTurn() {
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
 
         private boolean isGameOver() {
             // Implement logic to check if the game is over
