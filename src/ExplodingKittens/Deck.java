@@ -1,74 +1,90 @@
 package ExplodingKittens;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static ExplodingKittens.Card.Cards.*;
-import static ExplodingKittens.Card.Cards.NOPE;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class Deck {
-    // cards: Arraylist<card>
-    public Deck(){
-        this.cards=new ArrayList<>();
+    private ArrayList<Card> cards;
+
+    public Deck() {
+        cards = new ArrayList<>();
         initializeDeck();
+        shuffle();
     }
-    public HashMap<Card.Cards, Integer> amountsCardstype = new HashMap<>();
+
     private void initializeDeck() {
-        cardlibrary();
-        for (Card.Cards card : amountsCardstype.keySet()) {
-            int amount = amountsCardstype.get(card);
-            for (int i = 1; i <= amount; i++) {
-                Card Card1 = new Card(i, card, this);
-                cards.add(Card1);
+        for (CardType type : CardType.values()) {
+            for (int i = 0; i < getInitialCardCount(type); i++) {
+                cards.add(new Card(type));
             }
         }
     }
 
-    public ArrayList<Card> playingDeck;
-    public ArrayList<Card> beginDeck;
-
-    public ArrayList<Card> discardPile;
-    public void setBeginDeck() {
-        beginDeck.add(ExplodingKittens.Card.Cards.);
-
-        this.beginDeck = beginDeck;
+    private int getInitialCardCount(CardType type) {
+        // Return the initial count for each card type
+        // You can customize this based on the rules of the game
+        switch (type) {
+            case EXPLODING_KITTEN:
+                return 4;
+            case DEFUSE:
+                return 6;
+            case SKIP:
+                return 4;
+            case ATTACK:
+                return 4;
+            case FAVOR:
+                return 4;
+            case SEE_THE_FUTURE:
+                return 5;
+            case SHUFFLE:
+                return 4;
+            case NOPE:
+                return 5;
+            case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
+                return 4;
+            // Add cases for other card types
+            default:
+                return 4;
+        }
     }
-    public ArrayList<Card> cards;
-    public ArrayList<Card> discardPile;
+
+    public void shuffle() {
+        Random random = new Random();
+        for (int i = cards.size() - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            swapCards(i, j);
+        }
+        Collections.shuffle(cards);
+    }
+
+    private void swapCards(int i, int j) {
+        Card temp = cards.get(i);
+        cards.set(i, cards.get(j));
+        cards.set(j, temp);
+    }
+
+    public Card draw() {
+        if (!isEmpty()) {
+            return cards.remove(0);
+        }
+        return null; // Deck is empty
+    }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
+
     public ArrayList<Card> getCards() {
         return cards;
     }
     // shuffle() shuffles the cards
-    public void shuffle(){
-        //randomizes the cards order
-    }
+
     //drawCard() takes a card from the top of the deck and removes from the deck
-    public Card drawCard(){
-        // remove one card from playingDeck list.
-        return Card card;
-
-    }
-    public void removeCard(){
-
-    }
-
-    public void cardlibrary(){
-        amountsCardstype.put(SHUFFLE,4);
-        amountsCardstype.put(SKIP,4);
-        amountsCardstype.put(SEETHEFUTURE, 5);
-        amountsCardstype.put(FAVOR, 4);
-        amountsCardstype.put(CATCARD1, 4);
-        amountsCardstype.put(CATCARD2, 4);
-        amountsCardstype.put(CATCARD3, 4);
-        amountsCardstype.put(CATCARD4, 4);
-        amountsCardstype.put(CATCARD5, 4);
-        amountsCardstype.put(DEFUSE, 6);
-        amountsCardstype.put(EXPLODINGKITTEN, 4);
-        amountsCardstype.put(NOPE, 5);
-        amountsCardstype.put(ATTACK, 4);
-    }
 
     public int pileSize(){
-        return playingDeck.size();
+        return cards.size();
     }
 }
