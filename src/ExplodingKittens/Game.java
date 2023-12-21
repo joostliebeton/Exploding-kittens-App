@@ -15,8 +15,8 @@ public class Game {
         }
         private int currentPlayerIndex;
 
-        public Game(int numPlayers) {
-            initializePlayers(numPlayers);
+        public Game(String[] Players) {
+            initializePlayers(Players);
             initializeDeckAndhands();
             initializeDiscardPile();
 
@@ -40,10 +40,10 @@ public class Game {
             discardPile = new DiscardPile();
         }
 
-        private void initializePlayers(int numPlayers) {
+        private void initializePlayers(String[] names) {
             players = new ArrayList<>();
-            for (int i = 1; i <= numPlayers; i++) {
-                players.add(new Player("Player " + i));
+            for (String name : names) {
+                players.add(new Player(name));
             }
         }
 
