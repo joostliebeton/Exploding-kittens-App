@@ -94,4 +94,8 @@ public class Deck {
     public void addExplodingKitten() {
         cards.add(new Card(CardType.EXPLODING_KITTEN));
     }
+
+    public Card[] getDeck() {
+        return cards.toArray(new Card[0]);
+    }
 }

@@ -12,6 +12,11 @@ public class GameRule {
         // Start the game
         game.startGame();
         System.out.println(game.getPlayers().get(0).getName() + " has " + game.getPlayers().get(0).getHand().size() + " cards in hand.");
+        game.startGame();
+        System.out.println(game.getPlayers().get(0).getName() + " has " + game.getPlayers().get(0).getHand().size() + " cards in hand.");
+        //show discard pile
+        game.getDiscardPile();
+        game.getDeck();
     }
     //validatePlay() validates the played action
 }
