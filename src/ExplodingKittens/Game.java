@@ -99,4 +99,15 @@ public class Game {
     public void endGame(){
         //end the game
     }
+
+    public void getDiscardPile() {
+        for (Card card : discardPile.getDiscardPile()) {
+            System.out.println(card.getType());
+        }
+    }
+    public void getDeck() {
+        for (Card card : deck.getDeck()) {
+            System.out.println(card.getType());
+        }
+    }
 }

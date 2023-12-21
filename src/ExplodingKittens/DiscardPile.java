@@ -13,4 +13,8 @@ public class DiscardPile {
         discardedCards.add(card);
         System.out.println("Card discarded: " + card.getType());
     }
+
+    public Card[] getDiscardPile() {
+        return discardedCards.toArray(new Card[0]);
+    }
 }
