@@ -14,9 +14,10 @@ public class Game {
         private int currentPlayerIndex;
 
         public Game(int numPlayers) {
+            initializePlayers(numPlayers);
             initializeDeckandhands();
             initializeDiscardPile();
-            initializePlayers(numPlayers);
+
             currentPlayerIndex = 0;
         }
 

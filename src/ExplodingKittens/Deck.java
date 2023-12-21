@@ -16,6 +16,9 @@ public class Deck {
 
     private void initializeDeck() {
         for (CardType type : CardType.values()) {
+            if (type == CardType.EXPLODING_KITTEN) {
+                continue;
+            }
             for (int i = 0; i < getInitialCardCount(type); i++) {
                 cards.add(new Card(type));
             }
