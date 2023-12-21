@@ -87,8 +87,4 @@ public class Deck {
     public int pileSize(){
         return cards.size();
     }
-
-    public void addExplodingKitten() {
-        cards.add(new Card(CardType.EXPLODING_KITTEN));
-    }
 }
