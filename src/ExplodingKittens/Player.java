@@ -28,15 +28,16 @@ public class Player {
             }
         }
 
-        public void playCard(Card card, DiscardPile discardPile) {
-            if (hand.contains(card)) {
-                hand.remove(card);
-                System.out.println(name + " played a " + card.getType() + " card.");
-                discardPile.discardCard(card);
+    public void playCard(int cardIndex, DiscardPile discardPile) {
+        if (cardIndex >= 0 && cardIndex < hand.size()) {
+            Card playedCard = hand.remove(cardIndex);
+            System.out.println(name + " played a " + playedCard.getType() + " card.");
+            discardPile.discardCard(playedCard);
+            // Implement the specific action associated with the played card
+            // For example, triggering a special ability or resolving effects
+        } else {
+            System.out.println("Invalid card index. Choose a card within the valid range.");
 
-            }
-            // Implement card-playing logic based on the rules of the game
-            // This can involve checking if the card is playable and updating the game state
-            // Special card functionality can be added here
         }
+    }
     }

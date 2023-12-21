@@ -7,16 +7,14 @@ public class GameRule {
     public static void main(String[] args) {
         // Create a game with 3 players
         Game game = new Game(3);
-        System.out.println("Game created with " + game.getPlayers().size() + " players.");
-        System.out.println(game.getPlayers().get(0).getName() + " has " + game.getPlayers().get(0).getHand().size() + " cards in hand.");
-        // Start the game
-        game.startGame();
-        System.out.println(game.getPlayers().get(0).getName() + " has " + game.getPlayers().get(0).getHand().size() + " cards in hand.");
-        game.startGame();
-        System.out.println(game.getPlayers().get(0).getName() + " has " + game.getPlayers().get(0).getHand().size() + " cards in hand.");
-        //show discard pile
-        game.getDiscardPile();
-        game.getDeck();
+
+        // Run the game loop until it's over
+        while (!game.isGameOver()) {
+            game.turn();
+        }
+
+        // Display the winner or any end-of-game information
+        System.out.println("Game Over! Winner: " + game.getPlayers().get(0).getName());
     }
     //validatePlay() validates the played action
 }
