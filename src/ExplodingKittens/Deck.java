@@ -36,7 +36,7 @@ public class Deck {
             case SKIP:
                 return 4;
             case ATTACK:
-                return 20;
+                return 4;
             case FAVOR:
                 return 4;
             case SEE_THE_FUTURE:
@@ -46,7 +46,7 @@ public class Deck {
             case NOPE:
                 return 5;
             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
-                return 4;
+                return 20;
             // Add cases for other card types
             default:
                 return 4;

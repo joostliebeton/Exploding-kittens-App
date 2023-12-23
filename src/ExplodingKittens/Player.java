@@ -123,13 +123,59 @@ public class Player {
     }
 
     private void catCardsInHand(CardType catCard) {
-        int catCardCount = 0;
+        int catCardCount = 1;
         for (Card card : hand) {
             if (card.getType() == catCard) {
                 catCardCount++;
             }
         }
-        System.out.println(name + " has " + catCardCount + " cat cards in hand.");
+
+        System.out.println(name + " has " + catCardCount + " " + catCard + " in hand.");
+        if (catCardCount == 1) {
+            System.out.println("You need 1 more " + catCard + " to play this card.");
+        } else if (catCardCount == 2) {
+            int deletedcardcount = 0;
+            while (deletedcardcount < 2) {
+                for (int i = 0; i < hand.size(); i++) {
+                    if (hand.get(i).getType() == catCard) {
+                        playedCard = hand.remove(i);
+                        deletedcardcount++;
+                    }
+                }
+            }
+            favor(game.getNextPlayer());
+        } else if (catCardCount >= 3) {
+            System.out.println("Do you want to play the 2 " + catCard + " card? (yes/no)");
+            Scanner scanner = new Scanner(System.in);
+            String response = scanner.nextLine().toLowerCase();
+            if (response.equals("yes")) {
+                int deletedcardcount = 0;
+                while (deletedcardcount < 2) {
+                    for (int i = 0; i < hand.size(); i++) {
+                        if (hand.get(i).getType() == catCard) {
+                            playedCard = hand.remove(i);
+                            deletedcardcount++;
+                        }
+                    }
+                }
+                favor(game.getNextPlayer());
+            } else if (response.equals("no")) {
+                System.out.println("do you want to play the 3 " + catCard + " card? (yes/no)");
+                response = scanner.nextLine().toLowerCase();
+                if (response.equals("yes")) {
+                    int deletedcardcount = 0;
+                    while (deletedcardcount < 3) {
+                        for (int i = 0; i < hand.size(); i++) {
+                            if (hand.get(i).getType() == catCard) {
+                                playedCard = hand.remove(i);
+                                deletedcardcount++;
+                            }
+                        }
+                    }
+                    favor(game.getNextPlayer());
+                }
+            }
+        }
     }
 
     public void shuffleDeck() {
