@@ -1,6 +1,7 @@
 package ExplodingKittens;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,11 +9,13 @@ public class Player {
     private String name;
     private List<Card> hand;
     private Game game;
+    private Deck deck;
     private DiscardPile discardPile1 = new DiscardPile();
-    public Player(String name , Game game) {
+    public Player(String name , Game game, Deck deck) {
         this.name = name;
         this.hand = new ArrayList<>();
         this.game = game;
+        this.deck=deck;
     }
     public String getName() {
         return name;
@@ -63,6 +66,41 @@ public class Player {
     public void playCard(int cardIndex, DiscardPile discardPile1) {
         if (cardIndex >= 0 && cardIndex < hand.size() && hand.get(cardIndex).playable()) {
             Card playedCard = hand.remove(cardIndex);
+            switch (playedCard.getType()){
+                case NOPE:
+                    playedCard.Nope();
+                    break;
+                case SHUFFLE:
+                    shuffleDeck();
+                    break;
+                case SKIP:
+                    playedCard.Skip();
+                    break;
+                case SEE_THE_FUTURE:
+                    playedCard.SeeTheFuture();
+                    break;
+                case CAT_CARD1:
+                    playedCard.CatCard();
+                    break;
+                case CAT_CARD2:
+                    playedCard.CatCard();
+                    break;
+                case CAT_CARD3:
+                    playedCard.CatCard();
+                    break;
+                case CAT_CARD4:
+                    playedCard.CatCard();
+                    break;
+                case CAT_CARD5:
+                    playedCard.CatCard();
+                    break;
+                case FAVOR:
+                    playedCard.Favor();
+                    break;
+                case ATTACK:
+                    playedCard.Attack();
+                    break;
+            }
             System.out.println(name + " played a " + playedCard.getType() + " card.");
             discardPile1.discardCard(playedCard);
             // Implement the specific action associated with the played card
@@ -71,5 +109,16 @@ public class Player {
             System.out.println("Invalid card index. Choose a card within the valid range.");
 
         }
+    }
+    public void shuffleDeck() {
+        if (deck != null) {
+            Card shuffleCard = new Card(CardType.SHUFFLE);
+            shuffleCard.Shuffle(deck);
+            System.out.println(name + " shuffled the deck.");
+        } else {
+            System.out.println("Error: Deck reference is null.");
+        }
+        // Delegate the shuffle to the Card class
+
     }
     }
