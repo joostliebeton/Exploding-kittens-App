@@ -11,6 +11,8 @@ public class Player {
     private Game game;
     private Deck deck;
     private Card playedCard;
+    int extraTurns;
+    int turnsToSkip;
     private DiscardPile discardPile1 = new DiscardPile();
     public Player(String name , Game game, Deck deck) {
         this.name = name;
@@ -18,6 +20,7 @@ public class Player {
         this.game = game;
         this.deck=deck;
         this.playedCard = null;
+        extraTurns = 0;
     }
     public String getName() {
         return name;
@@ -25,6 +28,9 @@ public class Player {
 
     public List<Card> getHand() {
         return hand;
+    }
+    public Card getPlayedCard() {
+        return playedCard;
     }
     public void drawCard(Deck deck) {
         Card drawnCard = deck.draw();
@@ -74,34 +80,35 @@ public class Player {
             playedCard = hand.remove(cardIndex);
             System.out.println(name + " played a " + playedCard.getType() + " card.");
             discardPile1.discardCard(playedCard);
-            switch (playedCard.getType()){
+            switch (playedCard.getType()) {
                 case NOPE:
                     playedCard.Nope();
-                    game.endTurn();
+
                     break;
                 case SHUFFLE:
                     shuffleDeck();
-                    game.endTurn();
+
                     break;
                 case SKIP:
                     playedCard.Skip();
-                    game.endTurnNoDraw();
+                    turnsToSkip =1;
                     break;
                 case SEE_THE_FUTURE:
                     playedCard.SeeTheFuture();
-                    game.endTurn();
+
                     break;
                 case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
                     playedCard.CatCard();
-                    game.endTurn();
+
                     break;
                 case FAVOR:
                     playedCard.Favor();
-                    game.endTurn();
+
                     break;
                 case ATTACK:
-                    playedCard.Attack();
-                    game.endTurn();
+                    turnsToSkip++;
+                    Attack(game.getNextPlayer());
+
                     break;
             }
 
@@ -119,7 +126,23 @@ public class Player {
         } else {
             System.out.println("Error: Deck reference is null.");
         }
+    }
         // Delegate the shuffle to the Card class
+        public void Attack(Player targetPlayer) {
+            targetPlayer.extraTurns +=1;
+            System.out.println(name + " played an Attack card. " + targetPlayer.getName() + " will have two turns.");
+        }
 
     }
-    }
+
+
+//    public void SeeTheFuture(){
+//        Card[] cards = deck.peek();
+//        System.out.println(name + " played a See the Future card. The top three cards are: ");
+//        for (Card card : cards) {
+//            System.out.println(card.getType());
+//        }
+//    }
+
+
+
