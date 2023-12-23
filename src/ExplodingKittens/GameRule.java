@@ -14,10 +14,10 @@ public class GameRule {
         Game game = new Game(players);
 
         // Run the game loop until it's over
+        game.getDeck();
         while (!game.isGameOver()) {
             game.turn();
         }
-
         // Display the winner or any end-of-game information
         System.out.println("Game Over! Winner: " + game.getPlayers().get(0).getName());
     }

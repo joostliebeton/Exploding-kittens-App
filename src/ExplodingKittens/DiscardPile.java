@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscardPile {
+    public Card[] get;
     private List<Card> discardedCards;
 
     public DiscardPile() {
@@ -16,5 +17,9 @@ public class DiscardPile {
 
     public Card[] getDiscardPile() {
         return discardedCards.toArray(new Card[0]);
+    }
+
+    public int length() {
+        return discardedCards.size();
     }
 }

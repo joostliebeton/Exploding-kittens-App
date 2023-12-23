@@ -36,11 +36,11 @@ public class Deck {
             case SKIP:
                 return 4;
             case ATTACK:
-                return 10;
+                return 20;
             case FAVOR:
                 return 4;
             case SEE_THE_FUTURE:
-                return 10;
+                return 4;
             case SHUFFLE:
                 return 4; //4
             case NOPE:
