@@ -40,7 +40,7 @@ public class Deck {
             case FAVOR:
                 return 4;
             case SEE_THE_FUTURE:
-                return 5;
+                return 10;
             case SHUFFLE:
                 return 4; //4
             case NOPE:
@@ -97,5 +97,13 @@ public class Deck {
 
     public Card[] getDeck() {
         return cards.toArray(new Card[0]);
+    }
+
+    public Card[] peek() {
+        List<Card> peekedCards = new ArrayList<>();
+        for (int i = 3; i > 0; i--) {
+            peekedCards.add(cards.get(i));
+        }
+        return peekedCards.toArray(new Card[0]);
     }
 }
