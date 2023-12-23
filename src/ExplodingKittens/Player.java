@@ -83,19 +83,16 @@ public class Player {
             switch (playedCard.getType()) {
                 case NOPE:
                     playedCard.Nope();
-
                     break;
                 case SHUFFLE:
                     shuffleDeck();
-
                     break;
                 case SKIP:
                     playedCard.Skip();
                     turnsToSkip =1;
                     break;
                 case SEE_THE_FUTURE:
-                    playedCard.SeeTheFuture();
-
+                    SeeTheFuture();
                     break;
                 case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
                     playedCard.CatCard();
@@ -132,17 +129,17 @@ public class Player {
             targetPlayer.extraTurns +=1;
             System.out.println(name + " played an Attack card. " + targetPlayer.getName() + " will have two turns.");
         }
-
+    public void SeeTheFuture(){
+        Card[] cards = deck.peek();
+        System.out.println(name + " played a See the Future card. The top three cards are: ");
+        for (Card card : cards) {
+            System.out.println(card.getType());
+        }
+    }
     }
 
 
-//    public void SeeTheFuture(){
-//        Card[] cards = deck.peek();
-//        System.out.println(name + " played a See the Future card. The top three cards are: ");
-//        for (Card card : cards) {
-//            System.out.println(card.getType());
-//        }
-//    }
+
 
 
 
