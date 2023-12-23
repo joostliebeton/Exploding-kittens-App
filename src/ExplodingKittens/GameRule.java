@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class GameRule {
-    private static String[] players;
+    private static String[] players = {"Player 1", "Player 2", "Player 3"};
 
     public boolean validatePlay(){
         return true;
