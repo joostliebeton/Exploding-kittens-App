@@ -18,26 +18,32 @@ public class Game {
         private int currentPlayerIndex;
 
         public Game(String[] Players) {
+            initializeDeck();
             initializePlayers(Players);
-            initializeDeckAndhands();
+            initilializehands();
+
             initializeDiscardPile();
 
             currentPlayerIndex = 0;
         }
 
-        private void initializeDeckAndhands() {
+        private void initializeDeck() {
             deck = new Deck();
+            // Add Exploding Kittens to the deck after initial cards have been dealt
+
+        }
+        private void initilializehands() {
             for (int i = 0; i < 5; i++) {
                 for (Player player : players) {
                     player.drawCard(deck);
                 }
             }
-            // Add Exploding Kittens to the deck after initial cards have been dealt
             for (int i = 0; i < 4; i++) {
                 deck.addExplodingKitten();
             }
             deck.shuffle();
         }
+
         private void initializeDiscardPile() {
             discardPile = new DiscardPile();
         }
@@ -45,7 +51,7 @@ public class Game {
         private void initializePlayers(String[] names) {
             players = new ArrayList<>();
             for (String name : names) {
-                players.add(new Player(name, this));
+                players.add(new Player(name, this, deck));
             }
         }
 
