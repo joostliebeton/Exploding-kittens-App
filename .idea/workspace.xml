@@ -9,12 +9,10 @@
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703154524207</updated>
       <workItem from="1703154530239" duration="14225000" />
-      <workItem from="1703333844496" duration="4353000" />
+      <workItem from="1703333844496" duration="7115000" />
     </task>
     <task id="LOCAL-00001" summary="first commited item">
       <option name="closed" value="true" />
@@ -157,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703333917711</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="commited">
+      <option name="closed" value="true" />
+      <created>1703339792581</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703339792581</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,5 +190,10 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/exploding_kittens$GameRule.ic" NAME="GameRule Coverage Results" MODIFIED="1703342011221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ExplodingKittens.*</FILTER>
+    </SUITE>
   </component>
 </project>
