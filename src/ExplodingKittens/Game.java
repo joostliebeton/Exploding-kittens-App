@@ -56,10 +56,22 @@ public class Game {
 
     public void turn() {
         currentPlayer = getCurrentPlayer();
+
+
         while (currentPlayer.extraTurns > 0) {
             System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
             currentPlayer.playCard(getPlayerInput(), discardPile);
+            if(discardPile.getDiscardPile()[discardPile.length()-1].getType() == CardType.ATTACK){
+                currentPlayer.extraTurns = 0;
+                currentPlayer.turnsToSkip = 1;
+                Player targetPlayer = getNextPlayer();
+                targetPlayer.extraTurns+=3;
+                System.out.println(targetPlayer.getName() + " has " + targetPlayer.extraTurns + " extra turns!");
+                handleTurnEnd();
+                return;
+        }
             currentPlayer.extraTurns--;
+            currentPlayer.drawCard(deck);
         }
         currentPlayer.playCard(getPlayerInput(), discardPile);
         handleTurnEnd();
@@ -107,6 +119,7 @@ public class Game {
     }
     public void endTurnNoDraw() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+
     }
 
     boolean isGameOver() {
