@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Game {
     //players: Arraylist<player>
+
         private Deck deck;
         private Player currentPlayer;
         private ArrayList<Player> eliminatedplayers = new ArrayList<>();
@@ -55,7 +56,22 @@ public class Game {
 
     public void turn() {
         currentPlayer = getCurrentPlayer();
+        while (currentPlayer.extraTurns > 0) {
+            System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
+            currentPlayer.playCard(getPlayerInput(), discardPile);
+            currentPlayer.extraTurns--;
+        }
         currentPlayer.playCard(getPlayerInput(), discardPile);
+        handleTurnEnd();
+    }
+    private void handleTurnEnd() {
+        if (currentPlayer.turnsToSkip > 0) {
+            System.out.println(currentPlayer.getName() + " skips a turn.");
+            currentPlayer.turnsToSkip--;
+            endTurnNoDraw();
+        } else {
+            endTurn();
+        }
     }
 
     private int getPlayerInput() {
@@ -80,6 +96,9 @@ public class Game {
 
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
+    }
+    public Player getNextPlayer() {
+        return players.get((currentPlayerIndex + 1) % players.size());
     }
 
     public void endTurn() {
@@ -110,5 +129,6 @@ public class Game {
         players.remove(player);
         eliminatedplayers.add(player);
         System.out.println(player.getName() + " has been eliminated!");
+        currentPlayerIndex = (currentPlayerIndex - 1) % players.size();
     }
 }
