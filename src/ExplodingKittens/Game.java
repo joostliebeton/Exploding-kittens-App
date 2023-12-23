@@ -21,9 +21,7 @@ public class Game {
             initializeDeck();
             initializePlayers(Players);
             initilializehands();
-
             initializeDiscardPile();
-
             currentPlayerIndex = 0;
         }
 
@@ -58,7 +56,6 @@ public class Game {
     public void turn() {
         currentPlayer = getCurrentPlayer();
         currentPlayer.playCard(getPlayerInput(), discardPile);
-        endTurn();
     }
 
     private int getPlayerInput() {
@@ -87,6 +84,9 @@ public class Game {
 
     public void endTurn() {
         currentPlayer.drawCard(deck);
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
+    public void endTurnNoDraw() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 

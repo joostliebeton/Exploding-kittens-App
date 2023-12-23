@@ -70,7 +70,7 @@ public class Card {
         //card.remove
     }
     public void  Nope(){
-
+        //make a new method for nope only when the other things are done.
         }
     public void Shuffle(Deck deck) {
         // Implement your shuffle logic on the deck directly
@@ -79,6 +79,8 @@ public class Card {
     public void  Skip(){
 
         }
+
+
     public void  SeeTheFuture(){
 
         }

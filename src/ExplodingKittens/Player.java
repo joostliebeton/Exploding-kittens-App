@@ -7,15 +7,17 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
-    private List<Card> hand;
+    private ArrayList<Card> hand;
     private Game game;
     private Deck deck;
+    private Card playedCard;
     private DiscardPile discardPile1 = new DiscardPile();
     public Player(String name , Game game, Deck deck) {
         this.name = name;
         this.hand = new ArrayList<>();
         this.game = game;
         this.deck=deck;
+        this.playedCard = null;
     }
     public String getName() {
         return name;
@@ -23,7 +25,10 @@ public class Player {
 
     public List<Card> getHand() {
         return hand;
-    }public void drawCard(Deck deck) {Card drawnCard = deck.draw();if (drawnCard != null) {
+    }
+    public void drawCard(Deck deck) {
+        Card drawnCard = deck.draw();
+        if (drawnCard != null) {
         hand.add(drawnCard);
         System.out.println(name + " drew a " + drawnCard.getType() + " card.");
         if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
@@ -47,7 +52,8 @@ public class Player {
                 eliminate();
             }
         }
-    }}
+    }
+    }
 
     private void eliminate() {
         game.eliminatePlayer(this);
@@ -65,44 +71,40 @@ public class Player {
 
     public void playCard(int cardIndex, DiscardPile discardPile1) {
         if (cardIndex >= 0 && cardIndex < hand.size() && hand.get(cardIndex).playable()) {
-            Card playedCard = hand.remove(cardIndex);
+            playedCard = hand.remove(cardIndex);
+            System.out.println(name + " played a " + playedCard.getType() + " card.");
+            discardPile1.discardCard(playedCard);
             switch (playedCard.getType()){
                 case NOPE:
                     playedCard.Nope();
+                    game.endTurn();
                     break;
                 case SHUFFLE:
                     shuffleDeck();
+                    game.endTurn();
                     break;
                 case SKIP:
                     playedCard.Skip();
+                    game.endTurnNoDraw();
                     break;
                 case SEE_THE_FUTURE:
                     playedCard.SeeTheFuture();
+                    game.endTurn();
                     break;
-                case CAT_CARD1:
+                case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
                     playedCard.CatCard();
-                    break;
-                case CAT_CARD2:
-                    playedCard.CatCard();
-                    break;
-                case CAT_CARD3:
-                    playedCard.CatCard();
-                    break;
-                case CAT_CARD4:
-                    playedCard.CatCard();
-                    break;
-                case CAT_CARD5:
-                    playedCard.CatCard();
+                    game.endTurn();
                     break;
                 case FAVOR:
                     playedCard.Favor();
+                    game.endTurn();
                     break;
                 case ATTACK:
                     playedCard.Attack();
+                    game.endTurn();
                     break;
             }
-            System.out.println(name + " played a " + playedCard.getType() + " card.");
-            discardPile1.discardCard(playedCard);
+
             // Implement the specific action associated with the played card
             // For example, triggering a special ability or resolving effects
         } else {
@@ -112,8 +114,7 @@ public class Player {
     }
     public void shuffleDeck() {
         if (deck != null) {
-            Card shuffleCard = new Card(CardType.SHUFFLE);
-            shuffleCard.Shuffle(deck);
+            playedCard.Shuffle(deck);
             System.out.println(name + " shuffled the deck.");
         } else {
             System.out.println("Error: Deck reference is null.");
