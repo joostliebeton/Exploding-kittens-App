@@ -56,8 +56,6 @@ public class Game {
 
     public void turn() {
         currentPlayer = getCurrentPlayer();
-
-
         while (currentPlayer.extraTurns > 0) {
             System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
             currentPlayer.playCard(getPlayerInput(), discardPile);
