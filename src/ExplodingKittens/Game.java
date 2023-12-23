@@ -72,6 +72,14 @@ public class Game {
             currentPlayer.drawCard(deck);
         }
         currentPlayer.playCard(getPlayerInput(), discardPile);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to end your turn? (yes/no)");
+        String response = scanner.nextLine().toLowerCase();
+        if (response.equals("yes")) {
+            handleTurnEnd();
+        } else {
+            turn();
+        }
         handleTurnEnd();
     }
     private void handleTurnEnd() {
