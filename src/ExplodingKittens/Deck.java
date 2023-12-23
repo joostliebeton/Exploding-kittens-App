@@ -30,9 +30,9 @@ public class Deck {
         // You can customize this based on the rules of the game
         switch (type) {
             case EXPLODING_KITTEN:
-                return 4;
+                return 20; //4
             case DEFUSE:
-                return 6;
+                return 20; //6
             case SKIP:
                 return 4;
             case ATTACK:

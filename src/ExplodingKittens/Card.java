@@ -21,19 +21,55 @@ public class Card {
 
     // methode is playable()
 
-    public CardType getCardType(){
-        return type;
-    }
-
     public boolean playable(){
-        return true;
+        if(getType() == CardType.EXPLODING_KITTEN){
+            return false;
+        }
+        if (getType() == CardType.DEFUSE || getType() == CardType.NOPE ||
+                getType() == CardType.SHUFFLE || getType() == CardType.SKIP ||
+                getType() == CardType.SEE_THE_FUTURE || getType() == CardType.CAT_CARD1 || getType() == CardType.CAT_CARD2 || getType() == CardType.CAT_CARD3 || getType() == CardType.CAT_CARD4 || getType() == CardType.CAT_CARD5 ||
+                getType() == CardType.FAVOR || getType() == CardType.ATTACK){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     // methode play()
     public void play(){
+        switch (type){
+//            case EXPLODING_KITTEN:
+//                ExplodingKitten();
+//                break;
+            case DEFUSE:
+                Defuse();
+                break;
+            case NOPE:
+                Nope();
+                break;
+            case SHUFFLE:
+                Shuffle();
+                break;
+            case SKIP:
+                Skip();
+                break;
+            case SEE_THE_FUTURE:
+                SeeTheFuture();
+                break;
+            case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
+                CatCard();
+                break;
+            case FAVOR:
+                Favor();
+                break;
+            case ATTACK:
+                Attack();
+                break;
+        }
     }
     // the functionality of the cards
 //    public void ExplodingKitten(){
-//        if(Deck.drawCard().equals(EXPLODINGKITTEN)){
+//        if(deck.draw().equals(EXPLODINGKITTEN)){
 //            if(Player.hasCard(DEFUSE)){
 //                Scanner intExplodingKitten = new Scanner(System.in);
 //                play(DEFUSE);

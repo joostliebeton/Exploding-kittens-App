@@ -1,5 +1,6 @@
 package ExplodingKittens;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ public class Game {
     //players: Arraylist<player>
         private Deck deck;
         private Player currentPlayer;
+        private ArrayList<Player> eliminatedplayers = new ArrayList<>();
         private List<Player> players;
         private DiscardPile discardPile;
         public List<Player> getPlayers() {
@@ -43,7 +45,7 @@ public class Game {
         private void initializePlayers(String[] names) {
             players = new ArrayList<>();
             for (String name : names) {
-                players.add(new Player(name));
+                players.add(new Player(name, this));
             }
         }
 
@@ -96,5 +98,11 @@ public class Game {
         for (Card card : deck.getDeck()) {
             System.out.println(card.getType());
         }
+    }
+
+    public void eliminatePlayer(Player player) {
+        players.remove(player);
+        eliminatedplayers.add(player);
+        System.out.println(player.getName() + " has been eliminated!");
     }
 }
