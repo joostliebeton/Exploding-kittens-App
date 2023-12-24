@@ -7,13 +7,11 @@ import java.util.Random;
 
 public class Deck {
     private ArrayList<Card> cards;
-
     public Deck() {
         cards = new ArrayList<>();
         initializeDeck();
         shuffle();
     }
-
     private void initializeDeck() {
         for (CardType type : CardType.values()) {
             if (type == CardType.EXPLODING_KITTEN) {
@@ -24,7 +22,6 @@ public class Deck {
             }
         }
     }
-
     private int getInitialCardCount(CardType type) {
         // Return the initial count for each card type
         // You can customize this based on the rules of the game
@@ -46,7 +43,7 @@ public class Deck {
             case NOPE:
                 return 5;
             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
-                return 20;
+                return 4;
             // Add cases for other card types
             default:
                 return 4;

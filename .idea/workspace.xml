@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="02a173d9-8ac6-4212-a31b-9274771f4614" name="Changes" comment="commited">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +28,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2ZwWuAj6FuEewGDaEfZZKwFxAaH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,6 +42,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Update-v1",
+    "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,7 +81,9 @@
       <option name="presentableId" value="Default" />
       <updated>1703154524207</updated>
       <workItem from="1703154530239" duration="14225000" />
-      <workItem from="1703333844496" duration="25781000" />
+      <workItem from="1703333844496" duration="25954000" />
+      <workItem from="1703416164082" duration="841000" />
+      <workItem from="1703426195438" duration="996000" />
     </task>
     <task id="LOCAL-00001" summary="first commited item">
       <option name="closed" value="true" />
@@ -224,7 +229,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703367156616</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="commited">
+      <option name="closed" value="true" />
+      <created>1703368288023</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1703368288023</updated>
+    </task>
+    <task id="LOCAL-00020" summary="commited">
+      <option name="closed" value="true" />
+      <created>1703368331585</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1703368331585</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
