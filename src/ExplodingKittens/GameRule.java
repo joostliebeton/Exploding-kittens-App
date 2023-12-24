@@ -1,10 +1,7 @@
 package ExplodingKittens;
 
-import javax.swing.*;
-import java.util.List;
-
 public class GameRule {
-    private static String[] players = {"Playerjoost", "Playerjoris", "Player 3"};
+    private static String[] players = {"PlayerJoost", "PlayerJoris", "Player3"};
 
     public boolean validatePlay(){
         return true;

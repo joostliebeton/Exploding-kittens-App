@@ -1,11 +1,5 @@
 package ExplodingKittens;
 
-import java.util.ArrayList;
-
-import java.util.HashMap;
-import java.util.Scanner;
-
-
 
 public class Card {
     private CardType type;

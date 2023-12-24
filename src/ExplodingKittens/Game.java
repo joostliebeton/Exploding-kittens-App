@@ -8,66 +8,69 @@ import java.util.Scanner;
 public class Game {
     //players: Arraylist<player>
 
-        private Deck deck;
-        private Player currentPlayer;
-        private ArrayList<Player> eliminatedplayers = new ArrayList<>();
-        private List<Player> players;
-        private DiscardPile discardPile;
-        public List<Player> getPlayers() {
-            return players;
-        }
-        private int currentPlayerIndex;
+    private Deck deck;
+    private Player currentPlayer;
+    private ArrayList<Player> eliminatedplayers = new ArrayList<>();
+    private List<Player> players;
+    private DiscardPile discardPile;
 
-        public Game(String[] Players) {
-            initializeDeck();
-            initializePlayers(Players);
-            initilializehands();
-            initializeDiscardPile();
-            currentPlayerIndex = 0;
-        }
+    public List<Player> getPlayers() {
+        return players;
+    }
 
-        private void initializeDeck() {
-            deck = new Deck();
-            // Add Exploding Kittens to the deck after initial cards have been dealt
+    private int currentPlayerIndex;
 
-        }
-        private void initilializehands() {
-            for (int i = 0; i < 5; i++) {
-                for (Player player : players) {
-                    player.drawCard(deck);
-                }
-            }
-            for (int i = 0; i < 4; i++) {
-                deck.addExplodingKitten();
-            }
-            deck.shuffle();
-        }
+    public Game(String[] Players) {
+        initializeDeck();
+        initializePlayers(Players);
+        initilializehands();
+        initializeDiscardPile();
+        currentPlayerIndex = 0;
+    }
 
-        private void initializeDiscardPile() {
-            discardPile = new DiscardPile();
-        }
+    private void initializeDeck() {
+        deck = new Deck();
+        // Add Exploding Kittens to the deck after initial cards have been dealt
 
-        private void initializePlayers(String[] names) {
-            players = new ArrayList<>();
-            for (String name : names) {
-                players.add(new Player(name, this, deck));
+    }
+
+    private void initilializehands() {
+        for (int i = 0; i < /*player.size()*/ 5; i++) {
+            for (Player player : players) {
+                player.drawCard(deck);
             }
         }
+        for (int i = 0; i < 4; i++) {
+            deck.addExplodingKitten();
+        }
+        deck.shuffle();
+    }
+
+    private void initializeDiscardPile() {
+        discardPile = new DiscardPile();
+    }
+
+    private void initializePlayers(String[] names) {
+        players = new ArrayList<>();
+        for (String name : names) {
+            players.add(new Player(name, this, deck));
+        }
+    }
 
     public void turn() {
         currentPlayer = getCurrentPlayer();
         while (currentPlayer.extraTurns > 0) {
             System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
             currentPlayer.playCard(getPlayerInput(), discardPile);
-            if(discardPile.getDiscardPile()[discardPile.length()-1].getType() == CardType.ATTACK){
+            if (discardPile.getDiscardPile()[discardPile.length() - 1].getType() == CardType.ATTACK) {
                 currentPlayer.extraTurns = 0;
                 currentPlayer.turnsToSkip = 1;
                 Player targetPlayer = getNextPlayer();
-                targetPlayer.extraTurns+=3;
+                targetPlayer.extraTurns += 3;
                 System.out.println(targetPlayer.getName() + " has " + targetPlayer.extraTurns + " extra turns!");
                 handleTurnEnd();
                 return;
-        }
+            }
             currentPlayer.extraTurns--;
             currentPlayer.drawCard(deck);
         }
@@ -82,6 +85,7 @@ public class Game {
         }
         handleTurnEnd();
     }
+
     private void handleTurnEnd() {
         if (currentPlayer.turnsToSkip > 0) {
             System.out.println(currentPlayer.getName() + " skips a turn.");
@@ -115,6 +119,7 @@ public class Game {
     public Player getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
+
     public Player getNextPlayer() {
         return players.get((currentPlayerIndex + 1) % players.size());
     }
@@ -123,6 +128,7 @@ public class Game {
         currentPlayer.drawCard(deck);
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
+
     public void endTurnNoDraw() {
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 
@@ -138,6 +144,7 @@ public class Game {
             System.out.println(card.getType());
         }
     }
+
     public void getDeck() {
         for (Card card : deck.getDeck()) {
             System.out.println(card.getType());
@@ -149,5 +156,9 @@ public class Game {
         eliminatedplayers.add(player);
         System.out.println(player.getName() + " has been eliminated!");
         currentPlayerIndex = (currentPlayerIndex - 1) % players.size();
+    }
+
+    public ArrayList<Player> getEliminatedPlayers() {
+        return eliminatedplayers;
     }
 }

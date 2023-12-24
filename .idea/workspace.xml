@@ -4,11 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02a173d9-8ac6-4212-a31b-9274771f4614" name="Changes" comment="commited">
+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_10_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_10_17__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_12_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_12_18__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/CardType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/DiscardPile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Hand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,40 +32,89 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package-info" />
         <option value="Class" />
       </list>
     </option>
   </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/main" />
+  </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/check" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
+  &quot;associatedIndex&quot;: 3
 }</component>
-  <component name="ProjectId" id="2ZwWuAj6FuEewGDaEfZZKwFxAaH" />
+  <component name="ProjectId" id="2ZDLyXW5ogVA31AxjAEddOCyjLN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
     "git-widget-placeholder": "Update-v1",
-    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "onboarding.tips.debug.path": "C:/Users/joris/IdeaProjects/Project/src/Main.java",
+    "settings.editor.selected.configurable": "shared-indexes",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\joris\IdeaProjects\Project\src\Cards" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\joris\IdeaProjects\Project\src\ExplodingKittensFalse" />
+      <recent name="C:\Users\joris\IdeaProjects\Project\src" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ExplodingKittens" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="GameRule" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameRule" />
@@ -66,8 +129,75 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testDeckInitialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="testDeckInitialization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testEliminatePlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="testEliminatePlayer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testEliminatePlayerListSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="testEliminatePlayerListSize" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameTest" />
+        <item itemvalue="JUnit.GameTest.testEliminatePlayerListSize" />
+        <item itemvalue="JUnit.GameTest.testEliminatePlayer" />
+        <item itemvalue="JUnit.GameTest.testDeckInitialization" />
         <item itemvalue="Application.GameRule" />
       </list>
     </recent_temporary>
@@ -75,177 +205,255 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="02a173d9-8ac6-4212-a31b-9274771f4614" name="Changes" comment="" />
-      <created>1703154524207</created>
+      <changelist id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="" />
+      <created>1701951961435</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1703154524207</updated>
-      <workItem from="1703154530239" duration="14225000" />
-      <workItem from="1703333844496" duration="25954000" />
-      <workItem from="1703416164082" duration="841000" />
-      <workItem from="1703426195438" duration="996000" />
+      <updated>1701951961435</updated>
+      <workItem from="1701951962392" duration="2248000" />
+      <workItem from="1701958153036" duration="254000" />
+      <workItem from="1701958517553" duration="9157000" />
+      <workItem from="1702029072014" duration="6034000" />
+      <workItem from="1702155984212" duration="2750000" />
+      <workItem from="1702991059140" duration="5510000" />
+      <workItem from="1702996641317" duration="14074000" />
+      <workItem from="1703291592568" duration="8465000" />
+      <workItem from="1703366844809" duration="155000" />
+      <workItem from="1703374385367" duration="13696000" />
     </task>
-    <task id="LOCAL-00001" summary="first commited item">
+    <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703159117146</created>
+      <created>1701956642740</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1703159117146</updated>
+      <updated>1701956642740</updated>
     </task>
-    <task id="LOCAL-00002" summary="first commited item">
+    <task id="LOCAL-00002" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703160922946</created>
+      <created>1701957315513</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1703160922946</updated>
+      <updated>1701957315513</updated>
     </task>
-    <task id="LOCAL-00003" summary="first commited item">
+    <task id="LOCAL-00003" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703160933081</created>
+      <created>1701957654919</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1703160933081</updated>
+      <updated>1701957654919</updated>
     </task>
-    <task id="LOCAL-00004" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java">
+    <task id="LOCAL-00004" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703160982670</created>
+      <created>1701957717213</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1703160982670</updated>
+      <updated>1701957717213</updated>
     </task>
-    <task id="LOCAL-00005" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java">
+    <task id="LOCAL-00005" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703161366825</created>
+      <created>1701957848218</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1703161366825</updated>
+      <updated>1701957848218</updated>
     </task>
-    <task id="LOCAL-00006" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java">
+    <task id="LOCAL-00006" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703161374406</created>
+      <created>1701957856987</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1703161374406</updated>
+      <updated>1701957856987</updated>
     </task>
-    <task id="LOCAL-00007" summary="commited">
+    <task id="LOCAL-00007" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703161745377</created>
+      <created>1701958563698</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1703161745377</updated>
+      <updated>1701958563698</updated>
     </task>
-    <task id="LOCAL-00008" summary="commited">
+    <task id="LOCAL-00008" summary="commit test">
       <option name="closed" value="true" />
-      <created>1703161888005</created>
+      <created>1701958583769</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1703161888005</updated>
+      <updated>1701958583769</updated>
     </task>
-    <task id="LOCAL-00009" summary="commited">
+    <task id="LOCAL-00009" summary="Merge remote-tracking branch 'origin/master'">
       <option name="closed" value="true" />
-      <created>1703173058719</created>
+      <created>1701958627234</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1703173058719</updated>
+      <updated>1701958627234</updated>
     </task>
-    <task id="LOCAL-00010" summary="commited">
+    <task id="LOCAL-00010" summary="Merge remote-tracking branch 'origin/master'">
       <option name="closed" value="true" />
-      <created>1703174975540</created>
+      <created>1701958706764</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1703174975540</updated>
+      <updated>1701958706764</updated>
     </task>
-    <task id="LOCAL-00011" summary="commited">
+    <task id="LOCAL-00011" summary="Merge remote-tracking branch 'origin/master'">
       <option name="closed" value="true" />
-      <created>1703333917711</created>
+      <created>1701958734485</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1703333917711</updated>
+      <updated>1701958734485</updated>
     </task>
-    <task id="LOCAL-00012" summary="commited">
+    <task id="LOCAL-00012" summary="Merge remote-tracking branch 'origin/master'">
       <option name="closed" value="true" />
-      <created>1703339792581</created>
+      <created>1701958793141</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1703339792581</updated>
+      <updated>1701958793141</updated>
     </task>
-    <task id="LOCAL-00013" summary="commited">
+    <task id="LOCAL-00013" summary="Merge remote-tracking banch 'origin/master'">
       <option name="closed" value="true" />
-      <created>1703342207426</created>
+      <created>1701958998845</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1703342207426</updated>
+      <updated>1701958998845</updated>
     </task>
-    <task id="LOCAL-00014" summary="commited">
+    <task id="LOCAL-00014" summary="test">
       <option name="closed" value="true" />
-      <created>1703349168106</created>
+      <created>1701959283565</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1703349168106</updated>
+      <updated>1701959283565</updated>
     </task>
-    <task id="LOCAL-00015" summary="commited">
+    <task id="LOCAL-00015" summary="test">
       <option name="closed" value="true" />
-      <created>1703349675863</created>
+      <created>1701959342971</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1703349675863</updated>
+      <updated>1701959342971</updated>
     </task>
-    <task id="LOCAL-00016" summary="commited">
+    <task id="LOCAL-00016" summary="test">
       <option name="closed" value="true" />
-      <created>1703363859063</created>
+      <created>1701967590457</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1703363859063</updated>
+      <updated>1701967590457</updated>
     </task>
-    <task id="LOCAL-00017" summary="commited">
+    <task id="LOCAL-00017" summary="test">
       <option name="closed" value="true" />
-      <created>1703363882076</created>
+      <created>1701967602260</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1703363882076</updated>
+      <updated>1701967602260</updated>
     </task>
-    <task id="LOCAL-00018" summary="commited">
+    <task id="LOCAL-00018" summary="test">
       <option name="closed" value="true" />
-      <created>1703367156616</created>
+      <created>1702153813341</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1703367156616</updated>
+      <updated>1702153813341</updated>
     </task>
-    <task id="LOCAL-00019" summary="commited">
+    <task id="LOCAL-00019" summary="Merge remote-tracking branch 'origin/check' into check">
       <option name="closed" value="true" />
-      <created>1703368288023</created>
+      <created>1702154461063</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1703368288023</updated>
+      <updated>1702154461063</updated>
     </task>
-    <task id="LOCAL-00020" summary="commited">
+    <task id="LOCAL-00020" summary="Merge remote-tracking branch 'origin/check' into check">
       <option name="closed" value="true" />
-      <created>1703368331585</created>
+      <created>1702154486560</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1703368331585</updated>
+      <updated>1702154486560</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Merge remote-tracking branch 'origin/check' into check">
+      <option name="closed" value="true" />
+      <created>1702210267900</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1702210267900</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Merge remote-tracking branch 'origin/test' into check">
+      <option name="closed" value="true" />
+      <created>1702994651648</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702994651648</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Merge remote-tracking branch 'origin/test' into check">
+      <option name="closed" value="true" />
+      <created>1703063473203</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1703063473203</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Merge remote-tracking branch 'origin/test' into check">
+      <option name="closed" value="true" />
+      <created>1703063631417</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1703063631417</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703069855682</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1703069855682</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703069923106</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1703069923106</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703077641623</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1703077641623</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703083598785</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1703083598785</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703427061230</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1703427061230</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,26 +464,37 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/Update-v1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Card.java&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java&#10;#&#9;src/ExplodingKittens/Player.java" />
-    <MESSAGE value="first commited item" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java" />
-    <MESSAGE value="commited" />
-    <option name="LAST_COMMIT_MESSAGE" value="commited" />
+    <MESSAGE value="commit test" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
+    <MESSAGE value="Merge remote-tracking banch 'origin/master'" />
+    <MESSAGE value="test" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/check' into check" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/exploding_kittens$GameRule.ic" NAME="GameRule Coverage Results" MODIFIED="1703342011221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ExplodingKittens.*</FILTER>
-    </SUITE>
   </component>
 </project>
