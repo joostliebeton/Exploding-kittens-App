@@ -122,60 +122,66 @@ public class Player {
         }
     }
 
-    private void catCardsInHand(CardType catCard) {
+    private void catCardsInHand(CardType typecard) {
         int catCardCount = 1;
+        int deletedcardcount = 1;
         for (Card card : hand) {
-            if (card.getType() == catCard) {
+            if (card.getType() == typecard) {
                 catCardCount++;
             }
         }
 
-        System.out.println(name + " has " + catCardCount + " " + catCard + " in hand.");
+        System.out.println(name + " has " + catCardCount + " " + typecard + " in hand.");
         if (catCardCount == 1) {
-            System.out.println("You need 1 more " + catCard + " to play this card.");
+            System.out.println("You need at least 1 more " + typecard + " to play this card as an action card");
         } else if (catCardCount == 2) {
-            int deletedcardcount = 0;
-            while (deletedcardcount < 2) {
-                for (int i = 0; i < hand.size(); i++) {
-                    if (hand.get(i).getType() == catCard) {
-                        playedCard = hand.remove(i);
-                        deletedcardcount++;
-                    }
-                }
-            }
-            favor(game.getNextPlayer());
-        } else if (catCardCount >= 3) {
-            System.out.println("Do you want to play the 2 " + catCard + " card? (yes/no)");
+            System.out.println("Do you want to play the 2 " + typecard + " card? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
             if (response.equals("yes")) {
-                int deletedcardcount = 0;
-                while (deletedcardcount < 2) {
-                    for (int i = 0; i < hand.size(); i++) {
-                        if (hand.get(i).getType() == catCard) {
-                            playedCard = hand.remove(i);
-                            deletedcardcount++;
-                        }
-                    }
-                }
-                favor(game.getNextPlayer());
+                twoCards(typecard);
             } else if (response.equals("no")) {
-                System.out.println("do you want to play the 3 " + catCard + " card? (yes/no)");
+                System.out.println("oke continue");
+            }
+
+        }
+        else if (catCardCount >= 3) {
+            System.out.println("Do you want to play the 2 " + typecard + " card? (yes/no)");
+            Scanner scanner = new Scanner(System.in);
+            String response = scanner.nextLine().toLowerCase();
+            if (response.equals("yes")) {
+                twoCards(typecard);
+            }
+            else if (response.equals("no")) {
+                System.out.println("do you want to play the 3 " + typecard + " card? (yes/no)");
                 response = scanner.nextLine().toLowerCase();
                 if (response.equals("yes")) {
-                    int deletedcardcount = 0;
+
                     while (deletedcardcount < 3) {
                         for (int i = 0; i < hand.size(); i++) {
-                            if (hand.get(i).getType() == catCard) {
+                            if (hand.get(i).getType() == typecard) {
                                 playedCard = hand.remove(i);
                                 deletedcardcount++;
                             }
                         }
                     }
-                    favor(game.getNextPlayer());
+                   chooseplayerChoice();
                 }
             }
         }
+    }
+
+    private void twoCards(CardType typecard) {
+        int deletedcardcount=1;
+        while (deletedcardcount < 2) {
+            for (int i = 0; i < hand.size(); i++) {
+                if (hand.get(i).getType() == typecard) {
+                    playedCard = hand.remove(i);
+                    deletedcardcount++;
+                }
+            }
+        }
+        chooseplayer();
     }
 
     public void shuffleDeck() {
@@ -204,6 +210,63 @@ public class Player {
             System.out.println(card.getType());
         }
     }
+    public void chooseplayerChoice() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Choose a player to take a card from (enter the player index): ");
+        for (int i = 0; i < game.getPlayers().size(); i++) {
+            if (!Objects.equals(game.getPlayers().get(i).getName(), name)) {
+                System.out.println(i + " " + game.getPlayers().get(i).getName());
+            }
+        }
+        int playerIndex = scanner.nextInt();
+        if (playerIndex < game.getPlayers().size()) {
+            Player targetPlayer = game.getPlayers().get(playerIndex);
+            favorChoice(targetPlayer);
+        } else {
+            System.out.println("Invalid player index. Choose a player within the valid range.");
+        }
+    }
+    public void favorChoice(Player targetPlayer) {
+        // Ask the user to choose a card type
+        System.out.println(name + ", you played a Favor card. Choose a card type to request from the other player: ");
+        System.out.println("1: EXPLODING_KITTEN, 2: DEFUSE, 3: NOPE, 4: SKIP, 5: ATTACK, 6:  SEE_THE_FUTURE, 7:FAVOR, 8: SHUFFLE, 9: CAT_CARD1, 10: CAT_CARD2, 11: CAT_CARD3, 12: CAT_CARD4, 13: CAT_CARD5 ");
+
+        Scanner scanner = new Scanner(System.in);
+        int chosenType = scanner.nextInt();
+
+        // Check if the target player has the requested card type
+        CardType requestedType = CardType.values()[chosenType - 1];
+        if (targetPlayer.hasCardType(requestedType)) {
+            // Target player has the requested card type, take a card from them
+            Card takenCard = targetPlayer.takeCard(requestedType);
+            hand.add(takenCard);
+            assert takenCard != null;
+            System.out.println(name + " took a " + takenCard.getType() + " card from " + targetPlayer.getName() + ".");
+        } else {
+            // Target player doesn't have the requested card type
+            System.out.println(targetPlayer.getName() + " doesn't have the requested card type. You get nothing.");
+        }
+    }
+
+    private boolean hasCardType(CardType type) {
+        for (Card card : hand) {
+            if (card.getType() == type) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Card takeCard(CardType type) {
+        for (Card card : hand) {
+            if (card.getType() == type) {
+                this.hand.remove(card);
+                return card;
+            }
+        }
+        return null;
+    }
+
     public void chooseplayer() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose a player to take a card from (enter the player index): ");

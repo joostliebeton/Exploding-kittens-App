@@ -42,8 +42,11 @@ public class Deck {
                 return 4; //4
             case NOPE:
                 return 5;
-            case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
+            case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4:
                 return 4;
+            case CAT_CARD5:
+                return 30;
+
             // Add cases for other card types
             default:
                 return 4;

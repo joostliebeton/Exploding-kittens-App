@@ -83,7 +83,6 @@ public class Game {
         } else {
             turn();
         }
-        handleTurnEnd();
     }
 
     private void handleTurnEnd() {

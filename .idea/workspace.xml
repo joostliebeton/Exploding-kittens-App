@@ -4,25 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_10_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_10_17__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_12_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_12_18__Changes_.xml" afterDir="false" />
+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="commited">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/CardType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/DiscardPile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Hand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exploding kittens.iml" beforeDir="false" afterPath="$PROJECT_DIR$/exploding kittens.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +83,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/joris/IdeaProjects/Project/src/Main.java",
-    "settings.editor.selected.configurable": "shared-indexes",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -115,7 +102,7 @@
       <recent name="ExplodingKittens" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.GameRule">
     <configuration name="GameRule" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameRule" />
       <module name="exploding kittens" />
@@ -139,6 +126,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="ExplodingKittens" />
       <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -192,13 +180,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.GameRule" />
+      <item itemvalue="JUnit.GameTest" />
+      <item itemvalue="JUnit.GameTest.testDeckInitialization" />
+      <item itemvalue="JUnit.GameTest.testEliminatePlayer" />
+      <item itemvalue="JUnit.GameTest.testEliminatePlayerListSize" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GameRule" />
         <item itemvalue="JUnit.GameTest" />
         <item itemvalue="JUnit.GameTest.testEliminatePlayerListSize" />
         <item itemvalue="JUnit.GameTest.testEliminatePlayer" />
         <item itemvalue="JUnit.GameTest.testDeckInitialization" />
-        <item itemvalue="Application.GameRule" />
       </list>
     </recent_temporary>
   </component>
@@ -491,10 +486,16 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+    <MESSAGE value="commited" />
+    <option name="LAST_COMMIT_MESSAGE" value="commited" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/exploding_kittens$GameRule.ic" NAME="GameRule Coverage Results" MODIFIED="1703342011221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>ExplodingKittens.*</FILTER>
+    </SUITE>
   </component>
 </project>
