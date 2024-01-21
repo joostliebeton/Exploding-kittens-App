@@ -10,7 +10,7 @@ import java.util.*;
 public class Player {
     private static boolean nopeCardPlayed = false;
     private String name;
-    private ArrayList<Card> hand;
+    private Hand hand;
     private Game game;
     private Deck deck;
     private Card playedCard;
@@ -20,11 +20,17 @@ public class Player {
     private DiscardPile discardPile1 = new DiscardPile();
     public Player(String name , Game game, Deck deck) {
         this.name = name;
-        this.hand = new ArrayList<>();
+        this.hand = new Hand();
         this.game = game;
         this.deck=deck;
         this.playedCard = null;
         extraTurns = 0;
+    }
+    public int getExtraTurns() {
+        return extraTurns;
+    }
+    public void setExtraTurns(int extraTurns, int oldturns) {
+        this.extraTurns = oldturns + extraTurns;
     }
 
     public String getName() {
@@ -32,12 +38,12 @@ public class Player {
     }
 
     public List<Card> getHand() {
-        return hand;
+        return hand.getHand();
     }
     public void drawCard(Deck deck) {
         Card drawnCard = deck.draw();
         if (drawnCard != null) {
-        hand.add(drawnCard);
+        hand.addCard(drawnCard);
         System.out.println(name + " drew a " + drawnCard.getType() + " card.");
         if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
             // Check if the player has a Defuse card
@@ -68,7 +74,7 @@ public class Player {
     }
 
     private boolean hasDefuseCard() {
-        for (Card card : hand) {
+        for (Card card : getHand()) {
             if (card.getType() == CardType.DEFUSE) {
                 hand.remove(card);
                 return true;
@@ -79,7 +85,8 @@ public class Player {
 
     public void playCard(int cardIndex, DiscardPile discardPile1) {
         if (cardIndex >= 0 && cardIndex < hand.size() && hand.get(cardIndex).playable()) {
-            playedCard = hand.remove(cardIndex);
+            playedCard = hand.get(cardIndex);
+            hand.remove(playedCard);
             System.out.println(name + " played a " + playedCard.getType() + " card.");
             discardPile1.discardCard(playedCard);
             switch (playedCard.getType()) {
@@ -94,9 +101,8 @@ public class Player {
                         System.out.println("Nope card negated the Shuffle!");
                         setNopeCardPlayed(false); // Reset Nope card flag
                     } else {
-                        shuffleDeck();
+                        playedCard.Shuffle(deck, this);
                     }
-                    shuffleDeck();
                     break;
                 case SKIP:
                     game.askPlayersNope();
@@ -109,7 +115,7 @@ public class Player {
                     break;
                 case SEE_THE_FUTURE:
                     game.askPlayersNope();
-                    SeeTheFuture();
+                    playedCard.seeTheFuture(deck, this);
                     break;
                 case CAT_CARD1:
                     catCardsInHand(CardType.CAT_CARD1);
@@ -133,7 +139,7 @@ public class Player {
                 case ATTACK:
                     game.askPlayersNope();
                     turnsToSkip++;
-                    Attack(game.getNextPlayer());
+                    playedCard.Attack(this, game.getNextPlayer());
                     break;
             }
             // Implement the specific action associated with the played card
@@ -146,7 +152,7 @@ public class Player {
     private void catCardsInHand(CardType typecard) {
         int catCardCount = 1;
         int deletedcardcount = 1;
-        for (Card card : hand) {
+        for (Card card : getHand()) {
             if (card.getType() == typecard) {
                 catCardCount++;
             }
@@ -181,7 +187,8 @@ public class Player {
                     while (deletedcardcount < 3) {
                         for (int i = 0; i < hand.size(); i++) {
                             if (hand.get(i).getType() == typecard) {
-                                playedCard = hand.remove(i);
+                                playedCard = hand.get(i);
+                                hand.remove(playedCard);
                                 deletedcardcount++;
                             }
                         }
@@ -197,33 +204,15 @@ public class Player {
         while (deletedcardcount < 2) {
             for (int i = 0; i < hand.size(); i++) {
                 if (hand.get(i).getType() == typecard) {
-                    playedCard = hand.remove(i);
+                    playedCard = hand.get(i);
+                    hand.remove(playedCard);
                     deletedcardcount++;
                 }
             }
         }
         chooseplayer();
     }
-
-    public void shuffleDeck() {
-        if (deck != null) {
-            playedCard.Shuffle(deck);
-            System.out.println(name + " shuffled the deck.");
-        } else {
-            System.out.println("Error: Deck reference is null.");
-        }
-    }
         // Delegate the shuffle to the Card class
-    public void Attack(Player targetPlayer) {
-       if (this.extraTurns >1) {
-            extraTurns = 0;
-            targetPlayer.extraTurns += 3;
-            System.out.println(name + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.extraTurns + " extra turns.");
-        } else{
-            targetPlayer.extraTurns += 1;
-            System.out.println(name + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.extraTurns + " extra turns.");
-        }
-    }
 
     private void setNopeCardPlayed(boolean bool){
         this.nopeCardPlayed = bool;
@@ -233,17 +222,6 @@ public class Player {
         return nopeCardPlayed;
     }
 
-    public void SeeTheFuture(){
-      if (!(deck.isEmpty())) {
-            Card[] cards = deck.peek();
-            System.out.println(name + " played a See the Future card. The top three cards are: ");
-            for (Card card : cards) {
-                System.out.println(card.getType());
-            }
-        } else {
-            System.out.println("Error: Deck is empty.");
-        }
-    }
     public void chooseplayerChoice() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose a player to take a card from (enter the player index): ");
@@ -283,7 +261,7 @@ public class Player {
     }
 
     private boolean hasCardType(CardType type) {
-        for (Card card : hand) {
+        for (Card card : getHand()) {
             if (card.getType() == type) {
                 return true;
             }
@@ -292,7 +270,7 @@ public class Player {
     }
 
     private Card takeCard(CardType type) {
-        for (Card card : hand) {
+        for (Card card : getHand()) {
             if (card.getType() == type) {
                 this.hand.remove(card);
                 return card;
@@ -339,8 +317,8 @@ public class Player {
                  System.out.println("Invalid card index. Please try again.");
             }
         } while (cardIndex < 0 || cardIndex >= hand.size());
-
-        Card card = hand.remove(cardIndex);
+        Card card = hand.get(cardIndex);
+        hand.remove(card);
         player.hand.add(card);
         System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
     }

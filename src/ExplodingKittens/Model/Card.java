@@ -1,6 +1,8 @@
 package ExplodingKittens.Model;
 
 
+import ExplodingKittens.Player;
+
 public class Card {
     private CardType type;
 
@@ -28,13 +30,37 @@ public class Card {
         }
     }
 
-
+    public void seeTheFuture(Deck deck, Player player){
+        if (!(deck.isEmpty())) {
+            Card[] cards = deck.peek();
+            System.out.println(player.getName()  + " played a See the Future card. The top three cards are: ");
+            for (Card card : cards) {
+                System.out.println(card.getType());
+            }
+        } else {
+            System.out.println("Error: Deck is empty.");
+        }
+    }
     public void  Nope(){
         //make a new method for nope only when the other things are done.
         }
-    public void Shuffle(Deck deck) {
-        // Implement your shuffle logic on the deck directly
-        deck.shuffle();
+    public void Shuffle(Deck deck, Player player) {
+        if (deck != null) {
+            deck.shuffle();
+            System.out.println(player.getName() + " shuffled the deck.");
+        } else {
+            System.out.println("Error: Deck reference is null.");
+        }
+    }
+    public void Attack(Player currentplayer, Player targetPlayer){
+        if (currentplayer.getExtraTurns() >1) {
+            currentplayer.setExtraTurns(0,0);
+            targetPlayer.setExtraTurns(3, targetPlayer.getExtraTurns());
+            System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
+        } else{
+            targetPlayer.setExtraTurns(1, targetPlayer.getExtraTurns());
+            System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns()+ " extra turns.");
+        }
     }
 
 
