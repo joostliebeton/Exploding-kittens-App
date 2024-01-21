@@ -1,4 +1,4 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
 
 public enum CardType {
     EXPLODING_KITTEN,

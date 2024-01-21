@@ -1,6 +1,11 @@
 package ExplodingKittens;
 
 
+import ExplodingKittens.Model.Card;
+import ExplodingKittens.Model.CardType;
+import ExplodingKittens.Model.Deck;
+import ExplodingKittens.Model.DiscardPile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -159,5 +164,13 @@ public class Game {
 
     public ArrayList<Player> getEliminatedPlayers() {
         return eliminatedplayers;
+    }
+
+    public void askPlayersNope() {
+        for (Player player : players) {
+            if (player != currentPlayer) {
+                player.askNope();
+            }
+        }
     }
 }

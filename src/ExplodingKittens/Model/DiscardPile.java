@@ -1,4 +1,6 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
+import ExplodingKittens.Model.Card;
+
 import java.util.ArrayList;
 import java.util.List;
 

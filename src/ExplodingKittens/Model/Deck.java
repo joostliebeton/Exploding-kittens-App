@@ -1,4 +1,7 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
+
+import ExplodingKittens.Model.Card;
+import ExplodingKittens.Model.CardType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +48,7 @@ public class Deck {
             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4:
                 return 4;
             case CAT_CARD5:
-                return 30;
+                return 60;
 
             // Add cases for other card types
             default:

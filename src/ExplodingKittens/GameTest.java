@@ -1,8 +1,7 @@
 package ExplodingKittens;
 
+import ExplodingKittens.Model.Deck;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
         String[] players = {"PlayerJoost", "PlayerJoris", "Player3"};

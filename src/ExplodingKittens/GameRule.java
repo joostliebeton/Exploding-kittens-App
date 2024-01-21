@@ -1,7 +1,7 @@
 package ExplodingKittens;
 
 public class GameRule {
-    private static String[] players = {"PlayerJoost", "PlayerJoris", "Player3"};
+    private static String[] players = {"PlayerJoost", "PlayerJoris", "PlayerLenn"};
 
     public boolean validatePlay(){
         return true;

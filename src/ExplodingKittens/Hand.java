@@ -1,5 +1,7 @@
 package ExplodingKittens;
 
+import ExplodingKittens.Model.Card;
+
 import java.util.ArrayList;
 
 public class Hand {

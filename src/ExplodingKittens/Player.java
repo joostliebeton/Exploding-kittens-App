@@ -1,8 +1,14 @@
 package ExplodingKittens;
 
+import ExplodingKittens.Model.Card;
+import ExplodingKittens.Model.CardType;
+import ExplodingKittens.Model.Deck;
+import ExplodingKittens.Model.DiscardPile;
+
 import java.util.*;
 
 public class Player {
+    private static boolean nopeCardPlayed = false;
     private String name;
     private ArrayList<Card> hand;
     private Game game;
@@ -78,15 +84,31 @@ public class Player {
             discardPile1.discardCard(playedCard);
             switch (playedCard.getType()) {
                 case NOPE:
+                    //ask players if they want to play a nope card
+                    game.askPlayersNope();
                     playedCard.Nope();
                     break;
                 case SHUFFLE:
+                    game.askPlayersNope();
+                    if (getNopeCardPlayed()) {
+                        System.out.println("Nope card negated the Shuffle!");
+                        setNopeCardPlayed(false); // Reset Nope card flag
+                    } else {
+                        shuffleDeck();
+                    }
                     shuffleDeck();
                     break;
                 case SKIP:
-                    turnsToSkip++;
+                    game.askPlayersNope();
+                    if (getNopeCardPlayed()) {
+                        System.out.println("Nope card negated the Skip!");
+                        setNopeCardPlayed(false); // Reset Nope card flag
+                    } else {
+                        turnsToSkip++;
+                    }
                     break;
                 case SEE_THE_FUTURE:
+                    game.askPlayersNope();
                     SeeTheFuture();
                     break;
                 case CAT_CARD1:
@@ -105,15 +127,15 @@ public class Player {
                     catCardsInHand(CardType.CAT_CARD5);
                     break;
                 case FAVOR:
+                    game.askPlayersNope();
                     chooseplayer();
                     break;
                 case ATTACK:
+                    game.askPlayersNope();
                     turnsToSkip++;
                     Attack(game.getNextPlayer());
-
                     break;
             }
-
             // Implement the specific action associated with the played card
             // For example, triggering a special ability or resolving effects
         } else {
@@ -121,7 +143,6 @@ public class Player {
 
         }
     }
-
     private void catCardsInHand(CardType typecard) {
         int catCardCount = 1;
         int deletedcardcount = 1;
@@ -194,7 +215,7 @@ public class Player {
     }
         // Delegate the shuffle to the Card class
     public void Attack(Player targetPlayer) {
-        if (this.extraTurns >1) {
+       if (this.extraTurns >1) {
             extraTurns = 0;
             targetPlayer.extraTurns += 3;
             System.out.println(name + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.extraTurns + " extra turns.");
@@ -203,11 +224,24 @@ public class Player {
             System.out.println(name + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.extraTurns + " extra turns.");
         }
     }
+
+    private void setNopeCardPlayed(boolean bool){
+        this.nopeCardPlayed = bool;
+    }
+
+    private boolean getNopeCardPlayed() {
+        return nopeCardPlayed;
+    }
+
     public void SeeTheFuture(){
-        Card[] cards = deck.peek();
-        System.out.println(name + " played a See the Future card. The top three cards are: ");
-        for (Card card : cards) {
-            System.out.println(card.getType());
+      if (!(deck.isEmpty())) {
+            Card[] cards = deck.peek();
+            System.out.println(name + " played a See the Future card. The top three cards are: ");
+            for (Card card : cards) {
+                System.out.println(card.getType());
+            }
+        } else {
+            System.out.println("Error: Deck is empty.");
         }
     }
     public void chooseplayerChoice() {
@@ -309,6 +343,21 @@ public class Player {
         Card card = hand.remove(cardIndex);
         player.hand.add(card);
         System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
+    }
+
+    public void askNope() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to play a Nope card? (yes/no)");
+        String response = scanner.nextLine().toLowerCase();
+        if (response.equals("yes")) {
+            // Player wants to play Nope card
+            playCard(hand.indexOf(playedCard), discardPile1);
+            System.out.println(name + " played a Nope card.");
+            setNopeCardPlayed(true);
+        } else {
+            // Player does not want to play Nope card
+            System.out.println(name + " did not play a Nope card.");
+        }
     }
 }
 
