@@ -5,6 +5,7 @@ import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
 import ExplodingKittens.Model.Deck;
 import ExplodingKittens.Model.DiscardPile;
+import ExplodingKittens.View.TUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,14 +66,16 @@ public class Game {
     public void turn() {
         currentPlayer = getCurrentPlayer();
         while (currentPlayer.extraTurns > 0) {
-            System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
+            TUI.turnMessage(currentPlayer, 1);
+            //System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
             currentPlayer.playCard(getPlayerInput(), discardPile);
             if (discardPile.getDiscardPile()[discardPile.length() - 1].getType() == CardType.ATTACK) {
                 currentPlayer.extraTurns = 0;
                 currentPlayer.turnsToSkip = 1;
                 Player targetPlayer = getNextPlayer();
                 targetPlayer.extraTurns += 3;
-                System.out.println(targetPlayer.getName() + " has " + targetPlayer.extraTurns + " extra turns!");
+                TUI.turnMessage(targetPlayer, 2);
+                //System.out.println(targetPlayer.getName() + " has " + targetPlayer.extraTurns + " extra turns!");
                 handleTurnEnd();
                 return;
             }
@@ -81,7 +84,8 @@ public class Game {
         }
         currentPlayer.playCard(getPlayerInput(), discardPile);
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Do you want to end your turn? (yes/no)");
+        TUI.turnMessage(1);
+        //System.out.println("Do you want to end your turn? (yes/no)");
         String response = scanner.nextLine().toLowerCase();
         if (response.equals("yes")) {
             handleTurnEnd();
@@ -92,7 +96,8 @@ public class Game {
 
     private void handleTurnEnd() {
         if (currentPlayer.turnsToSkip > 0) {
-            System.out.println(currentPlayer.getName() + " skips a turn.");
+            TUI.handleTurnEndMessage(currentPlayer);
+            //System.out.println(currentPlayer.getName() + " skips a turn.");
             currentPlayer.turnsToSkip--;
             endTurnNoDraw();
         } else {
@@ -105,15 +110,19 @@ public class Game {
         int cardIndex;
 
         do {
-            System.out.println(currentPlayer.getName() + ", choose a card to play (enter the card index): ");
+            TUI.getPlayerInputMessage(currentPlayer, 1);
+            //System.out.println(currentPlayer.getName() + ", choose a card to play (enter the card index): ");
             for (int i = 0; i < currentPlayer.getHand().size(); i++) {
-                System.out.println(i + ": " + currentPlayer.getHand().get(i).getType());
+
+                TUI.getPlayerInputMessage(currentPlayer, i);
+                //System.out.println(i + ": " + currentPlayer.getHand().get(i).getType());
             }
             cardIndex = scanner.nextInt();
 
             // Check if the entered index is valid
             if (cardIndex < 0 || cardIndex >= currentPlayer.getHand().size()) {
-                System.out.println("Invalid card index. Please try again.");
+                TUI.getPlayerInputMessage(1);
+                //System.out.println("Invalid card index. Please try again.");
             }
         } while (cardIndex < 0 || cardIndex >= currentPlayer.getHand().size());
 
@@ -145,20 +154,23 @@ public class Game {
     // Other methods as needed
     public void getDiscardPile() {
         for (Card card : discardPile.getDiscardPile()) {
-            System.out.println(card.getType());
+            TUI.getDiscardPileMessage(card);
+            //System.out.println(card.getType());
         }
     }
 
     public void getDeck() {
         for (Card card : deck.getDeck()) {
-            System.out.println(card.getType());
+            TUI.getDeckMessage(card);
+            //System.out.println(card.getType());
         }
     }
 
     public void eliminatePlayer(Player player) {
         players.remove(player);
         eliminatedplayers.add(player);
-        System.out.println(player.getName() + " has been eliminated!");
+        TUI.eliminatePlayerMessage(player);
+        //System.out.println(player.getName() + " has been eliminated!");
         currentPlayerIndex = (currentPlayerIndex - 1) % players.size();
     }
 

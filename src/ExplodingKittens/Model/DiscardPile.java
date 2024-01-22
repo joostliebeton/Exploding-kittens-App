@@ -1,5 +1,6 @@
 package ExplodingKittens.Model;
 import ExplodingKittens.Model.Card;
+import ExplodingKittens.View.TUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,8 @@ public class DiscardPile {
 
     public void discardCard(Card card) {
         discardedCards.add(card);
-        System.out.println("Card discarded: " + card.getType());
+        TUI.discardCardMessage(card);
+        //System.out.println("Card discarded: " + card.getType());
     }
 
     public Card[] getDiscardPile() {
