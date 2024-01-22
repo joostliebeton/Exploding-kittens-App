@@ -1,0 +1,741 @@
+Index: src/ExplodingKittens/Deck.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ExplodingKittens;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.List;\r\nimport java.util.Random;\r\n\r\npublic class Deck {\r\n    private ArrayList<Card> cards;\r\n\r\n    public Deck() {\r\n        cards = new ArrayList<>();\r\n        initializeDeck();\r\n        shuffle();\r\n    }\r\n\r\n    private void initializeDeck() {\r\n        for (CardType type : CardType.values()) {\r\n            if (type == CardType.EXPLODING_KITTEN) {\r\n                continue;\r\n            }\r\n            for (int i = 0; i < getInitialCardCount(type); i++) {\r\n                cards.add(new Card(type));\r\n            }\r\n        }\r\n    }\r\n\r\n    private int getInitialCardCount(CardType type) {\r\n        // Return the initial count for each card type\r\n        // You can customize this based on the rules of the game\r\n        switch (type) {\r\n            case EXPLODING_KITTEN:\r\n                return 4; //4\r\n            case DEFUSE:\r\n                return 6; //6\r\n            case SKIP:\r\n                return 4;\r\n            case ATTACK:\r\n                return 4;\r\n            case FAVOR:\r\n                return 4;\r\n            case SEE_THE_FUTURE:\r\n                return 5;\r\n            case SHUFFLE:\r\n                return 20; //4\r\n            case NOPE:\r\n                return 5;\r\n            case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:\r\n                return 4;\r\n            // Add cases for other card types\r\n            default:\r\n                return 4;\r\n        }\r\n    }\r\n\r\n    public void shuffle() {\r\n        Random random = new Random();\r\n        for (int i = cards.size() - 1; i > 0; i--) {\r\n            int j = random.nextInt(i + 1);\r\n            swapCards(i, j);\r\n        }\r\n        Collections.shuffle(cards);\r\n    }\r\n\r\n    private void swapCards(int i, int j) {\r\n        Card temp = cards.get(i);\r\n        cards.set(i, cards.get(j));\r\n        cards.set(j, temp);\r\n    }\r\n\r\n    public Card draw() {\r\n        if (!isEmpty()) {\r\n            return cards.remove(0);\r\n        }\r\n        return null; // Deck is empty\r\n    }\r\n\r\n    public boolean isEmpty() {\r\n        return cards.isEmpty();\r\n    }\r\n\r\n\r\n    public ArrayList<Card> getCards() {\r\n        return cards;\r\n    }\r\n    // shuffle() shuffles the cards\r\n\r\n    //drawCard() takes a card from the top of the deck and removes from the deck\r\n\r\n    public int pileSize(){\r\n        return cards.size();\r\n    }\r\n\r\n    public void addExplodingKitten() {\r\n        cards.add(new Card(CardType.EXPLODING_KITTEN));\r\n    }\r\n\r\n    public Card[] getDeck() {\r\n        return cards.toArray(new Card[0]);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ExplodingKittens/Deck.java b/src/ExplodingKittens/Deck.java
+--- a/src/ExplodingKittens/Deck.java	(revision 98d332b6cb7a226d042a6da6504d9d3d61f95646)
++++ b/src/ExplodingKittens/Deck.java	(date 1703425537412)
+@@ -42,7 +42,7 @@
+             case SEE_THE_FUTURE:
+                 return 5;
+             case SHUFFLE:
+-                return 20; //4
++                return 4;
+             case NOPE:
+                 return 5;
+             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4, CAT_CARD5:
+Index: src/ExplodingKittens/Game.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ExplodingKittens;\r\n\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Scanner;\r\n\r\npublic class Game {\r\n    //players: Arraylist<player>\r\n        private Deck deck;\r\n        private Player currentPlayer;\r\n        private ArrayList<Player> eliminatedplayers = new ArrayList<>();\r\n        private List<Player> players;\r\n        private DiscardPile discardPile;\r\n        public List<Player> getPlayers() {\r\n            return players;\r\n        }\r\n        private int currentPlayerIndex;\r\n\r\n        public Game(String[] Players) {\r\n            initializeDeck();\r\n            initializePlayers(Players);\r\n            initilializehands();\r\n\r\n            initializeDiscardPile();\r\n\r\n            currentPlayerIndex = 0;\r\n        }\r\n\r\n        private void initializeDeck() {\r\n            deck = new Deck();\r\n            // Add Exploding Kittens to the deck after initial cards have been dealt\r\n\r\n        }\r\n        private void initilializehands() {\r\n            for (int i = 0; i < 5; i++) {\r\n                for (Player player : players) {\r\n                    player.drawCard(deck);\r\n                }\r\n            }\r\n            for (int i = 0; i < 4; i++) {\r\n                deck.addExplodingKitten();\r\n            }\r\n            deck.shuffle();\r\n        }\r\n\r\n        private void initializeDiscardPile() {\r\n            discardPile = new DiscardPile();\r\n        }\r\n\r\n        private void initializePlayers(String[] names) {\r\n            players = new ArrayList<>();\r\n            for (String name : names) {\r\n                players.add(new Player(name, this, deck));\r\n            }\r\n        }\r\n\r\n    public void turn() {\r\n        currentPlayer = getCurrentPlayer();\r\n        currentPlayer.playCard(getPlayerInput(), discardPile);\r\n        endTurn();\r\n    }\r\n\r\n    private int getPlayerInput() {\r\n        Scanner scanner = new Scanner(System.in);\r\n        int cardIndex;\r\n\r\n        do {\r\n            System.out.println(currentPlayer.getName() + \", choose a card to play (enter the card index): \");\r\n            for (int i = 0; i < currentPlayer.getHand().size(); i++) {\r\n                System.out.println(i + \": \" + currentPlayer.getHand().get(i).getType());\r\n            }\r\n            cardIndex = scanner.nextInt();\r\n\r\n            // Check if the entered index is valid\r\n            if (cardIndex < 0 || cardIndex >= currentPlayer.getHand().size()) {\r\n                System.out.println(\"Invalid card index. Please try again.\");\r\n            }\r\n        } while (cardIndex < 0 || cardIndex >= currentPlayer.getHand().size());\r\n\r\n        return cardIndex;\r\n    }\r\n\r\n    public Player getCurrentPlayer() {\r\n        return players.get(currentPlayerIndex);\r\n    }\r\n\r\n    public void endTurn() {\r\n        currentPlayer.drawCard(deck);\r\n        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();\r\n    }\r\n\r\n    boolean isGameOver() {\r\n        return players.size() == 1;\r\n    }\r\n\r\n    // Other methods as needed\r\n    public void getDiscardPile() {\r\n        for (Card card : discardPile.getDiscardPile()) {\r\n            System.out.println(card.getType());\r\n        }\r\n    }\r\n    public void getDeck() {\r\n        for (Card card : deck.getDeck()) {\r\n            System.out.println(card.getType());\r\n        }\r\n    }\r\n\r\n    public void eliminatePlayer(Player player) {\r\n        players.remove(player);\r\n        eliminatedplayers.add(player);\r\n        System.out.println(player.getName() + \" has been eliminated!\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ExplodingKittens/Game.java b/src/ExplodingKittens/Game.java
+--- a/src/ExplodingKittens/Game.java	(revision 98d332b6cb7a226d042a6da6504d9d3d61f95646)
++++ b/src/ExplodingKittens/Game.java	(date 1703425290884)
+@@ -32,13 +32,15 @@
+             // Add Exploding Kittens to the deck after initial cards have been dealt
+ 
+         }
++
+         private void initilializehands() {
+-            for (int i = 0; i < 5; i++) {
++            for (int i = 0; i < 5 /*players.size()*/; i++) {
+                 for (Player player : players) {
+                     player.drawCard(deck);
+                 }
+             }
+             for (int i = 0; i < 4; i++) {
++                //
+                 deck.addExplodingKitten();
+             }
+             deck.shuffle();
+@@ -106,9 +108,18 @@
+         }
+     }
+ 
++
++
+     public void eliminatePlayer(Player player) {
+         players.remove(player);
+         eliminatedplayers.add(player);
+         System.out.println(player.getName() + " has been eliminated!");
+     }
++    public ArrayList<Player> getEliminatedPlayers() {
++        return eliminatedplayers;
++    }
++    public int getCardsInDeck() {
++        return deck.getCards().size();
++        //important one for the JUnit test  should return amount of cards in deck
++    }
+ }
+Index: src/ExplodingKittens/GameRule.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ExplodingKittens;\r\n\r\nimport javax.swing.*;\r\nimport java.util.List;\r\n\r\npublic class GameRule {\r\n    private static String[] players = {\"Playerjoost\", \"Playerjoris\", \"Player 3\"};\r\n\r\n    public boolean validatePlay(){\r\n        return true;\r\n    }\r\n    public static void main(String[] args) {\r\n        // Create a game with 3 players\r\n        Game game = new Game(players);\r\n\r\n        // Run the game loop until it's over\r\n        while (!game.isGameOver()) {\r\n            game.turn();\r\n        }\r\n\r\n        // Display the winner or any end-of-game information\r\n        System.out.println(\"Game Over! Winner: \" + game.getPlayers().get(0).getName());\r\n    }\r\n    //validatePlay() validates the played action\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ExplodingKittens/GameRule.java b/src/ExplodingKittens/GameRule.java
+--- a/src/ExplodingKittens/GameRule.java	(revision 98d332b6cb7a226d042a6da6504d9d3d61f95646)
++++ b/src/ExplodingKittens/GameRule.java	(date 1703419127362)
+@@ -4,7 +4,7 @@
+ import java.util.List;
+ 
+ public class GameRule {
+-    private static String[] players = {"Playerjoost", "Playerjoris", "Player 3"};
++    private static String[] players = {"PlayerJoost", "PlayerJoris", "Player3"};
+ 
+     public boolean validatePlay(){
+         return true;
+Index: exploding kittens.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/exploding kittens.iml b/exploding kittens.iml
+--- a/exploding kittens.iml	(revision 98d332b6cb7a226d042a6da6504d9d3d61f95646)
++++ b/exploding kittens.iml	(date 1703417731650)
+@@ -7,5 +7,31 @@
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="module-library">
++      <library name="JUnit4">
++        <CLASSES>
++          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
++    <orderEntry type="module-library">
++      <library name="JUnit5.8.1">
++        <CLASSES>
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"02a173d9-8ac6-4212-a31b-9274771f4614\" name=\"Changes\" comment=\"commited\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/ExplodingKittens/Card.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ExplodingKittens/Card.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/ExplodingKittens/Deck.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ExplodingKittens/Deck.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/ExplodingKittens/Game.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ExplodingKittens/Game.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/ExplodingKittens/GameRule.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ExplodingKittens/GameRule.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/ExplodingKittens/Player.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ExplodingKittens/Player.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 0\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2ZwWuAj6FuEewGDaEfZZKwFxAaH\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\",\r\n    \"git-widget-placeholder\": \"Update-v1\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"settings.editor.selected.configurable\": \"editor.preferences.fonts.default\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"02a173d9-8ac6-4212-a31b-9274771f4614\" name=\"Changes\" comment=\"\" />\r\n      <created>1703154524207</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1703154524207</updated>\r\n      <workItem from=\"1703154530239\" duration=\"14225000\" />\r\n      <workItem from=\"1703333844496\" duration=\"4353000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"first commited item\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703159117146</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703159117146</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"first commited item\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703160922946</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703160922946</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"first commited item\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703160933081</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703160933081</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703160982670</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703160982670</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703161366825</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703161366825</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703161374406</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703161374406</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"commited\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703161745377</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703161745377</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"commited\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703161888005</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703161888005</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"commited\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703173058719</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703173058719</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"commited\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703174975540</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703174975540</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"commited\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703333917711</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703333917711</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"12\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Card.java&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java&#10;#&#9;src/ExplodingKittens/Player.java\" />\r\n    <MESSAGE value=\"first commited item\" />\r\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java\" />\r\n    <MESSAGE value=\"commited\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"commited\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 98d332b6cb7a226d042a6da6504d9d3d61f95646)
++++ b/.idea/workspace.xml	(date 1703426169850)
+@@ -4,18 +4,20 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="02a173d9-8ac6-4212-a31b-9274771f4614" name="Changes" comment="commited">
++    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
++      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_10_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_10_17__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_12_18__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_12_2023_12_18__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/exploding kittens.iml" beforeDir="false" afterPath="$PROJECT_DIR$/exploding kittens.iml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Card.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Deck.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -25,139 +27,419 @@
+   <component name="FileTemplateManagerImpl">
+     <option name="RECENT_TEMPLATES">
+       <list>
++        <option value="package-info" />
+         <option value="Class" />
+       </list>
+     </option>
++  </component>
++  <component name="Git.Rebase.Settings">
++    <option name="NEW_BASE" value="origin/main" />
+   </component>
+   <component name="Git.Settings">
++    <favorite-branches>
++      <branch-storage>
++        <map>
++          <entry type="REMOTE">
++            <value>
++              <list>
++                <branch-info repo="$PROJECT_DIR$" source="origin/check" />
++              </list>
++            </value>
++          </entry>
++        </map>
++      </branch-storage>
++    </favorite-branches>
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="master" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "associatedIndex": 0
+-}]]></component>
+-  <component name="ProjectId" id="2ZwWuAj6FuEewGDaEfZZKwFxAaH" />
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 3
++}</component>
++  <component name="ProjectId" id="2ZDLyXW5ogVA31AxjAEddOCyjLN" />
++  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
++    <ConfirmationsSetting value="2" id="Add" />
++  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "Downloaded.Files.Path.Enabled": "false",
++    "Repository.Attach.Annotations": "false",
++    "Repository.Attach.JavaDocs": "false",
++    "Repository.Attach.Sources": "false",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+     "WebServerToolWindowFactoryState": "false",
++    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
++    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
++    "create.test.in.the.same.root": "true",
+     "git-widget-placeholder": "Update-v1",
++    "last_opened_file_path": "C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+     "node.js.selected.package.tslint": "(autodetect)",
+     "nodejs_package_manager_path": "npm",
+-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
++    "onboarding.tips.debug.path": "C:/Users/joris/IdeaProjects/Project/src/Main.java",
++    "settings.editor.selected.configurable": "shared-indexes",
+     "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\joris\IdeaProjects\Project\src\Cards" />
++    </key>
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\joris\IdeaProjects\Project\src" />
++    </key>
++    <key name="CreateTestDialog.Recents.Supers">
++      <recent name="" />
++    </key>
++    <key name="CreateTestDialog.RecentsKey">
++      <recent name="ExplodingKittens" />
++    </key>
++  </component>
++  <component name="RunManager">
++    <configuration name="GameRule" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameRule" />
++      <module name="exploding kittens" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="ExplodingKittens.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="PlayerOrder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-20.0.2" />
++      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
++      <option name="MAIN_CLASS_NAME" value="Game.PlayerOrder" />
++      <module name="project" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="Game.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="GameTest.testDeckInitialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="exploding kittens" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="ExplodingKittens.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="ExplodingKittens" />
++      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
++      <option name="METHOD_NAME" value="testDeckInitialization" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="GameTest.testEliminatePlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="exploding kittens" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="ExplodingKittens.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="ExplodingKittens" />
++      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
++      <option name="METHOD_NAME" value="testEliminatePlayer" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="GameTest.testEliminatePlayerListSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="exploding kittens" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="ExplodingKittens.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="ExplodingKittens" />
++      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
++      <option name="METHOD_NAME" value="testEliminatePlayerListSize" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.GameTest.testEliminatePlayerListSize" />
++        <item itemvalue="JUnit.GameTest.testEliminatePlayer" />
++        <item itemvalue="JUnit.GameTest.testDeckInitialization" />
++        <item itemvalue="Application.GameRule" />
++        <item itemvalue="Application.PlayerOrder" />
++      </list>
++    </recent_temporary>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+-      <changelist id="02a173d9-8ac6-4212-a31b-9274771f4614" name="Changes" comment="" />
+-      <created>1703154524207</created>
++      <changelist id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="" />
++      <created>1701951961435</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1703154524207</updated>
+-      <workItem from="1703154530239" duration="14225000" />
+-      <workItem from="1703333844496" duration="4353000" />
++      <updated>1701951961435</updated>
++      <workItem from="1701951962392" duration="2248000" />
++      <workItem from="1701958153036" duration="254000" />
++      <workItem from="1701958517553" duration="9157000" />
++      <workItem from="1702029072014" duration="6034000" />
++      <workItem from="1702155984212" duration="2750000" />
++      <workItem from="1702991059140" duration="5510000" />
++      <workItem from="1702996641317" duration="14074000" />
++      <workItem from="1703291592568" duration="8465000" />
++      <workItem from="1703366844809" duration="155000" />
++      <workItem from="1703374385367" duration="10264000" />
+     </task>
+-    <task id="LOCAL-00001" summary="first commited item">
++    <task id="LOCAL-00001" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703159117146</created>
++      <created>1701956642740</created>
+       <option name="number" value="00001" />
+       <option name="presentableId" value="LOCAL-00001" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703159117146</updated>
++      <updated>1701956642740</updated>
+     </task>
+-    <task id="LOCAL-00002" summary="first commited item">
++    <task id="LOCAL-00002" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703160922946</created>
++      <created>1701957315513</created>
+       <option name="number" value="00002" />
+       <option name="presentableId" value="LOCAL-00002" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703160922946</updated>
++      <updated>1701957315513</updated>
+     </task>
+-    <task id="LOCAL-00003" summary="first commited item">
++    <task id="LOCAL-00003" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703160933081</created>
++      <created>1701957654919</created>
+       <option name="number" value="00003" />
+       <option name="presentableId" value="LOCAL-00003" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703160933081</updated>
++      <updated>1701957654919</updated>
+     </task>
+-    <task id="LOCAL-00004" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java">
++    <task id="LOCAL-00004" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703160982670</created>
++      <created>1701957717213</created>
+       <option name="number" value="00004" />
+       <option name="presentableId" value="LOCAL-00004" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703160982670</updated>
++      <updated>1701957717213</updated>
+     </task>
+-    <task id="LOCAL-00005" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java">
++    <task id="LOCAL-00005" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703161366825</created>
++      <created>1701957848218</created>
+       <option name="number" value="00005" />
+       <option name="presentableId" value="LOCAL-00005" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703161366825</updated>
++      <updated>1701957848218</updated>
+     </task>
+-    <task id="LOCAL-00006" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java">
++    <task id="LOCAL-00006" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703161374406</created>
++      <created>1701957856987</created>
+       <option name="number" value="00006" />
+       <option name="presentableId" value="LOCAL-00006" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703161374406</updated>
++      <updated>1701957856987</updated>
+     </task>
+-    <task id="LOCAL-00007" summary="commited">
++    <task id="LOCAL-00007" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703161745377</created>
++      <created>1701958563698</created>
+       <option name="number" value="00007" />
+       <option name="presentableId" value="LOCAL-00007" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703161745377</updated>
++      <updated>1701958563698</updated>
+     </task>
+-    <task id="LOCAL-00008" summary="commited">
++    <task id="LOCAL-00008" summary="commit test">
+       <option name="closed" value="true" />
+-      <created>1703161888005</created>
++      <created>1701958583769</created>
+       <option name="number" value="00008" />
+       <option name="presentableId" value="LOCAL-00008" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703161888005</updated>
++      <updated>1701958583769</updated>
+     </task>
+-    <task id="LOCAL-00009" summary="commited">
++    <task id="LOCAL-00009" summary="Merge remote-tracking branch 'origin/master'">
+       <option name="closed" value="true" />
+-      <created>1703173058719</created>
++      <created>1701958627234</created>
+       <option name="number" value="00009" />
+       <option name="presentableId" value="LOCAL-00009" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703173058719</updated>
++      <updated>1701958627234</updated>
+     </task>
+-    <task id="LOCAL-00010" summary="commited">
++    <task id="LOCAL-00010" summary="Merge remote-tracking branch 'origin/master'">
+       <option name="closed" value="true" />
+-      <created>1703174975540</created>
++      <created>1701958706764</created>
+       <option name="number" value="00010" />
+       <option name="presentableId" value="LOCAL-00010" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703174975540</updated>
++      <updated>1701958706764</updated>
+     </task>
+-    <task id="LOCAL-00011" summary="commited">
++    <task id="LOCAL-00011" summary="Merge remote-tracking branch 'origin/master'">
+       <option name="closed" value="true" />
+-      <created>1703333917711</created>
++      <created>1701958734485</created>
+       <option name="number" value="00011" />
+       <option name="presentableId" value="LOCAL-00011" />
+       <option name="project" value="LOCAL" />
+-      <updated>1703333917711</updated>
++      <updated>1701958734485</updated>
++    </task>
++    <task id="LOCAL-00012" summary="Merge remote-tracking branch 'origin/master'">
++      <option name="closed" value="true" />
++      <created>1701958793141</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1701958793141</updated>
++    </task>
++    <task id="LOCAL-00013" summary="Merge remote-tracking banch 'origin/master'">
++      <option name="closed" value="true" />
++      <created>1701958998845</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1701958998845</updated>
++    </task>
++    <task id="LOCAL-00014" summary="test">
++      <option name="closed" value="true" />
++      <created>1701959283565</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1701959283565</updated>
++    </task>
++    <task id="LOCAL-00015" summary="test">
++      <option name="closed" value="true" />
++      <created>1701959342971</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1701959342971</updated>
++    </task>
++    <task id="LOCAL-00016" summary="test">
++      <option name="closed" value="true" />
++      <created>1701967590457</created>
++      <option name="number" value="00016" />
++      <option name="presentableId" value="LOCAL-00016" />
++      <option name="project" value="LOCAL" />
++      <updated>1701967590457</updated>
++    </task>
++    <task id="LOCAL-00017" summary="test">
++      <option name="closed" value="true" />
++      <created>1701967602260</created>
++      <option name="number" value="00017" />
++      <option name="presentableId" value="LOCAL-00017" />
++      <option name="project" value="LOCAL" />
++      <updated>1701967602260</updated>
++    </task>
++    <task id="LOCAL-00018" summary="test">
++      <option name="closed" value="true" />
++      <created>1702153813341</created>
++      <option name="number" value="00018" />
++      <option name="presentableId" value="LOCAL-00018" />
++      <option name="project" value="LOCAL" />
++      <updated>1702153813341</updated>
++    </task>
++    <task id="LOCAL-00019" summary="Merge remote-tracking branch 'origin/check' into check">
++      <option name="closed" value="true" />
++      <created>1702154461063</created>
++      <option name="number" value="00019" />
++      <option name="presentableId" value="LOCAL-00019" />
++      <option name="project" value="LOCAL" />
++      <updated>1702154461063</updated>
++    </task>
++    <task id="LOCAL-00020" summary="Merge remote-tracking branch 'origin/check' into check">
++      <option name="closed" value="true" />
++      <created>1702154486560</created>
++      <option name="number" value="00020" />
++      <option name="presentableId" value="LOCAL-00020" />
++      <option name="project" value="LOCAL" />
++      <updated>1702154486560</updated>
++    </task>
++    <task id="LOCAL-00021" summary="Merge remote-tracking branch 'origin/check' into check">
++      <option name="closed" value="true" />
++      <created>1702210267900</created>
++      <option name="number" value="00021" />
++      <option name="presentableId" value="LOCAL-00021" />
++      <option name="project" value="LOCAL" />
++      <updated>1702210267900</updated>
++    </task>
++    <task id="LOCAL-00022" summary="Merge remote-tracking branch 'origin/test' into check">
++      <option name="closed" value="true" />
++      <created>1702994651648</created>
++      <option name="number" value="00022" />
++      <option name="presentableId" value="LOCAL-00022" />
++      <option name="project" value="LOCAL" />
++      <updated>1702994651648</updated>
++    </task>
++    <task id="LOCAL-00023" summary="Merge remote-tracking branch 'origin/test' into check">
++      <option name="closed" value="true" />
++      <created>1703063473203</created>
++      <option name="number" value="00023" />
++      <option name="presentableId" value="LOCAL-00023" />
++      <option name="project" value="LOCAL" />
++      <updated>1703063473203</updated>
++    </task>
++    <task id="LOCAL-00024" summary="Merge remote-tracking branch 'origin/test' into check">
++      <option name="closed" value="true" />
++      <created>1703063631417</created>
++      <option name="number" value="00024" />
++      <option name="presentableId" value="LOCAL-00024" />
++      <option name="project" value="LOCAL" />
++      <updated>1703063631417</updated>
++    </task>
++    <task id="LOCAL-00025" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
++      <option name="closed" value="true" />
++      <created>1703069855682</created>
++      <option name="number" value="00025" />
++      <option name="presentableId" value="LOCAL-00025" />
++      <option name="project" value="LOCAL" />
++      <updated>1703069855682</updated>
++    </task>
++    <task id="LOCAL-00026" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
++      <option name="closed" value="true" />
++      <created>1703069923106</created>
++      <option name="number" value="00026" />
++      <option name="presentableId" value="LOCAL-00026" />
++      <option name="project" value="LOCAL" />
++      <updated>1703069923106</updated>
+     </task>
+-    <option name="localTasksCounter" value="12" />
++    <task id="LOCAL-00027" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
++      <option name="closed" value="true" />
++      <created>1703077641623</created>
++      <option name="number" value="00027" />
++      <option name="presentableId" value="LOCAL-00027" />
++      <option name="project" value="LOCAL" />
++      <updated>1703077641623</updated>
++    </task>
++    <task id="LOCAL-00028" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
++      <option name="closed" value="true" />
++      <created>1703083598785</created>
++      <option name="number" value="00028" />
++      <option name="presentableId" value="LOCAL-00028" />
++      <option name="project" value="LOCAL" />
++      <updated>1703083598785</updated>
++    </task>
++    <option name="localTasksCounter" value="29" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -168,18 +450,34 @@
+       <map>
+         <entry key="MAIN">
+           <value>
+-            <State />
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="origin/check" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
+           </value>
+         </entry>
+       </map>
+     </option>
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Card.java&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java&#10;#&#9;src/ExplodingKittens/Player.java" />
+-    <MESSAGE value="first commited item" />
+-    <MESSAGE value="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;src/ExplodingKittens/Deck.java&#10;#&#9;src/ExplodingKittens/Game.java" />
+-    <MESSAGE value="commited" />
+-    <option name="LAST_COMMIT_MESSAGE" value="commited" />
++    <MESSAGE value="commit test" />
++    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
++    <MESSAGE value="Merge remote-tracking banch 'origin/master'" />
++    <MESSAGE value="test" />
++    <MESSAGE value="Merge remote-tracking branch 'origin/check' into check" />
++    <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
++    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
++    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
++    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># exploding kittens Project\r\n\r\n\r\n\r\n## Getting started\r\n\r\nTo make it easy for you to get started with GitLab, here's a list of recommended next steps.\r\n\r\nAlready a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!\r\n\r\n## Add your files\r\n\r\n- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files\r\n- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:\r\n\r\n```\r\ncd existing_repo\r\ngit remote add origin https://gitlab.utwente.nl/s3259633/exploding-kittens-project.git\r\ngit branch -M main\r\ngit push -uf origin main\r\n```\r\n\r\n## Integrate with your tools\r\n\r\n- [ ] [Set up project integrations](https://gitlab.utwente.nl/s3259633/exploding-kittens-project/-/settings/integrations)\r\n\r\n## Collaborate with your team\r\n\r\n- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)\r\n- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)\r\n- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)\r\n- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)\r\n- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)\r\n\r\n## Test and Deploy\r\n\r\nUse the built-in continuous integration in GitLab.\r\n\r\n- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)\r\n- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)\r\n- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)\r\n- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)\r\n- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)\r\n\r\n***\r\n\r\n# Editing this README\r\n\r\nWhen you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.\r\n\r\n## Suggestions for a good README\r\nEvery project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.\r\n\r\n## Name\r\nChoose a self-explaining name for your project.\r\n\r\n## Description\r\nLet people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.\r\n\r\n## Badges\r\nOn some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.\r\n\r\n## Visuals\r\nDepending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.\r\n\r\n## Installation\r\nWithin a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.\r\n\r\n## Usage\r\nUse examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.\r\n\r\n## Support\r\nTell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.\r\n\r\n## Roadmap\r\nIf you have ideas for releases in the future, it is a good idea to list them in the README.\r\n\r\n## Contributing\r\nState if you are open to contributions and what your requirements are for accepting them.\r\n\r\nFor people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.\r\n\r\nYou can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.\r\n\r\n## Authors and acknowledgment\r\nShow your appreciation to those who have contributed to the project.\r\n\r\n## License\r\nFor open source projects, say how it is licensed.\r\n\r\n## Project status\r\nIf you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision 98d332b6cb7a226d042a6da6504d9d3d61f95646)
++++ b/README.md	(date 1703417360292)
+@@ -1,4 +1,4 @@
+-# exploding kittens Project
++ # exploding kittens Project
+ 
+ 
+ 
+Index: src/ExplodingKittens/GameTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ExplodingKittens/GameTest.java b/src/ExplodingKittens/GameTest.java
+new file mode 100644
+--- /dev/null	(date 1703426169803)
++++ b/src/ExplodingKittens/GameTest.java	(date 1703426169803)
+@@ -0,0 +1,48 @@
++package ExplodingKittens;
++
++import org.junit.jupiter.api.Test;
++import static org.junit.jupiter.api.Assertions.*;
++
++public class GameTest {
++    String[] players = {"PlayerJoost", "PlayerJoris", "Player3"};
++    @Test void testAmountOfPlayers() {
++        Game game = new Game(this.players);
++        assert(game.getPlayers().size() == 3) : "after this test the amount of players should be 3";
++    }
++    @Test void testDeckInitialization() {
++        //Game game = new Game(this.players);
++        Deck deck = new Deck();
++        deck.addExplodingKitten(); // does this even do something
++        assert deck.pileSize() == 56 : "Deck should have 56 cards but is "+ deck.pileSize();
++        //assertNotEquals(0, deck.pileSize()); should check if deck is not empty because that cant be the case
++    }
++    @Test void testHandInitialization() {
++        Game game = new Game(this.players);
++        for (Player player : game.getPlayers()) {
++            assert(!player.getHand().isEmpty());
++            // test if hand is empty
++        }
++    }
++    @Test void testEliminatePlayer() {
++        Game game = new Game(this.players);
++        Player player = game.getPlayers().get(0);
++        game.eliminatePlayer(player);
++        assert(!game.getPlayers().contains(player)) : "Player"+ player.getName() + " should be eliminate";
++    }
++    @Test void testEliminatePlayerList() {
++        Game game = new Game(this.players);
++        Player player = game.getPlayers().get(0);
++        game.eliminatePlayer(player);
++        assert(game.getEliminatedPlayers().contains(player));
++    }
++    @Test void testEliminatePlayerListSize() {
++        Game game = new Game(this.players);
++        Player player = game.getPlayers().get(0);
++        Player player2 = game.getPlayers().get(1);
++        game.eliminatePlayer(player);
++        game.eliminatePlayer(player2);
++        assert(game.getEliminatedPlayers().size() == 2);
++    }
++
++
++}

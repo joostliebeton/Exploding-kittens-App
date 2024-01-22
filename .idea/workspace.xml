@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/check' into check">
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" afterDir="false" />
+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Hand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/DiscardPile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/DiscardPile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -29,6 +31,19 @@
     <option name="NEW_BASE" value="origin/main" />
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/check" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -50,39 +65,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Update-v1&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/liebe/OneDrive - University of Twente/jaar 1/module 2&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/joris/IdeaProjects/Project/src/Main.java&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.GameRule.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.GameTest.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "Update-v1",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/joris/IdeaProjects/Project/src/Main.java",
+    "settings.editor.selected.configurable": "shared-indexes",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\joris\IdeaProjects\Project\src\Cards" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\joris\IdeaProjects\Project\src\ExplodingKittensFalse" />
       <recent name="C:\Users\joris\IdeaProjects\Project\src" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ExplodingKittens" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.GameRule">
+  <component name="RunManager" selected="JUnit.GameTest">
     <configuration name="GameRule" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameRule" />
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Model.*" />
+          <option name="PATTERN" value="ExplodingKittens.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -90,42 +122,85 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerOrder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-20.0.2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Game.PlayerOrder" />
-      <module name="project" />
+    <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Game.*" />
+          <option name="PATTERN" value="ExplodingKittens.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerOrder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$USER_HOME$/.jdks/openjdk-20.0.2" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Game.PlayerOrder" />
-      <module name="project" />
+    <configuration name="GameTest.testDeckInitialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Game.*" />
+          <option name="PATTERN" value="ExplodingKittens.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="testDeckInitialization" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testEliminatePlayer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="testEliminatePlayer" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameTest.testEliminatePlayerListSize" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameTest" />
+      <option name="METHOD_NAME" value="testEliminatePlayerListSize" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.GameTest" />
         <item itemvalue="Application.GameRule" />
-        <item itemvalue="Application.PlayerOrder" />
+        <item itemvalue="JUnit.GameTest.testEliminatePlayerListSize" />
+        <item itemvalue="JUnit.GameTest.testEliminatePlayer" />
+        <item itemvalue="JUnit.GameTest.testDeckInitialization" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-20.0.2-azul-20.0.2-f644763e9732-d86f2a68" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -139,19 +214,19 @@
       <workItem from="1701958153036" duration="254000" />
       <workItem from="1701958517553" duration="9157000" />
       <workItem from="1702029072014" duration="6034000" />
-      <workItem from="1704212008773" duration="569000" />
-      <workItem from="1704212597471" duration="594000" />
-      <workItem from="1704467148700" duration="595000" />
-      <workItem from="1704472499224" duration="595000" />
-      <workItem from="1704540161895" duration="1188000" />
-      <workItem from="1704716702733" duration="22000" />
-      <workItem from="1704962295642" duration="148000" />
-      <workItem from="1704962751246" duration="742000" />
-      <workItem from="1705487295575" duration="2490000" />
-      <workItem from="1705496505512" duration="1665000" />
-      <workItem from="1705583990395" duration="992000" />
-      <workItem from="1705840148860" duration="406000" />
-      <workItem from="1705840587006" duration="7956000" />
+      <workItem from="1702155984212" duration="2750000" />
+      <workItem from="1702991059140" duration="5510000" />
+      <workItem from="1702996641317" duration="14074000" />
+      <workItem from="1703291592568" duration="8465000" />
+      <workItem from="1703366844809" duration="155000" />
+      <workItem from="1703374385367" duration="14329000" />
+      <workItem from="1703430323687" duration="601000" />
+      <workItem from="1703432799548" duration="882000" />
+      <workItem from="1704643517484" duration="81000" />
+      <workItem from="1704643687659" duration="634000" />
+      <workItem from="1705569941540" duration="25000" />
+      <workItem from="1705570038473" duration="604000" />
+      <workItem from="1705913702684" duration="15348000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -315,13 +390,93 @@
     </task>
     <task id="LOCAL-00021" summary="Merge remote-tracking branch 'origin/check' into check">
       <option name="closed" value="true" />
-      <created>1705847412849</created>
+      <created>1702210267900</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1705847412849</updated>
+      <updated>1702210267900</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Merge remote-tracking branch 'origin/test' into check">
+      <option name="closed" value="true" />
+      <created>1702994651648</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1702994651648</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Merge remote-tracking branch 'origin/test' into check">
+      <option name="closed" value="true" />
+      <created>1703063473203</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1703063473203</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Merge remote-tracking branch 'origin/test' into check">
+      <option name="closed" value="true" />
+      <created>1703063631417</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1703063631417</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703069855682</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1703069855682</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703069923106</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1703069923106</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703077641623</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1703077641623</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703083598785</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1703083598785</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703427061230</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1703427061230</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703429832543</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1703429832543</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1703429853601</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1703429853601</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +493,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/check" />
+                        <option value="origin/Update-v1" />
                       </list>
                     </value>
                   </entry>
@@ -356,7 +511,10 @@
     <MESSAGE value="Merge remote-tracking banch 'origin/master'" />
     <MESSAGE value="test" />
     <MESSAGE value="Merge remote-tracking branch 'origin/check' into check" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/check' into check" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

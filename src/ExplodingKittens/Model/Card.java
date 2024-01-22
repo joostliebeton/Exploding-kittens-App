@@ -2,6 +2,7 @@ package ExplodingKittens.Model;
 
 
 import ExplodingKittens.Player;
+import ExplodingKittens.View.TUI;
 
 public class Card {
     private CardType type;
@@ -33,12 +34,12 @@ public class Card {
     public void seeTheFuture(Deck deck, Player player){
         if (!(deck.isEmpty())) {
             Card[] cards = deck.peek();
-            System.out.println(player.getName()  + " played a See the Future card. The top three cards are: ");
+            TUI.seeTheFutureMessage(player, 1);
             for (Card card : cards) {
-                System.out.println(card.getType());
+                TUI.seeTheFutureMessage(card); //prints card
             }
         } else {
-            System.out.println("Error: Deck is empty.");
+            TUI.seeTheFutureMessage(player, 2);
         }
     }
     public void  Nope(){
@@ -47,19 +48,23 @@ public class Card {
     public void Shuffle(Deck deck, Player player) {
         if (deck != null) {
             deck.shuffle();
-            System.out.println(player.getName() + " shuffled the deck.");
+            TUI.ShuffleMessage(player, 1);
+        //System.out.println(player.getName() + " shuffled the deck.");
         } else {
-            System.out.println("Error: Deck reference is null.");
+            TUI.ShuffleMessage(player, 2);
+        //System.out.println("Error: Deck reference is null.");
         }
     }
     public void Attack(Player currentplayer, Player targetPlayer){
         if (currentplayer.getExtraTurns() >1) {
             currentplayer.setExtraTurns(0,0);
             targetPlayer.setExtraTurns(3, targetPlayer.getExtraTurns());
-            System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
+            TUI.AttackMessage(currentplayer, targetPlayer);
+            //System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
         } else{
             targetPlayer.setExtraTurns(1, targetPlayer.getExtraTurns());
-            System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns()+ " extra turns.");
+            TUI.AttackMessage(currentplayer, targetPlayer);
+            //System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
         }
     }
 

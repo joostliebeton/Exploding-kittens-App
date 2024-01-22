@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_23_12_2023_22_27_[Changes]" date="1703366826613" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_12_2023_22_27_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 23/12/2023 22:27 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Game.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Game.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_12_2023_22_27_[Changes]/Game.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Player.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Player.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_12_2023_22_27_[Changes]/Player.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Deck.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Deck.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_12_2023_22_27_[Changes]/Deck.class" />
+  </binary>
+</changelist>

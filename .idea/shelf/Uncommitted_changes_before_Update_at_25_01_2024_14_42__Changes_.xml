@@ -1,0 +1,34 @@
+<changelist name="Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]" date="1706190148597" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 25/01/2024 14:42 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Game.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Game.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/Game.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/GameRule.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/GameRule.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/GameRule.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Player.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Player.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/Player.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Hand.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Hand.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/Hand.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/Player$1.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/Player$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/Player$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/exploding kittens/ExplodingKittens/GameTest.class" />
+    <option name="AFTER_PATH" value="out/production/exploding kittens/ExplodingKittens/GameTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_01_2024_14_42_[Changes]/GameTest.class" />
+  </binary>
+</changelist>
