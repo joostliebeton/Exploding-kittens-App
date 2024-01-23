@@ -2,20 +2,21 @@ package ExplodingKittens.Model;
 
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
+import ExplodingKittens.View.TUI;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Deck {
+public class Deck{
     private ArrayList<Card> cards;
+    private TUI tui;
     public Deck() {
         cards = new ArrayList<>();
-        initializeDeck();
-        shuffle();
+        tui = new TUI();
     }
-    private void initializeDeck() {
+    public void initializeDeck() {
         for (CardType type : CardType.values()) {
             if (type == CardType.EXPLODING_KITTEN) {
                 continue;
@@ -24,6 +25,7 @@ public class Deck {
                 cards.add(new Card(type));
             }
         }
+        shuffle();
     }
     private int getInitialCardCount(CardType type) {
         // Return the initial count for each card type
@@ -108,5 +110,14 @@ public class Deck {
             peekedCards.add(cards.get(i));
         }
         return peekedCards.toArray(new Card[0]);
+    }
+    public void addCard(Card card) {
+        cards.add(card);
+    }
+    public void remove(Card card) {
+        cards.remove(card);
+    }
+    public int length(){
+        return cards.size();
     }
 }

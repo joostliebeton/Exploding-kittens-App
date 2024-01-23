@@ -20,7 +20,7 @@ class GameTest {
         @Test void testHandInitialization() {
             Game game = new Game(this.players);
             for (Player player : game.getPlayers()) {
-                assert(!player.getHand().isEmpty());
+                assert(!player.getHandList().isEmpty());
                 // test if hand is empty
             }
         }

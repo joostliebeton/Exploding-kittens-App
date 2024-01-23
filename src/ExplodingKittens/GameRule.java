@@ -4,11 +4,12 @@ import ExplodingKittens.View.TUI;
 
 public class GameRule {
     private static String[] players = {"PlayerJoost", "PlayerJoris", "PlayerLenn"};
-
+    private static TUI tui;
     public boolean validatePlay(){
         return true;
     }
     public static void main(String[] args) {
+        tui = new TUI();
         // Create a game with 3 players
         Game game = new Game(players);
 
@@ -18,7 +19,7 @@ public class GameRule {
             game.turn();
         }
         // Display the winner or any end-of-game information
-        TUI.mainMessage(game);
+        tui.mainMessage(game);
         //System.out.println("Game Over! Winner: " + game.getPlayers().get(0).getName());
     }
     //validatePlay() validates the played action
