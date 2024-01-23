@@ -24,7 +24,7 @@ public class TUI {
     public void ShuffleMessage(Player player, int message) {
         switch (message) {
             case 1:
-                System.out.println(player.getName() + " shuffled the deck.");
+                System.out.println(player.getName() + " shuffled the deck."); // hey homo
                 break;
             case 2:
                 System.out.println("Error: Deck reference is null.");

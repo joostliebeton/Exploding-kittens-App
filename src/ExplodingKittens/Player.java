@@ -8,7 +8,8 @@ import ExplodingKittens.View.TUI;
 import java.util.*;
 
 public class Player {
-    private static boolean nopeCardPlayed = false;
+
+
     private String name;
     private Hand hand;
     private Game game;
@@ -23,6 +24,15 @@ public class Player {
         this.game = game;
         extraTurns = 0;
     }
+    public Game getGame(){
+        return game;
+    }
+    public int getTurnsToSkip() {
+        return turnsToSkip;
+    }
+    public void setTurnsToSkip(int turnsToSkip, int oldturnstoskip) {
+        this.turnsToSkip = turnsToSkip+oldturnstoskip;
+    }
     public int getExtraTurns() {
         return extraTurns;
     }
@@ -34,25 +44,21 @@ public class Player {
         return name;
     }
 
-    public List<Card> getHand() {
-        return hand.getHand();
+    public List<Card> getHandList() {
+        return hand.getHandlist();
+    }
+    public Hand getHand() {
+        return hand;
     }
 
 
 
 
 
-    private boolean hasCardType(CardType type) {
-        for (Card card : getHand()) {
-            if (card.getType() == type) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    private Card takeCard(CardType type) {
-        for (Card card : getHand()) {
+
+    public Card takeCard(CardType type) {
+        for (Card card : getHandList()) {
             if (card.getType() == type) {
                 this.hand.remove(card);
                 return card;
