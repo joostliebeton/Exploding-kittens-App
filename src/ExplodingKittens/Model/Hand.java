@@ -63,9 +63,11 @@ public class Hand {
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
             if (response.equals("yes")) {
+                //command to server to play the 2 cat card
                 player.getGame().twoCards(typeCard);
             } else if (response.equals("no")) {
                 clientTui.catCardsInHandMessage(1);
+                //playcardcmd for the 1 cat card
                 //System.out.println("oke continue");
             }
 
@@ -77,6 +79,7 @@ public class Hand {
             String response = scanner.nextLine().toLowerCase();
             if (response.equals("yes")) {
                 player.getGame().twoCards(typeCard);
+                //command to server to play the 2 cat card
             }
             else if (response.equals("no")) {
                 clientTui.catCardsInHandMessage(typeCard, 3);
@@ -93,6 +96,7 @@ public class Hand {
                             }
                         }
                     }
+                    //command to server to play the 3 cat card
                     player.getGame().choosePlayerChoice();
                 }
             }

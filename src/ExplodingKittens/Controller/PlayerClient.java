@@ -1,5 +1,6 @@
 package ExplodingKittens.Controller;
 
+import ExplodingKittens.Model.Player;
 import ExplodingKittens.View.ClientTUI;
 import ExplodingKittens.exceptions.ExitProgram;
 import ExplodingKittens.exceptions.ProtocolException;
@@ -14,11 +15,14 @@ public class PlayerClient {
     private BufferedReader in;
     private BufferedWriter out;
     private ClientTUI playerClientTUI;
+    private Player player;
     /**
      * Constructs a new PlayerClient. Initialises the view.
      */
     public PlayerClient() {
+        ///implement//////
         this.playerClientTUI = new ClientTUI(this);
+        this.player = new Player("Player", null);
         // To be implemented
     }
     /**

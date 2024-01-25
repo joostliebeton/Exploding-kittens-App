@@ -12,7 +12,7 @@ public class GameRule {
     public static void main(String[] args) {
         clientTui = new ClientTUI();
         // Create a game with 3 players
-        Game game = new Game(players);
+        Game game = new Game("joost");
 
         // Run the game loop until it's over
         game.getDeck();

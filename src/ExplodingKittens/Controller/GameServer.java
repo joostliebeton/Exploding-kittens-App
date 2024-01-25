@@ -1,5 +1,8 @@
 package ExplodingKittens.Controller;
 
+import ExplodingKittens.Model.Card;
+import ExplodingKittens.Model.CardType;
+import ExplodingKittens.Model.Player;
 import ExplodingKittens.View.ServerTUI;
 import ExplodingKittens.exceptions.ExitProgram;
 
@@ -19,7 +22,7 @@ public class GameServer implements Runnable{
     /** Next client number, increasing for every new connection */
     private int next_client_no;
 
-    /** The view of this HotelServer */
+    /** The view of this gameServer */
     private ServerTUI view;
 
     /** The name of the Hotel */
@@ -126,7 +129,77 @@ public class GameServer implements Runnable{
         this.clients.remove(client);
     }
 //////////////////////////server methods///////////////////////// 0
-    public void addPLayer
+    public void addPlayer(String name) {
+        game.addPlayer(name);
+    }
+//    public void requestGame(int playerCount, int aiCount) {
+//        game.requestGame(playerCount, aiCount);
+//    }
+    public void playCardcmd(CardType cardType) {
+        if (game.getCurrentPlayer().getHandList().contains(cardType)) {
+            int index = 0;
+            for (Card card : game.getCurrentPlayer().getHandList()) {
+                index++;
+                if (card.getType() == cardType) {
+                    game.playCard(index);
+                    return;
+                }
+            }
+        } else{
+            view.showMessage("You don't have this card in your hand.");
+        }
+    }
+    public Game getGame() {
+        return game;
+    }
+    public void startGame() {
+        game.gameStart();
+    }
+    public void drawCard() {
+        Player currentplayer = game.getCurrentPlayer();
+        game.drawCard(currentplayer);
+    }
+    public void chooseCardInHand(CardType cardType){
+        Card card = new Card(cardType);
+        game.giveCard(card);
+    }
+    public void playFavor(Player targetPlayer) {
+        game.setTargetPlayer(targetPlayer);
+        game.chooseCard();
+    }
+    public void playCombo2(CardType cardType){
+        game.getCurrentPlayer().getGame().twoCards(cardType);
+    }
+    public void playCombo3(){
+        game.favorChoice();
+    }
+    public void generalCardResponse(CardType cardType){
+        game.getClientTui().generalCardResponse(cardType);
+
+    }
+    public void playDefuse(int index) {
+        game.playDefuse(index);
+    }
+
+    public void drawPileSize() {
+        game.getClientTui().drawPileMessage(game.getDeckLength());
+    }
+    public void userHandSize(Player player) {
+        game.getClientTui().userHandSizeMessage(player.getName(), player.getHandList().size());
+    }
+
+    public void requestAlivePlayers() {
+        game.getClientTui().requestAlivePlayersMessage(game.getAlivePlayers());
+    }
+    public void requestPlayersLobby() {
+        game.getClientTui().requestPlayersLobbyMessage(game.getPlayers());
+    }
+    public int playersLobbySize() {
+        return game.getPlayers().size();
+    }
+    public void requestCardsInHand(Player player) {
+        game.getClientTui().requestCardsInHandMessage(player.getName(), player.getHandList());
+    }
 
 
 
@@ -135,9 +208,9 @@ public class GameServer implements Runnable{
 
 
 /////////////////////main//////////////////////////////////////
-public static void main(String[] args) {
-    GameServer gameServer = new GameServer();
-    System.out.println("Welcome to the Game Server! Starting...");
-    new Thread(gameServer).start();
-}
+    public static void main(String[] args) {
+        GameServer gameServer = new GameServer();
+        System.out.println("Welcome to the Game Server! Starting...");
+        new Thread(gameServer).start();
+    }
 }

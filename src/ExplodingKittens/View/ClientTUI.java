@@ -8,6 +8,7 @@ import ExplodingKittens.Model.Player;
 import ExplodingKittens.utils.TextIO;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 
 public class ClientTUI {
@@ -269,6 +270,38 @@ public void handleTurnEndMessage(Player player) {
             case 1:
                 System.out.println("Do you want to play a Nope card? (yes/no)");
                 break;
+        }
+    }
+    public void drawPileMessage(int message){
+        System.out.println(message);
+    }
+    public void generalCardResponse(CardType cardType) {
+        //////////////////////////////////to implement/////
+        ////System.out.println(played a card) + cardtype
+    }
+
+    public void userHandSizeMessage(String name, int size) {
+        System.out.println(name + " has " + size + " cards in hand.");
+    }
+
+    public void requestAlivePlayersMessage(Object alivePlayers) {
+        // moet nog even naar gekeken worden
+        System.out.println("Alive players: " + alivePlayers);
+    }
+
+    public void requestPlayersLobbyMessage(List<Player> players) {
+        System.out.println("Players in lobby: ");
+        for (Player player : players) {
+            System.out.println(player.getName());
+        }
+    }
+
+    public void requestCardsInHandMessage(String name, List<Card> handList) {
+        System.out.println(name + "'s hand: ");
+        int i =0;
+        for (Card card : handList) {
+            System.out.println(i+  ": "+ card.getType());
+            i++;
         }
     }
 }

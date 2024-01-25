@@ -12,15 +12,15 @@ public class ProtocolMessages {
     public static final String CHOOSE_CARD_IN_HAND = "CHOOSE_CARD_IN_HAND"; // [par] card_value (CHOOSE_CARD_IN_HAND~card_type) favor card response.
     public static final String PLAY_FAVOR = "PLAY_FAVOR"; // [par] username victim(STRING) (PLAY_FAVOR~victim)
     public static final String PLAY_COMBO = "PLAY_COMBO"; // [par] card_value, amount of cards, username victim(STRING) (PLAY_COMBO_CARD~card_type~amount~victim)
-    public static final String GENERAL_CARD_RESPONSE = "GENERAL_CARD_RESPONSE"; // [par] card_value (GENERAL_CARD_RESPONSE~card_value) // tells the receiver that the sender has played a card //to: all clients
     public static final String PLAY_DEFUSE = "PLAY_DEFUSE"; // [par] index of draw pile, (PLAY_DEFUSE, index))
     public static final String DRAW_PILE_SIZE = "DRAW_PILE_SIZE"; // [par] none (DRAW_PILE_SIZE) request the draw pile size.
     public static final String USERS_HAND_SIZE = "USERS_HAND_SIZE"; // [par] player username (String) (USERS_HAND_SIZE~username)
     public static final String REQUEST_ALIVE_PLAYERS = "REQUEST_ALIVE_PLAYERS"; // [par] none (REQUEST_ALIVE_PLAYERS)
     public static final String REQUEST_PLAYERS_LOBBY = "REQUEST_PLAYERS_LOBBY"; // [par] none (REQUEST_PLAYERS_LOBBY)
-    public static final String REQUEST_CARD_IN_HAND = "REQUEST_CARD_IN_HAND"; // [par] none (REQUEST_CARD_IN_HAND)
+    public static final String REQUEST_CARDS_IN_HAND = "REQUEST_CARDS_IN_HAND"; // [par] none (REQUEST_CARD_IN_HAND)
 
     /////////////////server to client/////////////////////
+    public static final String GENERAL_CARD_RESPONSE = "GENERAL_CARD_RESPONSE"; // [par] card_value (GENERAL_CARD_RESPONSE~card_value) // tells the receiver that the sender has played a card //to: all clients
 
     public static final String CONNECTED = "CONNECTED"; // [par] none (CONNECTED) // tells the client that the connection was succesfull//to: client that sent the connect command
     public static final String GAME_STARTED = "GAME_STARTED"; // [par] EXTENSIONS (GAME_STARTED~POSSIBLE-EXTENSIONS) // tells the client that the game has started//to: all clients

@@ -112,6 +112,9 @@ public class Deck{
     public void addCard(Card card) {
         cards.add(card);
     }
+    public void putCard(int index, Card card) {
+        cards.add(index,card);
+    }
     public void remove(Card card) {
         cards.remove(card);
     }
