@@ -1,6 +1,8 @@
 package ExplodingKittens;
 
+import ExplodingKittens.Controller.Game;
 import ExplodingKittens.Model.Deck;
+import ExplodingKittens.Model.Player;
 import org.junit.jupiter.api.Test;
 
 class GameTest {
@@ -20,7 +22,7 @@ class GameTest {
         @Test void testHandInitialization() {
             Game game = new Game(this.players);
             for (Player player : game.getPlayers()) {
-                assert(!player.getHand().isEmpty());
+                assert(!player.getHandList().isEmpty());
                 // test if hand is empty
             }
         }

@@ -1,15 +1,50 @@
 package ExplodingKittens.View;
 
-import ExplodingKittens.Game;
+import ExplodingKittens.Controller.Game;
+import ExplodingKittens.Controller.PlayerClient;
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.Deck;
-import ExplodingKittens.Model.DiscardPile;
-import ExplodingKittens.Player;
+import ExplodingKittens.Model.Player;
+import ExplodingKittens.utils.TextIO;
+
+import java.io.PrintWriter;
 
 
-public class TUI {
-    public static void seeTheFutureMessage(Player player, int message) {
+public class ClientTUI {
+    private PlayerClient playerClient;
+    private PrintWriter Writer;
+    private PrintWriter console;
+    public ClientTUI() {
+        console = new PrintWriter(System.out, true);
+    }
+    public void showMessage(String message) {
+        console.println(message);
+    }
+
+    public String getString(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnString();
+    }
+    public int getInt(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnInt();
+
+
+    }
+    public boolean getBoolean(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnBoolean();
+
+    }
+    public ClientTUI(PlayerClient playerClient) {
+        this.playerClient = playerClient;
+        this.Writer = new PrintWriter(System.out, true);
+    }
+
+    public void seeTheFutureMessage(Player player, int message) {
         switch (message) {
             case 1:
                 System.out.println(player.getName() + " played a See the Future card. The top three cards are: ");
@@ -19,31 +54,31 @@ public class TUI {
                 break;
         }
     }
-        public static void seeTheFutureMessage(Card card){
+    public void seeTheFutureMessage(Card card){
             System.out.println(card.getType());
             }
 
-    public static void ShuffleMessage(Player player, int message) {
+    public void ShuffleMessage(Player player, int message) {
         switch (message) {
             case 1:
-                System.out.println(player.getName() + " shuffled the deck.");
+                System.out.println(player.getName() + " shuffled the deck."); // hey homo
                 break;
             case 2:
                 System.out.println("Error: Deck reference is null.");
                 break;
         }
     }
-    public static void AttackMessage(Player currentPlayer, Player targetPlayer) {
+    public void AttackMessage(Player currentPlayer, Player targetPlayer) {
         System.out.println(currentPlayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
     }
 
-    public static void discardCardMessage(Card card) {
+    public void discardCardMessage(Card card) {
         System.out.println("Card discarded: " + card.getType());
     }
 
 
     // write overread methode of turn message but then with targetplayer
-    public static void turnMessage(Player player, int message) {
+    public void turnMessage(Player player, int message) {
 switch (message) {
             case 1:
                 // this one is for the currentplayer
@@ -55,7 +90,7 @@ switch (message) {
                 break;
         }
     }
-    public static void turnMessage(int message){
+    public void turnMessage(int message){
         switch (message) {
             case 1:
                 System.out.println("Do you want to end your turn? (yes/no)");
@@ -63,24 +98,17 @@ switch (message) {
         }
 }
 
-public static void handleTurnEndMessage(Player player) {
+public void handleTurnEndMessage(Player player) {
     System.out.println(player.getName() + " skips a turn.");
 }
-    public static void getPlayerInputMessage(Player player, int message) {
-            switch (message){
-                case 1:
-                    System.out.println(player.getName() + ", choose a card to play (enter the card index): ");
-                    break;
-                case 2:
-                    int i = message;
-                    //
-                    System.out.println(i + ": " + player.getHand().get(i).getType());
-                    break;
+    public void getPlayerInputMessage(Player player) {
+        System.out.println(player.getName() + ", choose a card to play (enter the card index): ");
 
-            }
     }
-
-        public static void getPlayerInputMessage(int message) {
+    public void outputPlayerHand(Player player, int i){
+        System.out.println(i + ": " + player.getHand().get(i).getType());
+    }
+        public void getPlayerInputMessage(int message) {
                 switch (message){
                     case 1:
                         System.out.println("Invalid card index. Please try again.");
@@ -89,26 +117,26 @@ public static void handleTurnEndMessage(Player player) {
 
         }
 
-    public static void getDiscardPileMessage(Card card) {
+    public void getDiscardPileMessage(Card card) {
             System.out.println(card.getType());
         }
-    public static void getDeckMessage(Card card) {
+    public void getDeckMessage(Card card) {
             System.out.println(card.getType());
         }
-    public static void eliminatePlayerMessage(Player player) {
+    public void eliminatePlayerMessage(Player player) {
         System.out.println(player.getName() + " has been eliminated!");
-    }
+}
 
-    public static void mainMessage(Game game){
+    public void mainMessage(Game game){
         System.out.println("Game Over! Winner: " + game.getPlayers().get(0).getName());
     }
 
-    public static void drawCardMessage(String name, Card drawnCard) {
+    public void drawCardMessage(String name, Card drawnCard) {
         System.out.println(name + " drew a " + drawnCard.getType() + " card.");
 
 
     }
-    public static void drawCardMessage(String name, int message){
+    public void drawCardMessage(String name, int message){
         switch (message){
             case 1:
                 System.out.println(name + ", you drew an Exploding Kitten! Do you want to play a Defuse card? (yes/no)");
@@ -119,10 +147,10 @@ public static void handleTurnEndMessage(Player player) {
         }
     }
 
-    public static void playCardMessage(String name, Card playedCard) {
+    public void playCardMessage(String name, Card playedCard) {
         System.out.println(name + " played a " + playedCard.getType() + " card.");
     }
-    public static void playCardMessage(int message){
+    public void playCardMessage(int message){
         switch (message){
             case 1:
                 System.out.println("Nope card negated the Shuffle!");
@@ -137,10 +165,10 @@ public static void handleTurnEndMessage(Player player) {
     }
 
 
-    public static void catCardsInHandMessage(String name, CardType typeCard, int catCardCount) {
+    public void catCardsInHandMessage(String name, CardType typeCard, int catCardCount) {
         System.out.println(name + " has " + catCardCount + " " + typeCard + " in hand.");
     }
-    public static void catCardsInHandMessage(CardType typeCard, int message){
+    public void catCardsInHandMessage(CardType typeCard, int message){
         switch (message){
             case 1:
                 System.out.println("You need at least 1 more " + typeCard + " to play this card as an action card");
@@ -153,13 +181,13 @@ public static void handleTurnEndMessage(Player player) {
                 break;
             }
     }
-    public static void catCardsInHandMessage(int message){
+    public void catCardsInHandMessage(int message){
         System.out.println("oke continue");
         }
 
 
 
-        public static void choosePlayerChoiceMessage(int message) {
+        public void choosePlayerChoiceMessage(int message) {
         switch (message) {
             case 1:
                 System.out.println("Choose a player to take a card from (enter the player index): ");
@@ -170,21 +198,21 @@ public static void handleTurnEndMessage(Player player) {
         }
     }
 
-       public static void choosePlayerChoiceMessage(Game game, int message){
+       public void choosePlayerChoiceMessage(Game game, int message){
                 System.out.println(message + " " + game.getPlayers().get(message).getName());
             }
 
-            public static void favorChoiceMessage(String name) {
+            public void favorChoiceMessage(String name) {
                 System.out.println(name + ", you played a Favor card. Choose a card type to request from the other player: ");
             }
-            public static void favorChoiceMessage(int message){
+            public void favorChoiceMessage(int message){
                 switch (message){
                     case 1:
                         System.out.println("1: EXPLODING_KITTEN, 2: DEFUSE, 3: NOPE, 4: SKIP, 5: ATTACK, 6:  SEE_THE_FUTURE, 7:FAVOR, 8: SHUFFLE, 9: CAT_CARD1, 10: CAT_CARD2, 11: CAT_CARD3, 12: CAT_CARD4, 13: CAT_CARD5 ");
                         break;
                 }
             }
-            public static void favorChoiceMessage(String name, Player targetPlayer, Card takenCard, int message){
+            public void favorChoiceMessage(String name, Player targetPlayer, Card takenCard, int message){
                 switch (message){
                     case 1:
                         System.out.println(name + " took a " + takenCard.getType() + " card from " + targetPlayer.getName() + ".");
@@ -195,7 +223,7 @@ public static void handleTurnEndMessage(Player player) {
                 }
 
             }
-    public static void choosePlayerMessage(int message){
+    public void choosePlayerMessage(int message){
         switch (message){
             case 1:
                 System.out.println("Choose a player to take a card from (enter the player index): ");
@@ -205,30 +233,28 @@ public static void handleTurnEndMessage(Player player) {
                 break;
         }
     }
-    public static void choosePlayerMessage(Game game, int message){
+    public void choosePlayerMessage(Game game, int message){
                 System.out.println(message +" "+ game.getPlayers().get(message).getName());
             }
 
-    public static void favorMessage(String name, Player targetPlayer) {
+    public void favorMessage(String name, Player targetPlayer) {
             System.out.println(name + " played a Favor card. " + targetPlayer.getName() + " must give you a card.");
     }
-    public static void giveCardMessage(String name, Player player) {
+    public void giveCardMessage(String name, Player player) {
         System.out.println(name + ", choose a card to give to " + player.getName() + " (enter the card index): ");
     }
-    public static void giveCardMessage(int message){
+    public void giveCardMessage(int message){
         switch (message){
             case 1:
                 System.out.println("Invalid card index. Please try again.");
                 break;
         }
     }
-    public static void giveCardMessage(String name, Player player, Card card) {
+    public void giveCardMessage(String name, Player player, Card card) {
         System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
     }
-    public static void  giveCardMessage(int message, Player player){
-        System.out.println(message + ": " + player.getHand().get(message).getType());
-    }
-    public static void askNopeMessage(String name, int message) {
+
+    public void askNopeMessage(String name, int message) {
         switch (message){
             case 1:
                 System.out.println(name + " played a Nope card.");
@@ -238,7 +264,7 @@ public static void handleTurnEndMessage(Player player) {
                 break;
         }
     }
-    public static void askNopeMessage(int message){
+    public void askNopeMessage(int message){
         switch (message){
             case 1:
                 System.out.println("Do you want to play a Nope card? (yes/no)");
