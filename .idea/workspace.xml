@@ -5,35 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/ComputerPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/HumanPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/ProtocolMessages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/ServerTUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/exceptions/ExitProgram.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/exceptions/ProtocolException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/exceptions/ServerUnavailableException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/utils/TextIO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Card.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/CardType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Deck.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/DiscardPile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Hand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Hand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/ComputerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/ComputerPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Hand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Hand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/HumanPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Card.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/DiscardPile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" afterDir="false" />
     </list>
-    <list id="53ce8c0a-31ab-413c-9c87-65cbca00660b" name="Changes by joris" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" afterDir="false" />
-    </list>
+    <list id="53ce8c0a-31ab-413c-9c87-65cbca00660b" name="Changes by joris" comment="Changes by joris" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,77 +61,17 @@
         </map>
       </branch-storage>
     </favorite-branches>
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="joris080 &lt;j.j.k.jacobs@student.utwente.nl&gt;" />
+      </list>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java">
-      <ranges>
-        <range start1="5" end1="7" start2="5" end2="5" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="11" end1="12" start2="9" end2="10" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="21" end1="22" start2="19" end2="20" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="25" end1="26" start2="23" end2="24" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="28" end1="29" start2="26" end2="27" changelist="53ce8c0a-31ab-413c-9c87-65cbca00660b" />
-        <range start1="35" end1="36" start2="33" end2="34" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="39" end1="40" start2="37" end2="38" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="45" end1="46" start2="43" end2="44" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="57" end1="58" start2="55" end2="56" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="65" end1="66" start2="63" end2="64" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="68" end1="80" start2="66" end2="72" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="81" end1="83" start2="73" end2="74" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="91" end1="92" start2="82" end2="83" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="94" end1="95" start2="85" end2="86" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="97" end1="98" start2="88" end2="89" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="99" end1="100" start2="90" end2="91" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="101" end1="102" start2="92" end2="93" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="105" end1="106" start2="96" end2="97" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="110" end1="111" start2="101" end2="102" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="121" end1="122" start2="112" end2="113" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="124" end1="125" start2="115" end2="116" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="139" end1="140" start2="130" end2="131" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="142" end1="143" start2="133" end2="134" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="155" end1="156" start2="146" end2="147" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="161" end1="162" start2="152" end2="153" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="172" end1="173" start2="163" end2="164" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="176" end1="177" start2="167" end2="168" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="179" end1="180" start2="170" end2="171" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="186" end1="187" start2="177" end2="178" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="197" end1="198" start2="188" end2="189" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="207" end1="208" start2="198" end2="199" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="211" end1="212" start2="202" end2="203" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="214" end1="215" start2="205" end2="206" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="217" end1="218" start2="208" end2="209" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="224" end1="225" start2="215" end2="216" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="227" end1="231" start2="218" end2="220" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="240" end1="241" start2="229" end2="230" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ExplodingKittens/Player.java">
-      <ranges>
-        <range start1="5" end1="6" start2="5" end2="5" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="11" end1="12" start2="10" end2="12" changelist="53ce8c0a-31ab-413c-9c87-65cbca00660b" />
-        <range start1="15" end1="16" start2="15" end2="16" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="17" end1="22" start2="17" end2="21" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="25" end1="27" start2="24" end2="24" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="29" end1="29" start2="26" end2="35" changelist="53ce8c0a-31ab-413c-9c87-65cbca00660b" />
-        <range start1="40" end1="42" start2="46" end2="51" changelist="53ce8c0a-31ab-413c-9c87-65cbca00660b" />
-        <range start1="43" end1="74" start2="52" end2="52" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="75" end1="78" start2="53" end2="53" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="79" end1="88" start2="54" end2="54" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="89" end1="156" start2="55" end2="55" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="157" end1="281" start2="56" end2="56" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="282" end1="290" start2="57" end2="57" changelist="53ce8c0a-31ab-413c-9c87-65cbca00660b" />
-        <range start1="291" end1="293" start2="58" end2="61" changelist="53ce8c0a-31ab-413c-9c87-65cbca00660b" />
-        <range start1="301" end1="326" start2="69" end2="69" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="327" end1="330" start2="70" end2="70" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="331" end1="339" start2="71" end2="71" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-        <range start1="340" end1="369" start2="72" end2="77" changelist="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -152,38 +87,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.GameRule.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.GameTest.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "create.test.in.the.same.root": "true",
-    "git-widget-placeholder": "Update-v1",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/joris/IdeaProjects/Mod2bit.ss.week1/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "onboarding.tips.debug.path": "C:/Users/joris/IdeaProjects/Project/src/Main.java",
-    "settings.editor.selected.configurable": "shared-indexes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.GameRule.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.GameTest.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Update-v1&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/liebe/IdeaProjects/exploding kittens/src/ExplodingKittens&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/joris/IdeaProjects/Project/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;shared-indexes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ExplodingKittens.Controller" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\liebe\IdeaProjects\exploding kittens\src\ExplodingKittens" />
       <recent name="C:\Users\joris\IdeaProjects\Project\src\Cards" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -203,7 +142,7 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -215,7 +154,7 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -230,7 +169,7 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -246,7 +185,7 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -262,7 +201,7 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -335,7 +274,11 @@
       <workItem from="1705935031499" duration="594000" />
       <workItem from="1705950823114" duration="594000" />
       <workItem from="1706002107095" duration="4962000" />
-      <workItem from="1706013680182" duration="10284000" />
+      <workItem from="1706013680182" duration="11144000" />
+      <workItem from="1706041392351" duration="652000" />
+      <workItem from="1706042820621" duration="6662000" />
+      <workItem from="1706109617754" duration="5423000" />
+      <workItem from="1706189122635" duration="675000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -585,7 +528,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703429853601</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <option name="closed" value="true" />
+      <created>1706025392880</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1706025392880</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Changes by joris">
+      <option name="closed" value="true" />
+      <created>1706025409815</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1706025409815</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,15 +582,16 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
+    <MESSAGE value="Changes by joris" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by joris" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/ExplodingKittens/Player1.java</url>
-          <line>42</line>
-          <properties class="ExplodingKittens.Player1" method="getExtraTurns">
+          <url>file://$PROJECT_DIR$/src/ExplodingKittens/Model/Player1.java</url>
+          <line>41</line>
+          <properties class="ExplodingKittens.Model.Player1" method="getExtraTurns">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

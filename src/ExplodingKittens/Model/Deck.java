@@ -1,8 +1,6 @@
 package ExplodingKittens.Model;
 
-import ExplodingKittens.Model.Card;
-import ExplodingKittens.Model.CardType;
-import ExplodingKittens.View.TUI;
+import ExplodingKittens.View.ClientTUI;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,10 +9,10 @@ import java.util.Random;
 
 public class Deck{
     private ArrayList<Card> cards;
-    private TUI tui;
+    private ClientTUI clientTui;
     public Deck() {
         cards = new ArrayList<>();
-        tui = new TUI();
+        clientTui = new ClientTUI();
     }
     public void initializeDeck() {
         for (CardType type : CardType.values()) {

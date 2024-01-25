@@ -1,15 +1,13 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
 
-import ExplodingKittens.Model.Card;
-import ExplodingKittens.Model.CardType;
-import ExplodingKittens.View.TUI;
+import ExplodingKittens.View.ClientTUI;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Hand {
     private ArrayList<Card> hand;
-    private TUI tui;
+    private ClientTUI clientTui;
     public ArrayList<Card> getHandlist(){
         return hand;
     }
@@ -18,7 +16,7 @@ public class Hand {
     }
     public Hand(){
         hand = new ArrayList<>();
-        tui  = new TUI();
+        clientTui = new ClientTUI();
     }
     public void setHand(ArrayList<Card> hand){
         this.hand = hand;
@@ -54,26 +52,26 @@ public class Hand {
                 catCardCount++;
             }
         }
-        tui.catCardsInHandMessage(player.getName(), typeCard, catCardCount);
+        clientTui.catCardsInHandMessage(player.getName(), typeCard, catCardCount);
         //System.out.println(name + " has " + catCardCount + " " + typeCard + " in hand.");
         if (catCardCount == 1) {
-            tui.catCardsInHandMessage(typeCard, 1);
+            clientTui.catCardsInHandMessage(typeCard, 1);
             //System.out.println("You need at least 1 more " + typeCard + " to play this card as an action card");
         } else if (catCardCount == 2) {
-            tui.catCardsInHandMessage(typeCard, 2);
+            clientTui.catCardsInHandMessage(typeCard, 2);
             //System.out.println("Do you want to play the 2 " + typeCard + " card? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
             if (response.equals("yes")) {
                 player.getGame().twoCards(typeCard);
             } else if (response.equals("no")) {
-                tui.catCardsInHandMessage(1);
+                clientTui.catCardsInHandMessage(1);
                 //System.out.println("oke continue");
             }
 
         }
         else if (catCardCount >= 3) {
-            tui.catCardsInHandMessage(typeCard, 2);
+            clientTui.catCardsInHandMessage(typeCard, 2);
             //System.out.println("Do you want to play the 2 " + typeCard + " card? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
@@ -81,7 +79,7 @@ public class Hand {
                 player.getGame().twoCards(typeCard);
             }
             else if (response.equals("no")) {
-                tui.catCardsInHandMessage(typeCard, 3);
+                clientTui.catCardsInHandMessage(typeCard, 3);
                 //System.out.println("do you want to play the 3 " + typeCard + " card? (yes/no)");
                 response = scanner.nextLine().toLowerCase();
                 if (response.equals("yes")) {
