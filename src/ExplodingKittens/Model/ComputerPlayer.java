@@ -1,6 +1,6 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
 
-import ExplodingKittens.Model.*;
+import ExplodingKittens.Controller.Game;
 
 public class ComputerPlayer extends Player1 {
     ComputerPlayer(String name, Game game, Deck deck, Deck discardPile){super(name,game,deck,discardPile);

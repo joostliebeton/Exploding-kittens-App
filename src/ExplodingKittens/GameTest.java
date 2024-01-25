@@ -1,6 +1,8 @@
 package ExplodingKittens;
 
+import ExplodingKittens.Controller.Game;
 import ExplodingKittens.Model.Deck;
+import ExplodingKittens.Model.Player;
 import org.junit.jupiter.api.Test;
 
 class GameTest {

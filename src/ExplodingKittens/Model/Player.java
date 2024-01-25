@@ -1,9 +1,9 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
 
+import ExplodingKittens.Controller.Game;
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.Deck;
-import ExplodingKittens.View.TUI;
+import ExplodingKittens.Model.Hand;
 
 import java.util.*;
 

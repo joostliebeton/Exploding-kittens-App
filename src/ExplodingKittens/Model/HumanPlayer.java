@@ -1,12 +1,12 @@
-package ExplodingKittens;
+package ExplodingKittens.Model;
 
-import ExplodingKittens.Model.*;
-import ExplodingKittens.View.TUI;
+import ExplodingKittens.Controller.Game;
+import ExplodingKittens.View.ClientTUI;
 
 public class HumanPlayer extends Player1{
    HumanPlayer(String name, Game game, Deck deck, Deck discardPile){
        super(name, game, deck, discardPile);
-       TUI tui = new TUI();
+       ClientTUI clientTui = new ClientTUI();
    }
    // create HumanPlayer specific methods here:
 

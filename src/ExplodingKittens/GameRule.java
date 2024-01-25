@@ -1,15 +1,16 @@
 package ExplodingKittens;
 
-import ExplodingKittens.View.TUI;
+import ExplodingKittens.Controller.Game;
+import ExplodingKittens.View.ClientTUI;
 
 public class GameRule {
     private static String[] players = {"PlayerJoost", "PlayerJoris", "PlayerLenn"};
-    private static TUI tui;
+    private static ClientTUI clientTui;
     public boolean validatePlay(){
         return true;
     }
     public static void main(String[] args) {
-        tui = new TUI();
+        clientTui = new ClientTUI();
         // Create a game with 3 players
         Game game = new Game(players);
 
@@ -19,7 +20,7 @@ public class GameRule {
             game.turn();
         }
         // Display the winner or any end-of-game information
-        tui.mainMessage(game);
+        clientTui.mainMessage(game);
         //System.out.println("Game Over! Winner: " + game.getPlayers().get(0).getName());
     }
     //validatePlay() validates the played action

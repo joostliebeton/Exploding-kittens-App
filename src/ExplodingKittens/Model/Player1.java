@@ -1,7 +1,6 @@
-package ExplodingKittens;
-import ExplodingKittens.Model.Deck;
-import ExplodingKittens.Model.Card;
-import ExplodingKittens.View.TUI;
+package ExplodingKittens.Model;
+import ExplodingKittens.Controller.Game;
+import ExplodingKittens.View.ClientTUI;
 import java.util.List;
 
 public abstract class Player1 {
@@ -14,7 +13,7 @@ public abstract class Player1 {
     int extraTurns;
     int turnsToSkip;
     Deck discardPile;
-    TUI tui;
+    ClientTUI clientTui;
     // do we want a target player in here? what is the function of a target player?
     // I think it might be more convinient to do this in game class? iterate over available players and then let the player choose which target to attack'.
 
@@ -30,7 +29,7 @@ public Player1(String name, Game game, Deck deck, Deck discardPile){
     this.turnsToSkip = 0;
     this.discardPile = discardPile;
     this.playedCard = null;
-    this.tui = new TUI();
+    this.clientTui = new ClientTUI();
 
 }
     //getters

@@ -1,12 +1,49 @@
 package ExplodingKittens.View;
 
-import ExplodingKittens.Game;
+import ExplodingKittens.Controller.Game;
+import ExplodingKittens.Controller.PlayerClient;
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Player;
+import ExplodingKittens.Model.Player;
+import ExplodingKittens.utils.TextIO;
+
+import java.io.PrintWriter;
 
 
-public class TUI {
+public class ClientTUI {
+    private PlayerClient playerClient;
+    private PrintWriter Writer;
+    private PrintWriter console;
+    public ClientTUI() {
+        console = new PrintWriter(System.out, true);
+    }
+    public void showMessage(String message) {
+        console.println(message);
+    }
+
+    public String getString(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnString();
+    }
+    public int getInt(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnInt();
+
+
+    }
+    public boolean getBoolean(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnBoolean();
+
+    }
+    public ClientTUI(PlayerClient playerClient) {
+        this.playerClient = playerClient;
+        this.Writer = new PrintWriter(System.out, true);
+    }
+
     public void seeTheFutureMessage(Player player, int message) {
         switch (message) {
             case 1:
