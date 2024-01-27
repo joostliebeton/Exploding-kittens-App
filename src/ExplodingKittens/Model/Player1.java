@@ -8,7 +8,6 @@ public abstract class Player1 {
     Hand hand;
     Game game;
     boolean isAlive;
-    Deck deck;
     Card playedCard; // does this belong in this class? or do we put this in the game class?
     int extraTurns;
     int turnsToSkip;
@@ -19,17 +18,14 @@ public abstract class Player1 {
 
 
 
-public Player1(String name, Game game, Deck deck, Deck discardPile){
+public Player1(String name, Game game){
     this.name = name;
     this.game = game;
-    this.deck = deck;
     this.hand = new Hand();
     this.isAlive = true;
     this.extraTurns = 0;
     this.turnsToSkip = 0;
-    this.discardPile = discardPile;
     this.playedCard = null;
-    this.clientTui = new ClientTUI();
 
 }
     //getters
@@ -37,7 +33,6 @@ public Player1(String name, Game game, Deck deck, Deck discardPile){
     public Hand getHand(){return this.hand;}
     public Game getGame(){return this.game;} // if we implement that we can play more games at once this might be a handy getter
     public boolean getIsAlive(){return this.isAlive;}
-    public Deck getDeck(){return this.deck;}
     public int getTurnsToSkip() {return turnsToSkip;}
     public int getExtraTurns() {return extraTurns;}
     public List<Card> getHandList() {return hand.getHandlist();}
@@ -53,5 +48,7 @@ public Player1(String name, Game game, Deck deck, Deck discardPile){
     public void setIsAlive(boolean isAlive){this.isAlive = isAlive;}
 
 
-
+    public Card getPlayedCard() {
+        return playedCard;
+    }
 }

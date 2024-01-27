@@ -42,7 +42,7 @@ public class ProtocolMessages {
     public static final String EXCEPTION = "EXCEPTION"; // [par] exception type (EXCEPTION~exception type) // tells the client that something went wrong //to: client that sent the command that caused the exception
     public static final String GENERAL_CARD_REQUEST = "GENERAL_CARD_REQUEST"; // [par] VICTIM (GENERAL_CARD_REQUEST~VICTIM) // requests the receiver to select a card of a kind //to: player needing to pick a kind of card
     public static final String REQUEST_CARD_IN_HAND_RESPONSE = "REQUEST_CARD_IN_HAND_RESPONSE"; // [par] card_value, card_value (REQUEST_CARD_IN_HAND_RESPONSE~card_value~card_value) // tells the client his hands//to: client that requested the card
-
+    public static final String RESPONSE_CARDS_IN_HAND = "RESPONSE_CARDS_IN_HAND"; // [par] card_value, card_value (RESPONSE_CARDS_IN_HAND~card_value~card_value) // tells the client his hands//to: client that requested the card
 
     ///////////////////////optional////////////////////////
 //      public static final String CHAT = "CHAT"; // [par] message (CHAT~message)

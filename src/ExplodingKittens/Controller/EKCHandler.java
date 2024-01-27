@@ -1,5 +1,6 @@
 package ExplodingKittens.Controller;
 
+import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
 
 import java.io.*;
@@ -66,13 +67,12 @@ public class EKCHandler implements Runnable {
      * @throws IOException if an IO errors occur.
      */
     public void handleCommand(String msg) throws IOException {
-        String name = null;
 
         String[] words = msg.split(ProtocolMessages.DELIMITER);
         String command = words[0];
         switch (command) {
             case ProtocolMessages.HI:
-                out.write(ProtocolMessages.HI + ";" + server.getGameName());
+                out.write(ProtocolMessages.HI + ProtocolMessages.DELIMITER + server.getGameName());
                 out.newLine();
                 out.flush();
                 break;
@@ -83,20 +83,20 @@ public class EKCHandler implements Runnable {
                 out.flush();
                 break;
             case ProtocolMessages.REQUEST_GAME:
-                if(server.playersLobbySize() >=2 && Integer.parseInt(words[1]) == server.playersLobbySize()) {
+                if(server.getGame().getPlayers().size() >=2 && Integer.parseInt(words[1]) ==server.getGame().getPlayers().size()) {
                     server.startGame();
                     out.write(ProtocolMessages.GAME_STARTED);
                     out.newLine();
                     out.flush();
                 } else if((Integer.parseInt(words[1]) >=2)) {
-                    if (server.playersLobbySize() >= Integer.parseInt(words[1])) {
+                    if (server.getGame().getPlayers().size() >= Integer.parseInt(words[1])) {
                         out.write(ProtocolMessages.GAME_STARTED);
                         server.startGame();
                         out.newLine();
                         out.flush();
-                    } else if ((Integer.parseInt(words[1]) > server.playersLobbySize())) {
-                        for (int i = server.playersLobbySize(); i < Integer.parseInt(words[1]); i++) {
-                            server.addPlayer("Computer player" + i);
+                    } else if ((Integer.parseInt(words[1]) > server.getGame().getPlayers().size())) {
+                        for (int i = server.getGame().getPlayers().size(); i < Integer.parseInt(words[1]); i++) {
+                            server.addComputerplayer("Computer" + i);
                         }
                         out.write(ProtocolMessages.GAME_STARTED);
                         server.startGame();
@@ -106,7 +106,6 @@ public class EKCHandler implements Runnable {
                 }
                 break;
             case ProtocolMessages.PLAY_CARD:
-                out.write(ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + words[1]);
                 server.playCardcmd(CardType.valueOf(words[1]));
                 out.newLine();
                 out.flush();
@@ -147,25 +146,47 @@ public class EKCHandler implements Runnable {
                 } else {
                     throw new IllegalArgumentException("illegal command");
                 }
-
             case ProtocolMessages.PLAY_DEFUSE:
-                server.playFavor(server.getGame().getPlayer(words[1]));
-                out.write("Played favor");
+                server.playDefuse(Integer.parseInt(words[1]));
+                out.write("Played defuse");
                 out.newLine();
                 out.flush();
                 break;
-            case ProtocolMessages.EXIT:
-                shutdown();
+            case ProtocolMessages.DRAW_PILE_SIZE:
+                out.write(server.drawPileSize());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.USERS_HAND_SIZE:
+                out.write(server.userHandSize(words[1]));
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_ALIVE_PLAYERS:
+                out.write(server.requestAlivePlayers());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_PLAYERS_LOBBY:
+                out.write(server.requestAlivePlayers());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_CARDS_IN_HAND:
+                out.write(server.requestCardsInHand("Joost"));
+                out.newLine();
+                out.flush();
                 break;
             default:
-                throw new IllegalArgumentException("Empty command");
-
                 out.write("Command not found");
                 out.newLine();
                 out.flush();
-                throw new IllegalArgumentException("Empty command");
+                break;
+//                throw new IllegalArgumentException("Empty command");
+
         }
-        }
+
+    }
 
     private void shutdown() {
         System.out.println("> [" + name + "] Shutting down.");

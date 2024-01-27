@@ -16,7 +16,6 @@ public class Hand {
     }
     public Hand(){
         hand = new ArrayList<>();
-        clientTui = new ClientTUI();
     }
     public void setHand(ArrayList<Card> hand){
         this.hand = hand;
@@ -44,7 +43,7 @@ public class Hand {
     public void add(Card takenCard) {
         hand.add(takenCard);
     }
-    public void catCardsInHand(CardType typeCard, Player player) {
+    public void catCardsInHand(CardType typeCard, Player1 player) {
         int catCardCount = 1;
         int deletedcardcount = 1;
         for (Card card : getHandlist()) {

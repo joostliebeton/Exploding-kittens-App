@@ -4,23 +4,25 @@ import ExplodingKittens.Controller.Game;
 import ExplodingKittens.Controller.PlayerClient;
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.Player;
+
+import ExplodingKittens.Model.Player1;
+import ExplodingKittens.exceptions.ExitProgram;
+import ExplodingKittens.exceptions.ServerUnavailableException;
 import ExplodingKittens.utils.TextIO;
+import ExplodingKittens.Controller.ProtocolMessages;
 
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.SQLOutput;
 import java.util.List;
 
 
 public class ClientTUI {
     private PlayerClient playerClient;
-    private PrintWriter Writer;
     private PrintWriter console;
-    public ClientTUI() {
-        console = new PrintWriter(System.out, true);
-    }
-    public void showMessage(String message) {
-        console.println(message);
-    }
+
+
 
     public String getString(String question) {
         console.print(question);
@@ -42,10 +44,87 @@ public class ClientTUI {
     }
     public ClientTUI(PlayerClient playerClient) {
         this.playerClient = playerClient;
-        this.Writer = new PrintWriter(System.out, true);
+        this.console = new PrintWriter(System.out, true);
+    }
+    public void start() throws ServerUnavailableException {
+        System.out.println("Make a choice to play a card");
+        printHelpMenu();
+        String input = "";
+        input = TextIO.getln();
+        boolean out = false;
+        while (!out){
+            try {
+                if(!input.equals("") && input != null) {
+                    handleUserInput(input);
+                }
+            } catch (ExitProgram e) {
+                playerClient.sendExit();
+                playerClient.closeConnection();
+            }
+            input = TextIO.getlnString();
+        }
+    }
+    public void printHelpMenu() {
+        System.out.println(("Welcome to the Hotel booking system\n" +
+                "Commands :\n" +
+                "Hand ..............request hand\n" +
+                "play ..............you want to play a card\n" +
+                "PlayerAmount.......requests player count\n" +
+                "Start i1 i2........starts a game with i1 players of which are i2 ai\n" +
+                "handsize...........request a hand size of player\n" +
+                "h ................ help ( this menu )\n" +
+                "p ................ print state of the hotel\n" +
+                "x ................ exit\n"));
+    }
+    public void handleUserInput(String input) throws ExitProgram, ServerUnavailableException {
+        String[] inputs = input.split(" ");
+        String command = inputs[0];
+        switch (command.toLowerCase()) {
+            case "playeramount":
+                playerClient.requestAmountofPlayers();
+                break;
+            case "play":
+                playerClient.doPlay(getString("Enter card type"));
+                break;
+            case "handsize" :
+                playerClient.doRequestCardsInHand(getString("Enter player name"));
+                break;
+            case "hand":
+                playerClient.doRequestCardsInHandtype();
+                break;
+            case "start":
+                if (inputs.length <= 2){
+                    playerClient.doStartGameRequest(inputs[1], "0");
+                    break;
+                } else {
+                    playerClient.doStartGameRequest(inputs[1], inputs[2]);
+                    break;
+                }
+//            case ProtocolMessages.BILL:
+//                hotelClient.doBill(name, String.valueOf(nights));
+//                break;
+//            case ProtocolMessages.PRINT:
+//                hotelClient.doPrint();
+//                break;
+//            case ProtocolMessages.HELP:
+//                printHelpMenu();
+//                break;
+            default:
+                System.out.println("Invalid Command");
+                printHelpMenu();
+        }
     }
 
-    public void seeTheFutureMessage(Player player, int message) {
+
+    public void showMessage(String message) {
+        System.out.println(message);
+    }
+
+    public InetAddress getIp() throws UnknownHostException {
+        return InetAddress.getByName(getString("Enter IP address: "));
+    }
+
+    public void seeTheFutureMessage(Player1 player, int message) {
         switch (message) {
             case 1:
                 System.out.println(player.getName() + " played a See the Future card. The top three cards are: ");
@@ -59,7 +138,7 @@ public class ClientTUI {
             System.out.println(card.getType());
             }
 
-    public void ShuffleMessage(Player player, int message) {
+    public void ShuffleMessage(Player1 player, int message) {
         switch (message) {
             case 1:
                 System.out.println(player.getName() + " shuffled the deck."); // hey homo
@@ -69,7 +148,7 @@ public class ClientTUI {
                 break;
         }
     }
-    public void AttackMessage(Player currentPlayer, Player targetPlayer) {
+    public void AttackMessage(Player1 currentPlayer, Player1 targetPlayer) {
         System.out.println(currentPlayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
     }
 
@@ -79,7 +158,7 @@ public class ClientTUI {
 
 
     // write overread methode of turn message but then with targetplayer
-    public void turnMessage(Player player, int message) {
+    public void turnMessage(Player1 player, int message) {
 switch (message) {
             case 1:
                 // this one is for the currentplayer
@@ -99,14 +178,14 @@ switch (message) {
         }
 }
 
-public void handleTurnEndMessage(Player player) {
+public void handleTurnEndMessage(Player1 player) {
     System.out.println(player.getName() + " skips a turn.");
 }
-    public void getPlayerInputMessage(Player player) {
+    public void getPlayerInputMessage(Player1 player) {
         System.out.println(player.getName() + ", choose a card to play (enter the card index): ");
 
     }
-    public void outputPlayerHand(Player player, int i){
+    public void outputPlayerHand(Player1 player, int i){
         System.out.println(i + ": " + player.getHand().get(i).getType());
     }
         public void getPlayerInputMessage(int message) {
@@ -124,7 +203,7 @@ public void handleTurnEndMessage(Player player) {
     public void getDeckMessage(Card card) {
             System.out.println(card.getType());
         }
-    public void eliminatePlayerMessage(Player player) {
+    public void eliminatePlayerMessage(Player1 player) {
         System.out.println(player.getName() + " has been eliminated!");
 }
 
@@ -213,7 +292,7 @@ public void handleTurnEndMessage(Player player) {
                         break;
                 }
             }
-            public void favorChoiceMessage(String name, Player targetPlayer, Card takenCard, int message){
+            public void favorChoiceMessage(String name, Player1 targetPlayer, Card takenCard, int message){
                 switch (message){
                     case 1:
                         System.out.println(name + " took a " + takenCard.getType() + " card from " + targetPlayer.getName() + ".");
@@ -238,10 +317,10 @@ public void handleTurnEndMessage(Player player) {
                 System.out.println(message +" "+ game.getPlayers().get(message).getName());
             }
 
-    public void favorMessage(String name, Player targetPlayer) {
+    public void favorMessage(String name, Player1 targetPlayer) {
             System.out.println(name + " played a Favor card. " + targetPlayer.getName() + " must give you a card.");
     }
-    public void giveCardMessage(String name, Player player) {
+    public void giveCardMessage(String name, Player1 player) {
         System.out.println(name + ", choose a card to give to " + player.getName() + " (enter the card index): ");
     }
     public void giveCardMessage(int message){
@@ -251,7 +330,7 @@ public void handleTurnEndMessage(Player player) {
                 break;
         }
     }
-    public void giveCardMessage(String name, Player player, Card card) {
+    public void giveCardMessage(String name, Player1 player, Card card) {
         System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
     }
 
@@ -289,9 +368,9 @@ public void handleTurnEndMessage(Player player) {
         System.out.println("Alive players: " + alivePlayers);
     }
 
-    public void requestPlayersLobbyMessage(List<Player> players) {
+    public void requestPlayersLobbyMessage(List<Player1> players) {
         System.out.println("Players in lobby: ");
-        for (Player player : players) {
+        for (Player1 player : players) {
             System.out.println(player.getName());
         }
     }

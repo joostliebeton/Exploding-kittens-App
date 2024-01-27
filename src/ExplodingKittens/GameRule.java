@@ -10,7 +10,6 @@ public class GameRule {
         return true;
     }
     public static void main(String[] args) {
-        clientTui = new ClientTUI();
         // Create a game with 3 players
         Game game = new Game("joost");
 
