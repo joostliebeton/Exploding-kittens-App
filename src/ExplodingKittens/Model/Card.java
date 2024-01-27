@@ -4,7 +4,7 @@ package ExplodingKittens.Model;
 import ExplodingKittens.View.ClientTUI;
 
 public class Card {
-    private ClientTUI clientTui = new ClientTUI();
+
     private CardType type;
 
     public Card(CardType type) {
@@ -31,39 +31,38 @@ public class Card {
         }
     }
 
-    public void seeTheFuture(Deck deck, Player player){
+    public void seeTheFuture(Deck deck, Player1 player){
         if (!(deck.isEmpty())) {
             Card[] cards = deck.peek();
-            clientTui.seeTheFutureMessage(player, 1);
+
             for (Card card : cards) {
-                clientTui.seeTheFutureMessage(card); //prints card
+
             }
         } else {
-            clientTui.seeTheFutureMessage(player, 2);
+
         }
     }
     public void  Nope(){
         //make a new method for nope only when the other things are done.
         }
-    public void Shuffle(Deck deck, Player player) {
+    public void Shuffle(Deck deck, Player1 player) {
         if (deck != null) {
             deck.shuffle();
-            clientTui.ShuffleMessage(player, 1);
+
         //System.out.println(player.getName() + " shuffled the deck.");
         } else {
-            clientTui.ShuffleMessage(player, 2);
+
         //System.out.println("Error: Deck reference is null.");
         }
     }
-    public void Attack(Player currentplayer, Player targetPlayer){
+    public void Attack(Player1 currentplayer, Player1 targetPlayer){
         if (currentplayer.getExtraTurns() >1) {
             currentplayer.setExtraTurns(0,0);
             targetPlayer.setExtraTurns(3, targetPlayer.getExtraTurns());
-            clientTui.AttackMessage(currentplayer, targetPlayer);
             //System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
         } else{
             targetPlayer.setExtraTurns(1, targetPlayer.getExtraTurns());
-            clientTui.AttackMessage(currentplayer, targetPlayer);
+
             //System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
         }
     }

@@ -1,8 +1,8 @@
 package ExplodingKittens.Controller;
 
 import ExplodingKittens.Model.Card;
-import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.Player;
+import ExplodingKittens.Model.CardType;;
+import ExplodingKittens.Model.Player1;
 import ExplodingKittens.View.ServerTUI;
 import ExplodingKittens.exceptions.ExitProgram;
 
@@ -121,7 +121,7 @@ public class GameServer implements Runnable{
          * a new Hotel with this name.
          */
     public void setupGame() {
-        gameName = view.getString("Please enter the name of the hotel.");
+        gameName = view.getString("Please enter the name of the game.");
         game = new Game(gameName);
         // To be implemented.
     }
@@ -132,22 +132,24 @@ public class GameServer implements Runnable{
     public void addPlayer(String name) {
         game.addPlayer(name);
     }
+    public void addComputerplayer(String name) {
+        game.addComputerplayer(name);
+    }
 //    public void requestGame(int playerCount, int aiCount) {
 //        game.requestGame(playerCount, aiCount);
 //    }
-    public void playCardcmd(CardType cardType) {
+    public String playCardcmd(CardType cardType) {
         if (game.getCurrentPlayer().getHandList().contains(cardType)) {
             int index = 0;
             for (Card card : game.getCurrentPlayer().getHandList()) {
                 index++;
                 if (card.getType() == cardType) {
                     game.playCard(index);
-                    return;
+                    return ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + cardType;
                 }
             }
-        } else{
-            view.showMessage("You don't have this card in your hand.");
         }
+        return ("you don't have this card");
     }
     public Game getGame() {
         return game;
@@ -156,14 +158,14 @@ public class GameServer implements Runnable{
         game.gameStart();
     }
     public void drawCard() {
-        Player currentplayer = game.getCurrentPlayer();
+        Player1 currentplayer = game.getCurrentPlayer();
         game.drawCard(currentplayer);
     }
     public void chooseCardInHand(CardType cardType){
         Card card = new Card(cardType);
         game.giveCard(card);
     }
-    public void playFavor(Player targetPlayer) {
+    public void playFavor(Player1 targetPlayer) {
         game.setTargetPlayer(targetPlayer);
         game.chooseCard();
     }
@@ -181,24 +183,45 @@ public class GameServer implements Runnable{
         game.playDefuse(index);
     }
 
-    public void drawPileSize() {
-        game.getClientTui().drawPileMessage(game.getDeckLength());
+    public String drawPileSize() {
+        return ProtocolMessages.RESPONSE_DRAW_PILE_SIZE + ProtocolMessages.DELIMITER + game.getDeckLength();
     }
-    public void userHandSize(Player player) {
-        game.getClientTui().userHandSizeMessage(player.getName(), player.getHandList().size());
+    public String userHandSize(String player) {
+        Player1 player1 = game.getPlayer(player);
+        return ProtocolMessages.RESPONSE_USERS_HAND_SIZE + ProtocolMessages.DELIMITER + player1.getHandList().size();
+//        game.getClientTui().userHandSizeMessage(player.getName(), player.getHandList().size());
     }
 
-    public void requestAlivePlayers() {
-        game.getClientTui().requestAlivePlayersMessage(game.getAlivePlayers());
+    public String requestAlivePlayers() {
+        StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder.append(ProtocolMessages.RESPONSE_ALIVE_PLAYERS).append("~");
+
+
+        for (Player1 username : game.getPlayers()) {
+            responseBuilder.append(username.getName()).append(ProtocolMessages.DELIMITER);
+        }
+
+        if (!game.getPlayers().isEmpty()) {
+            responseBuilder.deleteCharAt(responseBuilder.length() - 1);
+        }
+        return responseBuilder.toString();
     }
-    public void requestPlayersLobby() {
-        game.getClientTui().requestPlayersLobbyMessage(game.getPlayers());
+
+    public String playersLobbySize() {
+        return ProtocolMessages.RESPONSE_PLAYERS_LOBBY + ProtocolMessages.DELIMITER + game.getPlayers().size();
     }
-    public int playersLobbySize() {
-        return game.getPlayers().size();
-    }
-    public void requestCardsInHand(Player player) {
-        game.getClientTui().requestCardsInHandMessage(player.getName(), player.getHandList());
+    public String requestCardsInHand(String player) {
+        StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder.append(ProtocolMessages.REQUEST_CARD_IN_HAND_RESPONSE).append("~");
+        Player1 player1 = game.getPlayer(player);
+        // Append the card values in hand
+        for (Card value : player1.getHandList()) {
+            responseBuilder.append(value.getType().toString()).append(ProtocolMessages.DELIMITER);
+        }
+        if (!player1.getHandList().isEmpty()) {
+            responseBuilder.deleteCharAt(responseBuilder.length() - 1);
+        }
+        return responseBuilder.toString();
     }
 
 

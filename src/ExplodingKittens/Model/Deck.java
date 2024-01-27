@@ -12,7 +12,6 @@ public class Deck{
     private ClientTUI clientTui;
     public Deck() {
         cards = new ArrayList<>();
-        clientTui = new ClientTUI();
     }
     public void initializeDeck() {
         for (CardType type : CardType.values()) {

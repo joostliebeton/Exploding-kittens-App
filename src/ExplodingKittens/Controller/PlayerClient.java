@@ -9,6 +9,7 @@ import ExplodingKittens.exceptions.ServerUnavailableException;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Objects;
 
 public class PlayerClient {
     private Socket serverSock;
@@ -56,6 +57,8 @@ public class PlayerClient {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             } catch (ProtocolException | ExitProgram e) {
                 throw new RuntimeException(e);
@@ -193,30 +196,79 @@ public class PlayerClient {
             e.printStackTrace();
         }
     }
-    public void handleHello() throws ServerUnavailableException , ProtocolException {
+    public void handleHello() throws ServerUnavailableException, ProtocolException, IOException {
 // Send HELLO
-        sendMessage (String.valueOf(ProtocolMessages.HI ));
+        sendMessage((ProtocolMessages.HI ));
 // Read answer from Server
         String answer = readLineFromServer();
 // Check if it is HELLO, split on delimiter
         String [] splitted = answer.split(ProtocolMessages.DELIMITER);
-        if (splitted[0].equalsIgnoreCase("h")) {
-            System.out.println("Welcome to the Hotel booking system "
-                    + "of hotel: " + splitted[1] + "!");
+        if (splitted[0].equalsIgnoreCase(ProtocolMessages.HI )) {
+            System.out.println("Welcome to the game "
+                    + "of Game: " + splitted[1] + "!");
+            doConnect(playerClientTUI.getString("what is your name?"));
+            out.newLine();
+            out.flush();
+            System.out.println(readLineFromServer());
         } else {
 // Throw protocol exception
-            throw new ProtocolException ("No HELLO returned. "
+            throw new ProtocolException ("No HI returned. "
                     + "Instead: " + answer );
         }
     }
+    public void doConnect(String name) throws ServerUnavailableException {
+        if(name != null) {
+            sendMessage(ProtocolMessages.CONNECT + ProtocolMessages.DELIMITER + name);
+            playerClientTUI.showMessage("> " + readLineFromServer());
+        }
+    }
+   public void requestAmountofPlayers() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.REQUEST_PLAYERS_LOBBY);
+        playerClientTUI.showMessage("> " + readLineFromServer());
+    }
+    public void doPlay(String card) throws ServerUnavailableException {
+        if(card != null) {
+            sendMessage(ProtocolMessages.PLAY_CARD+ ProtocolMessages.DELIMITER + card);
+            playerClientTUI.showMessage("> " + readLineFromServer());
+        }
+    }
+    public void doRequestCardsInHand(String player) throws ServerUnavailableException {
+        if(player != null) {
+            sendMessage(ProtocolMessages.CHOOSE_CARD_IN_HAND + ProtocolMessages.DELIMITER + player);
+            playerClientTUI.showMessage("> " + readLineFromServer());
+        }
+    }
+    public void doRequestCardsInHandtype() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.REQUEST_CARDS_IN_HAND);
+        playerClientTUI.showMessage("> " + readLineFromServer());
+
+    }
+    public void doStartGameRequest(String numberOfPlayers, String aiPlayers) throws ServerUnavailableException {
+        if(numberOfPlayers != null && Objects.equals(aiPlayers, "0")) {
+            sendMessage(ProtocolMessages.REQUEST_GAME + ProtocolMessages.DELIMITER + numberOfPlayers);
+            playerClientTUI.showMessage("> " + readLineFromServer());
+        } else{
+            sendMessage(ProtocolMessages.REQUEST_GAME + ProtocolMessages.DELIMITER + numberOfPlayers + ProtocolMessages.DELIMITER + aiPlayers);
+            playerClientTUI.showMessage("> " + readLineFromServer());
+
+        }
+    }
     public static void main(String[] args) {
-        (new PlayerClient()).start();
+        (new PlayerClient()).run();
     }
     public void run(){
         try {
+
             start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void sendExit() {
+        //To be implemented
+    }
+
+
+
 }
