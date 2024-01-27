@@ -12,7 +12,6 @@ public class Deck{
     private ClientTUI clientTui;
     public Deck() {
         cards = new ArrayList<>();
-        clientTui = new ClientTUI();
     }
     public void initializeDeck() {
         for (CardType type : CardType.values()) {
@@ -111,6 +110,9 @@ public class Deck{
     }
     public void addCard(Card card) {
         cards.add(card);
+    }
+    public void putCard(int index, Card card) {
+        cards.add(index,card);
     }
     public void remove(Card card) {
         cards.remove(card);

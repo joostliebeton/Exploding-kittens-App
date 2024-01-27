@@ -1,10 +1,7 @@
 package ExplodingKittens.Controller;
 
 
-import ExplodingKittens.Model.Card;
-import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.Deck;
-import ExplodingKittens.Model.Player;
+import ExplodingKittens.Model.*;
 import ExplodingKittens.View.ClientTUI;
 
 import java.util.ArrayList;
@@ -16,40 +13,46 @@ public class Game {
     //players: Arraylist<player>
     private boolean nopeCardPlayed = false;
     public String gameName;
-
+    private Player1 targetPlayer;
     private Deck deck;
-    private Player currentPlayer;
-    private ArrayList<Player> eliminatedplayers = new ArrayList<>();
-    private List<Player> players;
+    private Player1 currentPlayer;
+    private ArrayList<Player1> eliminatedplayers = new ArrayList<>();
+    private List<Player1> players;
     private Deck discardPile;
     public Card playedCard;
 
-    public List<Player> getPlayers() {
+    public List<Player1> getPlayers() {
         return players;
     }
     public ClientTUI clientTui;
     private int currentPlayerIndex;
-
+    public ClientTUI getClientTui(){
+        return clientTui;
+    }
+    public int getDeckLength(){
+        return deck.length();
+    }
 
     public Game(String name) {
         this.gameName = name;
-        clientTui = new ClientTUI();
+        this.players= new ArrayList<>();
         initializeDeck();
 
 //        initializePlayers(Players); //CHANGE THE WAY PLAYER ARE MADE
 //        initilializehands();
 //        initializeDiscardPile();
-        gameStart();
-        currentPlayerIndex = 0;
+        //gameStart();
+
     }
     public void gameStart(){
         initilializehands();
+        currentPlayerIndex = 0;
+        while (!this.isGameOver()) {
+            this.turn();
+        }
     }
     public Game getGame(){
         return this;
-    }
-    public void AddPlayer(String name){
-        players.add(new Player(name, this));
     }
 
     private void initializeDeck() {
@@ -60,10 +63,11 @@ public class Game {
 
     }
 
+
     private void initilializehands() {
         for (int i = 0; i < /*player.size()*/ 5; i++) {
-            for (Player player : players) {
-                drawCard(deck, player);
+            for (Player1 player : players) {
+                drawCard(player);
             }
         }
         for (int i = 0; i < 4; i++) {
@@ -72,33 +76,33 @@ public class Game {
         deck.shuffle();
     }
 
-    private void initializePlayers(String[] names) {
-        players = new ArrayList<>();
-        for (String name : names) {
-            players.add(new Player(name, this));
-        }
-    }
+//    private void initializePlayers(List<Player> names) {
+//        players = new ArrayList<>();
+//        for (String name : names) {
+//            players.add(new Player(name, this));
+//        }
+//    }
 
     public void turn() {
         currentPlayer = getCurrentPlayer();
         while (currentPlayer.getExtraTurns() > 0) {
-            clientTui.turnMessage(currentPlayer, 1);
+            //clientTui.turnMessage(currentPlayer, 1);
             //System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
-            playCard(getPlayerInput(), discardPile);
+            playCard(getPlayerInput());
             if (discardPile.getDeck()[discardPile.length() - 1].getType() == CardType.ATTACK) {
                 currentPlayer.setExtraTurns(0,0);
                 currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip());
-                Player targetPlayer = getNextPlayer();
+                targetPlayer = getNextPlayer();
                 targetPlayer.setExtraTurns(3, targetPlayer.getExtraTurns());
-                clientTui.turnMessage(targetPlayer, 2);
+                //clientTui.turnMessage(targetPlayer, 2);
                 //System.out.println(targetPlayer.getName() + " has " + targetPlayer.extraTurns + " extra turns!");
                 handleTurnEnd();
                 return;
             }
             currentPlayer.setExtraTurns(-1, currentPlayer.getExtraTurns());
-            drawCard(deck, currentPlayer);
+            drawCard(currentPlayer);
         }
-        playCard(getPlayerInput(), discardPile);
+        playCard(getPlayerInput());
         Scanner scanner = new Scanner(System.in);
         clientTui.turnMessage(1);
         //System.out.println("Do you want to end your turn? (yes/no)");
@@ -122,28 +126,28 @@ public class Game {
     }
     public void choosePlayerChoice() {
         Scanner scanner = new Scanner(System.in);
-        clientTui.choosePlayerChoiceMessage(1);
+        //clientTui.choosePlayerChoiceMessage(1);
         //System.out.println("Choose a player to take a card from (enter the player index): ");
         for (int i = 0; i < this.getPlayers().size(); i++) {
             if (!Objects.equals(this.getPlayers().get(i).getName(), currentPlayer.getName())) {
-                clientTui.choosePlayerChoiceMessage(this, i);
+                //clientTui.choosePlayerChoiceMessage(this, i);
                 //System.out.println(i + " " + game.getPlayers().get(i).getName());
             }
         }
         int playerIndex = scanner.nextInt();
         if (playerIndex < this.getPlayers().size()) {
-            Player targetPlayer = this.getPlayers().get(playerIndex);
-            favorChoice(targetPlayer);
+            targetPlayer = this.getPlayers().get(playerIndex);
+            favorChoice();
         } else {
-            clientTui.choosePlayerChoiceMessage(2);
+            //clientTui.choosePlayerChoiceMessage(2);
             //System.out.println("Invalid player index. Choose a player within the valid range.");
         }
     }
-    public void favorChoice(Player targetPlayer) {
+    public void favorChoice() {
         // Ask the user to choose a card type
-        clientTui.favorChoiceMessage(currentPlayer.getName());
+        //clientTui.favorChoiceMessage(currentPlayer.getName());
         //System.out.println(name + ", you played a Favor card. Choose a card type to request from the other player: ");
-        clientTui.favorChoiceMessage(1);
+        //clientTui.favorChoiceMessage(1);
         //System.out.println("1: EXPLODING_KITTEN, 2: DEFUSE, 3: NOPE, 4: SKIP, 5: ATTACK, 6:  SEE_THE_FUTURE, 7:FAVOR, 8: SHUFFLE, 9: CAT_CARD1, 10: CAT_CARD2, 11: CAT_CARD3, 12: CAT_CARD4, 13: CAT_CARD5 ");
 
         Scanner scanner = new Scanner(System.in);
@@ -153,16 +157,25 @@ public class Game {
         CardType requestedType = CardType.values()[chosenType - 1];
         if (targetPlayer.getHand().hasCardType(requestedType)) {
             // Target player has the requested card type, take a card from them
-            Card takenCard = targetPlayer.takeCard(requestedType);
+            Card takenCard = takeCard(requestedType, targetPlayer);
             currentPlayer.getHand().add(takenCard);
             assert takenCard != null;
-            clientTui.favorChoiceMessage(currentPlayer.getName(), targetPlayer, takenCard, 1);
+            //clientTui.favorChoiceMessage(currentPlayer.getName(), targetPlayer, takenCard, 1);
             //System.out.println(name + " took a " + takenCard.getType() + " card from " + targetPlayer.getName() + ".");
         } else {
             // Target player doesn't have the requested card type
-            clientTui.favorChoiceMessage(currentPlayer.getName(), targetPlayer, null, 2); // check whether gives correct output, not sure if null is correctly implemented
+            //clientTui.favorChoiceMessage(currentPlayer.getName(), targetPlayer, null, 2); // check whether gives correct output, not sure if null is correctly implemented
             //System.out.println(targetPlayer.getName() + " doesn't have the requested card type. You get nothing.");
         }
+    }
+    public Card takeCard(CardType type,Player1 targetPlayer) {
+        for (Card card : targetPlayer.getHandList()) {
+            if (card.getType() == type) {
+                targetPlayer.getHand().remove(card);
+                return card;
+            }
+        }
+        return null;
     }
 
     private int getPlayerInput() {
@@ -170,18 +183,18 @@ public class Game {
         int cardIndex;
 
         do {
-            clientTui.getPlayerInputMessage(currentPlayer);
+           // clientTui.getPlayerInputMessage(currentPlayer);
             //System.out.println(currentPlayer.getName() + ", choose a card to play (enter the card index): ");
             for (int i = 0; i < currentPlayer.getHand().size(); i++) {
 
-                clientTui.outputPlayerHand(currentPlayer, i);
+                //clientTui.outputPlayerHand(currentPlayer, i);
                 //System.out.println(i + ": " + currentPlayer.getHand().get(i).getType());
             }
             cardIndex = scanner.nextInt();
 
             // Check if the entered index is valid
             if (cardIndex < 0 || cardIndex >= currentPlayer.getHand().size()) {
-                clientTui.getPlayerInputMessage(1);
+                //clientTui.getPlayerInputMessage(1);
                 //System.out.println("Invalid card index. Please try again.");
             }
         } while (cardIndex < 0 || cardIndex >= currentPlayer.getHand().size());
@@ -189,16 +202,16 @@ public class Game {
         return cardIndex;
     }
 
-    public Player getCurrentPlayer() {
+    public Player1 getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
 
-    public Player getNextPlayer() {
+    public Player1 getNextPlayer() {
         return players.get((currentPlayerIndex + 1) % players.size());
     }
 
     public void endTurn() {
-        drawCard(deck, currentPlayer);
+        drawCard(currentPlayer);
         currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
 
@@ -214,32 +227,32 @@ public class Game {
     // Other methods as needed
     public void getDiscardPile() {
         for (Card card : discardPile.getDeck()) {
-            clientTui.getDiscardPileMessage(card);
+            //clientTui.getDiscardPileMessage(card);
             //System.out.println(card.getType());
         }
     }
 
     public void getDeck() {
         for (Card card : deck.getDeck()) {
-            clientTui.getDeckMessage(card);
+            //clientTui.getDeckMessage(card);
             //System.out.println(card.getType());
         }
     }
 
-    public void eliminatePlayer(Player player) {
+    public void eliminatePlayer(Player1 player) {
         players.remove(player);
         eliminatedplayers.add(player);
-        clientTui.eliminatePlayerMessage(player);
+        //clientTui.eliminatePlayerMessage(player);
         //System.out.println(player.getName() + " has been eliminated!");
         currentPlayerIndex = (currentPlayerIndex - 1) % players.size();
     }
 
-    public ArrayList<Player> getEliminatedPlayers() {
+    public ArrayList<Player1> getEliminatedPlayers() {
         return eliminatedplayers;
     }
 
     public void askPlayersNope() {
-        for (Player player : players) {
+        for (Player1 player : players) {
             if (player != currentPlayer) {
                 int nopecardindex =0;
                 for(Card card : player.getHand().getHandlist()){
@@ -252,25 +265,26 @@ public class Game {
             }
         }
     }
-    public void drawCard(Deck deck, Player player) {
+    public void drawCard(Player1 player) {
         Card drawnCard = deck.draw();
         if (drawnCard != null) {
             player.getHand().addCard(drawnCard);
-            clientTui.drawCardMessage(player.getName(), drawnCard);
+            //clientTui.drawCardMessage(player.getName(), drawnCard);
             //System.out.println(name + " drew a " + drawnCard.getType() + " card.");
             if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
                 // Check if the player has a Defuse card
                 if (player.getHand().hasDefuseCard()) {
                     // Player has a Defuse card, ask if they want to play it
-                    clientTui.drawCardMessage(player.getName(), 1);
+                    //clientTui.drawCardMessage(player.getName(), 1);
                     //System.out.println(name + ", you drew an Exploding Kitten! Do you want to play a Defuse card? (yes/no)");
                     Scanner scanner = new Scanner(System.in);
                     String response = scanner.nextLine().toLowerCase();
 
                     if (response.equals("yes")) {
                         // Player wants to play Defuse card
-                        playCard(currentPlayer.getHand().indexOf(drawnCard), discardPile);
-                        clientTui.drawCardMessage(currentPlayer.getName(), 2);
+                        playCard(currentPlayer.getHand().indexOf(drawnCard));
+                        //clientTui.drawCardMessage(currentPlayer.getName(), 2);
+                        //// ask the player to put the card somewhere in the deck 0 < i < deck.length() deck.addCard(i, card)
                         //System.out.println(name + " played a Defuse card.");
                     } else {
                         // Player does not want to play Defuse card, eliminate them
@@ -284,20 +298,20 @@ public class Game {
         }
 
     }
-    public void askNope(Player player, int index) {
+    public void askNope(Player1 player, int index) {
         Scanner scanner = new Scanner(System.in);
-        clientTui.askNopeMessage(1);
+        //clientTui.askNopeMessage(1);
         //System.out.println("Do you want to play a Nope card? (yes/no)");
         String response = scanner.nextLine().toLowerCase();
         if (response.equals("yes")) {
             // Player wants to play Nope card
-            playCard(index, discardPile);
-            clientTui.askNopeMessage(player.getName(), 1);
+            playCard(index);
+            //clientTui.askNopeMessage(player.getName(), 1);
             //System.out.println(name + " played a Nope card.");
             setNopeCardPlayed(true);
         } else {
             // Player does not want to play Nope card
-            clientTui.askNopeMessage(player.getName(), 2);
+            //clientTui.askNopeMessage(player.getName(), 2);
             //System.out.println(name + " did not play a Nope card.");
         }
     }
@@ -308,7 +322,7 @@ public class Game {
     private boolean getNopeCardPlayed() {
         return nopeCardPlayed;
     }
-    public void playCard(int cardIndex, Deck discardPile) {
+    public void playCard(int cardIndex) {
         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().size() && currentPlayer.getHand().get(cardIndex).playable()) {
             playedCard = currentPlayer.getHand().get(cardIndex);
             currentPlayer.getHand().remove(playedCard);
@@ -391,17 +405,17 @@ public class Game {
 
         int playerIndex = scanner.nextInt();
         if (playerIndex < this.getPlayers().size()) {
-            Player targetPlayer = this.getPlayers().get(playerIndex);
-            favor(targetPlayer);
+            targetPlayer = this.getPlayers().get(playerIndex);
+            favor();
         } else {
             clientTui.choosePlayerMessage(2);
             //System.out.println("Invalid player index. Choose a player within the valid range.");
         }
     }
-    public void favor(Player targetPlayer) {
+    public void favor() {
         clientTui.favorMessage(currentPlayer.getName(), targetPlayer);
         //System.out.println(name + " played a Favor card. " + targetPlayer.getName() + " must give you a card.");
-        giveCard(targetPlayer, currentPlayer);
+        //giveCard();
     }
     public void twoCards(CardType typecard) {
         int deletedcardcount=1;
@@ -416,29 +430,63 @@ public class Game {
         }
         chooseplayer();
     }
-    public void giveCard(Player player, Player currentplayer) {
+    public void setTargetPlayer(Player1 player) {
+        this.targetPlayer = player;
+    }
+    public Player1 getTargetPlayer(){
+        return targetPlayer;
+    }
+    public void chooseCard(){
         Scanner scanner = new Scanner(System.in);
         int cardIndex;
 
         do {
-            clientTui.giveCardMessage(player.getName(), currentplayer);
+            clientTui.giveCardMessage(targetPlayer.getName(), currentPlayer);
             //System.out.println(name + ", choose a card to give to " + player.getName() + " (enter the card index): ");
-            for (int i = 0; i < player.getHand().size()-1; i++) {
-                clientTui.outputPlayerHand(player, i);
+            for (int i = 0; i < targetPlayer.getHand().size()-1; i++) {
+                clientTui.outputPlayerHand(targetPlayer, i);
                 //System.out.println(i + ": " + hand.get(i).getType());
             }
             cardIndex = scanner.nextInt();
 
             // Check if the entered index is valid
-            if (cardIndex < 0 || cardIndex >= player.getHand().size()) {
+            if (cardIndex < 0 || cardIndex >= targetPlayer.getHand().size()) {
                 clientTui.giveCardMessage(1);
                 //System.out.println("Invalid card index. Please try again.");
             }
-        } while (cardIndex < 0 || cardIndex >= player.getHand().size());
-        Card card = player.getHand().get(cardIndex);
-        player.getHand().remove(card);
-        player.getHand().add(card);
-        clientTui.giveCardMessage(player.getName(), currentplayer, card);
+        } while (cardIndex < 0 || cardIndex >= targetPlayer.getHand().size());
+        Card card = targetPlayer.getHand().get(cardIndex);
+        CardType cardType = card.getType();
+    }
+    public void giveCard(Card card) {
+        targetPlayer.getHand().remove(card);
+        currentPlayer.getHand().add(card);
+        clientTui.giveCardMessage(targetPlayer.getName(), currentPlayer, card);
         //System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
+    }
+
+    public void addPlayer(String name) {
+        players.add(new HumanPlayer(name, this));
+    }
+    public void addComputerplayer(String name) {
+        players.add(new ComputerPlayer(name, this));
+    }
+
+    public void playDefuse(int index) {
+        deck.putCard(index, new Card(CardType.EXPLODING_KITTEN));
+
+    }
+
+    public Object getAlivePlayers() {
+        return players;
+    }
+
+    public Player1 getPlayer(String word) {
+        for (Player1 player : players) {
+            if (player.getName().equals(word)) {
+                return player;
+            }
+        }
+        return null;
     }
 }

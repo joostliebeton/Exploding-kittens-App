@@ -1,5 +1,8 @@
 package ExplodingKittens.Controller;
 
+import ExplodingKittens.Model.Card;
+import ExplodingKittens.Model.CardType;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -64,72 +67,127 @@ public class EKCHandler implements Runnable {
      * @throws IOException if an IO errors occur.
      */
     public void handleCommand(String msg) throws IOException {
-        String name = null;
 
-        String[] words = msg.split(";");
+        String[] words = msg.split(ProtocolMessages.DELIMITER);
         String command = words[0];
-        if (words.length > 1) {
-            name = words[1];
-        }
-        if (words.length > 2) {
-            if ((command.charAt(0) == ProtocolMessages.ACT)) {
-                password = words[2];
-            } else if (command.charAt(0) == ProtocolMessages.BILL) {
-                nightCount = Integer.parseInt(words[2]);
-            } else {
-                System.out.println("Error, look again at the menu.");
-            }
-        }
+        switch (command) {
+            case ProtocolMessages.HI:
+                out.write(ProtocolMessages.HI + ProtocolMessages.DELIMITER + server.getGameName());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.CONNECT:
+                server.addPlayer(words[1]);
+                out.write(ProtocolMessages.CONNECTED);
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_GAME:
+                if(server.getGame().getPlayers().size() >=2 && Integer.parseInt(words[1]) ==server.getGame().getPlayers().size()) {
+                    server.startGame();
+                    out.write(ProtocolMessages.GAME_STARTED);
+                    out.newLine();
+                    out.flush();
+                } else if((Integer.parseInt(words[1]) >=2)) {
+                    if (server.getGame().getPlayers().size() >= Integer.parseInt(words[1])) {
+                        out.write(ProtocolMessages.GAME_STARTED);
+                        server.startGame();
+                        out.newLine();
+                        out.flush();
+                    } else if ((Integer.parseInt(words[1]) > server.getGame().getPlayers().size())) {
+                        for (int i = server.getGame().getPlayers().size(); i < Integer.parseInt(words[1]); i++) {
+                            server.addComputerplayer("Computer" + i);
+                        }
+                        out.write(ProtocolMessages.GAME_STARTED);
+                        server.startGame();
+                        out.newLine();
+                        out.flush();
+                    }
+                }
+                break;
+            case ProtocolMessages.PLAY_CARD:
+                server.playCardcmd(CardType.valueOf(words[1]));
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.DRAW_CARD:
+                server.drawCard();
+                out.write(server.getGame().getCurrentPlayer().getName() + "drew a card");
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.CHOOSE_CARD_IN_HAND:
+                server.chooseCardInHand(CardType.valueOf(words[1]));
+                out.write("Gave a card");
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.PLAY_FAVOR:
+                server.playFavor(server.getGame().getPlayer(words[1]));
+                out.write("Played favor");
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.PLAY_COMBO:
+                if (words[2].equals("2")){
+                    server.getGame().setTargetPlayer(server.getGame().getPlayer(words[3]));
+                    server.playCombo2(CardType.valueOf(words[1]));
+                    out.write("Played favor");
+                    out.newLine();
+                    out.flush();
+                    break;
+                } else if (words[2].equals("3")){
+                    server.getGame().setTargetPlayer(server.getGame().getPlayer(words[3]));
+                    server.playCombo3();
+                    out.write("Played favor");
+                    out.newLine();
+                    out.flush();
+                    break;
+                } else {
+                    throw new IllegalArgumentException("illegal command");
+                }
+            case ProtocolMessages.PLAY_DEFUSE:
+                server.playDefuse(Integer.parseInt(words[1]));
+                out.write("Played defuse");
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.DRAW_PILE_SIZE:
+                out.write(server.drawPileSize());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.USERS_HAND_SIZE:
+                out.write(server.userHandSize(words[1]));
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_ALIVE_PLAYERS:
+                out.write(server.requestAlivePlayers());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_PLAYERS_LOBBY:
+                out.write(server.requestAlivePlayers());
+                out.newLine();
+                out.flush();
+                break;
+            case ProtocolMessages.REQUEST_CARDS_IN_HAND:
+                out.write(server.requestCardsInHand("Joost"));
+                out.newLine();
+                out.flush();
+                break;
+            default:
+                out.write("Command not found");
+                out.newLine();
+                out.flush();
+                break;
+//                throw new IllegalArgumentException("Empty command");
 
-        if (command.length() == 1) {
-            switch (command.charAt(0)) {
-                case ProtocolMessages.HELLO:
-                    System.out.println("Found command h");
-                    out.write(ProtocolMessages.HELLO + ";" + srv.getHotelName());
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.IN:
-                    out.write(srv.doIn(name));
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.OUT:
-                    out.write(srv.doOut(name));
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.ACT:
-                    out.write(srv.doAct(name, password));
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.BILL:
-                    out.write(srv.doBill(name, String.valueOf(nightCount)));
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.ROOM:
-                    out.write(srv.doRoom(name));
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.PRINT:
-                    out.write(srv.doPrint());
-                    out.newLine();
-                    out.flush();
-                    break;
-                case ProtocolMessages.EXIT:
-                    shutdown();
-                    break;
-                default:
-                    out.write("Command not found");
-                    out.newLine();
-                    out.flush();
-            }
-        } else throw new IllegalArgumentException("Empty command");
+        }
 
     }
+
     private void shutdown() {
         System.out.println("> [" + name + "] Shutting down.");
         try {

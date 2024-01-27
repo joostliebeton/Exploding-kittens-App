@@ -5,28 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/ProtocolMessages.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/ServerTUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/exceptions/ExitProgram.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/exceptions/ProtocolException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/exceptions/ServerUnavailableException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/utils/TextIO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/ComputerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/ComputerPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/ComputerPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameRule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/GameTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Hand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/HumanPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Card.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Player1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/TUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/ProtocolMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/ProtocolMessages.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameRule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/GameTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Hand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/HumanPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/ComputerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/ComputerPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Player1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/TUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Hand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Hand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/HumanPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Player1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" afterDir="false" />
     </list>
     <list id="53ce8c0a-31ab-413c-9c87-65cbca00660b" name="Changes by joris" comment="Changes by joris" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,6 +79,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -279,6 +289,8 @@
       <workItem from="1706042820621" duration="6662000" />
       <workItem from="1706109617754" duration="5423000" />
       <workItem from="1706189122635" duration="675000" />
+      <workItem from="1706277057429" duration="21362000" />
+      <workItem from="1706354694202" duration="3370000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -584,21 +596,6 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
     <MESSAGE value="Changes by joris" />
     <option name="LAST_COMMIT_MESSAGE" value="Changes by joris" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/ExplodingKittens/Model/Player1.java</url>
-          <line>41</line>
-          <properties class="ExplodingKittens.Model.Player1" method="getExtraTurns">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
