@@ -38,8 +38,9 @@ public Player1(String name, Game game){
     public List<Card> getHandList() {return hand.getHandlist();}
 
     //setters
-    public void setTurnsToSkip(int turnsToSkip, int oldTurnsToSkip) {
+    public String setTurnsToSkip(int turnsToSkip, int oldTurnsToSkip) {
         this.turnsToSkip = turnsToSkip+oldTurnsToSkip;
+        return "" + this.turnsToSkip;
     }
     public void setExtraTurns(int extraTurns, int oldTurns) {
         this.extraTurns = oldTurns + extraTurns;
@@ -50,5 +51,17 @@ public Player1(String name, Game game){
 
     public Card getPlayedCard() {
         return playedCard;
+    }
+
+    public boolean isComputer() {
+        if (this instanceof ComputerPlayer) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int turn() {
+        return 0;
     }
 }

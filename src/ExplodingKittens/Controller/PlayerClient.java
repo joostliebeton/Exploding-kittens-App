@@ -94,6 +94,8 @@ public class PlayerClient {
                 serverSock = new Socket(addr, port);
                 in = new BufferedReader(new InputStreamReader(serverSock.getInputStream()));
                 out = new BufferedWriter(new OutputStreamWriter(serverSock.getOutputStream()));
+                Thread readerThread = new Thread(this::readFromServer);
+                Thread userInputThread = new Thread(this::handleUserInput);
             } catch (IOException e) {
                 System.out.println("ERROR: could not create a socket on "
                         + host + " and port " + port + ".");
@@ -104,6 +106,26 @@ public class PlayerClient {
                     throw new ExitProgram("User indicated to exit.");
                 }
             }
+        }
+    }
+    private void handleUserInput() {
+        try (BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in))) {
+            String userInput;
+            while ((userInput = userInputReader.readLine()) != null) {
+                out.write(userInput);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void readFromServer() {
+        try {
+            String line;
+            while ((line = in.readLine()) != null) {
+                System.out.println("Server: " + line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     /**
@@ -147,8 +169,7 @@ public class PlayerClient {
      * @return the line sent by the server.
      * @throws ServerUnavailableException if IO errors occur.
      */
-    public String readLineFromServer()
-            throws ServerUnavailableException {
+    public String readLineFromServer() throws ServerUnavailableException {
         if (in != null) {
             try {
                 // Read and return answer from Server
@@ -167,7 +188,30 @@ public class PlayerClient {
                             //playerClientTUI.showMessage("It's " + answer.split(ProtocolMessages.DELIMITER)[1] + "'s turn!");
                             return "It's " + answer.split(ProtocolMessages.DELIMITER)[1] + "'s turn!";
                         }
-
+                    case ProtocolMessages.RESPONSE_ALIVE_PLAYERS:
+                        for (int i = 1; i < answer.split(ProtocolMessages.DELIMITER).length; i++) {
+                            playerClientTUI.showMessage(answer.split(ProtocolMessages.DELIMITER)[i]);
+                        }
+                        return answer;
+                    case ProtocolMessages.GENERAL_CARD_REQUEST:
+                        playerClientTUI.showMessage("you where chosen by the favor card");
+                        doGiveCard(playerClientTUI.getString("Please enter the card you want to give"));
+                        break;
+                    case ProtocolMessages.GAME_STARTED:
+                        return "The game has started";
+                    case ProtocolMessages.GENERAL_CARD_RESPONSE:
+                        return "a " + answer.split(ProtocolMessages.DELIMITER)[1] + " has been played";
+                    case ProtocolMessages.REQUEST_CARD_IN_HAND_RESPONSE:
+                        for (int i = 1; i < answer.split(ProtocolMessages.DELIMITER).length; i++) {
+                            playerClientTUI.showMessage(answer.split(ProtocolMessages.DELIMITER)[i]);
+                        }
+                        return "these are the cards in your hand";
+                    case ProtocolMessages.PLAY_NOPED:
+                        playerClientTUI.showMessage("You have the ability to nope");
+                        playerClientTUI.getBoolean("Do you want to nope?");
+                    case ProtocolMessages.CARD_RECEIVED:
+                        return "You have received a" + answer.split(ProtocolMessages.DELIMITER)[3] + "Card from" + answer.split(ProtocolMessages.DELIMITER)[2] +
+                                "because of the " + answer.split(ProtocolMessages.DELIMITER)[1] + "card";
                     default:
                         return answer;
                 }
@@ -180,32 +224,31 @@ public class PlayerClient {
             throw new ServerUnavailableException("Could not read "
                     + "from server.");
         }
+        return null;
     }
-//    public String readMultipleLinesFromServer()
-//            throws ServerUnavailableException {
-//        if (in != null) {
-//            try {
-//
-//                // Read and return answer from Server
-//                StringBuilder sb = new StringBuilder();
-//                for (String line = in.readLine(); line != null && !line.equals(ProtocolMessages.EOT);
-//                     line = in.readLine()) {
-//                    sb.append(line + System.lineSeparator());
-//                }
-//                return sb.toString();
-//            } catch (IOException e) {
-//                throw new ServerUnavailableException("Could not read "
-//                        + "from server.");
-//            }
-//        } else {
-//            throw new ServerUnavailableException("Could not read "
-//                    + "from server.");
-//        }
-//    }
+    public String readMultipleLinesFromServer()
+            throws ServerUnavailableException {
+        if (in != null) {
+            try {
+
+                // Read and return answer from Server
+                StringBuilder sb = new StringBuilder();
+                for (String line = in.readLine(); line != null; line = in.readLine()) {
+                    sb.append(line + System.lineSeparator());
+                }
+                return sb.toString();
+            } catch (IOException e) {
+                throw new ServerUnavailableException("Could not read "
+                        + "from server.");
+            }
+        } else {
+            throw new ServerUnavailableException("Could not read "
+                    + "from server.");
+        }
+    }
     public void closeConnection() {
         System.out.println("Closing the connection...");
         try {
-
             in.close();
             out.close();
             serverSock.close();
@@ -227,7 +270,6 @@ public class PlayerClient {
                     + "of Game: " + splitted[1] + "!");
             out.newLine();
             out.flush();
-            System.out.println(readLineFromServer());
         } else {
 // Throw protocol exception
             throw new ProtocolException ("No HI returned. "
@@ -235,16 +277,22 @@ public class PlayerClient {
         }
     }
 
+
     public void doConnect(String name) throws ServerUnavailableException {
         if(name != null) {
             sendMessage(ProtocolMessages.CONNECT + ProtocolMessages.DELIMITER + name);
             playerClientTUI.showMessage("> " + readLineFromServer());
         }
     }
-   public void requestAmountofPlayers() throws ServerUnavailableException {
+   public void requestPlayers() throws ServerUnavailableException {
         sendMessage(ProtocolMessages.REQUEST_PLAYERS_LOBBY);
         playerClientTUI.showMessage("> " + readLineFromServer());
     }
+    public void requestAmountOfPlayers() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.REQUEST_PLAYERS_LOBBY);
+        playerClientTUI.showMessage("> " + readLineFromServer());
+    }
+
     public void doPlay(String card) throws ServerUnavailableException {
         if(card != null) {
             sendMessage(ProtocolMessages.PLAY_CARD+ ProtocolMessages.DELIMITER + card);
@@ -259,23 +307,26 @@ public class PlayerClient {
     }
     public void doRequestCardsInHandtype() throws ServerUnavailableException {
         sendMessage(ProtocolMessages.REQUEST_CARDS_IN_HAND);
-        playerClientTUI.showMessage("> " + readLineFromServer());
+        playerClientTUI.showMessage(">" + readLineFromServer());
 
     }
     public void doStartGameRequest(String numberOfPlayers, String aiPlayers) throws ServerUnavailableException {
         if(numberOfPlayers != null && Objects.equals(aiPlayers, "0")) {
             sendMessage(ProtocolMessages.REQUEST_GAME + ProtocolMessages.DELIMITER + numberOfPlayers);
             playerClientTUI.showMessage("> " + readLineFromServer());
+            playerClientTUI.showMessage("> " + readLineFromServer());
         } else{
             sendMessage(ProtocolMessages.REQUEST_GAME + ProtocolMessages.DELIMITER + numberOfPlayers + ProtocolMessages.DELIMITER + aiPlayers);
             playerClientTUI.showMessage("> " + readLineFromServer());
-
+            playerClientTUI.showMessage("> " + readLineFromServer());
         }
     }
     public void doFavor(String enterPlayerName) throws ServerUnavailableException {
         if(enterPlayerName != null) {
             sendMessage(ProtocolMessages.PLAY_FAVOR + ProtocolMessages.DELIMITER + enterPlayerName);
             playerClientTUI.showMessage("> " + readLineFromServer());
+            playerClientTUI.showMessage("> " + readLineFromServer());
+
         }
     }
     public static void main(String[] args) {
@@ -293,7 +344,17 @@ public class PlayerClient {
     public void sendExit() {
         //To be implemented
     }
+    public void doGiveCard(String enterCardType) throws ServerUnavailableException {
+        if(enterCardType != null) {
+            sendMessage(ProtocolMessages.CHOOSE_CARD_IN_HAND + ProtocolMessages.DELIMITER + enterCardType);
+            playerClientTUI.showMessage("> " + readLineFromServer());
+        }
+    }
 
+    public void doDrawCard() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.DRAW_CARD);
+        playerClientTUI.showMessage("> " + readLineFromServer());
+        playerClientTUI.showMessage("> " + readLineFromServer());
 
-
+    }
 }

@@ -47,7 +47,7 @@ public class Game {
     public void gameStart(){
         initilializehands();
         currentPlayerIndex = 0;
-
+        currentPlayer = getCurrentPlayer();
     }
     public Game getGame(){
         return this;
@@ -97,7 +97,7 @@ public class Game {
                 targetPlayer.setExtraTurns(3, targetPlayer.getExtraTurns());
                 //clientTui.turnMessage(targetPlayer, 2);
                 //System.out.println(targetPlayer.getName() + " has " + targetPlayer.extraTurns + " extra turns!");
-                handleTurnEnd();
+                //handleTurnEnd();
                 return;
             }
             currentPlayer.setExtraTurns(-1, currentPlayer.getExtraTurns());
@@ -115,9 +115,9 @@ public class Game {
         }
     }
 
-    private void handleTurnEnd() {
+    public void handleTurnEnd() {
         if (currentPlayer.getTurnsToSkip() > 0) {
-            clientTui.handleTurnEndMessage(currentPlayer);
+            //clientTui.handleTurnEndMessage(currentPlayer);
             //System.out.println(currentPlayer.getName() + " skips a turn.");
             currentPlayer.setTurnsToSkip(-1, currentPlayer.getTurnsToSkip());
             endTurnNoDraw();
@@ -139,19 +139,28 @@ public class Game {
         int playerIndex = scanner.nextInt();
         if (playerIndex < this.getPlayers().size()) {
             targetPlayer = this.getPlayers().get(playerIndex);
-            favorChoice();
+            //favorChoice();
         } else {
             //clientTui.choosePlayerChoiceMessage(2);
             //System.out.println("Invalid player index. Choose a player within the valid range.");
         }
     }
-    public void favorChoice() {
+    public void favorChoice(CardType cardType) {
         // Ask the user to choose a card type
         //clientTui.favorChoiceMessage(currentPlayer.getName());
         //System.out.println(name + ", you played a Favor card. Choose a card type to request from the other player: ");
         //clientTui.favorChoiceMessage(1);
         //System.out.println("1: EXPLODING_KITTEN, 2: DEFUSE, 3: NOPE, 4: SKIP, 5: ATTACK, 6:  SEE_THE_FUTURE, 7:FAVOR, 8: SHUFFLE, 9: CAT_CARD1, 10: CAT_CARD2, 11: CAT_CARD3, 12: CAT_CARD4, 13: CAT_CARD5 ");
-
+        int deletedcardcount=1;
+        while (deletedcardcount < 3) {
+            for (int i = 0; i < currentPlayer.getHand().size(); i++) {
+                if (currentPlayer.getHand().get(i).getType() == cardType) {
+                    Card playedCard = currentPlayer.getHand().get(i);
+                    currentPlayer.getHand().remove(playedCard);
+                    deletedcardcount++;
+                }
+            }
+        }
         Scanner scanner = new Scanner(System.in);
         int chosenType = scanner.nextInt();
 
@@ -203,7 +212,9 @@ public class Game {
 
         return cardIndex;
     }
-
+    public void nextCurrentPlayer(){
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+    }
     public Player1 getCurrentPlayer() {
         return players.get(currentPlayerIndex);
     }
@@ -267,10 +278,11 @@ public class Game {
             }
         }
     }
-    public void drawCard(Player1 player) {
+    public String drawCard(Player1 player) {
         Card drawnCard = deck.draw();
         if (drawnCard != null) {
             player.getHand().addCard(drawnCard);
+
             //clientTui.drawCardMessage(player.getName(), drawnCard);
             //System.out.println(name + " drew a " + drawnCard.getType() + " card.");
             if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
@@ -297,8 +309,10 @@ public class Game {
                     eliminatePlayer(currentPlayer);
                 }
             }
-        }
+            return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + "drew a card";
 
+        }
+        return null;
     }
     public void askNope(Player1 player, int index) {
         Scanner scanner = new Scanner(System.in);
@@ -324,62 +338,44 @@ public class Game {
     private boolean getNopeCardPlayed() {
         return nopeCardPlayed;
     }
-    public void playCard(int cardIndex) {
+    public  String playCard(int cardIndex) {
         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().size() && currentPlayer.getHand().get(cardIndex).playable()) {
             playedCard = currentPlayer.getHand().get(cardIndex);
             currentPlayer.getHand().remove(playedCard);
-            clientTui.playCardMessage(currentPlayer.getName(), playedCard);
+            //clientTui.playCardMessage(currentPlayer.getName(), playedCard);
             //System.out.println(name + " played a " + playedCard.getType() + " card.");
             discardPile.addCard(playedCard);
             switch (playedCard.getType()) {
                 case NOPE:
-                    //ask players if they want to play a nope card
-                    this.askPlayersNope();
                     playedCard.Nope();
                     break;
                 case SHUFFLE:
-                    this.askPlayersNope();
-                    if (getNopeCardPlayed()) {
-                        clientTui.playCardMessage(1);
-                        //System.out.println("Nope card negated the Shuffle!");
-                        setNopeCardPlayed(false); // Reset Nope card flag
-                    } else {
-                        playedCard.Shuffle(deck, currentPlayer);
-                    }
-                    break;
+                    return (playedCard.Shuffle(deck) + currentPlayer.getName() + ProtocolMessages.DELIMITER + " played a " + playedCard.getType() + " card");
                 case SKIP:
-                    this.askPlayersNope();
-                    if (getNopeCardPlayed()) {
-                        clientTui.playCardMessage(2);
-                        //System.out.println("Nope card negated the Skip!");
-                        setNopeCardPlayed(false); // Reset Nope card flag
-                    } else {
-                        currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip());
-                    }
-                    break;
+                    return ((currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip())));
                 case SEE_THE_FUTURE:
-                    this.askPlayersNope();
-                    playedCard.seeTheFuture(deck, currentPlayer);
-                    break;
+                    //this.askPlayersNope();
+                    return (playedCard.seeTheFuture(deck, currentPlayer));
+
                 case CAT_CARD1:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD1, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD1, currentPlayer);
+
                 case CAT_CARD2:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD2, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD2, currentPlayer);
+
                 case CAT_CARD3:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD3, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD3, currentPlayer);
+
                 case CAT_CARD4:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD4, currentPlayer);
-                    break;
+                     return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD4, currentPlayer);
+
                 case CAT_CARD5:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD5, currentPlayer);
-                    break;
-                case FAVOR:
-                    this.askPlayersNope();
-                    chooseplayer();
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD5, currentPlayer);
+
+                //case FAVOR: handled in gameserver
+//                    this.askPlayersNope();
+//                    favor();
+//                    break;
                 case ATTACK:
                     this.askPlayersNope();
                     currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip());
@@ -389,36 +385,33 @@ public class Game {
             // Implement the specific action associated with the played card
             // For example, triggering a special ability or resolving effects
         } else {
-            clientTui.playCardMessage(3);
+            //clientTui.playCardMessage(3);
             //System.out.println("Invalid card index. Choose a card within the valid range.");
 
         }
+        return null;
     }
-    public void chooseplayer() {
-        Scanner scanner = new Scanner(System.in);
-        clientTui.choosePlayerMessage(1);
-        //System.out.println("Choose a player to take a card from (enter the player index): ");
-        for (int i = 0; i < this.getPlayers().size(); i++) {
-            if (!Objects.equals(this.getPlayers().get(i).getName(), currentPlayer.getName())) {
-                clientTui.choosePlayerMessage(this, i);
-                //System.out.println(i +" "+ game.getPlayers().get(i).getName());
-            }
-        }
+//    public void chooseplayer(Player1 targetPlayer) {
+//        Scanner scanner = new Scanner(System.in);
+//        clientTui.choosePlayerMessage(1);
+//        //System.out.println("Choose a player to take a card from (enter the player index): ");
+//        for (int i = 0; i < this.getPlayers().size(); i++) {
+//            if (!Objects.equals(this.getPlayers().get(i).getName(), currentPlayer.getName())) {
+//                clientTui.choosePlayerMessage(this, i);
+//                //System.out.println(i +" "+ game.getPlayers().get(i).getName());
+//            }
+//        }
+//
+//        int playerIndex = scanner.nextInt();
+//        if (playerIndex < this.getPlayers().size()) {
+//            targetPlayer = this.getPlayers().get(playerIndex);
+//            favor();
+//        } else {
+//            clientTui.choosePlayerMessage(2);
+//            //System.out.println("Invalid player index. Choose a player within the valid range.");
+//        }
+//    }
 
-        int playerIndex = scanner.nextInt();
-        if (playerIndex < this.getPlayers().size()) {
-            targetPlayer = this.getPlayers().get(playerIndex);
-            favor();
-        } else {
-            clientTui.choosePlayerMessage(2);
-            //System.out.println("Invalid player index. Choose a player within the valid range.");
-        }
-    }
-    public void favor() {
-        clientTui.favorMessage(currentPlayer.getName(), targetPlayer);
-        //System.out.println(name + " played a Favor card. " + targetPlayer.getName() + " must give you a card.");
-        //giveCard();
-    }
     public void twoCards(CardType typecard) {
         int deletedcardcount=1;
         while (deletedcardcount < 2) {
@@ -430,7 +423,6 @@ public class Game {
                 }
             }
         }
-        chooseplayer();
     }
     public void setTargetPlayer(Player1 player) {
         this.targetPlayer = player;
@@ -463,7 +455,6 @@ public class Game {
     public void giveCard(Card card) {
         targetPlayer.getHand().remove(card);
         currentPlayer.getHand().add(card);
-        clientTui.giveCardMessage(targetPlayer.getName(), currentPlayer, card);
         //System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
     }
 
@@ -489,6 +480,6 @@ public class Game {
                 return player;
             }
         }
-        return null;
+        throw new IllegalArgumentException("player doesnt Exist");
     }
 }

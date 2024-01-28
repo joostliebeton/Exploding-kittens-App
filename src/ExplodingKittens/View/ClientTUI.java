@@ -23,7 +23,6 @@ public class ClientTUI {
     private PrintWriter console;
 
 
-
     public String getString(String question) {
         console.print(question);
         console.flush();
@@ -70,20 +69,21 @@ public class ClientTUI {
                 "PlayerAmount.......requests player count\n" +
                 "Start i1 i2........starts a game with i1 players of which are i2 ai\n" +
                 "handsize...........request a hand size of player\n" +
-                "h ................ help ( this menu )\n" +
-                "p ................ print state of the hotel\n" +
-                "x ................ exit\n"));
+                "h .................help ( this menu )\n" +
+                "give ..............give player a card\n" +
+                "draw ..............draw a card\n"));
     }
     public void handleUserInput(String input) throws ExitProgram, ServerUnavailableException {
         String[] inputs = input.split(" ");
         String command = inputs[0];
         switch (command.toLowerCase()) {
             case "playeramount":
-                playerClient.requestAmountofPlayers();
+                playerClient.requestAmountOfPlayers();
                 break;
             case "play":
                 String cardType = getString("Enter card type");
                 if(cardType.equals("FAVOR")){
+                    playerClient.requestPlayers();
                     playerClient.doFavor(getString("Enter player name"));
                     break;
                 }
@@ -106,7 +106,14 @@ public class ClientTUI {
             case "h":
                 printHelpMenu();
                 break;
-
+            case "give":
+                playerClient.doGiveCard(getString("Enter card"));
+                break;
+            case "favor":
+                break;
+            case "draw":
+                playerClient.doDrawCard();
+                break;
 //            case ProtocolMessages.PRINT:
 //                hotelClient.doPrint();
 //                break;
@@ -115,7 +122,6 @@ public class ClientTUI {
 //                break;
             default:
                 System.out.println("Invalid Command");
-                printHelpMenu();
         }
     }
 

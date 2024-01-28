@@ -1,5 +1,6 @@
 package ExplodingKittens.Model;
 
+import ExplodingKittens.Controller.ProtocolMessages;
 import ExplodingKittens.View.ClientTUI;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class Hand {
     public void add(Card takenCard) {
         hand.add(takenCard);
     }
-    public void catCardsInHand(CardType typeCard, Player1 player) {
+    public String catCardsInHand(CardType typeCard, Player1 player) {
         int catCardCount = 1;
         int deletedcardcount = 1;
         for (Card card : getHandlist()) {
@@ -51,13 +52,14 @@ public class Hand {
                 catCardCount++;
             }
         }
-        clientTui.catCardsInHandMessage(player.getName(), typeCard, catCardCount);
-        //System.out.println(name + " has " + catCardCount + " " + typeCard + " in hand.");
-        if (catCardCount == 1) {
-            clientTui.catCardsInHandMessage(typeCard, 1);
-            //System.out.println("You need at least 1 more " + typeCard + " to play this card as an action card");
+        //clientTui.catCardsInHandMessage(player.getName(), typeCard, catCardCount);
+        //return(player.getName() + " has " + catCardCount + " " + typeCard + " in hand.");
+        if (catCardCount == 1 ||  catCardCount == 2 || catCardCount ==3) {
+
+            //clientTui.catCardsInHandMessage(typeCard, 1);
+            return (ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + typeCard);
         } else if (catCardCount == 2) {
-            clientTui.catCardsInHandMessage(typeCard, 2);
+            //clientTui.catCardsInHandMessage(typeCard, 2);
             //System.out.println("Do you want to play the 2 " + typeCard + " card? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
@@ -65,14 +67,14 @@ public class Hand {
                 //command to server to play the 2 cat card
                 player.getGame().twoCards(typeCard);
             } else if (response.equals("no")) {
-                clientTui.catCardsInHandMessage(1);
+                //clientTui.catCardsInHandMessage(1);
                 //playcardcmd for the 1 cat card
                 //System.out.println("oke continue");
             }
 
         }
         else if (catCardCount >= 3) {
-            clientTui.catCardsInHandMessage(typeCard, 2);
+            //clientTui.catCardsInHandMessage(typeCard, 2);
             //System.out.println("Do you want to play the 2 " + typeCard + " card? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
@@ -100,6 +102,7 @@ public class Hand {
                 }
             }
         }
+        return null;
     }
     public boolean hasDefuseCard() {
         for (Card card : hand) {

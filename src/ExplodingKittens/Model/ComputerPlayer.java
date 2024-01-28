@@ -1,6 +1,7 @@
 package ExplodingKittens.Model;
 
 import ExplodingKittens.Controller.Game;
+import ExplodingKittens.Controller.ProtocolMessages;
 
 import java.util.List;
 
@@ -9,14 +10,39 @@ public class ComputerPlayer extends Player1 {
         super(name,game);
 
     }
+
+    public int turn(){
+        for (Card card : getHandList()){
+            if (card.isActionCard()){
+                int play = (int) (Math.random() * 1);
+                if (play == 1) {
+                    return hand.indexOf(card);
+                }
+            }
+            if (card.isCatCard()){
+                for (Card card1: getHandList()){
+                    if (card1.getType() == card.getType()){
+                        int play = (int) (Math.random() * 1);
+                        if (play == 1) {
+                            return hand.indexOf(card);
+                        }
+                    }
+                }
+            }
+        }
+        return-1;
+    }
+
+
     public Game getGame(){
         return game;
     }
     public int getTurnsToSkip() {
         return turnsToSkip;
     }
-    public void setTurnsToSkip(int turnsToSkip, int oldturnstoskip) {
+    public String setTurnsToSkip(int turnsToSkip, int oldturnstoskip) {
         this.turnsToSkip = turnsToSkip+oldturnstoskip;
+        return "" + this.turnsToSkip;
     }
     public int getExtraTurns() {
         return extraTurns;

@@ -39,15 +39,15 @@ public class Deck{
             case FAVOR:
                 return 4;
             case SEE_THE_FUTURE:
-                return 4;
+                return 10;
             case SHUFFLE:
                 return 4; //4
             case NOPE:
-                return 5;
+                return 1;
             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4:
                 return 4;
             case CAT_CARD5:
-                return 60;
+                return 4;
 
             // Add cases for other card types
             default:

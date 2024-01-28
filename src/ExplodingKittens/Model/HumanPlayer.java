@@ -15,8 +15,9 @@ public class HumanPlayer extends Player1{
     public int getTurnsToSkip() {
         return turnsToSkip;
     }
-    public void setTurnsToSkip(int turnsToSkip, int oldturnstoskip) {
+    public String setTurnsToSkip(int turnsToSkip, int oldturnstoskip) {
         this.turnsToSkip = turnsToSkip+oldturnstoskip;
+        return "" + this.turnsToSkip;
     }
     public int getExtraTurns() {
         return extraTurns;
