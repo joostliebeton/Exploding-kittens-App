@@ -12,6 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class GameServer implements Runnable{
     private ServerSocket ssock;
@@ -51,11 +52,9 @@ public class GameServer implements Runnable{
             try {
                 // Sets up the hotel application
                 setup();
-
                 while (true) {
                     Socket sock = ssock.accept();
-                    String name = "Client "
-                            + String.format("%02d", next_client_no++);
+                    String name = "Client " + String.format("%02d", next_client_no++);
                     view.showMessage("New client [" + name + "] connected!");
                     EKCHandler handler = new EKCHandler(sock, this, name);
                     new Thread(handler).start();
@@ -154,9 +153,47 @@ public class GameServer implements Runnable{
     public Game getGame() {
         return game;
     }
-    public void startGame() {
+    public void startGameProcess() {
         game.gameStart();
+        while (!getGame().isGameOver()) {
+            for (Player1 player : game.getPlayers()) {
+                // Notify the player that it's their turn
+                notifyPlayerTurn(player);
+            }
+
+        }
     }
+    private void waitForPlayerTurn() {
+        if(game.isCardPlayed()){
+            try{
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+
+            }
+        }
+    }
+
+    private void notifyPlayerTurn(Player1 player) {
+        // Send a message to the client associated with the player
+        // indicating that it's their turn
+        String playerName = player.getName();
+        // Use the EKCHandler associated with the player to send the message
+        EKCHandler playerHandler = getPlayerHandler(playerName);
+        if (playerHandler != null) {
+            playerHandler.sendMessage(ProtocolMessages.TURN + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName()); // Define your message format
+        }
+    }
+
+    private EKCHandler getPlayerHandler(String playerName) {
+        for (EKCHandler handler : clients) {
+            if (handler.getName().equals(playerName)) {
+                return handler;
+            }
+        }
+        return null;
+    }
+
     public void drawCard() {
         Player1 currentplayer = game.getCurrentPlayer();
         game.drawCard(currentplayer);
@@ -215,6 +252,16 @@ public class GameServer implements Runnable{
         responseBuilder.append(ProtocolMessages.REQUEST_CARD_IN_HAND_RESPONSE).append("~");
         Player1 player1 = game.getPlayer(player);
         // Append the card values in hand
+        try{
+            for (Card value : player1.getHandList()) {
+                responseBuilder.append(value.getType().toString()).append(ProtocolMessages.DELIMITER);
+            }
+            if (!player1.getHandList().isEmpty()) {
+                responseBuilder.deleteCharAt(responseBuilder.length() - 1);
+            }
+        } catch (NullPointerException e){
+            return ("player has no cards");
+        }
         for (Card value : player1.getHandList()) {
             responseBuilder.append(value.getType().toString()).append(ProtocolMessages.DELIMITER);
         }

@@ -1,6 +1,6 @@
 package ExplodingKittens.Controller;
 
-import ExplodingKittens.Model.Player;
+import ExplodingKittens.Model.Player1;
 import ExplodingKittens.View.ClientTUI;
 import ExplodingKittens.exceptions.ExitProgram;
 import ExplodingKittens.exceptions.ProtocolException;
@@ -16,14 +16,15 @@ public class PlayerClient {
     private BufferedReader in;
     private BufferedWriter out;
     private ClientTUI playerClientTUI;
-    private Player player;
+    private Player1 player;
+    private String name;
     /**
      * Constructs a new PlayerClient. Initialises the view.
      */
     public PlayerClient() {
         ///implement//////
         this.playerClientTUI = new ClientTUI(this);
-        this.player = new Player("Player", null);
+
         // To be implemented
     }
     /**
@@ -83,6 +84,7 @@ public class PlayerClient {
         while (serverSock == null) {
             String host = playerClientTUI.getString("Please enter the server IP.");
             int port = playerClientTUI.getInt("Please enter the server port.");
+            this.name = playerClientTUI.getString("Please enter your name.");
 
             // try to open a Socket to the server
             try {
@@ -155,7 +157,21 @@ public class PlayerClient {
                     throw new ServerUnavailableException("Could not read "
                             + "from server.");
                 }
-                return answer;
+                String command = answer.split(ProtocolMessages.DELIMITER)[0];
+                switch (command){
+                    case ProtocolMessages.TURN:
+                        if(this.name.equals(answer.split(ProtocolMessages.DELIMITER)[1])){
+                            return "it's your turn";
+                            //playerClientTUI.showMessage("It's your turn!");
+                        } else {
+                            //playerClientTUI.showMessage("It's " + answer.split(ProtocolMessages.DELIMITER)[1] + "'s turn!");
+                            return "It's " + answer.split(ProtocolMessages.DELIMITER)[1] + "'s turn!";
+                        }
+
+                    default:
+                        return answer;
+                }
+
             } catch (IOException e) {
                 throw new ServerUnavailableException("Could not read "
                         + "from server.");
@@ -189,6 +205,7 @@ public class PlayerClient {
     public void closeConnection() {
         System.out.println("Closing the connection...");
         try {
+
             in.close();
             out.close();
             serverSock.close();
@@ -204,9 +221,10 @@ public class PlayerClient {
 // Check if it is HELLO, split on delimiter
         String [] splitted = answer.split(ProtocolMessages.DELIMITER);
         if (splitted[0].equalsIgnoreCase(ProtocolMessages.HI )) {
+            doConnect(name);
+
             System.out.println("Welcome to the game "
                     + "of Game: " + splitted[1] + "!");
-            doConnect(playerClientTUI.getString("what is your name?"));
             out.newLine();
             out.flush();
             System.out.println(readLineFromServer());
@@ -216,6 +234,7 @@ public class PlayerClient {
                     + "Instead: " + answer );
         }
     }
+
     public void doConnect(String name) throws ServerUnavailableException {
         if(name != null) {
             sendMessage(ProtocolMessages.CONNECT + ProtocolMessages.DELIMITER + name);
@@ -234,7 +253,7 @@ public class PlayerClient {
     }
     public void doRequestCardsInHand(String player) throws ServerUnavailableException {
         if(player != null) {
-            sendMessage(ProtocolMessages.CHOOSE_CARD_IN_HAND + ProtocolMessages.DELIMITER + player);
+            sendMessage(ProtocolMessages.USERS_HAND_SIZE + ProtocolMessages.DELIMITER + player);
             playerClientTUI.showMessage("> " + readLineFromServer());
         }
     }
@@ -251,6 +270,12 @@ public class PlayerClient {
             sendMessage(ProtocolMessages.REQUEST_GAME + ProtocolMessages.DELIMITER + numberOfPlayers + ProtocolMessages.DELIMITER + aiPlayers);
             playerClientTUI.showMessage("> " + readLineFromServer());
 
+        }
+    }
+    public void doFavor(String enterPlayerName) throws ServerUnavailableException {
+        if(enterPlayerName != null) {
+            sendMessage(ProtocolMessages.PLAY_FAVOR + ProtocolMessages.DELIMITER + enterPlayerName);
+            playerClientTUI.showMessage("> " + readLineFromServer());
         }
     }
     public static void main(String[] args) {

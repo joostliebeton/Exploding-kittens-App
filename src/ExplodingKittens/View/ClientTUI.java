@@ -47,7 +47,6 @@ public class ClientTUI {
         this.console = new PrintWriter(System.out, true);
     }
     public void start() throws ServerUnavailableException {
-        System.out.println("Make a choice to play a card");
         printHelpMenu();
         String input = "";
         input = TextIO.getln();
@@ -65,8 +64,7 @@ public class ClientTUI {
         }
     }
     public void printHelpMenu() {
-        System.out.println(("Welcome to the Hotel booking system\n" +
-                "Commands :\n" +
+        System.out.println(("Commands :\n" +
                 "Hand ..............request hand\n" +
                 "play ..............you want to play a card\n" +
                 "PlayerAmount.......requests player count\n" +
@@ -84,7 +82,12 @@ public class ClientTUI {
                 playerClient.requestAmountofPlayers();
                 break;
             case "play":
-                playerClient.doPlay(getString("Enter card type"));
+                String cardType = getString("Enter card type");
+                if(cardType.equals("FAVOR")){
+                    playerClient.doFavor(getString("Enter player name"));
+                    break;
+                }
+                playerClient.doPlay(cardType);
                 break;
             case "handsize" :
                 playerClient.doRequestCardsInHand(getString("Enter player name"));
@@ -100,9 +103,10 @@ public class ClientTUI {
                     playerClient.doStartGameRequest(inputs[1], inputs[2]);
                     break;
                 }
-//            case ProtocolMessages.BILL:
-//                hotelClient.doBill(name, String.valueOf(nights));
-//                break;
+            case "h":
+                printHelpMenu();
+                break;
+
 //            case ProtocolMessages.PRINT:
 //                hotelClient.doPrint();
 //                break;

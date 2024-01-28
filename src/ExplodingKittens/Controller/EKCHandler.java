@@ -3,15 +3,16 @@ package ExplodingKittens.Controller;
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
 
+import javax.management.monitor.StringMonitor;
 import java.io.*;
 import java.net.Socket;
+import java.util.logging.Handler;
 
 public class EKCHandler implements Runnable {
     /** The socket and In- and OutputStreams */
     private BufferedReader in;
     private BufferedWriter out;
     private Socket sock;
-
     /** The connected HotelServer */
     private GameServer server;
 
@@ -37,6 +38,7 @@ public class EKCHandler implements Runnable {
             shutdown();
         }
     }
+
     /**
      * Continuously listens to client input and forwards the input to the
      * {@link #handleCommand(String)} method.
@@ -78,20 +80,25 @@ public class EKCHandler implements Runnable {
                 break;
             case ProtocolMessages.CONNECT:
                 server.addPlayer(words[1]);
+                this.name = words[1];
                 out.write(ProtocolMessages.CONNECTED);
                 out.newLine();
                 out.flush();
                 break;
             case ProtocolMessages.REQUEST_GAME:
                 if(server.getGame().getPlayers().size() >=2 && Integer.parseInt(words[1]) ==server.getGame().getPlayers().size()) {
-                    server.startGame();
                     out.write(ProtocolMessages.GAME_STARTED);
+                    out.newLine();
+                    out.flush();
+                    server.startGameProcess();
                     out.newLine();
                     out.flush();
                 } else if((Integer.parseInt(words[1]) >=2)) {
                     if (server.getGame().getPlayers().size() >= Integer.parseInt(words[1])) {
                         out.write(ProtocolMessages.GAME_STARTED);
-                        server.startGame();
+                        out.newLine();
+                        out.flush();
+                        server.startGameProcess();
                         out.newLine();
                         out.flush();
                     } else if ((Integer.parseInt(words[1]) > server.getGame().getPlayers().size())) {
@@ -99,7 +106,9 @@ public class EKCHandler implements Runnable {
                             server.addComputerplayer("Computer" + i);
                         }
                         out.write(ProtocolMessages.GAME_STARTED);
-                        server.startGame();
+                        out.newLine();
+                        out.flush();
+                        server.startGameProcess();
                         out.newLine();
                         out.flush();
                     }
@@ -173,7 +182,7 @@ public class EKCHandler implements Runnable {
                 out.flush();
                 break;
             case ProtocolMessages.REQUEST_CARDS_IN_HAND:
-                out.write(server.requestCardsInHand("Joost"));
+                out.write(server.requestCardsInHand(this.name));
                 out.newLine();
                 out.flush();
                 break;
@@ -191,6 +200,7 @@ public class EKCHandler implements Runnable {
     private void shutdown() {
         System.out.println("> [" + name + "] Shutting down.");
         try {
+            server.getGame().eliminatePlayer(server.getGame().getPlayer(name));
             in.close();
             out.close();
             sock.close();
@@ -198,5 +208,20 @@ public class EKCHandler implements Runnable {
             e.printStackTrace();
         }
         server.removeClient(this);
+    }
+
+    public Object getName() {
+        return name;
+    }
+
+    public void sendMessage(String msg) {
+        try {
+            out.write(msg);
+            out.newLine();
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
