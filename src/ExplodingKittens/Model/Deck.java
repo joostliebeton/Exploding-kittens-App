@@ -47,7 +47,7 @@ public class Deck{
             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4:
                 return 4;
             case CAT_CARD5:
-                return 60;
+                return 4;
 
             // Add cases for other card types
             default:

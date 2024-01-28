@@ -138,30 +138,33 @@ public class GameServer implements Runnable{
 //        game.requestGame(playerCount, aiCount);
 //    }
     public String playCardcmd(CardType cardType) {
-        if (game.getCurrentPlayer().getHandList().contains(cardType)) {
-            int index = 0;
-            for (Card card : game.getCurrentPlayer().getHandList()) {
-                index++;
-                if (card.getType() == cardType) {
-                    game.playCard(index);
-                    return ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + cardType;
-                }
+        for(CardType cardType1 : CardType.values()){
+            if(cardType1 == cardType){
+                int index = 0;
+                for (Card card : game.getCurrentPlayer().getHandList()) {
+                    if (card.getType() == cardType) {
+                        return (game.playCard(index));
+                    }
+                    index++;
+                }return ("you don't have this card");
             }
         }
-        return ("you don't have this card");
+        return "this card doesnt exist";
+
     }
     public Game getGame() {
         return game;
     }
     public void startGameProcess() {
         game.gameStart();
-        while (!getGame().isGameOver()) {
+        //while (!getGame().isGameOver()) {
             for (Player1 player : game.getPlayers()) {
                 // Notify the player that it's their turn
                 notifyPlayerTurn(player);
             }
 
-        }
+
+        //}
     }
     private void waitForPlayerTurn() {
         if(game.isCardPlayed()){
@@ -182,6 +185,7 @@ public class GameServer implements Runnable{
         EKCHandler playerHandler = getPlayerHandler(playerName);
         if (playerHandler != null) {
             playerHandler.sendMessage(ProtocolMessages.TURN + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName()); // Define your message format
+
         }
     }
 
@@ -201,20 +205,52 @@ public class GameServer implements Runnable{
     public void chooseCardInHand(CardType cardType){
         Card card = new Card(cardType);
         game.giveCard(card);
+        for(Player1 player: game.getPlayers()) {
+            if (player == game.getCurrentPlayer()){
+                sendMessageToPlayer(player.getName(), ProtocolMessages.CARD_RECEIVED + ProtocolMessages.DELIMITER + "FAVOR" + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName() + ProtocolMessages.DELIMITER + cardType.name());
+            } else if(player == game.getTargetPlayer()){
+                sendMessageToPlayer(player.getName(), ProtocolMessages.CARD_GIVEN + ProtocolMessages.DELIMITER + "FAVOR" + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + cardType.name());
+            } else {
+                sendMessageToPlayer(player.getName(), ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName() + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
+            }
+        }
     }
     public void playFavor(Player1 targetPlayer) {
         game.setTargetPlayer(targetPlayer);
-        game.chooseCard();
+        sendMessageToPlayer(targetPlayer.getName(), ProtocolMessages.GENERAL_CARD_REQUEST + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
+
+    }
+    public void ChatMessage(String message) {
+        for (EKCHandler handler : clients) {
+            handler.sendMessage(message);
+        }
+    }
+    public String giveCard(Card card) {
+        game.giveCard(card);
+
+        return ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + game.getTargetPlayer() + ProtocolMessages.DELIMITER + game.getCurrentPlayer();
+
     }
     public void playCombo2(CardType cardType){
         game.getCurrentPlayer().getGame().twoCards(cardType);
     }
-    public void playCombo3(){
-        game.favorChoice();
+    public String playCombo3(CardType cardType){
+        game.favorChoice(cardType);
+        return ProtocolMessages.GENERAL_CARD_REQUEST + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName();
     }
     public void generalCardResponse(CardType cardType){
         game.getClientTui().generalCardResponse(cardType);
 
+    }
+    public void sendMessageToPlayer(String playerName, String message) {
+        EKCHandler handler = getPlayerHandler(playerName);
+        if (handler != null) {
+            handler.sendMessage(message);
+        } else if (playerName.contains("Computer")) {
+            view.showMessage("Computer " + playerName + " " + message);
+        } else {
+            view.showMessage("Player " + playerName + " not found.");
+        }
     }
     public void playDefuse(int index) {
         game.playDefuse(index);

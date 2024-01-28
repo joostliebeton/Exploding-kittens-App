@@ -47,7 +47,7 @@ public class Game {
     public void gameStart(){
         initilializehands();
         currentPlayerIndex = 0;
-
+        currentPlayer = getCurrentPlayer();
     }
     public Game getGame(){
         return this;
@@ -139,19 +139,28 @@ public class Game {
         int playerIndex = scanner.nextInt();
         if (playerIndex < this.getPlayers().size()) {
             targetPlayer = this.getPlayers().get(playerIndex);
-            favorChoice();
+            //favorChoice();
         } else {
             //clientTui.choosePlayerChoiceMessage(2);
             //System.out.println("Invalid player index. Choose a player within the valid range.");
         }
     }
-    public void favorChoice() {
+    public void favorChoice(CardType cardType) {
         // Ask the user to choose a card type
         //clientTui.favorChoiceMessage(currentPlayer.getName());
         //System.out.println(name + ", you played a Favor card. Choose a card type to request from the other player: ");
         //clientTui.favorChoiceMessage(1);
         //System.out.println("1: EXPLODING_KITTEN, 2: DEFUSE, 3: NOPE, 4: SKIP, 5: ATTACK, 6:  SEE_THE_FUTURE, 7:FAVOR, 8: SHUFFLE, 9: CAT_CARD1, 10: CAT_CARD2, 11: CAT_CARD3, 12: CAT_CARD4, 13: CAT_CARD5 ");
-
+        int deletedcardcount=1;
+        while (deletedcardcount < 3) {
+            for (int i = 0; i < currentPlayer.getHand().size(); i++) {
+                if (currentPlayer.getHand().get(i).getType() == cardType) {
+                    Card playedCard = currentPlayer.getHand().get(i);
+                    currentPlayer.getHand().remove(playedCard);
+                    deletedcardcount++;
+                }
+            }
+        }
         Scanner scanner = new Scanner(System.in);
         int chosenType = scanner.nextInt();
 
@@ -324,11 +333,11 @@ public class Game {
     private boolean getNopeCardPlayed() {
         return nopeCardPlayed;
     }
-    public void playCard(int cardIndex) {
+    public String playCard(int cardIndex) {
         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().size() && currentPlayer.getHand().get(cardIndex).playable()) {
             playedCard = currentPlayer.getHand().get(cardIndex);
             currentPlayer.getHand().remove(playedCard);
-            clientTui.playCardMessage(currentPlayer.getName(), playedCard);
+            //clientTui.playCardMessage(currentPlayer.getName(), playedCard);
             //System.out.println(name + " played a " + playedCard.getType() + " card.");
             discardPile.addCard(playedCard);
             switch (playedCard.getType()) {
@@ -362,23 +371,23 @@ public class Game {
                     playedCard.seeTheFuture(deck, currentPlayer);
                     break;
                 case CAT_CARD1:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD1, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD1, currentPlayer);
+
                 case CAT_CARD2:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD2, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD2, currentPlayer);
+
                 case CAT_CARD3:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD3, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD3, currentPlayer);
+
                 case CAT_CARD4:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD4, currentPlayer);
-                    break;
+                     return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD4, currentPlayer);
+
                 case CAT_CARD5:
-                    currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD5, currentPlayer);
-                    break;
+                    return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD5, currentPlayer);
+
                 case FAVOR:
                     this.askPlayersNope();
-                    chooseplayer();
+                    favor();
                     break;
                 case ATTACK:
                     this.askPlayersNope();
@@ -393,27 +402,28 @@ public class Game {
             //System.out.println("Invalid card index. Choose a card within the valid range.");
 
         }
+        return null;
     }
-    public void chooseplayer() {
-        Scanner scanner = new Scanner(System.in);
-        clientTui.choosePlayerMessage(1);
-        //System.out.println("Choose a player to take a card from (enter the player index): ");
-        for (int i = 0; i < this.getPlayers().size(); i++) {
-            if (!Objects.equals(this.getPlayers().get(i).getName(), currentPlayer.getName())) {
-                clientTui.choosePlayerMessage(this, i);
-                //System.out.println(i +" "+ game.getPlayers().get(i).getName());
-            }
-        }
-
-        int playerIndex = scanner.nextInt();
-        if (playerIndex < this.getPlayers().size()) {
-            targetPlayer = this.getPlayers().get(playerIndex);
-            favor();
-        } else {
-            clientTui.choosePlayerMessage(2);
-            //System.out.println("Invalid player index. Choose a player within the valid range.");
-        }
-    }
+//    public void chooseplayer(Player1 targetPlayer) {
+//        Scanner scanner = new Scanner(System.in);
+//        clientTui.choosePlayerMessage(1);
+//        //System.out.println("Choose a player to take a card from (enter the player index): ");
+//        for (int i = 0; i < this.getPlayers().size(); i++) {
+//            if (!Objects.equals(this.getPlayers().get(i).getName(), currentPlayer.getName())) {
+//                clientTui.choosePlayerMessage(this, i);
+//                //System.out.println(i +" "+ game.getPlayers().get(i).getName());
+//            }
+//        }
+//
+//        int playerIndex = scanner.nextInt();
+//        if (playerIndex < this.getPlayers().size()) {
+//            targetPlayer = this.getPlayers().get(playerIndex);
+//            favor();
+//        } else {
+//            clientTui.choosePlayerMessage(2);
+//            //System.out.println("Invalid player index. Choose a player within the valid range.");
+//        }
+//    }
     public void favor() {
         clientTui.favorMessage(currentPlayer.getName(), targetPlayer);
         //System.out.println(name + " played a Favor card. " + targetPlayer.getName() + " must give you a card.");
@@ -430,7 +440,6 @@ public class Game {
                 }
             }
         }
-        chooseplayer();
     }
     public void setTargetPlayer(Player1 player) {
         this.targetPlayer = player;
@@ -463,7 +472,6 @@ public class Game {
     public void giveCard(Card card) {
         targetPlayer.getHand().remove(card);
         currentPlayer.getHand().add(card);
-        clientTui.giveCardMessage(targetPlayer.getName(), currentPlayer, card);
         //System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
     }
 
@@ -489,6 +497,6 @@ public class Game {
                 return player;
             }
         }
-        return null;
+        throw new IllegalArgumentException("player doesnt Exist");
     }
 }

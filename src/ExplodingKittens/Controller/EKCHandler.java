@@ -115,7 +115,10 @@ public class EKCHandler implements Runnable {
                 }
                 break;
             case ProtocolMessages.PLAY_CARD:
-                server.playCardcmd(CardType.valueOf(words[1]));
+                out.write(ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + words[1]);
+                out.newLine();
+                out.flush();
+                out.write(server.playCardcmd(CardType.valueOf(words[1])));
                 out.newLine();
                 out.flush();
                 break;
@@ -147,7 +150,7 @@ public class EKCHandler implements Runnable {
                     break;
                 } else if (words[2].equals("3")){
                     server.getGame().setTargetPlayer(server.getGame().getPlayer(words[3]));
-                    server.playCombo3();
+                    server.playCombo3(CardType.valueOf(words[1]));
                     out.write("Played favor");
                     out.newLine();
                     out.flush();
@@ -186,6 +189,10 @@ public class EKCHandler implements Runnable {
                 out.newLine();
                 out.flush();
                 break;
+            case ProtocolMessages.GENERAL_CARD_RESPONSE:
+                out.write((server.giveCard(new Card(CardType.valueOf(words[1])))));
+                out.newLine();
+                out.flush();
             default:
                 out.write("Command not found");
                 out.newLine();

@@ -43,7 +43,7 @@ public class Hand {
     public void add(Card takenCard) {
         hand.add(takenCard);
     }
-    public void catCardsInHand(CardType typeCard, Player1 player) {
+    public String catCardsInHand(CardType typeCard, Player1 player) {
         int catCardCount = 1;
         int deletedcardcount = 1;
         for (Card card : getHandlist()) {
@@ -51,11 +51,12 @@ public class Hand {
                 catCardCount++;
             }
         }
-        clientTui.catCardsInHandMessage(player.getName(), typeCard, catCardCount);
-        //System.out.println(name + " has " + catCardCount + " " + typeCard + " in hand.");
+        //clientTui.catCardsInHandMessage(player.getName(), typeCard, catCardCount);
+        //return(player.getName() + " has " + catCardCount + " " + typeCard + " in hand.");
         if (catCardCount == 1) {
-            clientTui.catCardsInHandMessage(typeCard, 1);
-            //System.out.println("You need at least 1 more " + typeCard + " to play this card as an action card");
+
+            //clientTui.catCardsInHandMessage(typeCard, 1);
+            return ("You need at least 1 more " + typeCard + " to play this card as an action card");
         } else if (catCardCount == 2) {
             clientTui.catCardsInHandMessage(typeCard, 2);
             //System.out.println("Do you want to play the 2 " + typeCard + " card? (yes/no)");
@@ -72,7 +73,7 @@ public class Hand {
 
         }
         else if (catCardCount >= 3) {
-            clientTui.catCardsInHandMessage(typeCard, 2);
+            //clientTui.catCardsInHandMessage(typeCard, 2);
             //System.out.println("Do you want to play the 2 " + typeCard + " card? (yes/no)");
             Scanner scanner = new Scanner(System.in);
             String response = scanner.nextLine().toLowerCase();
@@ -100,6 +101,7 @@ public class Hand {
                 }
             }
         }
+        return null;
     }
     public boolean hasDefuseCard() {
         for (Card card : hand) {
