@@ -21,7 +21,7 @@ public class ProtocolMessages {
 
     /////////////////server to client/////////////////////
     public static final String GENERAL_CARD_RESPONSE = "GENERAL_CARD_RESPONSE"; // [par] card_value (GENERAL_CARD_RESPONSE~card_value) // tells the receiver that the sender has played a card //to: all clients
-
+    public static final String DRAWN = "DRAWN"; // [par] card_value (DRAWN~card_value) // tells the client that he has drawn a card //to: client that drew the card
     public static final String CONNECTED = "CONNECTED"; // [par] none (CONNECTED) // tells the client that the connection was succesfull//to: client that sent the connect command
     public static final String GAME_STARTED = "GAME_STARTED"; // [par] EXTENSIONS (GAME_STARTED~POSSIBLE-EXTENSIONS) // tells the client that the game has started//to: all clients
     public static final String TURN = "TURN"; // [par] username (TURN~username) // tells the client that it is his turn //to: ALL CLIENTS

@@ -47,12 +47,13 @@ public class Game {
     public void gameStart(){
         initilializehands();
         currentPlayerIndex = 0;
-        while (!this.isGameOver()) {
-            this.turn();
-        }
+
     }
     public Game getGame(){
         return this;
+    }
+    public boolean isCardPlayed(){
+        return playedCard != null;
     }
 
     private void initializeDeck() {
@@ -123,6 +124,7 @@ public class Game {
         } else {
             endTurn();
         }
+        playedCard = null;
     }
     public void choosePlayerChoice() {
         Scanner scanner = new Scanner(System.in);
@@ -179,11 +181,11 @@ public class Game {
     }
 
     private int getPlayerInput() {
+
         Scanner scanner = new Scanner(System.in);
         int cardIndex;
-
         do {
-           // clientTui.getPlayerInputMessage(currentPlayer);
+           clientTui.getPlayerInputMessage(currentPlayer);
             //System.out.println(currentPlayer.getName() + ", choose a card to play (enter the card index): ");
             for (int i = 0; i < currentPlayer.getHand().size(); i++) {
 
