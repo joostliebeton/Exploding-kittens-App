@@ -40,7 +40,7 @@ public Player1(String name, Game game){
     //setters
     public String setTurnsToSkip(int turnsToSkip, int oldTurnsToSkip) {
         this.turnsToSkip = turnsToSkip+oldTurnsToSkip;
-        return "" + this.turnsToSkip;
+        return ("" + this.turnsToSkip+ 13);
     }
     public void setExtraTurns(int extraTurns, int oldTurns) {
         this.extraTurns = oldTurns + extraTurns;

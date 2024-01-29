@@ -32,7 +32,7 @@ public class Card {
         }
     }
 
-    public String seeTheFuture(Deck deck, Player1 player){
+    public String seeTheFuture(Deck deck){
         if (!(deck.isEmpty())) {
             StringBuilder responseBuilder = new StringBuilder();
             responseBuilder.append(ProtocolMessages.FUTURE).append(ProtocolMessages.DELIMITER);

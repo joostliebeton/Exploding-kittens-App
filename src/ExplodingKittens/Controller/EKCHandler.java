@@ -111,29 +111,36 @@ public class EKCHandler implements Runnable {
                     }
                 }
                 break;
-            case ProtocolMessages.PLAY_CARD:
-                if(Objects.equals(server.getGame().getCurrentPlayer().getName(), name)){
-                    if (words[1].equals("NOPE")){
-                        //server.playNopecmd();
-                        out.write(ProtocolMessages.GETS_NOPED+ ProtocolMessages.DELIMITER +
-                                server.getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + server.getGame().playedCard + ProtocolMessages.DELIMITER+
-                                server.getGame().getTargetPlayer().getName());
-                        out.newLine();
-                        out.flush();
-                        break;
-                    } else if (words[1].isEmpty()){
-                        out.write("No card selected");
-                        out.newLine();
-                        out.flush();
-                        break;
-                    }else {
-                        out.write(server.playCardcmd(CardType.valueOf(words[1])));
-                        out.newLine();
-                        out.flush();
-                        break;
-                    }
-                } else {
-                    out.write("Not your turn");
+                case ProtocolMessages.PLAY_CARD:
+                    try {
+                        if (Objects.equals(server.getGame().getCurrentPlayer().getName(), name)) {
+                            if (words[1].equals("NOPE")) {
+                                //server.playNopecmd();
+                                out.write(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
+                                        server.getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + server.getGame().playedCard + ProtocolMessages.DELIMITER +
+                                        server.getGame().getTargetPlayer().getName());
+                                out.newLine();
+                                out.flush();
+                                break;
+                            } else if (words[1].isEmpty()) {
+                                out.write("No card selected");
+                                out.newLine();
+                                out.flush();
+                                break;
+                            } else {
+                                out.write(server.playCardcmd(CardType.valueOf(words[1])));
+                                out.newLine();
+                                out.flush();
+                                break;
+                            }
+                        } else {
+                            out.write("Not your turn");
+                            out.newLine();
+                            out.flush();
+                            break;
+                        }
+                }catch (IllegalArgumentException e){
+                    out.write("CARD NOT FOUND");
                     out.newLine();
                     out.flush();
                     break;
@@ -144,6 +151,7 @@ public class EKCHandler implements Runnable {
                 out.flush();
                 server.getGame().getCurrentPlayer().setExtraTurns(-1, server.getGame().getCurrentPlayer().getExtraTurns());
                 if(server.getGame().getCurrentPlayer().getExtraTurns() == -1){
+                    server.getGame().getCurrentPlayer().setExtraTurns(0,0);
                     server.getGame().nextCurrentPlayer();;
                     server.turnMessage();
                     if (server.getGame().getCurrentPlayer() instanceof ComputerPlayer){

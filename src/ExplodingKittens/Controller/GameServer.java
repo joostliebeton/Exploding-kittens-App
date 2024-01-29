@@ -182,7 +182,7 @@ public class GameServer implements Runnable {
                     return true;
                 }
             }
-//                            return (ProtocolMessages.PLAY_NOPED + ProtocolMessages.DELIMITER + cardType.name());
+//                           return (ProtocolMessages.PLAY_NOPED + ProtocolMessages.DELIMITER + cardType.name());
         }
         return false;
     }
@@ -244,6 +244,7 @@ public class GameServer implements Runnable {
 
     public String drawCard() {
         Player1 currentplayer = game.getCurrentPlayer();
+        sendMessageToAllOtherPlayers(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + "drew a card");
         return game.drawCard(currentplayer);
     }
     public void chooseCardInHand(CardType cardType){

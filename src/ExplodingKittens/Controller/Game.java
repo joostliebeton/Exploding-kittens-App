@@ -252,12 +252,14 @@ public class Game {
         }
     }
 
-    public void eliminatePlayer(Player1 player) {
+    public String eliminatePlayer(Player1 player) {
         players.remove(player);
         eliminatedplayers.add(player);
+
         //clientTui.eliminatePlayerMessage(player);
         //System.out.println(player.getName() + " has been eliminated!");
         currentPlayerIndex = (currentPlayerIndex - 1) % players.size();
+        return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER +  player .getName() + " has been eliminated!")
     }
 
     public ArrayList<Player1> getEliminatedPlayers() {
@@ -288,32 +290,15 @@ public class Game {
             if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
                 // Check if the player has a Defuse card
                 if (player.getHand().hasDefuseCard()) {
-                    // Player has a Defuse card, ask if they want to play it
-                    //clientTui.drawCardMessage(player.getName(), 1);
-                    //System.out.println(name + ", you drew an Exploding Kitten! Do you want to play a Defuse card? (yes/no)");
-                    Scanner scanner = new Scanner(System.in);
-                    String response = scanner.nextLine().toLowerCase();
-
-                    if (response.equals("yes")) {
-                        // Player wants to play Defuse card
-                        playCard(currentPlayer.getHand().indexOf(drawnCard));
-                        //clientTui.drawCardMessage(currentPlayer.getName(), 2);
-                        //// ask the player to put the card somewhere in the deck 0 < i < deck.length() deck.addCard(i, card)
-                        //System.out.println(name + " played a Defuse card.");
-                    } else {
-                        // Player does not want to play Defuse card, eliminate them
-                        eliminatePlayer(currentPlayer);
+                   //player.getHand().remove(player.getHand().get(player.getHand().indexOf(card.CardType.DEFUSE)));
                     }
                 } else {
                     // Player does not have a Defuse card, eliminate them
                     eliminatePlayer(currentPlayer);
                 }
             }
-            return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + "drew a card";
-
+            return (ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + drawnCard.getType());
         }
-        return null;
-    }
     public void askNope(Player1 player, int index) {
         Scanner scanner = new Scanner(System.in);
         //clientTui.askNopeMessage(1);
@@ -355,7 +340,7 @@ public class Game {
                     return ((currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip())));
                 case SEE_THE_FUTURE:
                     //this.askPlayersNope();
-                    return (playedCard.seeTheFuture(deck, currentPlayer));
+                    return (playedCard.seeTheFuture(this.deck));
 
                 case CAT_CARD1:
                     return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD1, currentPlayer);
