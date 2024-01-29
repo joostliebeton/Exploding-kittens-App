@@ -103,6 +103,8 @@ public class ClientTUI {
                         break;
                     case "favor":
                         break;
+                    case "play_combo":
+                        playerClient.PlayCombo(inputs[1], inputs[2]);
                     case "draw":
                         playerClient.doDrawCard();
                         break;

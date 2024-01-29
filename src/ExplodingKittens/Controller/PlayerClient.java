@@ -419,4 +419,8 @@ public class PlayerClient {
 //        playerClientTUI.showMessage("> " + readLineFromServer());
 
     }
+
+    public void PlayCombo(String input, String input1) throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.PLAY_COMBO + ProtocolMessages.DELIMITER + input + ProtocolMessages.DELIMITER + input1);
+    }
 }

@@ -287,15 +287,15 @@ public class Game {
 
             //clientTui.drawCardMessage(player.getName(), drawnCard);
             //System.out.println(name + " drew a " + drawnCard.getType() + " card.");
-            if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
-                // Check if the player has a Defuse card
-                if (player.getHand().hasDefuseCard()) {
-                   //player.getHand().remove(player.getHand().get(player.getHand().indexOf(card.CardType.DEFUSE)));
-                    }
-                } else {
-                    // Player does not have a Defuse card, eliminate them
-                    eliminatePlayer(currentPlayer);
-                }
+//            if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
+//                // Check if the player has a Defuse card
+//                if (player.getHand().hasDefuseCard()) {
+//                   //player.getHand().remove(player.getHand().get(player.getHand().indexOf(card.CardType.DEFUSE)));
+//                    }
+//                } else {
+//                    // Player does not have a Defuse card, eliminate them
+//                    eliminatePlayer(currentPlayer);
+//                }
             }
             return (ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + drawnCard.getType());
         }
