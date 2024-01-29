@@ -259,7 +259,7 @@ public class Game {
         //clientTui.eliminatePlayerMessage(player);
         //System.out.println(player.getName() + " has been eliminated!");
         currentPlayerIndex = (currentPlayerIndex - 1) % players.size();
-        return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER +  player .getName() + " has been eliminated!")
+        return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER +  player .getName() + " has been eliminated!");
     }
 
     public ArrayList<Player1> getEliminatedPlayers() {
