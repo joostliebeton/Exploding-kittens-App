@@ -2,10 +2,12 @@ package ExplodingKittens.Controller;
 
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
+import ExplodingKittens.Model.ComputerPlayer;
 
 import javax.management.monitor.StringMonitor;
 import java.io.*;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.logging.Handler;
 
 public class EKCHandler implements Runnable {
@@ -87,41 +89,82 @@ public class EKCHandler implements Runnable {
                 break;
             case ProtocolMessages.REQUEST_GAME:
                 if(server.getGame().getPlayers().size() >=2 && Integer.parseInt(words[1]) ==server.getGame().getPlayers().size()) {
-                    out.write(ProtocolMessages.GAME_STARTED);
-                    out.newLine();
-                    out.flush();
                     server.startGameProcess();
+                    out.write(ProtocolMessages.GAME_STARTED);
                     out.newLine();
                     out.flush();
                 } else if((Integer.parseInt(words[1]) >=2)) {
                     if (server.getGame().getPlayers().size() >= Integer.parseInt(words[1])) {
-                        out.write(ProtocolMessages.GAME_STARTED);
-                        out.newLine();
-                        out.flush();
                         server.startGameProcess();
+                        out.write(ProtocolMessages.GAME_STARTED);
                         out.newLine();
                         out.flush();
                     } else if ((Integer.parseInt(words[1]) > server.getGame().getPlayers().size())) {
                         for (int i = server.getGame().getPlayers().size(); i < Integer.parseInt(words[1]); i++) {
                             server.addComputerplayer("Computer" + i);
                         }
+                        server.startGameProcess();
                         out.write(ProtocolMessages.GAME_STARTED);
                         out.newLine();
                         out.flush();
-                        server.startGameProcess();
-                        out.newLine();
-                        out.flush();
+
                     }
                 }
                 break;
-            case ProtocolMessages.PLAY_CARD:
-                server.playCardcmd(CardType.valueOf(words[1]));
+                case ProtocolMessages.PLAY_CARD:
+                    try {
+                        if (Objects.equals(server.getGame().getCurrentPlayer().getName(), name)) {
+                            if (words[1].equals("NOPE")) {
+                                //server.playNopecmd();
+                                out.write(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
+                                        server.getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + server.getGame().playedCard + ProtocolMessages.DELIMITER +
+                                        server.getGame().getTargetPlayer().getName());
+                                out.newLine();
+                                out.flush();
+                                break;
+                            } else if (words[1].isEmpty()) {
+                                out.write("No card selected");
+                                out.newLine();
+                                out.flush();
+                                break;
+                            } else {
+                                out.write(server.playCardcmd(CardType.valueOf(words[1])));
+                                out.newLine();
+                                out.flush();
+                                break;
+                            }
+                        } else {
+                            out.write("Not your turn");
+                            out.newLine();
+                            out.flush();
+                            break;
+                        }
+                }catch (IllegalArgumentException e){
+                    out.write("CARD NOT FOUND");
+                    out.newLine();
+                    out.flush();
+                    break;
+                }
+            case ProtocolMessages.DRAW_CARD:
+                out.write(server.drawCard());
                 out.newLine();
                 out.flush();
-                break;
-            case ProtocolMessages.DRAW_CARD:
-                server.drawCard();
-                out.write(server.getGame().getCurrentPlayer().getName() + "drew a card");
+                server.getGame().getCurrentPlayer().setExtraTurns(-1, server.getGame().getCurrentPlayer().getExtraTurns());
+                if(server.getGame().getCurrentPlayer().getExtraTurns() == -1){
+                    server.getGame().getCurrentPlayer().setExtraTurns(0,0);
+                    server.getGame().nextCurrentPlayer();;
+                    server.turnMessage();
+                    if (server.getGame().getCurrentPlayer() instanceof ComputerPlayer){
+                        server.playCard(server.getGame().getCurrentPlayer().turn());
+                        server.drawCard();
+                        if(server.getGame().getCurrentPlayer().getExtraTurns() == -1) {
+                            server.getGame().nextCurrentPlayer();
+                            server.turnMessage();
+                        }
+                    }
+                    break;
+                }
+                out.write("you have to draw another card");
                 out.newLine();
                 out.flush();
                 break;
@@ -147,7 +190,7 @@ public class EKCHandler implements Runnable {
                     break;
                 } else if (words[2].equals("3")){
                     server.getGame().setTargetPlayer(server.getGame().getPlayer(words[3]));
-                    server.playCombo3();
+                    server.playCombo3(CardType.valueOf(words[1]));
                     out.write("Played favor");
                     out.newLine();
                     out.flush();
@@ -185,6 +228,13 @@ public class EKCHandler implements Runnable {
                 out.write(server.requestCardsInHand(this.name));
                 out.newLine();
                 out.flush();
+                break;
+            case ProtocolMessages.GENERAL_CARD_RESPONSE:
+                out.write((server.giveCard(new Card(CardType.valueOf(words[1])))));
+                out.newLine();
+                out.flush();
+                break;
+            case "":
                 break;
             default:
                 out.write("Command not found");

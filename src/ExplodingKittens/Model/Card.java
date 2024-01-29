@@ -1,6 +1,7 @@
 package ExplodingKittens.Model;
 
 
+import ExplodingKittens.Controller.ProtocolMessages;
 import ExplodingKittens.View.ClientTUI;
 
 public class Card {
@@ -31,27 +32,32 @@ public class Card {
         }
     }
 
-    public void seeTheFuture(Deck deck, Player1 player){
+    public String seeTheFuture(Deck deck){
         if (!(deck.isEmpty())) {
+            StringBuilder responseBuilder = new StringBuilder();
+            responseBuilder.append(ProtocolMessages.FUTURE).append(ProtocolMessages.DELIMITER);
             Card[] cards = deck.peek();
-
             for (Card card : cards) {
-
+                responseBuilder.append(card.getType()).append(ProtocolMessages.DELIMITER);
             }
+            if (!(cards.length == 0)) {
+                responseBuilder.deleteCharAt(responseBuilder.length() - 1);
+            }
+            return (responseBuilder.toString());
         } else {
-
+            return ("DECK IS EMPTY");
         }
     }
     public void  Nope(){
         //make a new method for nope only when the other things are done.
         }
-    public void Shuffle(Deck deck, Player1 player) {
+    public String Shuffle(Deck deck) {
         if (deck != null) {
             deck.shuffle();
+            return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER);
 
-        //System.out.println(player.getName() + " shuffled the deck.");
         } else {
-
+            return ("DECK IS NULL");
         //System.out.println("Error: Deck reference is null.");
         }
     }
@@ -68,5 +74,16 @@ public class Card {
     }
 
 
+    public boolean isActionCard() {
+        return getType() == CardType.ATTACK || getType() == CardType.FAVOR || getType() == CardType.SHUFFLE || getType() == CardType.SEE_THE_FUTURE || getType() == CardType.SKIP || getType() == CardType.NOPE;
+    }
+
+    public boolean isCatCard() {
+        if (getType() == CardType.CAT_CARD1 || getType() == CardType.CAT_CARD2 || getType() == CardType.CAT_CARD3 || getType() == CardType.CAT_CARD4 || getType() == CardType.CAT_CARD5) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
