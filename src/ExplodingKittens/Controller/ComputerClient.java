@@ -1,7 +1,10 @@
 package ExplodingKittens.Controller;
 
+import ExplodingKittens.Model.Card;
+import ExplodingKittens.Model.CardType;
 import ExplodingKittens.Model.Player1;
 import ExplodingKittens.View.ClientTUI;
+import ExplodingKittens.View.ComputerTUI;
 import ExplodingKittens.exceptions.ExitProgram;
 import ExplodingKittens.exceptions.ProtocolException;
 import ExplodingKittens.exceptions.ServerUnavailableException;
@@ -9,22 +12,23 @@ import ExplodingKittens.exceptions.ServerUnavailableException;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Objects;
 
-public class PlayerClient {
+public class ComputerClient {
     private Socket serverSock;
     private BufferedReader in;
     private BufferedWriter out;
-    private ClientTUI playerClientTUI;
+    private ComputerTUI playerClientTUI;
     private Player1 player;
     private String name;
     /**
      * Constructs a new PlayerClient. Initialises the view.
      */
-    public PlayerClient() {
+    public ComputerClient() {
         ///implement//////
-        this.playerClientTUI = new ClientTUI(this);
+        this.playerClientTUI = new ComputerTUI(this);
 
         // To be implemented
     }
@@ -51,14 +55,7 @@ public class PlayerClient {
                 } catch (ServerUnavailableException e) {
                     System.out.println("Error " + e);
                     System.out.println("New connection (yes/no)? ");
-                    try {
-                        String input = in.readLine();
-                        if (input.equalsIgnoreCase("yes")) {
-                            start();
-                        }
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    start();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -89,7 +86,7 @@ public class PlayerClient {
 //            int port = playerClientTUI.getInt("Please enter the server port.");
             int port = 8888;
             try {
-                this.name = playerClientTUI.getString("Please enter your name.");
+                this.name = playerClientTUI.getString("Computer" + (int) (Math.random() * 1000));
                 while (this.name.isEmpty() || this.name.isBlank()) {
                     this.name = playerClientTUI.getString("Please enter your name.");
                 }
@@ -187,7 +184,7 @@ public class PlayerClient {
                         break;
                     case ProtocolMessages.TURN:
                         if (this.name.equals(answer.split(ProtocolMessages.DELIMITER)[1])) {
-                            playerClientTUI.showMessage("it's your turn");
+                            sendMessage(ProtocolMessages.DRAW_CARD);
                             //playerClientTUI.showMessage("It's your turn!");
                         } else {
                             //playerClientTUI.showMessage("It's " + answer.split(ProtocolMessages.DELIMITER)[1] + "'s turn!");
@@ -202,6 +199,12 @@ public class PlayerClient {
                     case ProtocolMessages.PICK_CARD_IN_HAND:
                         playerClientTUI.showMessage("you where chosen by the favor card");
                         playerClientTUI.showMessage("Please enter the card you want to give");
+                        ArrayList<Card> cards = new ArrayList<>();
+                        sendMessage(ProtocolMessages.REQUEST_CARDS_IN_HAND);
+                        for (int i = 1; i < entries.length; i++) {
+                            cards.add(new Card(CardType.valueOf(entries[i])));
+                        }
+                        sendMessage(ProtocolMessages.CHOOSE_CARD_IN_HAND + ProtocolMessages.DELIMITER +cards.get(1));
                         break;
                     case ProtocolMessages.GAME_STARTED:
                         playerClientTUI.showMessage("The game has started");
@@ -234,6 +237,7 @@ public class PlayerClient {
                         break;
                     case ProtocolMessages.DRAWN:
                         if (entries[1].equals("EXPLODING_KITTEN")){
+                            sendMessage(ProtocolMessages.PLAY_DEFUSE + ProtocolMessages.DELIMITER + 10);
                             playerClientTUI.showMessage("You have drawn an exploding kitten. \n luckily you can defuse it with your defuse card. return play DEFUSE (index)");
                         }
                     default:
@@ -243,6 +247,8 @@ public class PlayerClient {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ServerUnavailableException e) {
+            throw new RuntimeException(e);
         }
     }
     public String readLineFromServer() throws ServerUnavailableException {
@@ -419,7 +425,7 @@ public class PlayerClient {
         }
     }
     public static void main(String[] args) {
-        (new PlayerClient()).run();
+        (new ComputerClient()).run();
     }
     public void run(){
         try {

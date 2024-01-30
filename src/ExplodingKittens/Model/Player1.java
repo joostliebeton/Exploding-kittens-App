@@ -52,15 +52,6 @@ public Player1(String name, Game game){
     public Card getPlayedCard() {
         return playedCard;
     }
-
-    public boolean isComputer() {
-        if (this instanceof ComputerPlayer) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public int turn() {
         return 0;
     }

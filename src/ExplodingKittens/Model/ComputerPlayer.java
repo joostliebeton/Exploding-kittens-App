@@ -11,28 +11,6 @@ public class ComputerPlayer extends Player1 {
 
     }
 
-    public int turn(){
-        for (Card card : getHandList()){
-            if (card.isActionCard()){
-                int play = (int) (Math.random() * 1);
-                if (play == 1) {
-                    return hand.indexOf(card);
-                }
-            }
-            if (card.isCatCard()){
-                for (Card card1: getHandList()){
-                    if (card1.getType() == card.getType()){
-                        int play = (int) (Math.random() * 1);
-                        if (play == 1) {
-                            return hand.indexOf(card);
-                        }
-                    }
-                }
-            }
-        }
-        return-1;
-    }
-
 
     public Game getGame(){
         return game;
