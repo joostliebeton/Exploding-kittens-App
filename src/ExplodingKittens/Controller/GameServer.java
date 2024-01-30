@@ -111,14 +111,14 @@ public class GameServer implements Runnable {
         int port = 8888;
             // try to open a new ServerSocket
             try {
-                view.showMessage("Attempting to open a socket at 127.0.0.1 "
+                view.showMessage("Attempting to open a socket at 145.126.38.21 "
                         + "on port " + port + "...");
                 ssock = new ServerSocket(port, 0,
-                        InetAddress.getByName("127.0.0.1"));
+                        InetAddress.getByName("145.126.38.21"));
                 view.showMessage("Server started at port " + port);
             } catch (IOException e) {
                 view.showMessage("ERROR: could not create a socket on "
-                        + "127.0.0.1" + " and port " + port + ".");
+                        + "145.126.38.21" + " and port " + port + ".");
 
                 if (!view.getBoolean("Do you want to try again?")) {
                     throw new ExitProgram("User indicated to exit the "
@@ -296,7 +296,12 @@ public class GameServer implements Runnable {
     public String drawCard() {
         Player1 currentplayer = game.getCurrentPlayer();
         sendMessageToAllOtherPlayers(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + "drew a card");
-        return game.drawCard(currentplayer);
+        String answer = game.drawCard(currentplayer);
+        if (answer.contains("EXPLODING_KITTEN")){
+            sendMessageToAllOtherPlayers(ProtocolMessages.ANNOUNCEMENT+ ProtocolMessages.DELIMITER + "EXPLODING_KITTEN");
+            return("EXPLODING_KITTEN");
+        };
+        return answer;
     }
     public void chooseCardInHand(CardType cardType, Player1 victimplayer) {
         //first remove card
@@ -336,8 +341,11 @@ public class GameServer implements Runnable {
         return ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + game.getTargetPlayer() + ProtocolMessages.DELIMITER + game.getCurrentPlayer();
 
     }
-    public void playCombo2(CardType cardType){
-        game.getCurrentPlayer().getGame().twoCards(cardType);
+    public String playCombo2(CardType cardType){
+        game.getCurrentPlayer().getHand().add(new Card(CardType.FAVOR));
+        game.getCurrentPlayer().getHand().remove(getCardIndex(cardType, game.getCurrentPlayer()));
+        game.getCurrentPlayer().getHand().remove(getCardIndex(cardType, game.getCurrentPlayer()));
+        return playFavor(game.getTargetPlayer());
     }
     public String playCombo3(CardType cardType){
         game.favorChoice(cardType);

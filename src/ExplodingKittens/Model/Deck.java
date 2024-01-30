@@ -24,18 +24,18 @@ public class Deck{
         }
         shuffle();
     }
-    private int getInitialCardCount(CardType type) {
+    public int getInitialCardCount(CardType type) {
         // Return the initial count for each card type
         // You can customize this based on the rules of the game
         switch (type) {
             case EXPLODING_KITTEN:
-                return 1; //4
+                return 30; //4
             case DEFUSE:
-                return 3; //6
+                return 40; //6
             case SKIP:
-                return 10;
-            case ATTACK:
                 return 4;
+            case ATTACK:
+                return 10;
             case FAVOR:
                 return 4;
             case SEE_THE_FUTURE:

@@ -88,12 +88,12 @@ public class EKCHandler implements Runnable {
                 out.flush();
                 break;
             case ProtocolMessages.REQUEST_GAME:
-                if(server.getGame().getPlayers().size() >=2 && Integer.parseInt(words[1]) ==server.getGame().getPlayers().size()) {
+                if (server.getGame().getPlayers().size() >= 2 && Integer.parseInt(words[1]) == server.getGame().getPlayers().size()) {
                     server.startGameProcess();
                     out.write(ProtocolMessages.GAME_STARTED);
                     out.newLine();
                     out.flush();
-                } else if((Integer.parseInt(words[1]) >=2)) {
+                } else if ((Integer.parseInt(words[1]) >= 2)) {
                     if (server.getGame().getPlayers().size() >= Integer.parseInt(words[1])) {
                         server.startGameProcess();
                         out.write(ProtocolMessages.GAME_STARTED);
@@ -111,54 +111,56 @@ public class EKCHandler implements Runnable {
                     }
                 }
                 break;
-                case ProtocolMessages.PLAY_CARD:
-                    try {
-                        if (words[1].equals("NOPE")) {
-                            server.playerWhoNoped = server.getGame().getPlayer(name);
-                            server.nopecardPlayed = true;
-                            server.nopeanswer = true;
-                            server.getGame().getPlayer(this.name).getHand().remove(new Card(CardType.NOPE));
-                            server.getGame().getCurrentPlayer().getHand().remove(server.getGame().cardBeforeNope);
-                            server.sendMessageToAllPlayers(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
-                                    this.name + ProtocolMessages.DELIMITER + server.getGame().playedCard.toString() + ProtocolMessages.DELIMITER +
-                                    server.getGame().getCurrentPlayer().getName());
-                            //server.playNopecmd();
+            case ProtocolMessages.PLAY_CARD:
+                try {
+                    if (words[1].equals("NOPE")) {
+                        server.playerWhoNoped = server.getGame().getPlayer(name);
+                        server.nopecardPlayed = true;
+                        server.nopeanswer = true;
+                        server.getGame().getPlayer(this.name).getHand().remove(server.getGame().getPlayer(this.name).getHand().indexOf(CardType.NOPE));
+                        server.getGame().playerBeforeNope.getHand().remove(server.getGame().cardBeforeNope);
+                        server.sendMessageToAllPlayers(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
+                                this.name + ProtocolMessages.DELIMITER + server.getGame().cardBeforeNope.toString() + ProtocolMessages.DELIMITER +
+                                server.getGame().getCurrentPlayer().getName());
+                        //server.playNopecmd();
 //                            out.write(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
 //                                    this.name + ProtocolMessages.DELIMITER + server.getGame().playedCard + ProtocolMessages.DELIMITER +
 //                                    server.getGame().getCurrentPlayer().getName());
 //                            out.newLine();
 //                            out.flush();
-                            server.nopecardPlayed = false;
-                            server.nopeanswer = false;
-                            server.turnMessage();
+                        server.nopecardPlayed = false;
+                        server.nopeanswer = false;
+                        server.turnMessage();
+                        break;
+                    } else if (Objects.equals(server.getGame().getCurrentPlayer().getName(), name)) {
+                        if (words[1].isEmpty()) {
+                            out.write("No card selected");
+                            out.newLine();
+                            out.flush();
                             break;
-                        } else if (Objects.equals(server.getGame().getCurrentPlayer().getName(), name)) {
-                            if (words[1].isEmpty()) {
-                                out.write("No card selected");
-                                out.newLine();
-                                out.flush();
+                        } else if (words[1].equals("SKIP") || words[1].equals("ATTACK")) {
+                            out.write(server.playCardcmd(CardType.valueOf(words[1]), server.getGame().getPlayer(name)));
+                            out.newLine();
+                            out.flush();
+                            if (server.getGame().getPlayer(this.name).getExtraTurns() == -1) {
+                                server.getGame().nextCurrentPlayer();
+                                server.turnMessage();
+                                server.getGame().getPlayer(this.name).setExtraTurns(0, 0);
                                 break;
-                            } else if (words[1].equals("SKIP")){
-                                out.write(server.playCardcmd(CardType.valueOf(words[1]), server.getGame().getPlayer(name)));
-                                out.newLine();
-                                out.flush();
-                                if (server.getGame().getPlayer(this.name).getExtraTurns() == -1) {
-                                    server.getGame().nextCurrentPlayer();
-                                    server.turnMessage();
-                                }
-                            }else {
-                                out.write(server.playCardcmd(CardType.valueOf(words[1]), server.getGame().getPlayer(name)));
-                                out.newLine();
-                                out.flush();
-                                break;
-                            }
-                            break;
-                        } else {
-                            out.write("Not your turn");
+                            }break;
+                        } else{
+                            out.write(server.playCardcmd(CardType.valueOf(words[1]), server.getGame().getPlayer(name)));
                             out.newLine();
                             out.flush();
                             break;
                         }
+
+                } else{
+                out.write("Not your turn");
+                out.newLine();
+                out.flush();
+                break;
+            }
                 }catch (IllegalArgumentException e){
                     out.write("CARD NOT FOUND");
                     out.newLine();
@@ -166,15 +168,27 @@ public class EKCHandler implements Runnable {
                     break;
                 }
             case ProtocolMessages.DRAW_CARD:
+
                 if (Objects.equals(this.name, server.getGame().getCurrentPlayer().getName())) {
-                    out.write(server.drawCard());
-                    out.newLine();
-                    out.flush();
+                    String answer = server.drawCard();
+                    if (answer.equals("EXPLODING_KITTEN")){
+                        out.write(ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + answer);
+                        out.newLine();
+                        out.flush();
+                        out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "the deck is of size:" + server.getGame().getDeckLength());
+                        out.newLine();
+                        out.flush();
+                        break;
+                    }
                     if (server.getGame().isGameOver()) {
                         server.endGame();
                         out.newLine();
                         out.flush();
+                        break;
                     }
+                    out.write(ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + answer);
+                    out.newLine();
+                    out.flush();
                     server.getGame().getCurrentPlayer().setExtraTurns(-1, server.getGame().getCurrentPlayer().getExtraTurns());
                     if (server.getGame().getCurrentPlayer().getExtraTurns() == -1) {
                         server.getGame().getCurrentPlayer().setExtraTurns(0, 0);
@@ -195,7 +209,10 @@ public class EKCHandler implements Runnable {
                     out.newLine();
                     out.flush();
                     break;
-                } out.write(ProtocolMessages.EXCEPTION + ProtocolMessages.DELIMITER + "Not your turn");
+                }
+                out.write(ProtocolMessages.EXCEPTION + ProtocolMessages.DELIMITER + "Not your turn");
+                out.newLine();
+                out.flush();
                 break;
             case ProtocolMessages.CHOOSE_CARD_IN_HAND:
                 server.chooseCardInHand(CardType.valueOf(words[1]), server.getGame().getPlayer(this.name));
@@ -212,8 +229,8 @@ public class EKCHandler implements Runnable {
             case ProtocolMessages.PLAY_COMBO:
                 if (words[2].equals("2")){
                     server.getGame().setTargetPlayer(server.getGame().getPlayer(words[3]));
-                    server.playCombo2(CardType.valueOf(words[1]));
-                    out.write("Played favor");
+                    //server.playCombo2(CardType.valueOf(words[1]));
+                    out.write(server.playCombo2(CardType.valueOf(words[1])));
                     out.newLine();
                     out.flush();
                     break;
@@ -229,7 +246,17 @@ public class EKCHandler implements Runnable {
                 }
             case ProtocolMessages.PLAY_DEFUSE:
                 server.playDefuse(Integer.parseInt(words[1]));
-                out.write("Played defuse");
+                out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "You played a defuse");
+                out.newLine();
+                out.flush();
+                server.getGame().getCurrentPlayer().setExtraTurns(-1, server.getGame().getCurrentPlayer().getExtraTurns());
+                if (server.getGame().getCurrentPlayer().getExtraTurns() == -1) {
+                    server.getGame().getCurrentPlayer().setExtraTurns(0, 0);
+                    server.getGame().nextCurrentPlayer();
+                    server.turnMessage();
+                    break;
+                }
+                out.write(ProtocolMessages.RESPONSE_MANDATORY_DRAWS + ProtocolMessages.DELIMITER + server.getGame().getCurrentPlayer().getExtraTurns());
                 out.newLine();
                 out.flush();
                 break;
@@ -269,14 +296,49 @@ public class EKCHandler implements Runnable {
 //                out.flush();
 //                break;
             case ProtocolMessages.REFUSE_NOPE:
-                if(Objects.equals(server.getGame().cardBeforeNope, new Card(CardType.FAVOR))){
-                    server.getGame().playerBeforeNope.getHand().add(server.getGame().cardBeforeNope);
-                    out.write(server.playFavor(server.getGame().getTargetPlayer()));
+                if(Objects.equals(server.getGame().cardBeforeNope.getType(), new Card(CardType.FAVOR).getType())){
+                    server.getGame().playerBeforeNope.getHand().add(new Card(server.getGame().cardBeforeNope.getType()));
+                    server.sendMessageToPlayer((server.getGame().playerBeforeNope.getName()), server.playFavor(server.getGame().getTargetPlayer()));
+                    out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "You refused to nope");
                     out.newLine();
                     out.flush();
                     break;
                 }
-                server.sendMessageToPlayer((server.getGame().playerBeforeNope.getName()), "dit is een test" + server.getGame().playCard(server.getGame().getPlayer(server.getGame().playerBeforeNope.getName()).getHand().indexOf(server.getGame().cardBeforeNope), server.getGame().playerBeforeNope));
+                else if(Objects.equals(server.getGame().cardBeforeNope.getType(), new Card(CardType.SKIP).getType())) {
+                    out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "You refused to nope");
+                    out.newLine();
+                    out.flush();
+                    server.getGame().playerBeforeNope.getHand().add(new Card(CardType.SKIP));
+
+//                server.getGame().playerBeforeNope.getHand().add(new Card(server.getGame().cardBeforeNope.getType()));
+//                        server.getGame().playerBeforeNope.setExtraTurns(-1, server.getGame().playerBeforeNope.getExtraTurns());
+                    server.sendMessageToPlayer(server.getGame().playerBeforeNope.getName(), (server.getGame().playCard(server.getGame().playerBeforeNope.getHand().indexOf(CardType.SKIP), server.getGame().playerBeforeNope)));
+                    System.out.println(server.getGame().playerBeforeNope.getExtraTurns());
+                    if (server.getGame().playerBeforeNope.getExtraTurns() == -1) {
+                        server.getGame().playerBeforeNope.setExtraTurns(0, 0);
+                        server.getGame().nextCurrentPlayer();
+                        server.turnMessage();
+                        break;
+                    }
+                    break;
+                }
+                else if(Objects.equals(server.getGame().cardBeforeNope.getType(), new Card(CardType.ATTACK).getType())) {
+                    out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "You refused to nope");
+                    out.newLine();
+                    out.flush();
+                    server.getGame().playerBeforeNope.getHand().add(new Card(CardType.ATTACK));
+                server.sendMessageToPlayer(server.getGame().playerBeforeNope.getName(), (server.getGame().playCard(server.getGame().playerBeforeNope.getHand().indexOf(CardType.ATTACK), server.getGame().playerBeforeNope)));
+                    System.out.println(server.getGame().playerBeforeNope.getExtraTurns());
+                    if (server.getGame().playerBeforeNope.getExtraTurns() == -1) {
+                        server.getGame().playerBeforeNope.setExtraTurns(0, 0);
+                        server.getGame().nextCurrentPlayer();
+                        server.turnMessage();
+                        break;
+                    }
+                    break;
+                }
+
+                    server.sendMessageToPlayer((server.getGame().playerBeforeNope.getName()), server.getGame().playCard(server.getGame().getPlayer(server.getGame().playerBeforeNope.getName()).getHand().indexOf(server.getGame().cardBeforeNope.getType()), server.getGame().playerBeforeNope));
                 out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "You refused to nope");
                 out.newLine();
                 out.flush();

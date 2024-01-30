@@ -56,7 +56,7 @@ public class ClientTUI {
         System.out.println(("Commands :\n" +
                 "Hand ..............request hand\n" +
                 "play ..............you want to play a card\n" +
-                "PlayerAmount.......requests player count\n" +
+                "Players............requests players in game\n" +
                 "Start i1 i2........starts a game with i1 players of which are i2 ai\n" +
                 "handsize...........request a hand size of player\n" +
                 "h .................help ( this menu )\n" +
@@ -67,12 +67,13 @@ public class ClientTUI {
         try {
             String input = "";
             input = TextIO.getln();
-            while (!input.equals(null) && !input.isEmpty()) {
+            //!input.equals(null) && !input.isEmpty()
+            while (true) {
                 String[] inputs = input.split(" ");
                 String command = inputs[0];
                 switch (command.toLowerCase()) {
-                    case "playeramount":
-                        playerClient.requestAmountOfPlayers();
+                    case "players":
+                        playerClient.requestPlayers();
                         break;
                     case "play":
                         try {
@@ -84,8 +85,11 @@ public class ClientTUI {
                                     System.out.println("Please enter a player name together with the action");
                                 }
                                 break;
-                            } if (cardType.equals("NOPE")) {
+                            } else if (cardType.equals("NOPE")) {
                                 playerClient.doNope();
+                                break;
+                            } else if(cardType.equals("DEFUSE")){
+                                playerClient.PlayDefuse(inputs[2]);
                                 break;
                             }
                             playerClient.doPlay(cardType);
@@ -96,13 +100,21 @@ public class ClientTUI {
                         }
 
                     case "handsize":
+                        if (inputs.length == 1) {
+                            System.out.println("Please enter a player name");
+                            break;
+                        }
                         playerClient.doRequestCardsInHand(inputs[1]);
                         break;
                     case "hand":
                         playerClient.doRequestCardsInHandtype();
                         break;
                     case "start":
-                        if (inputs.length <= 2) {
+                        if(inputs.length == 1){
+                            System.out.println("Please enter a player amount");
+                            break;
+                        }
+                        else if (inputs.length <= 2) {
                             playerClient.doStartGameRequest(inputs[1], "0");
                             break;
                         } else {
@@ -118,7 +130,7 @@ public class ClientTUI {
                     case "favor":
                         break;
                     case "play_combo":
-                        playerClient.PlayCombo(inputs[1], inputs[2]);
+                        playerClient.PlayCombo(inputs[1], inputs[2], inputs[3]);
                     case "draw":
                         playerClient.doDrawCard();
                         break;
@@ -132,61 +144,16 @@ public class ClientTUI {
                             System.out.println("Please enter a valid action");
                         }
                         break;
+                    case "":
+                        break;
                     default:
                         System.out.println("Invalid Command");
+                        break;
                 }
                 input = TextIO.getln();
             }
-            throw new ServerUnavailableException("Server is unavailable");
-//        String[] inputs = input.split(" ");
-//        String command = inputs[0];
-//        switch (command.toLowerCase()) {
-//            case "playeramount":
-//                playerClient.requestAmountOfPlayers();
-//                break;
-//            case "play":
-//                String cardType = getString("Enter card type");
-//                if(cardType.equals("FAVOR")){
-//                    playerClient.requestPlayers();
-//                    playerClient.doFavor(getString("Enter player name"));
-//                    break;
-//                }
-//                playerClient.doPlay(cardType);
-//                break;
-//            case "handsize" :
-//                playerClient.doRequestCardsInHand(getString("Enter player name"));
-//                break;
-//            case "hand":
-//                playerClient.doRequestCardsInHandtype();
-//                break;
-//            case "start":
-//                if (inputs.length <= 2){
-//                    playerClient.doStartGameRequest(inputs[1], "0");
-//                    break;
-//                } else {
-//                    playerClient.doStartGameRequest(inputs[1], inputs[2]);
-//                    break;
-//                }
-//            case "h":
-//                printHelpMenu();
-//                break;
-//            case "give":
-//                playerClient.doGiveCard(getString("Enter card"));
-//                break;
-//            case "favor":
-//                break;
-//            case "draw":
-//                playerClient.doDrawCard();
-//                break;
-////            case ProtocolMessages.PRINT:
-////                hotelClient.doPrint();
-////                break;
-////            case ProtocolMessages.HELP:
-////                printHelpMenu();
-////                break;
-//            default:
-//                System.out.println("Invalid Command");
-//        }
+            //throw new ServerUnavailableException("Server is unavailable");
+//
         }catch (ServerUnavailableException e){
             System.out.println("Server is unavailable");
         }

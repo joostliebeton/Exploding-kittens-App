@@ -9,6 +9,7 @@ import ExplodingKittens.exceptions.ServerUnavailableException;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class PlayerClient {
@@ -82,11 +83,20 @@ public class PlayerClient {
     public void createConnection() throws ExitProgram {
         clearConnection();
         while (serverSock == null) {
-            //String host = playerClientTUI.getString("Please enter the server IP.");
-            String host = "127.0.0.1";
+            // host = playerClientTUI.getString("Please enter the server IP.");
+            //String host = "127.0.0.1";
+            String host = "145.126.38.21";
 //            int port = playerClientTUI.getInt("Please enter the server port.");
             int port = 8888;
-            this.name = playerClientTUI.getString("Please enter your name.");
+            try {
+                this.name = playerClientTUI.getString("Please enter your name.");
+                while (this.name.isEmpty() || this.name.isBlank()) {
+                    this.name = playerClientTUI.getString("Please enter your name.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid name.");
+                return;
+            }
 
             // try to open a Socket to the server
             try {
@@ -165,6 +175,7 @@ public class PlayerClient {
             String answer;
             while ((answer = in.readLine()) != null) {
                 String command = answer.split(ProtocolMessages.DELIMITER)[0];
+                String[] entries = answer.split(ProtocolMessages.DELIMITER);
                 switch (command) {
                     case ProtocolMessages.HI:
 //                        doConnect(name);
@@ -183,10 +194,9 @@ public class PlayerClient {
                         }
                         break;
                     case ProtocolMessages.RESPONSE_ALIVE_PLAYERS:
-                        for (int i = 1; i < answer.split(ProtocolMessages.DELIMITER).length; i++) {
-                            playerClientTUI.showMessage(answer.split(ProtocolMessages.DELIMITER)[i]);
+                        for (int i = 1; i < entries.length; i++) {
+                            playerClientTUI.showMessage(entries[i]);
                         }
-                        playerClientTUI.showMessage(answer);
                         break;
                     case ProtocolMessages.PICK_CARD_IN_HAND:
                         playerClientTUI.showMessage("you where chosen by the favor card");
@@ -221,6 +231,10 @@ public class PlayerClient {
                         }
                         closeConnection();
                         break;
+                    case ProtocolMessages.DRAWN:
+                        if (entries[1].equals("EXPLODING_KITTEN")){
+                            playerClientTUI.showMessage("You have drawn an exploding kitten. \n luckily you can defuse it with your defuse card. return play DEFUSE (index)");
+                        }
                     default:
                         playerClientTUI.showMessage(answer);
                         break;
@@ -239,6 +253,7 @@ public class PlayerClient {
                         throw new ServerUnavailableException("Could not read "
                                 + "from server.");
                     }
+
                     String command = answer.split(ProtocolMessages.DELIMITER)[0];
                     switch (command) {
                         case ProtocolMessages.HI:
@@ -256,7 +271,8 @@ public class PlayerClient {
                             for (int i = 1; i < answer.split(ProtocolMessages.DELIMITER).length; i++) {
                                 playerClientTUI.showMessage(answer.split(ProtocolMessages.DELIMITER)[i]);
                             }
-                            return answer;
+                            break;
+//                            return answer;
                         case ProtocolMessages.PICK_CARD_IN_HAND:
                             playerClientTUI.showMessage("you where chosen by the favor card");
                             playerClientTUI.showMessage("Please enter the card you want to give");
@@ -430,8 +446,8 @@ public class PlayerClient {
 
     }
 
-    public void PlayCombo(String input, String input1) throws ServerUnavailableException {
-        sendMessage(ProtocolMessages.PLAY_COMBO + ProtocolMessages.DELIMITER + input + ProtocolMessages.DELIMITER + input1);
+    public void PlayCombo(String input, String input1, String input2) throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.PLAY_COMBO + ProtocolMessages.DELIMITER + input + ProtocolMessages.DELIMITER + input1+ProtocolMessages.DELIMITER + input2);
     }
 
     public void doNope() throws ServerUnavailableException {
@@ -444,5 +460,9 @@ public class PlayerClient {
 
     public void doRefuseNope() throws ServerUnavailableException {
         sendMessage(ProtocolMessages.REFUSE_NOPE);
+    }
+
+    public void PlayDefuse(String input) throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.PLAY_DEFUSE + ProtocolMessages.DELIMITER + input);
     }
 }

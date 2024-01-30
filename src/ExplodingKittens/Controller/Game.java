@@ -72,7 +72,7 @@ public class Game {
                 drawCard(player);
             }
         }
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < deck.getInitialCardCount(CardType.EXPLODING_KITTEN); i++) {
             deck.addExplodingKitten();
         }
         deck.shuffle();
@@ -293,7 +293,8 @@ public class Game {
                 System.out.println(drawnCard.getType().name());
                 // Check if the player has a Defuse card
                 if (player.getHand().hasDefuseCard()) {
-                    return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an Exploding Kitten! They used a Defuse card to defuse it.");
+                    return (ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + drawnCard.getType());
+                    //return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an Exploding Kitten! They used a Defuse card to defuse it.");
                 } else {
                     // Player does not have a Defuse card, eliminate them
                     eliminatePlayer(currentPlayer);
@@ -304,6 +305,11 @@ public class Game {
         }
         return null;
     }
+    public void playDefuse(int index) {
+        deck.putCard(index, new Card(CardType.EXPLODING_KITTEN));
+
+    }
+    public boolean indexReturned = false;
     public void askNope(Player1 player, int index) {
         Scanner scanner = new Scanner(System.in);
         //clientTui.askNopeMessage(1);
@@ -367,10 +373,8 @@ public class Game {
 //                    favor();
 //                    break;
                 case ATTACK:
-                    this.askPlayersNope();
-                    currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip());
                     playedCard.Attack(currentPlayer, this.getNextPlayer());
-                    break;
+                    return (ProtocolMessages.ATTACKED + ProtocolMessages.DELIMITER + currentPlayer.getName() + ProtocolMessages.DELIMITER + this.getNextPlayer().getName());
             }
             // Implement the specific action associated with the played card
             // For example, triggering a special ability or resolving effects
@@ -454,10 +458,7 @@ public class Game {
         players.add(new ComputerPlayer(name, this));
     }
 
-    public void playDefuse(int index) {
-        deck.putCard(index, new Card(CardType.EXPLODING_KITTEN));
 
-    }
 
     public Object getAlivePlayers() {
         return players;

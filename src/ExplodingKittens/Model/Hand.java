@@ -28,6 +28,14 @@ public class Hand {
     public int indexOf(Card drawnCard) {
         return hand.indexOf(drawnCard);
     }
+    public int indexOf(CardType type) {
+        for (int i = 0; i < hand.size(); i++) {
+            if (hand.get(i).getType() == type) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public void remove(Card card) {
         hand.remove(card);

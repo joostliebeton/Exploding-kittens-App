@@ -62,11 +62,12 @@ public class Card {
         }
     }
     public void Attack(Player1 currentplayer, Player1 targetPlayer){
-        if (currentplayer.getExtraTurns() >1) {
-            currentplayer.setExtraTurns(0,0);
-            targetPlayer.setExtraTurns(3, targetPlayer.getExtraTurns());
+        if (currentplayer.getExtraTurns() >=1) {
+            currentplayer.setExtraTurns(-1,0);
+            targetPlayer.setExtraTurns(2, targetPlayer.getExtraTurns());
             //System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
         } else{
+            currentplayer.setExtraTurns(-1, currentplayer.getTurnsToSkip());
             targetPlayer.setExtraTurns(1, targetPlayer.getExtraTurns());
 
             //System.out.println(currentplayer.getName() + " played an Attack card. " + targetPlayer.getName() + " will have " + targetPlayer.getExtraTurns() + " extra turns.");
