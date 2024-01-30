@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
+    public Player1 playerBeforeNope;
     //players: Arraylist<player>
     private boolean nopeCardPlayed = false;
     public String gameName;
@@ -89,7 +90,7 @@ public class Game {
         while (currentPlayer.getExtraTurns() > 0) {
             //clientTui.turnMessage(currentPlayer, 1);
             //System.out.println(currentPlayer.getName() + " has " + currentPlayer.extraTurns + " extra turns!");
-            playCard(getPlayerInput());
+            playCard(getPlayerInput(), currentPlayer);
             if (discardPile.getDeck()[discardPile.length() - 1].getType() == CardType.ATTACK) {
                 currentPlayer.setExtraTurns(0,0);
                 currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip());
@@ -103,7 +104,7 @@ public class Game {
             currentPlayer.setExtraTurns(-1, currentPlayer.getExtraTurns());
             drawCard(currentPlayer);
         }
-        playCard(getPlayerInput());
+        playCard(getPlayerInput(),currentPlayer);
         Scanner scanner = new Scanner(System.in);
         clientTui.turnMessage(1);
         //System.out.println("Do you want to end your turn? (yes/no)");
@@ -213,7 +214,7 @@ public class Game {
         return cardIndex;
     }
     public void nextCurrentPlayer(){
-        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+        this.currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
     }
     public Player1 getCurrentPlayer() {
         return players.get(currentPlayerIndex);
@@ -280,25 +281,29 @@ public class Game {
             }
         }
     }
+    public Player1 cardReciever= null;
     public String drawCard(Player1 player) {
         Card drawnCard = deck.draw();
         if (drawnCard != null) {
-            player.getHand().addCard(drawnCard);
+
 
             //clientTui.drawCardMessage(player.getName(), drawnCard);
             //System.out.println(name + " drew a " + drawnCard.getType() + " card.");
-//            if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
-//                // Check if the player has a Defuse card
-//                if (player.getHand().hasDefuseCard()) {
-//                   //player.getHand().remove(player.getHand().get(player.getHand().indexOf(card.CardType.DEFUSE)));
-//                    }
-//                } else {
-//                    // Player does not have a Defuse card, eliminate them
-//                    eliminatePlayer(currentPlayer);
-//                }
+            if (drawnCard.getType() == CardType.EXPLODING_KITTEN) {
+                System.out.println(drawnCard.getType().name());
+                // Check if the player has a Defuse card
+                if (player.getHand().hasDefuseCard()) {
+                    return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an Exploding Kitten! They used a Defuse card to defuse it.");
+                } else {
+                    // Player does not have a Defuse card, eliminate them
+                    eliminatePlayer(currentPlayer);
+                }
             }
+            player.getHand().addCard(drawnCard);
             return (ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + drawnCard.getType());
         }
+        return null;
+    }
     public void askNope(Player1 player, int index) {
         Scanner scanner = new Scanner(System.in);
         //clientTui.askNopeMessage(1);
@@ -306,7 +311,7 @@ public class Game {
         String response = scanner.nextLine().toLowerCase();
         if (response.equals("yes")) {
             // Player wants to play Nope card
-            playCard(index);
+            playCard(index, currentPlayer);
             //clientTui.askNopeMessage(player.getName(), 1);
             //System.out.println(name + " played a Nope card.");
             setNopeCardPlayed(true);
@@ -319,11 +324,11 @@ public class Game {
     private void setNopeCardPlayed(boolean bool){
         this.nopeCardPlayed = bool;
     }
-
+    public Card cardBeforeNope = null;
     private boolean getNopeCardPlayed() {
         return nopeCardPlayed;
     }
-    public  String playCard(int cardIndex) {
+    public  String playCard(int cardIndex, Player1 currentPlayer) {
         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().size() && currentPlayer.getHand().get(cardIndex).playable()) {
             playedCard = currentPlayer.getHand().get(cardIndex);
             currentPlayer.getHand().remove(playedCard);
@@ -337,11 +342,11 @@ public class Game {
                 case SHUFFLE:
                     return (playedCard.Shuffle(deck) + currentPlayer.getName() + ProtocolMessages.DELIMITER + " played a " + playedCard.getType() + " card");
                 case SKIP:
-                    return ((currentPlayer.setTurnsToSkip(1, currentPlayer.getTurnsToSkip())));
+                    currentPlayer.setExtraTurns(-1, currentPlayer.getExtraTurns());
+                    return (ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + "SKIP" );
                 case SEE_THE_FUTURE:
                     //this.askPlayersNope();
                     return (playedCard.seeTheFuture(this.deck));
-
                 case CAT_CARD1:
                     return currentPlayer.getHand().catCardsInHand(CardType.CAT_CARD1, currentPlayer);
 
@@ -437,9 +442,8 @@ public class Game {
         Card card = targetPlayer.getHand().get(cardIndex);
         CardType cardType = card.getType();
     }
-    public void giveCard(Card card) {
-        targetPlayer.getHand().remove(card);
-        currentPlayer.getHand().add(card);
+    public void giveCard(Card card, Player1 player) {
+        player.getHand().add(card);
         //System.out.println(name + " gave " + player.getName() + " a " + card.getType() + " card.");
     }
 
@@ -465,6 +469,14 @@ public class Game {
                 return player;
             }
         }
-        throw new IllegalArgumentException("player doesnt Exist");
+        return null;
+    }
+
+    public void setCurrentPlayer(Player1 player) {
+        this.currentPlayer = player;
+    }
+
+    public Player1 getWinner() {
+        return players.get(0);
     }
 }

@@ -16,9 +16,11 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Objects;
 
 
 public class ClientTUI {
+    private Thread userInputThread;
     private PlayerClient playerClient;
     private PrintWriter console;
 
@@ -46,7 +48,7 @@ public class ClientTUI {
         this.console = new PrintWriter(System.out, true);
     }
     public void start() throws ServerUnavailableException {
-        Thread userInputThread = new Thread(this::handleUserInput);
+        userInputThread = new Thread(this::handleUserInput);
         userInputThread.start();
         printHelpMenu();
     }
@@ -73,16 +75,28 @@ public class ClientTUI {
                         playerClient.requestAmountOfPlayers();
                         break;
                     case "play":
-                        String cardType = getString("Enter card type");
-                        if (cardType.equals("FAVOR")) {
-                            playerClient.requestPlayers();
-                            playerClient.doFavor(getString("Enter player name"));
+                        try {
+                            String cardType = inputs[1];
+                            if (cardType.equals("FAVOR")) {
+                                try {
+                                    playerClient.doFavor(inputs[2]);
+                                }catch (ArrayIndexOutOfBoundsException e){
+                                    System.out.println("Please enter a player name together with the action");
+                                }
+                                break;
+                            } if (cardType.equals("NOPE")) {
+                                playerClient.doNope();
+                                break;
+                            }
+                            playerClient.doPlay(cardType);
+                            break;
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            System.out.println("Please enter a card type together with the action");
                             break;
                         }
-                        playerClient.doPlay(cardType);
-                        break;
+
                     case "handsize":
-                        playerClient.doRequestCardsInHand(getString("Enter player name"));
+                        playerClient.doRequestCardsInHand(inputs[1]);
                         break;
                     case "hand":
                         playerClient.doRequestCardsInHandtype();
@@ -99,7 +113,7 @@ public class ClientTUI {
                         printHelpMenu();
                         break;
                     case "give":
-                        playerClient.doGiveCard(getString("Enter card"));
+                        playerClient.doGiveCard(inputs[1]);
                         break;
                     case "favor":
                         break;
@@ -108,12 +122,16 @@ public class ClientTUI {
                     case "draw":
                         playerClient.doDrawCard();
                         break;
-//            case ProtocolMessages.PRINT:
-//                hotelClient.doPrint();
-//                break;
-//            case ProtocolMessages.HELP:
-//                printHelpMenu();
-//                break;
+                    case "drawamount":
+                        playerClient.requestDrawAmount();
+                        break;
+                    case "refuse":
+                        if (Objects.equals(inputs[1], "NOPE")){
+                            playerClient.doRefuseNope();
+                        } else{
+                            System.out.println("Please enter a valid action");
+                        }
+                        break;
                     default:
                         System.out.println("Invalid Command");
                 }

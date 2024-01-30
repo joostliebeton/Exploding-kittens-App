@@ -29,11 +29,11 @@ public class Deck{
         // You can customize this based on the rules of the game
         switch (type) {
             case EXPLODING_KITTEN:
-                return 3; //4
+                return 1; //4
             case DEFUSE:
                 return 3; //6
             case SKIP:
-                return 4;
+                return 10;
             case ATTACK:
                 return 4;
             case FAVOR:
@@ -43,7 +43,7 @@ public class Deck{
             case SHUFFLE:
                 return 4; //4
             case NOPE:
-                return 1;
+                return 10;
             case CAT_CARD1, CAT_CARD2, CAT_CARD3, CAT_CARD4:
                 return 4;
             case CAT_CARD5:

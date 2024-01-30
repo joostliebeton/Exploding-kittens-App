@@ -32,6 +32,9 @@ public class Hand {
     public void remove(Card card) {
         hand.remove(card);
     }
+    public void remove(int index) {
+        hand.remove(index);
+    }
 
     public int size() {
         return hand.size();
@@ -104,6 +107,7 @@ public class Hand {
         }
         return null;
     }
+
     public boolean hasDefuseCard() {
         for (Card card : hand) {
             if (card.getType() == CardType.DEFUSE) {

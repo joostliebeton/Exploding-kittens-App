@@ -5,6 +5,7 @@ public class ProtocolMessages {
     /////////////////BOTH CLIENT AND SERVER/////////////////////
     public static final String HI = "HI"; // [par] supported extionsions
     //////////////Client to server////////////////////////
+    public static final String REFUSE_NOPE = "REFUSE_NOPE"; // [par] none (REFUSE_NOPE) // tells the server that the client refuses to nope //to: server
     public static final String CONNECT = "CONNECT"; // [par] name (CONNECT~name)
     public static final String REQUEST_GAME = "REQUEST_GAME"; // [par] totalamount of player in game (REQUEST_GAME~amount) >=2, amount of which are AI players in the game int >=0 (REQUEST_GAME~amount~amountAI)
     public static final String PLAY_CARD = "PLAY_CARD"; // [par] card_value (PLAY_CARD~card_type) (note there is also the Play_combo_card and the Play favor card)
@@ -18,8 +19,10 @@ public class ProtocolMessages {
     public static final String REQUEST_ALIVE_PLAYERS = "REQUEST_ALIVE_PLAYERS"; // [par] none (REQUEST_ALIVE_PLAYERS)
     public static final String REQUEST_PLAYERS_LOBBY = "REQUEST_PLAYERS_LOBBY"; // [par] none (REQUEST_PLAYERS_LOBBY)
     public static final String REQUEST_CARDS_IN_HAND = "REQUEST_CARDS_IN_HAND"; // [par] none (REQUEST_CARD_IN_HAND)
+    public static final String REQUEST_MANDATORY_DRAWS = "REQUEST_MANDATORY_DRAWS"; // [par] none (REQUEST_MANDATORY_DRAWS)
 
     /////////////////server to client/////////////////////
+    public static final String RESPONSE_MANDATORY_DRAWS = "RESPONSE_MANDATORY_DRAWS"; // [par] amount of draws (RESPONSE_MANDATORY_DRAWS~amount)
     public static final String GENERAL_CARD_RESPONSE = "GENERAL_CARD_RESPONSE"; // [par] card_value (GENERAL_CARD_RESPONSE~card_value) // tells the receiver that the sender has played a card //to: all clients
     public static final String DRAWN = "DRAWN"; // [par] card_value (DRAWN~card_value) // tells the client that he has drawn a card //to: client that drew the card
     public static final String CONNECTED = "CONNECTED"; // [par] none (CONNECTED) // tells the client that the connection was succesfull//to: client that sent the connect command

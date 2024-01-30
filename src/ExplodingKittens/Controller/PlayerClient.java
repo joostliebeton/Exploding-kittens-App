@@ -82,8 +82,10 @@ public class PlayerClient {
     public void createConnection() throws ExitProgram {
         clearConnection();
         while (serverSock == null) {
-            String host = playerClientTUI.getString("Please enter the server IP.");
-            int port = playerClientTUI.getInt("Please enter the server port.");
+            //String host = playerClientTUI.getString("Please enter the server IP.");
+            String host = "127.0.0.1";
+//            int port = playerClientTUI.getInt("Please enter the server port.");
+            int port = 8888;
             this.name = playerClientTUI.getString("Please enter your name.");
 
             // try to open a Socket to the server
@@ -186,9 +188,9 @@ public class PlayerClient {
                         }
                         playerClientTUI.showMessage(answer);
                         break;
-                    case ProtocolMessages.GENERAL_CARD_REQUEST:
+                    case ProtocolMessages.PICK_CARD_IN_HAND:
                         playerClientTUI.showMessage("you where chosen by the favor card");
-                        doGiveCard(playerClientTUI.getString("Please enter the card you want to give"));
+                        playerClientTUI.showMessage("Please enter the card you want to give");
                         break;
                     case ProtocolMessages.GAME_STARTED:
                         playerClientTUI.showMessage("The game has started");
@@ -204,23 +206,27 @@ public class PlayerClient {
                         break;
                     case ProtocolMessages.PLAY_NOPED:
                         playerClientTUI.showMessage("You have the ability to nope");
-                        if (playerClientTUI.getBoolean("Do you want to nope?")) {
-                            sendMessage(ProtocolMessages.PLAY_NOPED);
-                        } else {
-                            playerClientTUI.showMessage("You have chosen not to nope");
-                        }
-                            break;
+                        playerClientTUI.showMessage("if you want to nope do Play NOPE, otherwise Refuse NOPE");
+                        break;
                     case ProtocolMessages.CARD_RECEIVED:
                         playerClientTUI.showMessage( "You have received a" + answer.split(ProtocolMessages.DELIMITER)[3] + "Card from" + answer.split(ProtocolMessages.DELIMITER)[2] +
                                 "because of the " + answer.split(ProtocolMessages.DELIMITER)[1] + "card");
                         break;
-
+                    case ProtocolMessages.GAME_FINISHED:
+                        if (this.name.equals(answer.split(ProtocolMessages.DELIMITER)[1])){
+                            playerClientTUI.showMessage("The game has finished, you are the winner");
+                        } else {
+                            playerClientTUI.showMessage("The game has finished, you are a loser");
+                            playerClientTUI.showMessage("The winner is " + answer.split(ProtocolMessages.DELIMITER)[1]);
+                        }
+                        closeConnection();
+                        break;
                     default:
                         playerClientTUI.showMessage(answer);
                         break;
                 }
             }
-        } catch (IOException | ServerUnavailableException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -237,6 +243,7 @@ public class PlayerClient {
                     switch (command) {
                         case ProtocolMessages.HI:
                             return answer;
+                            //////////////////////////////////
                         case ProtocolMessages.TURN:
                             if (this.name.equals(answer.split(ProtocolMessages.DELIMITER)[1])) {
                                 return "it's your turn";
@@ -250,9 +257,9 @@ public class PlayerClient {
                                 playerClientTUI.showMessage(answer.split(ProtocolMessages.DELIMITER)[i]);
                             }
                             return answer;
-                        case ProtocolMessages.GENERAL_CARD_REQUEST:
+                        case ProtocolMessages.PICK_CARD_IN_HAND:
                             playerClientTUI.showMessage("you where chosen by the favor card");
-                            doGiveCard(playerClientTUI.getString("Please enter the card you want to give"));
+                            playerClientTUI.showMessage("Please enter the card you want to give");
                             break;
                         case ProtocolMessages.GAME_STARTED:
                             return "The game has started";
@@ -265,10 +272,13 @@ public class PlayerClient {
                             return "these are the cards in your hand";
                         case ProtocolMessages.PLAY_NOPED:
                             playerClientTUI.showMessage("You have the ability to nope");
-                            playerClientTUI.getBoolean("Do you want to nope?");
+                            playerClientTUI.showMessage("if you want to nope do Play NOPE, otherwise Refuse NOPE");
+                            break;
                         case ProtocolMessages.CARD_RECEIVED:
                             return "You have received a" + answer.split(ProtocolMessages.DELIMITER)[3] + "Card from" + answer.split(ProtocolMessages.DELIMITER)[2] +
                                     "because of the " + answer.split(ProtocolMessages.DELIMITER)[1] + "card";
+                        case ProtocolMessages.GAME_FINISHED:
+                            return "The game has finished, you are the winner";
                         default:
                             return answer;
                     }
@@ -422,5 +432,17 @@ public class PlayerClient {
 
     public void PlayCombo(String input, String input1) throws ServerUnavailableException {
         sendMessage(ProtocolMessages.PLAY_COMBO + ProtocolMessages.DELIMITER + input + ProtocolMessages.DELIMITER + input1);
+    }
+
+    public void doNope() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.PLAY_CARD + ProtocolMessages.DELIMITER + "NOPE");
+    }
+
+    public void requestDrawAmount() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.REQUEST_MANDATORY_DRAWS);
+    }
+
+    public void doRefuseNope() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.REFUSE_NOPE);
     }
 }

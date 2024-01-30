@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class GameServer implements Runnable {
     private ServerSocket ssock;
@@ -106,8 +107,8 @@ public class GameServer implements Runnable {
 
         ssock = null;
         while (ssock == null) {
-            int port = view.getInt("Please enter the server port.");
-
+            //int port = view.getInt("Please enter the server port.");
+        int port = 8888;
             // try to open a new ServerSocket
             try {
                 view.showMessage("Attempting to open a socket at 127.0.0.1 "
@@ -132,7 +133,8 @@ public class GameServer implements Runnable {
      * a new Hotel with this name.
      */
     public void setupGame() {
-        gameName = view.getString("Please enter the name of the game.");
+        //gameName = view.getString("Please enter the name of the game.");
+        gameName = "test123";
         game = new Game(gameName);
         // To be implemented.
     }
@@ -153,18 +155,47 @@ public class GameServer implements Runnable {
     //    public void requestGame(int playerCount, int aiCount) {
 //        game.requestGame(playerCount, aiCount);
 //    }
-    public String playCardcmd(CardType cardType) {
+//    public String playCardcmd(CardType cardType, Player1 currentplayer) {
+//        for (CardType cardType1 : CardType.values()) {
+//            if (cardType1 == cardType) {
+//                int index = 0;
+//                for (Card card : currentplayer.getHandList()) {
+//                    if (card.getType().equals(cardType1)) {
+//                        sendMessageToAllOtherPlayers(ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + cardType);
+//                        if (card.isActionCard()) {
+//                            if (sendNopeMessage()){
+//                                while(!nopeanswer){
+//                                    if(nopecardPlayed){
+//                                        sendMessageToAllOtherPlayers(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName() + ProtocolMessages.DELIMITER
+//                                                + cardType + ProtocolMessages.DELIMITER + playerWhoNoped.getName());
+//                                        return (ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName()) + ProtocolMessages.DELIMITER
+//                                                + cardType + ProtocolMessages.DELIMITER + playerWhoNoped.getName();
+//                                    }
+//                                }return (game.playCard(index, currentplayer));
+//                            } return (game.playCard(index,currentplayer));
+//                        } return (game.playCard(index,currentplayer));
+//
+//                    }
+//                    index++;
+//                }return ("you don't have this card");
+//            }
+//
+//
+//        }return "this card doesnt exist";
+//    }
+    public String playCardcmd(CardType cardType, Player1 currentplayer) {
         for (CardType cardType1 : CardType.values()) {
             if (cardType1 == cardType) {
                 int index = 0;
-                for (Card card : game.getCurrentPlayer().getHandList()) {
+                for (Card card : currentplayer.getHandList()) {
                     if (card.getType().equals(cardType1)) {
                         sendMessageToAllOtherPlayers(ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + cardType);
                         if (card.isActionCard()) {
                             if (sendNopeMessage()){
-                                return ("wait for nope card");
-                            } return (game.playCard(index));
-                        } return (game.playCard(index));
+                                goInWaitForNope(currentplayer, cardType);
+                                return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "wait for nope cards";
+                            } return (game.playCard(index,currentplayer));
+                        } return (game.playCard(index,currentplayer));
 
                     }
                     index++;
@@ -174,11 +205,31 @@ public class GameServer implements Runnable {
 
         }return "this card doesnt exist";
     }
+
+    private void goInWaitForNope(Player1 currentplayer, CardType cardType) {
+        getGame().cardBeforeNope = new Card(cardType);
+        getGame().playerBeforeNope = currentplayer;
+    }
+
+    public int getCardIndex(CardType cardType, Player1 player){
+        int index = 0;
+        for (Card card : player.getHandList()) {
+            if (card.getType().equals(cardType)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+    public Player1 playerWhoNoped = null;
+    public boolean nopeanswer = false;
+
+    public boolean nopecardPlayed = false;
     public boolean sendNopeMessage(){
         for (Player1 player : game.getPlayers()) {
             for (Card card1 : player.getHandList()) {
                 if (card1.getType() == CardType.NOPE && player != game.getCurrentPlayer()) {
-                    sendMessageToPlayer(player.getName(), ProtocolMessages.PLAY_NOPED);
+                    sendMessageToPlayer(player.getName(), "NOPE");
                     return true;
                 }
             }
@@ -247,9 +298,12 @@ public class GameServer implements Runnable {
         sendMessageToAllOtherPlayers(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + "drew a card");
         return game.drawCard(currentplayer);
     }
-    public void chooseCardInHand(CardType cardType){
+    public void chooseCardInHand(CardType cardType, Player1 victimplayer) {
+        //first remove card
+        victimplayer.getHand().remove(getCardIndex(cardType, victimplayer));
+        //then give card
         Card card = new Card(cardType);
-        game.giveCard(card);
+        game.giveCard(card, game.cardReciever);
         for(Player1 player: game.getPlayers()) {
             if (player == game.getCurrentPlayer()){
                 sendMessageToPlayer(player.getName(), ProtocolMessages.CARD_RECEIVED + ProtocolMessages.DELIMITER + "FAVOR" + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName() + ProtocolMessages.DELIMITER + cardType.name());
@@ -260,10 +314,16 @@ public class GameServer implements Runnable {
             }
         }
     }
-    public void playFavor(Player1 targetPlayer) {
+    public String playFavor(Player1 targetPlayer) {
+        game.cardReciever = game.getCurrentPlayer();
+        game.getCurrentPlayer().getHand().remove(getCardIndex(CardType.FAVOR, game.getCurrentPlayer()));
         game.setTargetPlayer(targetPlayer);
-        sendMessageToPlayer(targetPlayer.getName(), ProtocolMessages.GENERAL_CARD_REQUEST + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
-
+        if (sendNopeMessage()){
+            goInWaitForNope(game.getCurrentPlayer(), CardType.FAVOR);
+            return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "wait for nope cards";
+        }
+        sendMessageToPlayer(targetPlayer.getName(), ProtocolMessages.PICK_CARD_IN_HAND + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
+        return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER +game.getCurrentPlayer().getName() + " (you) played a Favor card";
     }
     public void ChatMessage(String message) {
         for (EKCHandler handler : clients) {
@@ -271,7 +331,7 @@ public class GameServer implements Runnable {
         }
     }
     public String giveCard(Card card) {
-        game.giveCard(card);
+        game.giveCard(card, game.cardReciever);
 
         return ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + game.getTargetPlayer() + ProtocolMessages.DELIMITER + game.getCurrentPlayer();
 
@@ -289,7 +349,9 @@ public class GameServer implements Runnable {
     }
     public void sendMessageToPlayer(String playerName, String message) {
         EKCHandler handler = getPlayerHandler(playerName);
-        if (handler != null) {
+        if (handler != null && Objects.equals(message, "NOPE")) {
+            handler.sendMessage(ProtocolMessages.PLAY_NOPED);
+        } else if (handler != null) {
             handler.sendMessage(message);
         } else if (playerName.contains("Computer")) {
             view.showMessage("Computer " + playerName + " " + message);
@@ -304,6 +366,11 @@ public class GameServer implements Runnable {
             }
         }
     }
+    public void sendMessageToAllPlayers(String message) {
+        for (EKCHandler handler : clients) {
+            handler.sendMessage(message);
+        }
+    }
     public void playDefuse(int index) {
         game.playDefuse(index);
     }
@@ -313,6 +380,9 @@ public class GameServer implements Runnable {
     }
     public String userHandSize(String player) {
         Player1 player1 = game.getPlayer(player);
+        if (player1 == null) {
+        return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER+"Player not found.";
+        }
         return ProtocolMessages.RESPONSE_USERS_HAND_SIZE + ProtocolMessages.DELIMITER + player1.getHandList().size();
 //        game.getClientTui().userHandSizeMessage(player.getName(), player.getHandList().size());
     }
@@ -355,7 +425,7 @@ public class GameServer implements Runnable {
 
 
     public void playCard(int turn) {
-        game.playCard(turn);
+        game.playCard(turn, game.getCurrentPlayer());
     }
 
 
@@ -369,4 +439,13 @@ public class GameServer implements Runnable {
     }
 
 
+    public String requestMandatoryDraws(Player1 player) {
+        return (ProtocolMessages.RESPONSE_MANDATORY_DRAWS+ ProtocolMessages.DELIMITER+ (player.getExtraTurns()+1));
+    }
+
+    public void endGame() {
+        for (EKCHandler handler : clients) {
+            handler.sendMessage(ProtocolMessages.GAME_FINISHED + ProtocolMessages.DELIMITER + game.getWinner().getName());
+        }
+    }
 }
