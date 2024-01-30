@@ -270,6 +270,7 @@ public class EKCHandler implements Runnable {
 //                break;
             case ProtocolMessages.REFUSE_NOPE:
                 if(Objects.equals(server.getGame().cardBeforeNope, new Card(CardType.FAVOR))){
+                    server.getGame().playerBeforeNope.getHand().add(server.getGame().cardBeforeNope);
                     out.write(server.playFavor(server.getGame().getTargetPlayer()));
                     out.newLine();
                     out.flush();
