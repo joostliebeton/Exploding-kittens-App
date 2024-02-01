@@ -118,7 +118,7 @@ public class EKCHandler implements Runnable {
                         server.getGame().getPlayer(this.name).getHand().remove(server.getGame().getPlayer(this.name).getHand().indexOf(CardType.NOPE));
                         server.getGame().playerBeforeNope.getHand().remove(server.getGame().cardBeforeNope);
                         server.sendMessageToAllPlayers(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
-                                this.name + ProtocolMessages.DELIMITER + server.getGame().cardBeforeNope.toString() + ProtocolMessages.DELIMITER +
+                                this.name + ProtocolMessages.DELIMITER + server.getGame().cardBeforeNope.getType() + ProtocolMessages.DELIMITER +
                                 server.getGame().getCurrentPlayer().getName());
                         //server.playNopecmd();
 //                            out.write(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER +
@@ -184,7 +184,7 @@ public class EKCHandler implements Runnable {
                         out.flush();
                         break;
                     }
-                    out.write(ProtocolMessages.DRAWN + ProtocolMessages.DELIMITER + answer);
+                    out.write(answer);
                     out.newLine();
                     out.flush();
                     server.getGame().getCurrentPlayer().setExtraTurns(-1, server.getGame().getCurrentPlayer().getExtraTurns());

@@ -54,12 +54,20 @@ public class Game {
 
     }
     private void initilializehands() {
-        for (int i = 0; i < /*player.size()*/ 5; i++) {
+        for (int i = 0; i < /*player.size()*/ 4; i++) {
             for (Player1 player : players) {
                 drawCard(player);
             }
         }
+        int defusecount = 0;
+        for (Player1 player : players){
+            player.getHand().addCard(new Card(CardType.DEFUSE));
+            defusecount++;
+        }
         for (int i = 0; i < deck.getInitialCardCount(CardType.EXPLODING_KITTEN); i++) {
+            deck.addExplodingKitten();
+        }
+        for (int i = 0; i < deck.getInitialCardCount(CardType.DEFUSE)-defusecount; i++) {
             deck.addExplodingKitten();
         }
         deck.shuffle();

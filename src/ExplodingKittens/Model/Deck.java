@@ -14,7 +14,7 @@ public class Deck{
     }
     public void initializeDeck() {
         for (CardType type : CardType.values()) {
-            if (type == CardType.EXPLODING_KITTEN) {
+            if (type == CardType.EXPLODING_KITTEN || type == CardType.DEFUSE) {
                 continue;
             }
             for (int i = 0; i < getInitialCardCount(type); i++) {
@@ -28,9 +28,9 @@ public class Deck{
         // You can customize this based on the rules of the game
         switch (type) {
             case EXPLODING_KITTEN:
-                return 30; //4
+                return 10; //4
             case DEFUSE:
-                return 40; //6
+                return 10; //6
             case SKIP:
                 return 4;
             case ATTACK:
@@ -71,7 +71,7 @@ public class Deck{
 
     public Card draw() {
         if (!isEmpty()) {
-            return cards.remove(0);
+            return cards.remove(this.length()-1);
         }
         return null; // Deck is empty
     }

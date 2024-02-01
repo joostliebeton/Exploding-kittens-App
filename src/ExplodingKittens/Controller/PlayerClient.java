@@ -245,6 +245,7 @@ public class PlayerClient {
                                 sendMessage(ProtocolMessages.PLAY_DEFUSE + ProtocolMessages.DELIMITER + randomNumber);
                             }
                         }
+                        playerClientTUI.showMessage("You have drawn a " + entries[1] + " card");
                         break;
                     case ProtocolMessages.CHAT:
                         playerClientTUI.showMessage(answer.split(ProtocolMessages.DELIMITER)[1] + ": " + answer.split(ProtocolMessages.DELIMITER)[2]);

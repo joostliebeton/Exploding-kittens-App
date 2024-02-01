@@ -6,10 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Card.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Player1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Player1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ServerTUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ServerTUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +252,7 @@
       <workItem from="1706705968547" duration="759000" />
       <workItem from="1706727001011" duration="5681000" />
       <workItem from="1706784401177" duration="4198000" />
-      <workItem from="1706809770028" duration="875000" />
+      <workItem from="1706809770028" duration="4077000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -582,7 +590,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706792797395</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <option name="closed" value="true" />
+      <created>1706812570119</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1706812570119</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
