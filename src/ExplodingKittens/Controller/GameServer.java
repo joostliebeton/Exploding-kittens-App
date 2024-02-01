@@ -127,8 +127,8 @@ public class GameServer implements Runnable {
 
         ssock = null;
         while (ssock == null) {
-            int port = view.getInt("Please enter the server port.");
-        //int port = 8888;
+            //int port = view.getInt("Please enter the server port.");
+        int port = 8888;
             // try to open a new ServerSocket
             try {
                 view.showMessage("Attempting to open a socket at " + "127.0.0.1"  + " on port " + port + "...");
@@ -152,8 +152,8 @@ public class GameServer implements Runnable {
      * a new Game with this name.
      */
     public void setupGame() {
-        gameName = view.getString("Please enter the name of the game.");
-        //gameName = "test123";
+        //gameName = view.getString("Please enter the name of the game.");
+        gameName = "test123";
         game = new Game(gameName);
         // To be implemented.
     }

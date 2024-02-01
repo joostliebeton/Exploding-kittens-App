@@ -1,77 +1,46 @@
 package ExplodingKittens.Controller;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.io.*;
-import java.net.Socket;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class EKCHandlerTest {
+public class EKCHandlerTest {
 
     private EKCHandler ekcHandler;
-    private GameServerStub mockServer;
-    private BufferedReader mockBufferedReader;
-    private BufferedWriter mockBufferedWriter;
     private ByteArrayOutputStream outContent;
     private ByteArrayInputStream inContent;
-    private Socket mockSocket;
 
     @BeforeEach
-    void setUp() throws IOException {
-        mockServer = new GameServerStub();
-        String simulatedUserInput = ProtocolMessages.HI + "\n" + ProtocolMessages.CONNECT + ProtocolMessages.DELIMITER + "Player1" + "\n";
-        inContent = new ByteArrayInputStream(simulatedUserInput.getBytes());
+    void setUp() {
+        // Create a mock input and output stream
         outContent = new ByteArrayOutputStream();
+        inContent = new ByteArrayInputStream("Test message\n".getBytes());
 
-        mockBufferedReader = new BufferedReader(new InputStreamReader(inContent));
-        mockBufferedWriter = new BufferedWriter(new OutputStreamWriter(outContent));
-
-        mockSocket = new Socket() {
-            @Override
-            public InputStream getInputStream() {
-                return inContent;
-            }
-
-            @Override
-            public OutputStream getOutputStream() {
-                return outContent;
-            }
-        };
-
-        ekcHandler = new EKCHandler(mockSocket, mockServer, "TestClient");
+        // Create the handler with mocked streams
+//        ekcHandler = new EKCHandler(new BufferedReader(new InputStreamReader(inContent)),
+//                new BufferedWriter(new OutputStreamWriter(outContent)),
+//                null, "TestClient");
     }
 
     @Test
     void testHandleCommandHi() throws IOException {
-        ekcHandler.run();
-        mockBufferedWriter.flush();
+        ekcHandler.handleCommand(ProtocolMessages.HI);
+        outContent.flush();
         String output = outContent.toString();
-        assert(output.contains(ProtocolMessages.HI));
+        assertEquals(ProtocolMessages.HI + ProtocolMessages.DELIMITER + "null", output.strip());
     }
 
     @Test
     void testHandleCommandConnect() throws IOException {
-        ekcHandler.run();
-        mockBufferedWriter.flush();
+        ekcHandler.handleCommand(ProtocolMessages.CONNECT + ProtocolMessages.DELIMITER + "Player1");
+        outContent.flush();
         String output = outContent.toString();
-        assert(mockServer.isPlayerAdded());
-        assert(output.contains(ProtocolMessages.CONNECTED));
+        assertEquals(ProtocolMessages.CONNECTED, output.strip());
     }
 
-    // Stub class for GameServer
-    static class GameServerStub extends GameServer {
-        private boolean playerAdded = false;
+    // Add more tests for other command handling methods...
 
-        @Override
-        public void addPlayer(String name) {
-            playerAdded = true;
-        }
-
-        public boolean isPlayerAdded() {
-            return playerAdded;
-        }
-
-        // Implement other necessary methods or add logic as required
-    }
-
-    // Additional tests and utility methods...
 }

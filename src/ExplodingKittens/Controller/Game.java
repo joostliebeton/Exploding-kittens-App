@@ -175,7 +175,7 @@ public class Game {
      * @param currentPlayer The player who is playing the card.
      * @return A message indicating the outcome of the card play.
      */
-    public  String playCard(int cardIndex, Player1 currentPlayer) {
+    public String playCard(int cardIndex, Player1 currentPlayer) {
         if (cardIndex >= 0 && cardIndex < currentPlayer.getHand().size() && currentPlayer.getHand().get(cardIndex).playable()) {
             playedCard = currentPlayer.getHand().get(cardIndex);
             currentPlayer.getHand().remove(playedCard);
