@@ -15,7 +15,7 @@ public class EKCHandler implements Runnable {
     private BufferedReader in;
     private BufferedWriter out;
     private Socket sock;
-    /** The connected HotelServer */
+    /** The connected GAME */
     private GameServer server;
 
     /** Name of this ClientHandler */
@@ -26,6 +26,7 @@ public class EKCHandler implements Runnable {
      * @param sock The client socket
      * @param srv  The connected server
      * @param name The name of this ClientHandler
+     * @requires sock != null, srv != null, name != null
      */
     public EKCHandler(Socket sock, GameServer srv, String name) {
         try {
@@ -59,16 +60,10 @@ public class EKCHandler implements Runnable {
         }
     }
     /**
-     * Handles commands received from the client by calling the according
-     * methods at the HotelServer. For example, when the message "i Name"
-     * is received, the method doIn() of HotelServer should be called
-     * and the output must be sent to the client.
+     * Handles the command received from the client and performs corresponding actions.
      *
-     * If the received input is not valid, send an "Unknown Command"
-     * message to the server.
-     *
-     * @param msg command from client
-     * @throws IOException if an IO errors occur.
+     * @param msg the command received from the client
+     * @throws IOException if an IO error occurs
      */
     public synchronized void handleCommand(String msg) throws IOException {
 
@@ -326,7 +321,7 @@ public class EKCHandler implements Runnable {
                     }
                     break;
                 }
-                else if(server.action == "COMBO2") {
+                else if(Objects.equals(server.action, "COMBO2")) {
 
                     server.sendMessageToPlayer(server.getGame().playerBeforeNope.getName(),
                             ProtocolMessages.CARD_RECEIVED + ProtocolMessages.DELIMITER + "COMBO2" + ProtocolMessages.DELIMITER + server.getGame().getTargetPlayer().getName() +
@@ -364,7 +359,9 @@ public class EKCHandler implements Runnable {
         }
 
     }
-
+    /**
+     * Shuts down the handler and closes the connection.
+     */
     private void shutdown() {
         System.out.println("> [" + name + "] Shutting down.");
         try {
@@ -377,10 +374,20 @@ public class EKCHandler implements Runnable {
         }
         server.removeClient(this);
     }
-
+    /**
+     * Gets the name of this handler.
+     *
+     * @return the name of this handler
+     */
     public Object getName() {
         return name;
     }
+    /**
+     * Sends a message to the client.
+     *
+     * @param msg the message to send
+     * @requires msg != null
+     */
 
     public void sendMessage(String msg) {
         try {

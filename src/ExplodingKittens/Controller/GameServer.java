@@ -21,7 +21,7 @@ public class GameServer implements Runnable {
     private boolean chatFunction = true;
 
     /**
-     * List of HotelClientHandlers, one for each connected client
+     * List of EKCHandlers, one for each connected client
      */
     private List<EKCHandler> clients;
 
@@ -36,16 +36,26 @@ public class GameServer implements Runnable {
     private ServerTUI view;
 
     /**
-     * The name of the Hotel
+     * The name of the Game
      */
     private String gameName;
+    /** The game instance */
     private Game game;
 
+/**
+     * Constructs a new GameServer. Initializes the clients list,
+     * the view and the next_client_no.
+     */
     public GameServer() {
         this.clients = new ArrayList<>();
         this.view = new ServerTUI();
         this.next_client_no = 1;
     }
+    /**
+     * Gets the name of the game.
+     *
+     * @return the name of the game
+     */
 
     public String getGameName() {
         return this.gameName;
@@ -58,12 +68,13 @@ public class GameServer implements Runnable {
      * If {@link #setup()} throws a ExitProgram exception, stop the program.
      * In case of any other errors, ask the user whether the setup should be
      * ran again to open a new socket.
+     * @ensures a server socket is opened
      */
     public void run() {
         boolean openNewSocket = true;
         while (openNewSocket) {
             try {
-                // Sets up the hotel application
+                // Sets up the Game
                 setup();
                 while (true) {
                     Socket sock = ssock.accept();
@@ -111,7 +122,7 @@ public class GameServer implements Runnable {
      * @ensures a serverSocket is opened.
      */
     public void setup() throws ExitProgram {
-        // First, initialize the Hotel.
+        // First, initialize the Game
         setupGame();
 
         ssock = null;
@@ -121,7 +132,7 @@ public class GameServer implements Runnable {
             // try to open a new ServerSocket
             try {
                 view.showMessage("Attempting to open a socket at " + "127.0.0.1"  + " on port " + port + "...");
-//                ssock = new ServerSocket(port, 0, InetAddress.getByName("145.126.38.21"));
+//              ssock = new ServerSocket(port, 0, InetAddress.getByName("145.126.38.21"));
                 ssock = new ServerSocket(port, 0, InetAddress.getByName("127.0.0.1"));
                 view.showMessage("Server started at port " + port);
             } catch (IOException e) {
@@ -137,8 +148,8 @@ public class GameServer implements Runnable {
     }
 
     /**
-     * Asks the user for a hotel name and initializes
-     * a new Hotel with this name.
+     * Asks the user for a Game name and initializes
+     * a new Game with this name.
      */
     public void setupGame() {
         gameName = view.getString("Please enter the name of the game.");
@@ -146,16 +157,31 @@ public class GameServer implements Runnable {
         game = new Game(gameName);
         // To be implemented.
     }
-
+    /**
+     * Removes a client from the list of connected clients.
+     *
+     * @param client The client to be removed.
+     */
     public void removeClient(EKCHandler client) {
         this.clients.remove(client);
     }
 
-    //////////////////////////server methods///////////////////////// 0
+    //////////////////////////server methods/////////////////////////
+    /**
+     * Adds a player to the game.
+     *
+     * @param name The name of the player to be added.
+     */
     public void addPlayer(String name) {
         game.addPlayer(name);
     }
-
+    /**
+     * Plays a card with the specified card type by the current player.
+     *
+     * @param cardType      The type of card to be played.
+     * @param currentplayer The current player who is playing the card.
+     * @return A message indicating the result of playing the card.
+     */
 
     public String playCardcmd(CardType cardType, Player1 currentplayer) {
         for (CardType cardType1 : CardType.values()) {
@@ -179,17 +205,35 @@ public class GameServer implements Runnable {
 
         }return "this card doesnt exist";
     }
+    /**
+     * Marks the beginning of waiting for a "NOPE" response for the specified player and card type.
+     *
+     * @param currentplayer The player currently waiting for "NOPE" responses.
+     * @param cardType      The type of card for which "NOPE" responses are awaited.
+     */
 
     private void goInWaitForNope(Player1 currentplayer, CardType cardType) {
         getGame().cardBeforeNope = new Card(cardType);
         getGame().playerBeforeNope = currentplayer;
     }
     public String action;
+    /**
+     * Marks the beginning of waiting for a "NOPE" response for the specified player and action.
+     *
+     * @param currentplayer The player currently waiting for "NOPE" responses.
+     * @param action1       The action for which "NOPE" responses are awaited.
+     */
     private void goInWaitForNope(Player1 currentplayer, String action1) {
         action = action1;
         getGame().playerBeforeNope = currentplayer;
     }
-
+    /**
+     * Retrieves the index of a card with the specified card type from the player's hand.
+     *
+     * @param cardType The type of card to search for.
+     * @param player   The player whose hand is being searched.
+     * @return The index of the card if found, otherwise -1.
+     */
     public int getCardIndex(CardType cardType, Player1 player){
         int index = 0;
         for (Card card : player.getHandList()) {
@@ -204,6 +248,11 @@ public class GameServer implements Runnable {
     public boolean nopeanswer = false;
 
     public boolean nopecardPlayed = false;
+    /**
+     * Checks if any player has a "NOPE" card in their hand and sends the appropriate message.
+     *
+     * @return True if a "NOPE" card was found and a message was sent, otherwise false.
+     */
     public boolean sendNopeMessage(){
         for (Player1 player : game.getPlayers()) {
             for (Card card1 : player.getHandList()) {
@@ -216,22 +265,35 @@ public class GameServer implements Runnable {
         }
         return false;
     }
+    /**
+     * Retrieves the current game instance.
+     *
+     * @return The current game instance.
+     */
     public Game getGame() {
         return game;
     }
-
+    /**
+     * Starts the game process by initiating the game and sending turn messages to players.
+     */
     public void startGameProcess() {
         game.gameStart();
         turnMessage();
     }
-    //}
-
+    /**
+     * Sends turn messages to all players indicating whose turn it is.
+     */
     public void turnMessage(){
         for (Player1 player : game.getPlayers()){
             sendMessageToPlayer(player.getName(), ProtocolMessages.TURN + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
         }
     }
-
+    /**
+     * Retrieves the handler for a specific player.
+     *
+     * @param playerName The name of the player to retrieve the handler for.
+     * @return The handler for the specified player, or null if not found.
+     */
     private EKCHandler getPlayerHandler(String playerName) {
         for (EKCHandler handler : clients) {
             if (handler.getName().equals(playerName)) {
@@ -240,7 +302,11 @@ public class GameServer implements Runnable {
         }
         return null;
     }
-
+    /**
+     * Draws a card for the current player and sends appropriate messages to other players.
+     *
+     * @return A message indicating the result of drawing the card.
+     */
     public String drawCard() {
         Player1 currentplayer = game.getCurrentPlayer();
         sendMessageToAllOtherPlayers(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + getGame().getCurrentPlayer().getName() + ProtocolMessages.DELIMITER + "drew a card");
@@ -251,6 +317,12 @@ public class GameServer implements Runnable {
         };
         return answer;
     }
+    /**
+     * Allows the current player to choose a card from another player's hand.
+     *
+     * @param cardType      The type of card to choose.
+     * @param victimplayer  The player whose card is being chosen.
+     */
     public void chooseCardInHand(CardType cardType, Player1 victimplayer) {
         //first remove card
         victimplayer.getHand().remove(getCardIndex(cardType, victimplayer));
@@ -267,6 +339,12 @@ public class GameServer implements Runnable {
             }
         }
     }
+    /**
+     * Plays the Favor card, allowing the target player to select a card from his hand.
+     *
+     * @param targetPlayer The player from whose hand a card is given.
+     * @return A message indicating the result of playing the Favor card.
+     */
     public String playFavor(Player1 targetPlayer) {
         game.cardReciever = game.getCurrentPlayer();
         game.getCurrentPlayer().getHand().remove(getCardIndex(CardType.FAVOR, game.getCurrentPlayer()));
@@ -278,7 +356,13 @@ public class GameServer implements Runnable {
         sendMessageToPlayer(targetPlayer.getName(), ProtocolMessages.PICK_CARD_IN_HAND + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
         return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER +game.getCurrentPlayer().getName() + " (you) played a Favor card";
     }
-
+    /**
+     * Plays the Combo2 card, which allows the current player to remove two cards of the specified type from their hand
+     * and get a random card from the target player's hand.
+     *
+     * @param cardType The type of card to be removed from the current player's hand.
+     * @return A message indicating the result of playing the Combo2 card.
+     */
 
     public String playCombo2(CardType cardType){
         game.getCurrentPlayer().getHand().remove(getCardIndex(cardType, game.getCurrentPlayer()));
@@ -286,7 +370,13 @@ public class GameServer implements Runnable {
         return (takerandomCard(game.getCurrentPlayer(),game.getTargetPlayer()));
 
     }
-
+    /**
+     * Takes a random card from the target player and gives it to the current player as part of the Combo2 card effect.
+     *
+     * @param currentPlayer The player initiating the Combo2 card effect.
+     * @param targetPlayer The player from whose hand the card is taken.
+     * @return A message indicating the result of the card exchange.
+     */
     private String takerandomCard(Player1 currentPlayer, Player1 targetPlayer) {
         game.cardReciever = game.getCurrentPlayer();
         game.setTargetPlayer(targetPlayer);
@@ -298,6 +388,12 @@ public class GameServer implements Runnable {
         return ProtocolMessages.CARD_RECEIVED + ProtocolMessages.DELIMITER + "COMBO2" + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName() + ProtocolMessages.DELIMITER + game.giveCard(currentPlayer, targetPlayer);
     }
 
+    /**
+     * Sends a message to the specified player.
+     *
+     * @param playerName The name of the player to whom the message is sent.
+     * @param message The message to be sent.
+     */
     public void sendMessageToPlayer(String playerName, String message) {
         EKCHandler handler = getPlayerHandler(playerName);
         if (handler != null && Objects.equals(message, "NOPE")) {
@@ -310,6 +406,11 @@ public class GameServer implements Runnable {
             view.showMessage("Player " + playerName + " not found.");
         }
     }
+    /**
+     * Sends a message to all players except the current player.
+     *
+     * @param message The message to be sent.
+     */
     public void sendMessageToAllOtherPlayers(String message) {
         for (EKCHandler handler : clients) {
             if (handler.getName() != game.getCurrentPlayer().getName()) {
@@ -317,18 +418,38 @@ public class GameServer implements Runnable {
             }
         }
     }
+    /**
+     * Sends a message to all players.
+     *
+     * @param message The message to be sent.
+     */
     public void sendMessageToAllPlayers(String message) {
         for (EKCHandler handler : clients) {
             handler.sendMessage(message);
         }
     }
+    /**
+     * Plays the Defuse card which places the exploding kitten at the specified index in the deck.
+     *
+     * @param index The index of the exploding kitten to be placed.
+     */
     public void playDefuse(int index) {
         game.playDefuse(index);
     }
-
+    /**
+     * Retrieves the size of the draw pile.
+     *
+     * @return A message containing the size of the draw pile.
+     */
     public String drawPileSize() {
         return ProtocolMessages.RESPONSE_DRAW_PILE_SIZE + ProtocolMessages.DELIMITER + game.getDeckLength();
     }
+    /**
+     * Retrieves the size of the specified player's hand.
+     *
+     * @param player The name of the player whose hand size is to be retrieved.
+     * @return A message containing the size of the player's hand.
+     */
     public String userHandSize(String player) {
         Player1 player1 = game.getPlayer(player);
         if (player1 == null) {
@@ -337,7 +458,11 @@ public class GameServer implements Runnable {
         return ProtocolMessages.RESPONSE_USERS_HAND_SIZE + ProtocolMessages.DELIMITER + player1.getHandList().size();
 //        game.getClientTui().userHandSizeMessage(player.getName(), player.getHandList().size());
     }
-
+    /**
+     * Retrieves the list of alive players in the game.
+     *
+     * @return A message containing the names of the alive players.
+     */
     public String requestAlivePlayers() {
         StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append(ProtocolMessages.RESPONSE_ALIVE_PLAYERS).append("~");
@@ -352,7 +477,12 @@ public class GameServer implements Runnable {
         }
         return responseBuilder.toString();
     }
-
+    /**
+     * Retrieves the list of cards in the hand of the specified player.
+     *
+     * @param player The name of the player whose cards are to be retrieved.
+     * @return A message containing the types of cards in the player's hand.
+     */
     public String requestCardsInHand(String player) {
         StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append(ProtocolMessages.REQUEST_CARD_IN_HAND_RESPONSE).append(ProtocolMessages.DELIMITER);
@@ -370,6 +500,9 @@ public class GameServer implements Runnable {
         }
         return responseBuilder.toString();
     }
+    /**
+     * Sends a message to all clients indicating the winner.
+     */
 
     public void endGame() {
         for (EKCHandler handler : clients) {
@@ -377,6 +510,12 @@ public class GameServer implements Runnable {
             handler.sendMessage(ProtocolMessages.GAME_FINISHED + ProtocolMessages.DELIMITER + game.getWinner().getName());
         }
     }
+    /**
+     * Sends a chat message to all clients except the specified player.
+     *
+     * @param s The message to be sent.
+     * @param name The name of the player sending the chat.
+     */
 
     public void sendChat(String s , String name) {
         for (EKCHandler handler : clients) {
@@ -385,6 +524,12 @@ public class GameServer implements Runnable {
             }
         }
     }
+    /**
+     * Retrieves the number of mandatory draws for the specified player.
+     *
+     * @param player The player for whom the number of mandatory draws is to be retrieved.
+     * @return A message containing the number of mandatory draws for the player.
+     */
     public String requestMandatoryDraws(Player1 player) {
         return (ProtocolMessages.RESPONSE_MANDATORY_DRAWS+ ProtocolMessages.DELIMITER+ (player.getExtraTurns()+1));
     }
@@ -392,12 +537,27 @@ public class GameServer implements Runnable {
 
 
 /////////////////////main//////////////////////////////////////
+    /**
+     * The entry point of the Game Server application.
+     * <p>
+     * This method initializes a new instance of the {@code GameServer} class,
+     * starts the server, and prints a welcome message to the console.
+     * <p>
+     * It creates a new thread for the {@code GameServer} instance and starts
+     * the thread to handle client connections.
+     *
+     * @param args The command-line arguments (not used in this application).
+     */
     public static void main(String[] args) {
+        // Create a new instance of the GameServer
         GameServer gameServer = new GameServer();
+
+        // Print a welcome message to the console
         System.out.println("Welcome to the Game Server! Starting...");
+
+        // Start the server in a new thread
         new Thread(gameServer).start();
     }
-
 
 
 
