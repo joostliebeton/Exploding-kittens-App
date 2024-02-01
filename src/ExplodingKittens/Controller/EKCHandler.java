@@ -71,7 +71,7 @@ public class EKCHandler implements Runnable {
         String command = words[0];
         switch (command) {
             case ProtocolMessages.HI:
-                if (words[1] != "CHAT"){
+                if (!Objects.equals(words[1], "CHAT")){
                     server.setChatFunction(false);
                 }
                 out.write(ProtocolMessages.HI + ProtocolMessages.DELIMITER + server.getGameName());

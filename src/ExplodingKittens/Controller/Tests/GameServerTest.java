@@ -1,8 +1,8 @@
-package ExplodingKittens.Controller;
+package ExplodingKittens.Controller.Tests;
 
+import ExplodingKittens.Controller.GameServer;
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.HumanPlayer;
 import ExplodingKittens.Model.Player1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,7 +68,8 @@ public class GameServerTest {
         gameServer.setupGame();
         // Set up the game with the player
         gameServer.getGame().addPlayer("player1");
-        gameServer.getGame().getPlayer("player1").getHand().add(new Card(CardType.EXPLODING_KITTEN));
+        gameServer.getGame().getPlayer("player1").getHand()
+                .add(new Card(CardType.EXPLODING_KITTEN));
         gameServer.getGame().getPlayer("player1").getHand().add(new Card(CardType.DEFUSE));
 
         // Test the requestCardsInHand method

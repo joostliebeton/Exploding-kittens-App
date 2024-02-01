@@ -17,9 +17,9 @@ import java.util.Objects;
 import java.util.Random;
 
 public class PlayerClient {
-    private Socket serverSock;
-    private BufferedReader in;
-    private BufferedWriter out;
+    public Socket serverSock;
+    public BufferedReader in;
+    public BufferedWriter out;
     private ClientTUI playerClientTUI;
     private Player1 player;
     private String name;
