@@ -87,7 +87,9 @@ public class PlayerClient {
     public void createConnection() throws ExitProgram {
         clearConnection();
         while (serverSock == null) {
-             String host = playerClientTUI.getString("Please enter the server IP.");
+            String host = playerClientTUI.getString("Please enter the server IP.");
+            //String host = "127.0.0.1";
+            // host = playerClientTUI.getString("Please enter the server IP.");
             //String host = "127.0.0.1";
             //String host = "145.126.38.21";
 //            int port = playerClientTUI.getInt("Please enter the server port.");
@@ -325,6 +327,10 @@ public class PlayerClient {
         }
     }
    public void requestPlayers() throws ServerUnavailableException {
+        sendMessage(ProtocolMessages.REQUEST_PLAYERS_LOBBY);
+        //playerClientTUI.showMessage("> " + readLineFromServer());
+    }
+    public void requestAmountOfPlayers() throws ServerUnavailableException {
         sendMessage(ProtocolMessages.REQUEST_PLAYERS_LOBBY);
         //playerClientTUI.showMessage("> " + readLineFromServer());
     }

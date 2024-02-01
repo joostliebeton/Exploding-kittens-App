@@ -102,6 +102,7 @@ public class Game {
     // Other methods as needed
 
     public String eliminatePlayer(Player1 player) {
+
         players.remove(player);
         eliminatedplayers.add(player);
 
@@ -125,7 +126,7 @@ public class Game {
                 } else {
                     // Player does not have a Defuse card, eliminate them
                     eliminatePlayer(currentPlayer);
-                    return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an Exploding Kitten! They have been eliminated!");
+                    return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an exploding kitten! They have been eliminated!");
                 }
             }
             player.getHand().addCard(drawnCard);

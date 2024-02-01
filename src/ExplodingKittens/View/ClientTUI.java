@@ -62,7 +62,8 @@ public class ClientTUI {
                 "h .................help ( this menu )\n" +
                 "give ..............give player a card\n" +
                 "draw ..............draw a card\n" +
-                "chat...............chat with other players\n"));
+                "chat...............chat with other players\n"+
+                "drawamount.........check how many times you have to draw"));
     }
     public void handleUserInput() {
         try {

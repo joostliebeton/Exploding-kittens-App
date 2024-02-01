@@ -4,20 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+    <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
+      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_01_2024_21_08__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_01_2024_21_08__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_01_2024_21_08__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_01_2024_21_08__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_01_2024_21_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_01_2024_21_09__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Card.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Card.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Deck.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Player1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Model/Player1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ServerTUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ServerTUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/PlayerClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/View/ClientTUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -77,6 +78,7 @@
     &quot;Application.GameServer.executor&quot;: &quot;Run&quot;,
     &quot;Application.PlayerClient.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.EKCHandlerTest.executor&quot;: &quot;Coverage&quot;,
     &quot;JUnit.GameTest.executor&quot;: &quot;Run&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
@@ -89,9 +91,8 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Update-v1&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/liebe/Downloads&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/joris/OneDrive - University of Twente/Utwente/Mod 2/Programming/all ss's/most up to date ss/unpacked.ss&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -114,27 +115,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="ExplodingKittens.Controller" />
       <recent name="ExplodingKittens" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="ExplodingKittens.View" />
-      <recent name="ExplodingKittens.Controller" />
-    </key>
   </component>
-  <component name="RunManager" selected="Application.PlayerClient">
-    <configuration name="ComputerClient" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.ComputerClient" />
-      <module name="exploding kittens" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.EKCHandlerTest">
     <configuration name="GameRule" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ExplodingKittens.GameRule" />
       <module name="exploding kittens" />
@@ -174,6 +159,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EKCHandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="exploding kittens" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ExplodingKittens.Controller" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.EKCHandlerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="exploding kittens" />
       <extension name="coverage">
@@ -189,20 +189,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.ComputerClient" />
-      <item itemvalue="Application.GameServer" />
-      <item itemvalue="Application.GameRule" />
-      <item itemvalue="Application.PlayerClient" />
-      <item itemvalue="JUnit.GameTest" />
-    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EKCHandlerTest" />
         <item itemvalue="Application.PlayerClient" />
         <item itemvalue="Application.GameServer" />
-        <item itemvalue="Application.ComputerClient" />
-        <item itemvalue="JUnit.GameTest" />
         <item itemvalue="Application.GameRule" />
+        <item itemvalue="JUnit.GameTest" />
       </list>
     </recent_temporary>
   </component>
@@ -243,16 +236,10 @@
       <workItem from="1706006742105" duration="2241000" />
       <workItem from="1706190007311" duration="4000" />
       <workItem from="1706190044554" duration="10128000" />
-      <workItem from="1706430561565" duration="3717000" />
-      <workItem from="1706577907338" duration="62000" />
-      <workItem from="1706621424688" duration="11961000" />
-      <workItem from="1706644882775" duration="7108000" />
-      <workItem from="1706693558240" duration="1008000" />
-      <workItem from="1706704882097" duration="1053000" />
-      <workItem from="1706705968547" duration="759000" />
-      <workItem from="1706727001011" duration="5681000" />
-      <workItem from="1706784401177" duration="4198000" />
-      <workItem from="1706809770028" duration="4077000" />
+      <workItem from="1706430561565" duration="4763000" />
+      <workItem from="1706537746523" duration="1490000" />
+      <workItem from="1706650226411" duration="5088000" />
+      <workItem from="1706715936357" duration="16471000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -518,87 +505,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706190275091</updated>
     </task>
-    <task id="LOCAL-00034" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java">
+    <task id="LOCAL-00034" summary="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java">
       <option name="closed" value="true" />
-      <created>1706577945290</created>
+      <created>1706534800270</created>
       <option name="number" value="00034" />
       <option name="presentableId" value="LOCAL-00034" />
       <option name="project" value="LOCAL" />
-      <updated>1706577945290</updated>
+      <updated>1706534800270</updated>
     </task>
-    <task id="LOCAL-00035" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java">
-      <option name="closed" value="true" />
-      <created>1706577961237</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1706577961237</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java">
-      <option name="closed" value="true" />
-      <created>1706621611688</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1706621611688</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java">
-      <option name="closed" value="true" />
-      <created>1706621824584</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1706621824584</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java">
-      <option name="closed" value="true" />
-      <created>1706621867055</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1706621867055</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java">
-      <option name="closed" value="true" />
-      <created>1706650482807</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1706650482807</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <option name="closed" value="true" />
-      <created>1706650521143</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1706650521143</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <option name="closed" value="true" />
-      <created>1706652265113</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1706652265113</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <option name="closed" value="true" />
-      <created>1706792797395</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1706792797395</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <option name="closed" value="true" />
-      <created>1706812570119</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1706812570119</updated>
-    </task>
-    <option name="localTasksCounter" value="44" />
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,19 +551,14 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into check" />
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch&#10;#&#9;.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
     <MESSAGE value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/Game.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Deck.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/Model/Hand.class&#10;#&#9;out/production/exploding kittens/ExplodingKittens/View/ClientTUI.class&#10;#&#9;src/ExplodingKittens/Controller/EKCHandler.java&#10;#&#9;src/ExplodingKittens/Controller/Game.java&#10;#&#9;src/ExplodingKittens/Controller/GameServer.java&#10;#&#9;src/ExplodingKittens/Controller/PlayerClient.java&#10;#&#9;src/ExplodingKittens/Model/Hand.java&#10;#&#9;src/ExplodingKittens/View/ClientTUI.java" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/test' into test&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;src/ExplodingKittens/Card.java" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/exploding_kittens$GameServer.ic" NAME="GameServer Coverage Results" MODIFIED="1706780970525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>ExplodingKittens.Controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/exploding_kittens$ComputerClient.ic" NAME="ComputerClient Coverage Results" MODIFIED="1706728809476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/project$EKCHandlerTest.ic" NAME="EKCHandlerTest Coverage Results" MODIFIED="1706653256743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ExplodingKittens.Controller.*</FILTER>
     </SUITE>
   </component>
