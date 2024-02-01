@@ -32,6 +32,7 @@ public class PlayerClient {
 
         // To be implemented
     }
+
     /**
      * Starts a new HotelClient by creating a connection, followed by the
      * HELLO handshake as defined in the protocol. After a successful
