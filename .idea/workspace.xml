@@ -120,7 +120,7 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -135,12 +135,12 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ExplodingKittens.Controller" />
-      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.GameServerTest" />
+      <option name="PACKAGE_NAME" value="ExplodingKittens.Tests" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.Tests.GameServerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -150,12 +150,12 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ExplodingKittens.Controller" />
-      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.GameServerTest" />
+      <option name="PACKAGE_NAME" value="ExplodingKittens.Tests" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.Tests.GameServerTest" />
       <option name="METHOD_NAME" value="testDrawCard" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
@@ -166,12 +166,12 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ExplodingKittens.Controller" />
-      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.GameTest" />
+      <option name="PACKAGE_NAME" value="ExplodingKittens.Tests" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.Tests.GameTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -181,12 +181,12 @@
       <module name="exploding kittens" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ExplodingKittens.Controller.*" />
+          <option name="PATTERN" value="ExplodingKittens.Controller.Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="ExplodingKittens.Controller" />
-      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.PlayerClientTest" />
+      <option name="PACKAGE_NAME" value="ExplodingKittens.Tests" />
+      <option name="MAIN_CLASS_NAME" value="ExplodingKittens.Controller.Tests.PlayerClientTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
