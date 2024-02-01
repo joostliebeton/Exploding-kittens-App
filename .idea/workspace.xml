@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3d11a6a-4d21-4d76-90b6-46c4a15260c8" name="Changes" comment="Merge remote-tracking branch 'origin/Update-v1' into Update-v1&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <change afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandlerTest$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandlerTest$GameServerStub.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandlerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/EKCHandlerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/GameServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/Controller/PlayerClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ServerTUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/exploding kittens/ExplodingKittens/View/ServerTUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/EKCHandlerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Controller/GameServerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ExplodingKittens/Model/Deck.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,6 +250,7 @@
       <workItem from="1706784401177" duration="4198000" />
       <workItem from="1706809770028" duration="5031000" />
       <workItem from="1706715936357" duration="18084000" />
+      <workItem from="1706828047351" duration="1013000" />
     </task>
     <task id="LOCAL-00001" summary="commit test">
       <option name="closed" value="true" />
@@ -634,7 +624,7 @@
     <SUITE FILE_PATH="coverage/exploding_kittens$ComputerClient.ic" NAME="ComputerClient Coverage Results" MODIFIED="1706728809476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ExplodingKittens.Controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/exploding_kittens$GameServerTest.ic" NAME="GameServerTest Coverage Results" MODIFIED="1706825047135" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/exploding_kittens$GameServerTest.ic" NAME="GameServerTest Coverage Results" MODIFIED="1706828587289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>ExplodingKittens.Controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/project$EKCHandlerTest.ic" NAME="EKCHandlerTest Coverage Results" MODIFIED="1706653256743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

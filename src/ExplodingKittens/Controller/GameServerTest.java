@@ -2,6 +2,7 @@ package ExplodingKittens.Controller;
 
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
+import ExplodingKittens.Model.HumanPlayer;
 import ExplodingKittens.Model.Player1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class GameServerTest {
         int initialHandSize = currentPlayer.getHandList().size();
         gameServer.drawCard();
         assertEquals(initialHandSize + 1, currentPlayer.getHandList().size());
-        assertNotEquals(currentPlayer.getName(), "Player2");
+        assertNotEquals(gameServer.getGame().getCurrentPlayer(), "Player2");
 
     }
     @Test
@@ -59,6 +60,22 @@ public class GameServerTest {
         assert (result.contains(card.getType().name()) || result.contains("nope"));
         // Assert the result based on expected behavior
         // Add more assertions as needed
+    }
+    @Test
+    public void testRequestCardsInHand() {
+        // Create a player and add cards to its hand
+
+        gameServer.setupGame();
+        // Set up the game with the player
+        gameServer.getGame().addPlayer("player1");
+        gameServer.getGame().getPlayer("player1").getHand().add(new Card(CardType.EXPLODING_KITTEN));
+        gameServer.getGame().getPlayer("player1").getHand().add(new Card(CardType.DEFUSE));
+
+        // Test the requestCardsInHand method
+        String response = gameServer.requestCardsInHand("player1");
+        // Verify the response contains the expected card types
+        assertTrue(response.contains("EXPLODING_KITTEN"));
+        assertTrue(response.contains("DEFUSE"));
     }
 
     // Add more test methods to cover other functionalities
