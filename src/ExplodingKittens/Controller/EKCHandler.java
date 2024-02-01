@@ -2,7 +2,7 @@ package ExplodingKittens.Controller;
 
 import ExplodingKittens.Model.Card;
 import ExplodingKittens.Model.CardType;
-import ExplodingKittens.Model.ComputerPlayer;
+
 
 import javax.management.monitor.StringMonitor;
 import java.io.*;
@@ -100,14 +100,9 @@ public class EKCHandler implements Runnable {
                         out.newLine();
                         out.flush();
                     } else if ((Integer.parseInt(words[1]) > server.getGame().getPlayers().size())) {
-                        for (int i = server.getGame().getPlayers().size(); i < Integer.parseInt(words[1]); i++) {
-                            server.addComputerplayer("Computer" + i);
-                        }
-                        server.startGameProcess();
-                        out.write(ProtocolMessages.GAME_STARTED);
+                        out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "Not enough players");
                         out.newLine();
                         out.flush();
-
                     }
                 }
                 break;
@@ -194,17 +189,8 @@ public class EKCHandler implements Runnable {
                         server.getGame().getCurrentPlayer().setExtraTurns(0, 0);
                         server.getGame().nextCurrentPlayer();
                         server.turnMessage();
-                        if (server.getGame().getCurrentPlayer() instanceof ComputerPlayer) {
-                            server.playCard(server.getGame().getCurrentPlayer().turn());
-                            server.drawCard();
-                            if (server.getGame().getCurrentPlayer().getExtraTurns() == -1) {
-                                server.getGame().nextCurrentPlayer();
-                                server.turnMessage();
-                                break;
-                            }
-                        }
                         break;
-                    }
+                        }
                     out.write(ProtocolMessages.RESPONSE_MANDATORY_DRAWS + ProtocolMessages.DELIMITER + server.getGame().getCurrentPlayer().getExtraTurns());
                     out.newLine();
                     out.flush();
@@ -236,8 +222,8 @@ public class EKCHandler implements Runnable {
                     break;
                 } else if (words[2].equals("3")){
                     server.getGame().setTargetPlayer(server.getGame().getPlayer(words[3]));
-                    server.playCombo3(CardType.valueOf(words[1]));
-                    out.write("Played favor");
+                    //server.playCombo3(CardType.valueOf(words[1]));
+                    out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "NOT POSSIBLE");
                     out.newLine();
                     out.flush();
                     break;
@@ -256,7 +242,7 @@ public class EKCHandler implements Runnable {
                     server.turnMessage();
                     break;
                 }
-                out.write(ProtocolMessages.RESPONSE_MANDATORY_DRAWS + ProtocolMessages.DELIMITER + server.getGame().getCurrentPlayer().getExtraTurns());
+                out.write(ProtocolMessages.RESPONSE_MANDATORY_DRAWS + ProtocolMessages.DELIMITER + server.getGame().getCurrentPlayer().getExtraTurns()+1);
                 out.newLine();
                 out.flush();
                 break;
@@ -337,12 +323,25 @@ public class EKCHandler implements Runnable {
                     }
                     break;
                 }
+                else if(server.action == "COMBO2") {
 
-                    server.sendMessageToPlayer((server.getGame().playerBeforeNope.getName()), server.getGame().playCard(server.getGame().getPlayer(server.getGame().playerBeforeNope.getName()).getHand().indexOf(server.getGame().cardBeforeNope.getType()), server.getGame().playerBeforeNope));
+                    server.sendMessageToPlayer(server.getGame().playerBeforeNope.getName(),
+                            ProtocolMessages.CARD_RECEIVED + ProtocolMessages.DELIMITER + "COMBO2" + ProtocolMessages.DELIMITER + server.getGame().getTargetPlayer().getName() +
+                                    ProtocolMessages.DELIMITER + server.getGame().giveCard(server.getGame().playerBeforeNope, server.getGame().getTargetPlayer()));
+                    out.write(ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + "COMBO2" + ProtocolMessages.DELIMITER + server.getGame().getTargetPlayer().getName() +
+                            ProtocolMessages.DELIMITER + server.getGame().playerBeforeNope.getName() + ProtocolMessages.DELIMITER + server.getGame().getTargetPlayer());
+                    out.newLine();
+                    out.flush();
+                    break;
+                }
+                    server.sendMessageToPlayer((server.getGame().playerBeforeNope.getName()), server.getGame().playCard(server.getGame().getPlayer(server.getGame().playerBeforeNope.getName()).getHand().
+                            indexOf(server.getGame().cardBeforeNope.getType()), server.getGame().playerBeforeNope));
                 out.write(ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "You refused to nope");
                 out.newLine();
                 out.flush();
                 break;
+            case ProtocolMessages.CHAT:
+                server.sendChat(ProtocolMessages.CHAT + ProtocolMessages.DELIMITER + this.name + ProtocolMessages.DELIMITER + words[1], this.name);
             case "":
                 break;
             default:

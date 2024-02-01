@@ -15,18 +15,6 @@ public class ServerTUI {
         console.println(message);
     }
 
-    public String getString(String question) {
-        console.print(question);
-        console.flush();
-        return TextIO.getlnString();
-    }
-    public int getInt(String question) {
-        console.print(question);
-        console.flush();
-        return TextIO.getlnInt();
-
-
-    }
     public boolean getBoolean(String question) {
         console.print(question);
         console.flush();

@@ -78,13 +78,5 @@ public class Card {
     public boolean isActionCard() {
         return getType() == CardType.ATTACK || getType() == CardType.FAVOR || getType() == CardType.SHUFFLE || getType() == CardType.SEE_THE_FUTURE || getType() == CardType.SKIP || getType() == CardType.NOPE;
     }
-
-    public boolean isCatCard() {
-        if (getType() == CardType.CAT_CARD1 || getType() == CardType.CAT_CARD2 || getType() == CardType.CAT_CARD3 || getType() == CardType.CAT_CARD4 || getType() == CardType.CAT_CARD5) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
 

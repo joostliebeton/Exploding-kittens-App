@@ -113,8 +113,8 @@ public class GameServer implements Runnable {
             try {
                 view.showMessage("Attempting to open a socket at 145.126.38.21 "
                         + "on port " + port + "...");
-                ssock = new ServerSocket(port, 0,
-                        InetAddress.getByName("145.126.38.21"));
+//                ssock = new ServerSocket(port, 0, InetAddress.getByName("145.126.38.21"));
+                ssock = new ServerSocket(port, 0, InetAddress.getByName("127.0.0.1"));
                 view.showMessage("Server started at port " + port);
             } catch (IOException e) {
                 view.showMessage("ERROR: could not create a socket on "
@@ -148,41 +148,7 @@ public class GameServer implements Runnable {
         game.addPlayer(name);
     }
 
-    public void addComputerplayer(String name) {
-        game.addComputerplayer(name);
-    }
 
-    //    public void requestGame(int playerCount, int aiCount) {
-//        game.requestGame(playerCount, aiCount);
-//    }
-//    public String playCardcmd(CardType cardType, Player1 currentplayer) {
-//        for (CardType cardType1 : CardType.values()) {
-//            if (cardType1 == cardType) {
-//                int index = 0;
-//                for (Card card : currentplayer.getHandList()) {
-//                    if (card.getType().equals(cardType1)) {
-//                        sendMessageToAllOtherPlayers(ProtocolMessages.GENERAL_CARD_RESPONSE + ProtocolMessages.DELIMITER + cardType);
-//                        if (card.isActionCard()) {
-//                            if (sendNopeMessage()){
-//                                while(!nopeanswer){
-//                                    if(nopecardPlayed){
-//                                        sendMessageToAllOtherPlayers(ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName() + ProtocolMessages.DELIMITER
-//                                                + cardType + ProtocolMessages.DELIMITER + playerWhoNoped.getName());
-//                                        return (ProtocolMessages.GETS_NOPED + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName()) + ProtocolMessages.DELIMITER
-//                                                + cardType + ProtocolMessages.DELIMITER + playerWhoNoped.getName();
-//                                    }
-//                                }return (game.playCard(index, currentplayer));
-//                            } return (game.playCard(index,currentplayer));
-//                        } return (game.playCard(index,currentplayer));
-//
-//                    }
-//                    index++;
-//                }return ("you don't have this card");
-//            }
-//
-//
-//        }return "this card doesnt exist";
-//    }
     public String playCardcmd(CardType cardType, Player1 currentplayer) {
         for (CardType cardType1 : CardType.values()) {
             if (cardType1 == cardType) {
@@ -208,6 +174,11 @@ public class GameServer implements Runnable {
 
     private void goInWaitForNope(Player1 currentplayer, CardType cardType) {
         getGame().cardBeforeNope = new Card(cardType);
+        getGame().playerBeforeNope = currentplayer;
+    }
+    public String action;
+    private void goInWaitForNope(Player1 currentplayer, String action1) {
+        action = action1;
         getGame().playerBeforeNope = currentplayer;
     }
 
@@ -237,7 +208,6 @@ public class GameServer implements Runnable {
         }
         return false;
     }
-    boolean flag = false;
     public Game getGame() {
         return game;
     }
@@ -246,41 +216,11 @@ public class GameServer implements Runnable {
         game.gameStart();
         turnMessage();
     }
-    public void nextPlayer(){
-        turnMessage();
-    }
-
-
-
-
-    private void computerTurn(Player1 player) {
-        //to be implemented
-    }
     //}
 
     public void turnMessage(){
         for (Player1 player : game.getPlayers()){
             sendMessageToPlayer(player.getName(), ProtocolMessages.TURN + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
-        }
-    }
-
-    private void waitForPlayerTurn() {
-            try{
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-    }
-
-    private void notifyPlayerTurn(Player1 player) {
-        // Send a message to the client associated with the player
-        // indicating that it's their turn
-        String playerName = player.getName();
-        // Use the EKCHandler associated with the player to send the message
-        EKCHandler playerHandler = getPlayerHandler(playerName);
-        if (playerHandler != null) {
-            playerHandler.sendMessage(ProtocolMessages.TURN + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName()); // Define your message format
-
         }
     }
 
@@ -330,31 +270,26 @@ public class GameServer implements Runnable {
         sendMessageToPlayer(targetPlayer.getName(), ProtocolMessages.PICK_CARD_IN_HAND + ProtocolMessages.DELIMITER + game.getCurrentPlayer().getName());
         return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER +game.getCurrentPlayer().getName() + " (you) played a Favor card";
     }
-    public void ChatMessage(String message) {
-        for (EKCHandler handler : clients) {
-            handler.sendMessage(message);
-        }
-    }
-    public String giveCard(Card card) {
-        game.giveCard(card, game.cardReciever);
 
-        return ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + game.getTargetPlayer() + ProtocolMessages.DELIMITER + game.getCurrentPlayer();
 
-    }
     public String playCombo2(CardType cardType){
-        game.getCurrentPlayer().getHand().add(new Card(CardType.FAVOR));
         game.getCurrentPlayer().getHand().remove(getCardIndex(cardType, game.getCurrentPlayer()));
         game.getCurrentPlayer().getHand().remove(getCardIndex(cardType, game.getCurrentPlayer()));
-        return playFavor(game.getTargetPlayer());
-    }
-    public String playCombo3(CardType cardType){
-        game.favorChoice(cardType);
-        return ProtocolMessages.GENERAL_CARD_REQUEST + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName();
-    }
-    public void generalCardResponse(CardType cardType){
-        game.getClientTui().generalCardResponse(cardType);
+        return (takerandomCard(game.getCurrentPlayer(),game.getTargetPlayer()));
 
     }
+
+    private String takerandomCard(Player1 currentPlayer, Player1 targetPlayer) {
+        game.cardReciever = game.getCurrentPlayer();
+        game.setTargetPlayer(targetPlayer);
+        if (sendNopeMessage()){
+            goInWaitForNope(game.getCurrentPlayer(), "COMBO2");
+            return ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + "wait for nope cards";
+        }
+        sendMessageToAllOtherPlayers(ProtocolMessages.CARD_EXCHANGED + ProtocolMessages.DELIMITER + "COMBO2" + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName() + ProtocolMessages.DELIMITER + game.getCurrentPlayer());
+        return ProtocolMessages.CARD_RECEIVED + ProtocolMessages.DELIMITER + "COMBO2" + ProtocolMessages.DELIMITER + game.getTargetPlayer().getName() + ProtocolMessages.DELIMITER + game.giveCard(currentPlayer, targetPlayer);
+    }
+
     public void sendMessageToPlayer(String playerName, String message) {
         EKCHandler handler = getPlayerHandler(playerName);
         if (handler != null && Objects.equals(message, "NOPE")) {
@@ -410,9 +345,6 @@ public class GameServer implements Runnable {
         return responseBuilder.toString();
     }
 
-    public String playersLobbySize() {
-        return ProtocolMessages.RESPONSE_PLAYERS_LOBBY + ProtocolMessages.DELIMITER + game.getPlayers().size();
-    }
     public String requestCardsInHand(String player) {
         StringBuilder responseBuilder = new StringBuilder();
         responseBuilder.append(ProtocolMessages.REQUEST_CARD_IN_HAND_RESPONSE).append(ProtocolMessages.DELIMITER);
@@ -432,9 +364,6 @@ public class GameServer implements Runnable {
     }
 
 
-    public void playCard(int turn) {
-        game.playCard(turn, game.getCurrentPlayer());
-    }
 
 
 
@@ -454,6 +383,14 @@ public class GameServer implements Runnable {
     public void endGame() {
         for (EKCHandler handler : clients) {
             handler.sendMessage(ProtocolMessages.GAME_FINISHED + ProtocolMessages.DELIMITER + game.getWinner().getName());
+        }
+    }
+
+    public void sendChat(String s , String name) {
+        for (EKCHandler handler : clients) {
+            if (handler.getName() != name) {
+                handler.sendMessage(s);
+            }
         }
     }
 }

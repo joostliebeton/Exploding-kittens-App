@@ -11,13 +11,6 @@ public abstract class Player1 {
     Card playedCard; // does this belong in this class? or do we put this in the game class?
     int extraTurns;
     int turnsToSkip;
-    Deck discardPile;
-    ClientTUI clientTui;
-    // do we want a target player in here? what is the function of a target player?
-    // I think it might be more convinient to do this in game class? iterate over available players and then let the player choose which target to attack'.
-
-
-
 public Player1(String name, Game game){
     this.name = name;
     this.game = game;
@@ -45,14 +38,5 @@ public Player1(String name, Game game){
     public void setExtraTurns(int extraTurns, int oldTurns) {
         this.extraTurns = oldTurns + extraTurns;
     }
-    public void setPlayedCard(Card card){this.playedCard = card;}
-    public void setIsAlive(boolean isAlive){this.isAlive = isAlive;}
 
-
-    public Card getPlayedCard() {
-        return playedCard;
-    }
-    public int turn() {
-        return 0;
-    }
 }

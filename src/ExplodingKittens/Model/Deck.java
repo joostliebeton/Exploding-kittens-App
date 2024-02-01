@@ -9,7 +9,6 @@ import java.util.Random;
 
 public class Deck{
     private ArrayList<Card> cards;
-    private ClientTUI clientTui;
     public Deck() {
         cards = new ArrayList<>();
     }
@@ -81,29 +80,14 @@ public class Deck{
         return cards.isEmpty();
     }
 
-
-    public ArrayList<Card> getCards() {
-        return cards;
-    }
-    // shuffle() shuffles the cards
-
-    //drawCard() takes a card from the top of the deck and removes from the deck
-
-    public int pileSize(){
-        return cards.size();
-    }
-
     public void addExplodingKitten() {
         cards.add(new Card(CardType.EXPLODING_KITTEN));
     }
 
-    public Card[] getDeck() {
-        return cards.toArray(new Card[0]);
-    }
 
     public Card[] peek() {
         List<Card> peekedCards = new ArrayList<>();
-        for (int i = 3; i > 0; i--) {
+        for (int i = cards.size()-1; i > cards.size()-4; i--) {
             peekedCards.add(cards.get(i));
         }
         return peekedCards.toArray(new Card[0]);
@@ -113,9 +97,6 @@ public class Deck{
     }
     public void putCard(int index, Card card) {
         cards.add(index,card);
-    }
-    public void remove(Card card) {
-        cards.remove(card);
     }
     public int length(){
         return cards.size();

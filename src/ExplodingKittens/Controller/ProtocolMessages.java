@@ -5,6 +5,7 @@ public class ProtocolMessages {
     /////////////////BOTH CLIENT AND SERVER/////////////////////
     public static final String HI = "HI"; // [par] supported extionsions
     //////////////Client to server////////////////////////
+    public static final String CHAT = "CHAT"; // [par] message (CHAT~message)
     public static final String REFUSE_NOPE = "REFUSE_NOPE"; // [par] none (REFUSE_NOPE) // tells the server that the client refuses to nope //to: server
     public static final String CONNECT = "CONNECT"; // [par] name (CONNECT~name)
     public static final String REQUEST_GAME = "REQUEST_GAME"; // [par] totalamount of player in game (REQUEST_GAME~amount) >=2, amount of which are AI players in the game int >=0 (REQUEST_GAME~amount~amountAI)
@@ -46,10 +47,8 @@ public class ProtocolMessages {
     public static final String GENERAL_CARD_REQUEST = "GENERAL_CARD_REQUEST"; // [par] VICTIM (GENERAL_CARD_REQUEST~VICTIM) // requests the receiver to select a card of a kind //to: player needing to pick a kind of card
     public static final String REQUEST_CARD_IN_HAND_RESPONSE = "REQUEST_CARD_IN_HAND_RESPONSE"; // [par] card_value, card_value (REQUEST_CARD_IN_HAND_RESPONSE~card_value~card_value) // tells the client his hands//to: client that requested the card
     public static final String RESPONSE_CARDS_IN_HAND = "RESPONSE_CARDS_IN_HAND"; // [par] card_value, card_value (RESPONSE_CARDS_IN_HAND~card_value~card_value) // tells the client his hands//to: client that requested the card
-
+    //public static final String CHAT = "CHAT"; // [par]username message (CHAT~sender~message) // tells the //to: all;
     ///////////////////////optional////////////////////////
-//      public static final String CHAT = "CHAT"; // [par] message (CHAT~message)
-//      public static final String CHAT = "CHAT"; // [par] sender username, message (CHAT~sender~message)
 
     //////////////////NOTES//////////////////////////
     ///Note about double card/cat combos: You will notice that there is no
