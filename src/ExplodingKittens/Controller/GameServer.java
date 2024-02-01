@@ -373,6 +373,7 @@ public class GameServer implements Runnable {
 
     public void endGame() {
         for (EKCHandler handler : clients) {
+            System.out.println(game.getWinner().getName());
             handler.sendMessage(ProtocolMessages.GAME_FINISHED + ProtocolMessages.DELIMITER + game.getWinner().getName());
         }
     }

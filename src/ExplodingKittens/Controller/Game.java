@@ -113,6 +113,7 @@ public class Game {
     }
     public Player1 cardReciever= null;
     public String drawCard(Player1 player) {
+        currentPlayer = player;
         Card drawnCard = deck.draw();
         if (drawnCard != null) {
             //clientTui.drawCardMessage(player.getName(), drawnCard);
@@ -125,8 +126,8 @@ public class Game {
                     //return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an Exploding Kitten! They used a Defuse card to defuse it.");
                 } else {
                     // Player does not have a Defuse card, eliminate them
-                    eliminatePlayer(currentPlayer);
-                    return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an exploding kitten! They have been eliminated!");
+                    return eliminatePlayer(currentPlayer);
+                    //return (ProtocolMessages.ANNOUNCEMENT + ProtocolMessages.DELIMITER + player.getName() + " drew an exploding kitten! They have been eliminated!");
                 }
             }
             player.getHand().addCard(drawnCard);
