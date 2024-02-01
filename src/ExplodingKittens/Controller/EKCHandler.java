@@ -76,6 +76,9 @@ public class EKCHandler implements Runnable {
         String command = words[0];
         switch (command) {
             case ProtocolMessages.HI:
+                if (words[1] != "CHAT"){
+                    server.setChatFunction(false);
+                }
                 out.write(ProtocolMessages.HI + ProtocolMessages.DELIMITER + server.getGameName());
                 out.newLine();
                 out.flush();
@@ -341,7 +344,14 @@ public class EKCHandler implements Runnable {
                 out.flush();
                 break;
             case ProtocolMessages.CHAT:
-                server.sendChat(ProtocolMessages.CHAT + ProtocolMessages.DELIMITER + this.name + ProtocolMessages.DELIMITER + words[1], this.name);
+                if (server.getChatFunction()) {
+                    server.sendChat(ProtocolMessages.CHAT + ProtocolMessages.DELIMITER + this.name + ProtocolMessages.DELIMITER + words[1], this.name);
+                } else{
+                    out.write("Chat function not available");
+                    out.newLine();
+                    out.flush();
+                }
+                break;
             case "":
                 break;
             default:

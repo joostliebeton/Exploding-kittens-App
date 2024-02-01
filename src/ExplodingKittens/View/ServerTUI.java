@@ -21,5 +21,15 @@ public class ServerTUI {
         return TextIO.getlnBoolean();
 
     }
+    public String getString(String question) {
+        console.print(question);
+        console.flush();
+        return TextIO.getlnString();
+    }
 
+    public int getInt(String s) {
+        console.print(s);
+        console.flush();
+        return TextIO.getlnInt();
+    }
 }

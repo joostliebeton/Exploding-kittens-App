@@ -264,19 +264,18 @@ public class PlayerClient {
             if (in != null) {
                 try {
                     // Read and return answer from Server
-                    String answer = in.readLine();
-                    if (answer == null) {
-                        throw new ServerUnavailableException("Could not read "
-                                + "from server.");
-                    }
-
-                    String command = answer.split(ProtocolMessages.DELIMITER)[0];
-                    switch (command) {
-                        case ProtocolMessages.HI:
-                            return answer;
-                        //////////////////////////////////
-                    }
-                    return null;
+                    return  in.readLine();
+//                    if (answer == null) {
+//                        throw new ServerUnavailableException("Could not read "
+//                                + "from server.");
+//                    }
+//
+//                    String command = answer.split(ProtocolMessages.DELIMITER)[0];
+//                    if (command.equals(ProtocolMessages.HI)) {
+//                        return answer + ProtocolMessages.DELIMITER + "CHAT";
+//                        //////////////////////////////////
+//                    }
+//                    return null;
 
                 } catch (IOException e) {
                     throw new ServerUnavailableException("Could not read "
@@ -297,8 +296,9 @@ public class PlayerClient {
     }
     public void handleHello() throws ServerUnavailableException, ProtocolException, IOException {
 // Send HELLO
-        sendMessage((ProtocolMessages.HI ));
+        sendMessage((ProtocolMessages.HI + ProtocolMessages.DELIMITER + "CHAT" ));
 // Read answer from Server
+
         String answer = readLineFromServer();
 // Check if it is HELLO, split on delimiter
         String [] splitted = answer.split(ProtocolMessages.DELIMITER);
@@ -307,8 +307,6 @@ public class PlayerClient {
 
             System.out.println("Welcome to the game "
                     + "of Game: " + splitted[1] + "!");
-            out.newLine();
-            out.flush();
             Thread readerThread = new Thread(this::readFromServer);
             readerThread.start();
         } else {
@@ -321,7 +319,6 @@ public class PlayerClient {
 
     public void doConnect(String name) throws ServerUnavailableException {
         if(name != null) {
-            sendMessage((ProtocolMessages.HI ));
             sendMessage(ProtocolMessages.CONNECT + ProtocolMessages.DELIMITER + name);
             //playerClientTUI.showMessage("> " + readLineFromServer());
         }

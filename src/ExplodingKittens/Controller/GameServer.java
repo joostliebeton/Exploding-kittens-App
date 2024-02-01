@@ -18,6 +18,8 @@ import java.util.Objects;
 public class GameServer implements Runnable {
     private ServerSocket ssock;
 
+    private boolean chatFunction = true;
+
     /**
      * List of HotelClientHandlers, one for each connected client
      */
@@ -88,6 +90,13 @@ public class GameServer implements Runnable {
         view.showMessage("See you later!");
     }
 
+    public void setChatFunction(boolean chatFunction) {
+        this.chatFunction = chatFunction;
+    }
+    public boolean getChatFunction() {
+        return chatFunction;
+    }
+
     /**
      * Sets up a new Game using {@link #setupGame()} and opens a new
      * ServerSocket at localhost on a user-defined port.
@@ -107,12 +116,11 @@ public class GameServer implements Runnable {
 
         ssock = null;
         while (ssock == null) {
-            //int port = view.getInt("Please enter the server port.");
-        int port = 8888;
+            int port = view.getInt("Please enter the server port.");
+        //int port = 8888;
             // try to open a new ServerSocket
             try {
-                view.showMessage("Attempting to open a socket at 145.126.38.21 "
-                        + "on port " + port + "...");
+                view.showMessage("Attempting to open a socket at " + "127.0.0.1"  + " on port " + port + "...");
 //                ssock = new ServerSocket(port, 0, InetAddress.getByName("145.126.38.21"));
                 ssock = new ServerSocket(port, 0, InetAddress.getByName("127.0.0.1"));
                 view.showMessage("Server started at port " + port);
@@ -133,8 +141,8 @@ public class GameServer implements Runnable {
      * a new Hotel with this name.
      */
     public void setupGame() {
-        //gameName = view.getString("Please enter the name of the game.");
-        gameName = "test123";
+        gameName = view.getString("Please enter the name of the game.");
+        //gameName = "test123";
         game = new Game(gameName);
         // To be implemented.
     }
@@ -363,23 +371,6 @@ public class GameServer implements Runnable {
         return responseBuilder.toString();
     }
 
-
-
-
-
-
-/////////////////////main//////////////////////////////////////
-    public static void main(String[] args) {
-        GameServer gameServer = new GameServer();
-        System.out.println("Welcome to the Game Server! Starting...");
-        new Thread(gameServer).start();
-    }
-
-
-    public String requestMandatoryDraws(Player1 player) {
-        return (ProtocolMessages.RESPONSE_MANDATORY_DRAWS+ ProtocolMessages.DELIMITER+ (player.getExtraTurns()+1));
-    }
-
     public void endGame() {
         for (EKCHandler handler : clients) {
             handler.sendMessage(ProtocolMessages.GAME_FINISHED + ProtocolMessages.DELIMITER + game.getWinner().getName());
@@ -393,4 +384,21 @@ public class GameServer implements Runnable {
             }
         }
     }
+    public String requestMandatoryDraws(Player1 player) {
+        return (ProtocolMessages.RESPONSE_MANDATORY_DRAWS+ ProtocolMessages.DELIMITER+ (player.getExtraTurns()+1));
+    }
+
+
+
+/////////////////////main//////////////////////////////////////
+    public static void main(String[] args) {
+        GameServer gameServer = new GameServer();
+        System.out.println("Welcome to the Game Server! Starting...");
+        new Thread(gameServer).start();
+    }
+
+
+
+
+
 }
