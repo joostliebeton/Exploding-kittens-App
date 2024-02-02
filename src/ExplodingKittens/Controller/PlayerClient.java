@@ -100,8 +100,8 @@ public class PlayerClient {
             // host = playerClientTUI.getString("Please enter the server IP.");
             //String host = "127.0.0.1";
             //String host = "145.126.38.21";
-//            int port = playerClientTUI.getInt("Please enter the server port.");
-            int port = 8888;
+            int port = playerClientTUI.getInt("Please enter the server port.");
+            //int port = 8888;
             try {
                 this.name = playerClientTUI.getString("Please enter your name.");
                 while (this.name.isEmpty() || this.name.isBlank()) {
